@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway ticket office</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/timepickeraddon.css">
+    <link rel="Shortcut Icon" href="img/train.png">
+</head>
+
+<body>
+    <header class="header" style="opacity: 0.7;">
+        <div class="header__content">
+            <div class="container">
+                <div class="header__content-inner">
+                    <div class="header__logo">
+                        <a href="index.html">
+                            <img src="img/pngwing.com.png" width="100" height="70" alt="logo">
+                        </a>
+                    </div>
+                    <nav class="menu">
+                        <div class="header__btn-menu">
+                            <span class="mob_menu"></span>
+                        </div>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="listtrain.html">List train</a></li>
+                            <li><a href="listclient.html">List client</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="list_train">
+        <div class="title_list_train">
+            <p>List of trains</p>
+        </div>
+        <div class="default_btn transition modal_open_btn">
+            <a id="open_modal" class="transition" href="#">Add new train</a>
+        </div>
+        <div class="table">
+            <div class="table-header">
+                <div class="header__item"><a id="number_train" class="filter__link" href="#">Number train</a></div>
+                <div class="header__item"><a id="name_train" class="filter__link" href="#">Name train</a></div>
+                <div class="header__item"><a id="type_train" class="filter__link" href="#">Type train</a></div>
+                <div class="header__item"><a id="departure_station" class="filter__link" href="#">Departure station</a></div>
+                <div class="header__item"><a id="arrival_station" class="filter__link" href="#">Arrival station</a></div>
+                <div class="header__item"><a id="date_time_departure" class="filter__link filter__link--date" href="#">Date and time departure</a></div>
+                <div class="header__item"><a id="date_time_arrival" class="filter__link filter__link--date" href="#">Date and time arrival</a></div>
+                <div class="header__item"><a id="available_ticket" class="filter__link filter__link--number" href="#">Available tickets</a></div>
+                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Total tickets</a></div>
+                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Price</a></div>
+                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Edit</a></div>
+                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Delete</a></div>
+
+
+            </div>
+            <div class="table-content">
+                <div class="table-row">
+                    <div class="table-data">a@123asd1sd</div>
+                    <div class="table-data">Sorents</div>
+                    <div class="table-data">Business</div>
+                    <div class="table-data">Brest</div>
+                    <div class="table-data">Minsk</div>
+                    <div class="table-data">09/11/2023 02:04</div>
+                    <div class="table-data">09/11/2023 02:04</div>
+                    <div class="table-data">120</div>
+                    <div class="table-data">541</div>
+                    <div class="table-data">12</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_edit_modal" data-train_number="c@123asd1sd" data-name_train="Botrents" data-type_train="Business" data-departure_station="Brest" data-arrival_station="Minsk" data-date_time_departure="06/10/2020 02:04" data-timedate_arrival="09/10/2020 02:04"
+                                data-total_ticket="420" data-price="12" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-data">a@123asd1sd</div>
+                    <div class="table-data">Botrents</div>
+                    <div class="table-data">Business</div>
+                    <div class="table-data">Brest</div>
+                    <div class="table-data">Minsk</div>
+                    <div class="table-data">06/10/2020 02:04</div>
+                    <div class="table-data">09/10/2020 02:04</div>
+                    <div class="table-data">420</div>
+                    <div class="table-data">431</div>
+                    <div class="table-data">12</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_edit_modal" data-train_number="c@123asd1sd" data-name_train="Botrents" data-type_train="Business" data-departure_station="Brest" data-arrival_station="Minsk" data-date_time_departure="06/10/2020 02:04" data-timedate_arrival="09/10/2020 02:04"
+                                data-total_ticket="420" data-price="12" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-data">b@123asd1sd</div>
+                    <div class="table-data">Alpha</div>
+                    <div class="table-data">Coupe</div>
+                    <div class="table-data">Mogilev</div>
+                    <div class="table-data">Minsk</div>
+                    <div class="table-data">07/10/2022 02:04</div>
+                    <div class="table-data">13/10/2022 02:04</div>
+                    <div class="table-data">220</div>
+                    <div class="table-data">221</div>
+                    <div class="table-data">12</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_edit_modal" data-train_number="c@123asd1sd" data-name_train="Alpha" data-type_train="Classis" data-departure_station="Mogilev" data-arrival_station="Minsk" data-date_time_departure="07/10/2022 02:04" data-timedate_arrival="13/10/2022 02:04"
+                                data-total_ticket="221" data-price="12" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-data">c@123asd1sd</div>
+                    <div class="table-data">Zoks</div>
+                    <div class="table-data">Coupe</div>
+                    <div class="table-data">Brest</div>
+                    <div class="table-data">Minsk</div>
+                    <div class="table-data">09/10/2023 02:04</div>
+                    <div class="table-data">12/10/2023 04:04</div>
+                    <div class="table-data">20</div>
+                    <div class="table-data">321</div>
+                    <div class="table-data">12</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_edit_modal" data-train_number="c@123asd1sd" data-name_train="Zoks" data-type_train="Ultra" data-departure_station="Brest" data-arrival_station="Minsk" data-date_time_departure="09/10/2023 02:04" datas-timedate_arrival="12/10/2023 04:04" data-total_ticket="231"
+                                data-price="12" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal" class="modal bounceIn">
+        <div id="close_modal">+</div>
+        <div class="modal_txt">
+            <div class="add_train_content">
+                <form action="" method="post" onsubmit="add();return false;" class="form_add_train_new">
+                    <div class="title_buy_form">
+                        Add new train
+                    </div>
+                    <div class="img-overlay"></div>
+                    <div class="add_train_content_inner">
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
+                            <label for="name" class="form__label">Name</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+                            <label>
+                            <select class="form__field">
+                                <option selected> Departure station</option>
+                                <option>Brest</option>
+                                <option>Minsk</option>
+                                <option>Mogilev</option>
+                                <option>Grodno</option>
+                            </select>
+                        </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+                            <label>
+                            <select class="form__field">
+                                <option selected>Arrival station</option>
+                                <option>Brest</option>
+                                <option>Minsk</option>
+                                <option>Mogilev</option>
+                                <option>Grodno</option>
+                            </select>
+                        </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+                            <label>
+                            <select class="form__field">
+                                <option selected> Type train</option>
+                                <option>Business</option>
+                                <option>Econom</option>
+                                <option>Coupe</option>
+                                <option>Reserved seat</option>
+                            </select>
+                        </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input id="datepicker_departure" type="input" class="form__field" placeholder="Date and time departure" name="name" id='name' required />
+                            <label for="name" class="form__label">Date and time departure</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input id="datepicker_arrival" type="input" class="form__field" placeholder="Date and time arrival" name="name" id='name' required />
+                            <label for="name" class="form__label">Date and time arrival</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Total ticket" name="name" id='name' required />
+                            <label for="name" class="form__label">Total ticket</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Price" name="name" id='name' required />
+                            <label for="name" class="form__label">Price</label>
+                        </div>
+                        <div class="line-break"></div>
+
+                        <div class="default_btn transition">
+                            <button class="transition" type="submit">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal_edit" class="modal bounceIn">
+        <div id="close_edit_modal">+</div>
+        <div class="modal_edit_txt">
+            <div class="add_train_content">
+                <form action="" method="post" onsubmit="edit();return false;" class="form_add_train_new">
+                    <div class="title_buy_form">
+                        <p>Edit train</p>
+                        <p>Train number: <span id="train_number"></span></p>
+                    </div>
+                    <div class="img-overlay"></div>
+                    <div class="add_train_content_inner">
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Name" name="name" id="name_train_edit" />
+                            <label for="name" class="form__label">Name</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+                            <label>
+                            <select class="form__field">
+                                <option selected> Departure station <span id="dep_station"></span> </option>
+                                <option>Brest</option>
+                                <option>Minsk</option>
+                                <option>Mogilev</option>
+                                <option>Grodno</option>
+                            </select>
+                        </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+
+                            <select class="form__field">
+                                <option selected>Arrival station <span id="arr_station"></span></option>
+                                <option>Brest</option>
+                                <option>Minsk</option>
+                                <option>Mogilev</option>
+                                <option>Grodno</option>
+                            </select>
+                            </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+                            <label>
+                            <select class="form__field">
+                                <option selected> Type train <span id="type_train"></span></option>
+                                <option>Business</option>
+                                <option>Econom</option>
+                                <option>Coupe</option>
+                                <option>Reserved seat</option>
+                            </select>
+                        </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input id="datepicker_departure_edit" type="input" class="form__field" placeholder="Date and time departure" name="name" />
+                            <label for="name" class="form__label">Date and time departure</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input id="datepicker_arrival_edit" type="input" class="form__field" placeholder="Date and time arrival" name="name" />
+                            <label for="name" class="form__label">Date and time arrival</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input id="total_ticket" type="input" class="form__field" placeholder="Total ticket" name="name" />
+                            <label for="name" class="form__label">Total ticket</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input id="price_ticket" type="input" class="form__field" placeholder="Price ticket" name="name" />
+                            <label for="name" class="form__label">Price ticket</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="default_btn transition">
+                            <button class="transition" type="submit">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/timepickeraddon.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        var properties_train = [
+            'number_train',
+            'name_train',
+            'type_train',
+            'departure_station',
+            'arrival_station',
+            'available_ticket',
+            'total',
+            'date_time_departure',
+            'date_time_arrival'
+        ];
+        sort_table(properties_train);
+        init_edit_modal_open_close_btn_list_train();
+        init_modal_open_close_btn_add_train();
+    </script>
+</body>
+
+</html>

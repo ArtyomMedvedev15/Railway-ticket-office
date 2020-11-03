@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway ticket office</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/timepickeraddon.css">
+    <link rel="Shortcut Icon" href="img/train.png">
+</head>
+
+<body>
+    <header class="header" style="opacity: 0.7;">
+        <div class="header__content">
+            <div class="container">
+                <div class="header__content-inner">
+                    <div class="header__logo">
+                        <a href="index.html">
+                            <img src="img/pngwing.com.png" width="100" height="70" alt="logo">
+                        </a>
+                    </div>
+                    <nav class="menu">
+                        <div class="header__btn-menu">
+                            <span class="mob_menu"></span>
+                        </div>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="listtrain.html">List train</a></li>
+                            <li><a href="listclient.html">List client</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="find_train">
+        <div class="container">
+            <div class="find_train_content">
+                <form action="resultfindtrain.html" method="post">
+                    <div class="title_find_form">
+                        <p>Find your train!</p>
+                    </div>
+                    <div class="img-overlay"></div>
+                    <div class="find_train_content_inner">
+
+                        <div class="form__group field">
+                            <input id="datepicker" type="input" class="form__field" placeholder="Date and time" name="name" id='name' required />
+                            <label for="name" class="form__label">Date and time</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="selectdiv">
+                            <label>
+                            <select class="form__field">
+                                <option selected> Choose destination from</option>
+                                <option>Brest</option>
+                                <option>Minsk</option>
+                                <option>Mogilev</option>
+                                <option>Grodno</option>
+                            </select>
+                        </label>
+                        </div>
+
+                        <div class="selectdiv" style="margin-top: -10px;">
+                            <label>
+                            <select class="form__field">
+                                <option selected> Choose destination to</option>
+                                <option>Brest</option>
+                                <option>Minsk</option>
+                                <option>Mogilev</option>
+                                <option>Grodno</option>
+                            </select>
+                        </label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="default_btn transition">
+                            <button class="transition" type="submit">Find</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/timepickeraddon.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

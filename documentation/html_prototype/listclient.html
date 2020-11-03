@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway ticket office</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/timepickeraddon.css">
+    <link rel="Shortcut Icon" href="img/train.png">
+</head>
+
+<body>
+    <header class="header" style="opacity: 0.7;">
+        <div class="header__content">
+            <div class="container">
+                <div class="header__content-inner">
+                    <div class="header__logo">
+                        <a href="index.html">
+                            <img src="img/pngwing.com.png" width="100" height="70" alt="logo">
+                        </a>
+                    </div>
+                    <nav class="menu">
+                        <div class="header__btn-menu">
+                            <span class="mob_menu"></span>
+                        </div>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="listtrain.html">List train</a></li>
+                            <li><a href="listclient.html">List client</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="list_train">
+        <div class="title_list_train">
+            <p>List of client</p>
+        </div>
+        <div class="table">
+            <div class="table-header">
+                <div class="header__item"><a id="id_client" class="filter__link" href="#">Number train</a></div>
+                <div class="header__item"><a id="name_client" class="filter__link" href="#">Name</a></div>
+                <div class="header__item"><a id="soname_client" class="filter__link" href="#">Soname</a></div>
+                <div class="header__item"><a id="id_train" class="filter__link" href="#">Email</a></div>
+                <div class="header__item"><a id="id_train" class="filter__link" href="#">Date of purchase</a></div>
+                <div class="header__item"><a id="date_buy" class="filter__link filter__link--date" href="#">Phone number</a></div>
+                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Edit</a></div>
+                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Delete</a></div>
+
+
+            </div>
+            <div class="table-content">
+
+                <div class="table-row">
+                    <div class="table-data">a@123asd1sd</div>
+                    <div class="table-data">Jim</div>
+                    <div class="table-data">Clind</div>
+                    <div class="table-data">mail@mail.com</div>
+                    <div class="table-data">09/11/2023 02:04</div>
+                    <div class="table-data">+375(44)2321313</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_modal_edit" data-train_number="123asd1sd" data-name_client="Jim" data-soname_client="Clind" data-email_client="mail@mail.com" data-phone_client="+375(44)2321313" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-data">a@123asd1sd</div>
+                    <div class="table-data">Kim</div>
+                    <div class="table-data">Alind</div>
+                    <div class="table-data">mail@mail.com</div>
+                    <div class="table-data">09/11/2023 02:04</div>
+                    <div class="table-data">+375(44)2321313</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_modal_edit" data-train_number="123asd1sd" data-name_client="Kim" data-soname_client="Alind" data-email_client="mail@mail.com" data-phone_client="+375(44)2321313" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-row">
+                    <div class="table-data">a@123asd1sd</div>
+                    <div class="table-data">Mim</div>
+                    <div class="table-data">Zlind</div>
+                    <div class="table-data">mail@mail.com</div>
+                    <div class="table-data">09/11/2023 02:04</div>
+                    <div class="table-data">+375(44)2321313</div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a id="open_modal_edit" data-train_number="123asd1sd" data-name_client="Mim" data-soname_client="Zlind" data-email_client="mail@mail.com" data-phone_client="+375(44)2321313" class="transition" href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="table-data">
+                        <div class="default_btn transition">
+                            <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal_edit" class="modal bounceIn">
+        <div id="close_edit_modal">+</div>
+        <div class="modal_edit_txt">
+            <div class="buy_ticket_content">
+                <form action="" method="post" onsubmit="buy();return false;" class="form_buy_ticket">
+                    <div class="title_buy_form">
+                        <p>Train number: <span id="train_number"></span></p>
+                    </div>
+                    <div class="img-overlay"></div>
+                    <div class="buy_ticket_content_inner">
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Name" name="name" id="Name_client" />
+                            <label for="name" class="form__label">Name</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Soname" name="name" id='Soname_client' />
+                            <label for="name" class="form__label">Soname</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input type="input" class="form__field" placeholder="Phone number in format +373(33 or 29 or 44) your phone number" name="name" id='phone_client' pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" />
+                            <label for="name" class="form__label">+373(35 or 29 or 44)your phone number</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="form__group field">
+                            <input type="email" class="form__field" placeholder="Email" name="name" id='email_client' />
+                            <label for="name" class="form__label">Email</label>
+                        </div>
+                        <div class="line-break"></div>
+                        <div class="default_btn transition">
+                            <button class="transition" type="submit">Edit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/timepickeraddon.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        var properties_client = [
+            'id_client',
+            'name_client',
+            'soname_client',
+            'id_train',
+            'date_buy'
+        ];
+        init_edit_modal_client();
+        sort_table(properties_client);
+    </script>
+</body>
+
+</html>
