@@ -9,13 +9,25 @@
          minDate: 0
      });
      $("#datepicker_departure_edit").datetimepicker({
-
+         minDate: 0
      });
      $("#datepicker_arrival_edit").datetimepicker({
+         minDate: 0
+     });
 
+
+     $("div.holder").jPages({
+         containerID: "itemContainer",
+         perPage: 6,
+         startPage: 1,
+         startRange: 1,
+         midRange: 3,
+         endRange: 1
      });
 
  });
+
+
 
  function sort_table(properties) {
      $.each(properties, function(i, val) {
@@ -37,17 +49,17 @@
              }
 
              var parent = $(this).closest('.header__item');
-             var index = $(".header__item").index(parent);
-             var $table = $('.table-content');
-             var rows = $table.find('.table-row').get();
+             var index = $('.header__item').index(parent);
+             var $table = $('.table_body');
+             var rows = $table.find('.table_row').get();
              var isSelected = $(this).hasClass('filter__link--active');
              var isNumber = $(this).hasClass('filter__link--number');
              var isDate = $(this).hasClass('filter__link--date');
 
              rows.sort(function(a, b) {
 
-                 var x = $(a).find('.table-data').eq(index).text();
-                 var y = $(b).find('.table-data').eq(index).text();
+                 var x = $(a).find('.table_data').eq(index).text();
+                 var y = $(b).find('.table_data').eq(index).text();
 
                  if (isDate == true) {
 
@@ -155,13 +167,14 @@
              body.classList.add('body_block');
              $('#train_number').text(this.dataset.train_number);
              $('#name_train_edit').val(this.dataset.name_train);
-             $('#dep_station').text(this.dataset.departure_station);
-             $('#arr_station').text(this.dataset.arrival_station)
+             $('select[name=departure_station_edit]').val(this.dataset.departure_station);
+             $('select[name=arrival_station_edit]').val(this.dataset.arrival_station)
              $('#type_train').text(this.dataset.type_train);
              $('#datepicker_departure_edit').val(this.dataset.date_time_departure);
-             $('#datepicker_arrival_edit').val(this.dataset.timedate_arrival);
+             $('#datepicker_arrival_edit').val(this.dataset.date_time_arrival);
              $('#total_ticket').val(this.dataset.total_ticket);
              $('#price_ticket').val(this.dataset.price);
+             $('select[name=type_train_edit]').val(this.dataset.type_train);
 
          };
      }
@@ -186,11 +199,13 @@
              modal.classList.add('modal_vis');
              modal.classList.remove('bounceOutDown');
              body.classList.add('body_block');
-             $('#train_number').val(this.dataset.train_number);
+             $('#Train_number').text(this.dataset.train_number);
              $('#Name_client').val(this.dataset.name_client);
              $("#Soname_client").val(this.dataset.soname_client);
-             $('#phone_client').val(this.dataset.phone_client);
-             $('#email_client').val(this.dataset.email_client);
+             $('input[name=phone_client]').val(this.dataset.phone_client);
+             $('input[name=email_client]').val(this.dataset.email_client);
+
+             console.log(this.dataset.train_number);
          };
      }
      for (let index = 0; index < close_modal.length; index++) {
@@ -209,14 +224,39 @@
      setTimeout('location.replace("index.html")', 1000);
  }
 
- function add() {
-     alert("New train added")
-     setTimeout('location.replace("listtrain.html")', 1000);
+ function add_new_train() {
+     var arrival_data_time = $('#datepicker_arriva_add').val();
+     var departure_data_time = $('#datepicker_departure_add').val();
+
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime()) {
+         alert("Success add train")
+         setTimeout('location.replace("listtrain.html")', 100);
+         return true;
+     } else {
+         alert("Error illegal argument dates")
+         return false;
+     }
+
  }
 
- function edit() {
-     alert("Success edit train")
-     setTimeout('location.replace("listtrain.html")', 100);
+ function edit(dataarrival, datadeparture) {
+     var arrival_data_time = $('#datepicker_arrival_edit').val();
+     var departure_data_time = $('#datepicker_departure_edit').val();
+
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime()) {
+         alert("Success edit train")
+         setTimeout('location.replace("listtrain.html")', 100);
+         return true;
+     } else {
+         alert("Error illegal argument dates")
+         return false;
+     }
+
+ }
+
+ function edit_client() {
+     alert("Success edit client")
+     setTimeout('location.replace("listclient.html")', 100);
  }
 
  function confirmDelete() {
