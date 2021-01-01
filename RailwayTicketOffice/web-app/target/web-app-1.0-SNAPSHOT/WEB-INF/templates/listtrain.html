@@ -91,8 +91,6 @@
         </div>
     </section>
 
-
-
     <div id="modal" class="modal bounceIn">
         <div id="close_modal">+</div>
         <div class="modal_txt">
@@ -100,19 +98,19 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="add_train_content">
-                            <form action="" method="post" onsubmit="return add_new_train()" class="form_add_train_new">
+                            <form th:action="@{/listTrain}" method="get" onsubmit="return add_new_train()" class="form_add_train_new">
                                 <div class="title_buy_form">
                                     Add new train
                                 </div>
                                 <div class="img-overlay"></div>
                                 <div class="add_train_content_inner">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="input" class="form__field" placeholder="Name" name="name_train" id='name' required />
+                                        <input type="input" class="form__field" placeholder="Name" name="name_train" id='name' minlength="3" maxlength="35" required />
                                         <label for="name_train" class="form__label">Name</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" name="Departure_station">
+                                        <select class="form__field form-control" name="Departure_station" required>
                                             <option selected>Departure station</option>
                                             <option>Brest</option>
                                             <option>Minsk</option>
@@ -122,7 +120,7 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" name="arrival_station">
+                                        <select class="form__field form-control" name="arrival_station" required>
                                             <option selected>Arrival station</option>
                                             <option>Brest</option>
                                             <option>Minsk</option>
@@ -132,7 +130,7 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" name="type_train">
+                                        <select class="form__field form-control" name="type_train" required>
                                             <option selected> Type train</option>
                                             <option>Business</option>
                                             <option>Econom</option>
@@ -142,22 +140,22 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_departure_add" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep" id="datetime_dep" required />
-                                        <label for="datetime_dep" class="form__label">Date and time departure</label>
+                                        <input id="datepicker_departure_add" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep" required />
+                                        <label for="datepicker_departure_add" class="form__label">Date and time departure</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_arriva_add" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr" id="datetime_arr" required />
-                                        <label for="datetime_arr" class="form__label">Date and time arrival</label>
+                                        <input id="datepicker_arriva_add" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr"  required />
+                                        <label for="datepicker_arriva_add" class="form__label">Date and time arrival</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="input" class="form__field" placeholder="Total ticket" name="total_ticket" required />
+                                        <input type="number" class="form__field" placeholder="Total ticket" name="total_ticket" required min="1" max="500" />
                                         <label for="total_ticket" class="form__label">Total ticket</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="input" class="form__field" placeholder="Price" name="price" required />
+                                        <input type="number" class="form__field" placeholder="Price" name="price" required min="1" max="500" />
                                         <label for="price" class="form__label">Price</label>
                                     </div>
                                     <div class="line-break"></div>
@@ -179,7 +177,7 @@
         <div id="close_edit_modal">+</div>
         <div class="modal_edit_txt">
             <div class="add_train_content">
-                <form action="" method="post" onsubmit="return edit()" class="form_add_train_new">
+                <form th:action="@{/listTrain}" method="get" onsubmit="return edit()" class="form_add_train_new">
                     <div class="title_buy_form">
                         <p>Edit train</p>
                         <p>Train number: <span id="train_number"></span></p>
@@ -187,12 +185,12 @@
                     <div class="img-overlay"></div>
                     <div class="add_train_content_inner">
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id="name_train_edit" />
+                            <input type="input" class="form__field" placeholder="Name" name="name" id="name_train_edit" required />
                             <label for="name" class="form__label">Name</label>
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="departure_station_edit">
+                            <select class="form__field form-control" name="departure_station_edit" required>
                                 <option selected>Departure station</option>
                                 <option>Brest</option>
                                 <option>Minsk</option>
@@ -202,7 +200,7 @@
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="arrival_station_edit">
+                            <select class="form__field form-control" name="arrival_station_edit" required>
                                 <option selected>Arrival station</option>
                                 <option>Brest</option>
                                 <option>Minsk</option>
@@ -212,7 +210,7 @@
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="type_train_edit">
+                            <select class="form__field form-control" name="type_train_edit" required>
                                 <option selected> Type train</option>
                                 <option>Business</option>
                                 <option>Econom</option>
@@ -222,22 +220,22 @@
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="datepicker_departure_edit" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep_edit" id="datetime_dep_edit" />
-                            <label for="datetime_dep_edit" class="form__label">Date and time departure</label>
+                            <input id="datepicker_departure_edit" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep_edit" required/>
+                            <label for="datepicker_departure_edit" class="form__label">Date and time departure</label>
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="datepicker_arrival_edit" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr_edit" id="datetime_arr_edit" />
-                            <label for="datetime_arr_edit" class="form__label">Date and time arrival</label>
+                            <input id="datepicker_arrival_edit" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr_edit" required/>
+                            <label for="datepicker_arrival_edit" class="form__label">Date and time arrival</label>
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="total_ticket" type="input" class="form__field" placeholder="Total ticket" name="total_ticket_edit" />
+                            <input id="total_ticket" type="number" class="form__field" min="1" max="500" placeholder="Total ticket" name="total_ticket_edit" required/>
                             <label for="total_ticket" class="form__label">Total ticket</label>
                         </div>
                         <div class="line-break"></div>
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="price_ticket" type="input" class="form__field" placeholder="Price ticket" name="price_edit" />
+                            <input id="price_ticket" type="number" class="form__field" min="1" max="500" placeholder="Price ticket" name="price_edit" required/>
                             <label for="price" class="form__label">Price ticket</label>
                         </div>
                         <div class="line-break"></div>

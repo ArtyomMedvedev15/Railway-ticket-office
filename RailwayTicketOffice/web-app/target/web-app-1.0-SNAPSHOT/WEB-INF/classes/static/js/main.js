@@ -14,6 +14,12 @@
      $("#datepicker_arrival_edit").datetimepicker({
          minDate: 0
      });
+     $("#datepicker_departure_add").datetimepicker({
+         minDate: 0
+     });
+     $("#datepicker_arriva_add").datetimepicker({
+         minDate: 0
+     });
 
 
      $("div.holder").jPages({
@@ -221,19 +227,22 @@
 
  function buy() {
      alert("Dear clien thanks for choose us!")
-     setTimeout('location.replace("index.html")', 1000);
+     setTimeout('location.replace("/")', 1000);
  }
 
  function add_new_train() {
      var arrival_data_time = $('#datepicker_arriva_add').val();
      var departure_data_time = $('#datepicker_departure_add').val();
+     var departure_station = $('select[name=Departure_station]').val();
+     var arrival_station = $('select[name=arrival_station]').val();
 
-     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime()) {
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station !== arrival_station) {
          alert("Success add train")
-         setTimeout('location.replace("listtrain.html")', 100);
+         history.pushState("", document.title, window.location.pathname);
+         setTimeout('location.replace("/listTrain")', 100);
          return true;
      } else {
-         alert("Error illegal argument dates")
+         alert("Error illegal argument dates or stations")
          return false;
      }
 
@@ -242,13 +251,17 @@
  function edit(dataarrival, datadeparture) {
      var arrival_data_time = $('#datepicker_arrival_edit').val();
      var departure_data_time = $('#datepicker_departure_edit').val();
+     var departure_station = $('select[name=departure_station_edit]').val();
+     var arrival_station = $('select[name=arrival_station_edit]').val();
 
-     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime()) {
+
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station !== arrival_station) {
          alert("Success edit train")
-         setTimeout('location.replace("listtrain.html")', 100);
+         history.pushState("", document.title, window.location.pathname);
+         setTimeout('location.replace("/listTrain")', 100);
          return true;
      } else {
-         alert("Error illegal argument dates")
+         alert("Error illegal argument dates or stations")
          return false;
      }
 
@@ -256,7 +269,7 @@
 
  function edit_client() {
      alert("Success edit client")
-     setTimeout('location.replace("listclient.html")', 100);
+     setTimeout('location.replace("/listClient")', 100);
  }
 
  function confirmDelete() {
