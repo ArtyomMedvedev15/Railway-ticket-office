@@ -1,14 +1,3 @@
 language: java
-jdk:
-  - openjdk8
-
-script: ./mvnw clean install
-
-
-jobs:
-  include:
-    - stage: Test
-      script: ./mvnw clean test
-
-notification:
-  email: arthaos14@gmail.com
+sudo: false
+script: mvn clean verify
