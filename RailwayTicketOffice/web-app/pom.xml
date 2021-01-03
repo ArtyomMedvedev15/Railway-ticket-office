@@ -82,6 +82,14 @@
                     <configLocation>google_checks.xml</configLocation>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <repoToken>CaZBfEHlb27lay8bGcryseX6u9mfDwPj4</repoToken>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
