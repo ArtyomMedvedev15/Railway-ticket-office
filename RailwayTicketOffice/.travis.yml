@@ -1,4 +1,6 @@
 language: java
 sudo: false
 before_script: cd RailwayTicketOffice
-script: mvn clean verify
+script:
+  - mvn clean verify
+  - mvn checkstyle:checkstyle
