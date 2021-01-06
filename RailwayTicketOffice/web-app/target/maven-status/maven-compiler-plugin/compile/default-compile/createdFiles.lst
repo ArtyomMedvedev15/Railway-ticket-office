@@ -1,4 +1,6 @@
-com/railwayticket/domain/TypeTrain.class
-com/railwayticket/domain/Trains.class
-com/railwayticket/domain/ClientRailway.class
-com/railwayticket/domain/Stations.class
+com\railwayticket\domain\Trains.class
+com\railwayticket\HomeController.class
+com\railwayticket\config\MvcConfig.class
+com\railwayticket\domain\TypeTrain.class
+com\railwayticket\domain\ClientRailway.class
+com\railwayticket\domain\Stations.class

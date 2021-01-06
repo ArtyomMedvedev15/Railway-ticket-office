@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Trains.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">web-app</a> &gt; <a href="index.source.html" class="el_package">com.railwayticket.domain</a> &gt; <span class="el_source">Trains.java</span></div><h1>Trains.java</h1><pre class="source lang-java linenums">package com.railwayticket.domain;
+
+import java.sql.Date;
+import java.util.Objects;
+
+public class Trains {
+    private Long id_train;
+    private String name_train;
+    private TypeTrain typeTrain;
+    private Stations departureStation;
+    private Stations arrivalStation;
+    private Date date_time_departure;
+    private Date date_time_arrival;
+    private Integer available_ticket;
+    private Integer total_ticket;
+    private Float price_ticket;
+
+<span class="nc" id="L18">    public Trains() {</span>
+<span class="nc" id="L19">    }</span>
+
+    public Trains(String name_train, TypeTrain typeTrain, Stations departureStation, Stations arrivalStation,
+                  Date date_time_departure, Date date_time_arrival,
+<span class="nc" id="L23">                  Integer available_ticket, Integer total_ticket, Float price_ticket) {</span>
+<span class="nc" id="L24">        this.name_train = name_train;</span>
+<span class="nc" id="L25">        this.typeTrain = typeTrain;</span>
+<span class="nc" id="L26">        this.departureStation = departureStation;</span>
+<span class="nc" id="L27">        this.arrivalStation = arrivalStation;</span>
+<span class="nc" id="L28">        this.date_time_departure = date_time_departure;</span>
+<span class="nc" id="L29">        this.date_time_arrival = date_time_arrival;</span>
+<span class="nc" id="L30">        this.available_ticket = available_ticket;</span>
+<span class="nc" id="L31">        this.total_ticket = total_ticket;</span>
+<span class="nc" id="L32">        this.price_ticket = price_ticket;</span>
+<span class="nc" id="L33">    }</span>
+
+    public Long getId_train() {
+<span class="nc" id="L36">        return id_train;</span>
+    }
+
+    public void setId_train(Long id_train) {
+<span class="nc" id="L40">        this.id_train = id_train;</span>
+<span class="nc" id="L41">    }</span>
+
+    public String getName_train() {
+<span class="nc" id="L44">        return name_train;</span>
+    }
+
+    public void setName_train(String name_train) {
+<span class="nc" id="L48">        this.name_train = name_train;</span>
+<span class="nc" id="L49">    }</span>
+
+    public TypeTrain getTypeTrain() {
+<span class="nc" id="L52">        return typeTrain;</span>
+    }
+
+    public void setTypeTrain(TypeTrain typeTrain) {
+<span class="nc" id="L56">        this.typeTrain = typeTrain;</span>
+<span class="nc" id="L57">    }</span>
+
+    public Stations getDepartureStation() {
+<span class="nc" id="L60">        return departureStation;</span>
+    }
+
+    public void setDepartureStation(Stations departureStation) {
+<span class="nc" id="L64">        this.departureStation = departureStation;</span>
+<span class="nc" id="L65">    }</span>
+
+    public Stations getArrivalStation() {
+<span class="nc" id="L68">        return arrivalStation;</span>
+    }
+
+    public void setArrivalStation(Stations arrivalStation) {
+<span class="nc" id="L72">        this.arrivalStation = arrivalStation;</span>
+<span class="nc" id="L73">    }</span>
+
+    public Date getDate_time_departure() {
+<span class="nc" id="L76">        return date_time_departure;</span>
+    }
+
+    public void setDate_time_departure(Date date_time_departure) {
+<span class="nc" id="L80">        this.date_time_departure = date_time_departure;</span>
+<span class="nc" id="L81">    }</span>
+
+    public Date getDate_time_arrival() {
+<span class="nc" id="L84">        return date_time_arrival;</span>
+    }
+
+    public void setDate_time_arrival(Date date_time_arrival) {
+<span class="nc" id="L88">        this.date_time_arrival = date_time_arrival;</span>
+<span class="nc" id="L89">    }</span>
+
+    public Integer getAvailable_ticket() {
+<span class="nc" id="L92">        return available_ticket;</span>
+    }
+
+    public void setAvailable_ticket(Integer available_ticket) {
+<span class="nc" id="L96">        this.available_ticket = available_ticket;</span>
+<span class="nc" id="L97">    }</span>
+
+    public Integer getTotal_ticket() {
+<span class="nc" id="L100">        return total_ticket;</span>
+    }
+
+    public void setTotal_ticket(Integer total_ticket) {
+<span class="nc" id="L104">        this.total_ticket = total_ticket;</span>
+<span class="nc" id="L105">    }</span>
+
+    public Float getPrice_ticket() {
+<span class="nc" id="L108">        return price_ticket;</span>
+    }
+
+    public void setPrice_ticket(Float price_ticket) {
+<span class="nc" id="L112">        this.price_ticket = price_ticket;</span>
+<span class="nc" id="L113">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L117">        return &quot;Trains{&quot; +</span>
+                &quot;id_train=&quot; + id_train +
+                &quot;, name_train='&quot; + name_train + '\'' +
+                &quot;, typeTrain=&quot; + typeTrain +
+                &quot;, departureStation=&quot; + departureStation +
+                &quot;, arrivalStation=&quot; + arrivalStation +
+                &quot;, date_time_departure=&quot; + date_time_departure +
+                &quot;, date_time_arrival=&quot; + date_time_arrival +
+                &quot;, available_ticket=&quot; + available_ticket +
+                &quot;, total_ticket=&quot; + total_ticket +
+                &quot;, price_ticket=&quot; + price_ticket +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L134" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L135">        Trains trains = (Trains) o;</span>
+<span class="nc bnc" id="L136" title="All 20 branches missed.">        return Objects.equals(id_train, trains.id_train) &amp;&amp; Objects.equals(name_train, trains.name_train) &amp;&amp; typeTrain == trains.typeTrain &amp;&amp; departureStation == trains.departureStation &amp;&amp; arrivalStation == trains.arrivalStation &amp;&amp; Objects.equals(date_time_departure, trains.date_time_departure) &amp;&amp; Objects.equals(date_time_arrival, trains.date_time_arrival) &amp;&amp; Objects.equals(available_ticket, trains.available_ticket) &amp;&amp; Objects.equals(total_ticket, trains.total_ticket) &amp;&amp; Objects.equals(price_ticket, trains.price_ticket);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L141">        return Objects.hash(id_train, name_train, typeTrain, departureStation, arrivalStation, date_time_departure, date_time_arrival, available_ticket, total_ticket, price_ticket);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

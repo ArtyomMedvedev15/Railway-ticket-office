@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientRailway.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">web-app</a> &gt; <a href="index.source.html" class="el_package">com.railwayticket.domain</a> &gt; <span class="el_source">ClientRailway.java</span></div><h1>ClientRailway.java</h1><pre class="source lang-java linenums">package com.railwayticket.domain;
+
+import java.sql.Date;
+import java.util.Objects;
+
+public class ClientRailway {
+    private Long id_client;
+    private Long id_train;
+    private String name_client;
+    private String soname_client;
+    private Date date_purchase;
+    private String phone_client;
+
+<span class="nc" id="L14">    public ClientRailway() {</span>
+<span class="nc" id="L15">    }</span>
+
+<span class="nc" id="L17">    public ClientRailway(Long id_client, Long id_train, String name_client, String soname_client, Date date_purchase, String phone_client) {</span>
+<span class="nc" id="L18">        this.id_client = id_client;</span>
+<span class="nc" id="L19">        this.id_train = id_train;</span>
+<span class="nc" id="L20">        this.name_client = name_client;</span>
+<span class="nc" id="L21">        this.soname_client = soname_client;</span>
+<span class="nc" id="L22">        this.date_purchase = date_purchase;</span>
+<span class="nc" id="L23">        this.phone_client = phone_client;</span>
+<span class="nc" id="L24">    }</span>
+
+    public Long getId_client() {
+<span class="nc" id="L27">        return id_client;</span>
+    }
+
+    public void setId_client(Long id_client) {
+<span class="nc" id="L31">        this.id_client = id_client;</span>
+<span class="nc" id="L32">    }</span>
+
+    public Long getId_train() {
+<span class="nc" id="L35">        return id_train;</span>
+    }
+
+    public void setId_train(Long id_train) {
+<span class="nc" id="L39">        this.id_train = id_train;</span>
+<span class="nc" id="L40">    }</span>
+
+    public String getName_client() {
+<span class="nc" id="L43">        return name_client;</span>
+    }
+
+    public void setName_client(String name_client) {
+<span class="nc" id="L47">        this.name_client = name_client;</span>
+<span class="nc" id="L48">    }</span>
+
+    public String getSoname_client() {
+<span class="nc" id="L51">        return soname_client;</span>
+    }
+
+    public void setSoname_client(String soname_client) {
+<span class="nc" id="L55">        this.soname_client = soname_client;</span>
+<span class="nc" id="L56">    }</span>
+
+    public Date getDate_purchase() {
+<span class="nc" id="L59">        return date_purchase;</span>
+    }
+
+    public void setDate_purchase(Date date_purchase) {
+<span class="nc" id="L63">        this.date_purchase = date_purchase;</span>
+<span class="nc" id="L64">    }</span>
+
+    public String getPhone_client() {
+<span class="nc" id="L67">        return phone_client;</span>
+    }
+
+    public void setPhone_client(String phone_client) {
+<span class="nc" id="L71">        this.phone_client = phone_client;</span>
+<span class="nc" id="L72">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L76">        return &quot;ClientRailway{&quot; +</span>
+                &quot;id_client=&quot; + id_client +
+                &quot;, id_train=&quot; + id_train +
+                &quot;, name_client='&quot; + name_client + '\'' +
+                &quot;, soname_client='&quot; + soname_client + '\'' +
+                &quot;, date_purchase=&quot; + date_purchase +
+                &quot;, phone_client='&quot; + phone_client + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L89" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L90">        ClientRailway that = (ClientRailway) o;</span>
+<span class="nc bnc" id="L91" title="All 12 branches missed.">        return Objects.equals(id_client, that.id_client) &amp;&amp; Objects.equals(id_train, that.id_train) &amp;&amp; Objects.equals(name_client, that.name_client) &amp;&amp; Objects.equals(soname_client, that.soname_client) &amp;&amp; Objects.equals(date_purchase, that.date_purchase) &amp;&amp; Objects.equals(phone_client, that.phone_client);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L96">        return Objects.hash(id_client, id_train, name_client, soname_client, date_purchase, phone_client);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
