@@ -802,7 +802,7 @@ false posixrules
     <database id="5" parent="1" name="railwayticketoffice">
       <ObjectId>16387</ObjectId>
       <Owner>1</Owner>
-      <IntrospectionStateNumber>582</IntrospectionStateNumber>
+      <IntrospectionStateNumber>584</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <role id="6" parent="1" name="1">
@@ -861,7 +861,7 @@ false posixrules
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>583</IntrospectionStateNumber>
+      <IntrospectionStateNumber>585</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="19" parent="5" name="btree">
