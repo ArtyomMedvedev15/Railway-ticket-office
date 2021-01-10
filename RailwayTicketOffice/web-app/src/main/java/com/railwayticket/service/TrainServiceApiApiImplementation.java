@@ -20,7 +20,7 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
 
     private final TransactionTemplate transactionTemplate;
 
-    final static Logger logger = Logger.getLogger(HomeController.class);
+    final static Logger logger = Logger.getLogger(TrainServiceApiApiImplementation.class);
 
     public TrainServiceApiApiImplementation(PlatformTransactionManager transactionManager) {
         this.transactionTemplate = new TransactionTemplate(transactionManager);
@@ -88,7 +88,7 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
                 logger.info("Delete train successfully. Train: " + trains.toString() + " Time: " + new Date().toString());
                 return true;
             }else{
-                logger.error("Exception TrainServiceException" + " Time: " + new Date().toString());
+                logger.error("Id train equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Id equal null");
             }
         }catch (TrainServiceException ex){

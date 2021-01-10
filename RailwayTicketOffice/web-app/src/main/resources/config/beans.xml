@@ -22,6 +22,7 @@
      </bean>
 
     <bean id="clientservice" name="clientservice" class="com.railwayticket.service.ClientServiceApiImplementation">
+        <constructor-arg ref="transactionManager"/>
     </bean>
 
     <bean id="trainsservice" name="trainsservice" class="com.railwayticket.service.TrainServiceApiApiImplementation">
