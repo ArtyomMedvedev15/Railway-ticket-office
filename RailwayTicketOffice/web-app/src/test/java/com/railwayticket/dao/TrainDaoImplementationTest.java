@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 public class TrainDaoImplementationTest extends TestCase {
 
     ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:/applicationContext-test.xml");
-
     TrainDaoApi trainDaoApi = context.getBean("traindao",TrainDaoImplementation.class);
 
     @Test
@@ -83,7 +82,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void DeleteTrainTest() {
-        Trains trains = trainDaoApi.getOneById(123L);
+        Trains trains = trainDaoApi.getOneById(1234L);
 
         boolean result_delete_train = trainDaoApi.delete(trains);
 

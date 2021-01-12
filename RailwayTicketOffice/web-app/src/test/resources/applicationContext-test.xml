@@ -24,7 +24,7 @@
 
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:/database/initializeDatabase.sql"/>
-        <jdbc:script location="classpath:/database/populateData.sql"/>
+        <jdbc:script location="classpath:/database/populateDataTest.sql"/>
     </jdbc:initialize-database>
 
     <bean id="train1" class="com.railwayticket.domain.Trains">
@@ -44,6 +44,10 @@
     </bean>
 
     <bean id="traindao" name="traindao" class="com.railwayticket.dao.TrainDaoImplementation">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="clientdao" name="clientdao" class="com.railwayticket.dao.ClientDaoImplementation">
         <constructor-arg ref="dataSource"/>
     </bean>
 </beans>

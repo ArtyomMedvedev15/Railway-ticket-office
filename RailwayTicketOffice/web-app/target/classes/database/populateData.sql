@@ -79,7 +79,7 @@ SELECT 6, 'Gomel'
     );
 
 
-insert into trains(id_train, name_train, type_train_id, departure_station_id, arrival_station_id,
+INSERT INTO trains(id_train, name_train, type_train_id, departure_station_id, arrival_station_id,
                    date_time_departure, date_time_arrival, available_ticket, total_ticket, price_ticket)
-select 123,'TestTrain',1,1,2,'2020/09/12','2020/09/13',123,200,23.3
- where not exists (select id_train from trains where id_train = 123)
+SELECT 123,'TestTrain',1,1,2,'2020/09/12','2020/09/13',123,200,23.3
+WHERE NOT EXISTS (SELECT id_train FROM trains WHERE id_train = 123)
