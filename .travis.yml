@@ -1,6 +1,9 @@
 language: java
 sudo: false
-before_script: cd RailwayTicketOffice
+before_script: 
+  - cd RailwayTicketOffice
+  - psql -c 'create database railwayticketoffice;' -U postgres
+   - psql -c 'create database railwayticketofficetest;' -U postgres
 script:
   - mvn clean verify
   - mvn checkstyle:checkstyle
