@@ -1,78 +1,80 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="12" failures="0" name="com.railwayticket.service.TrainServiceApiApiImplementationTest" time="0.257" errors="0" skipped="0">
+<testsuite tests="12" failures="0" name="com.railwayticket.service.TrainServiceApiApiImplementationTest" time="0.021" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="java.vm.version" value="9+181"/>
-    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home/lib"/>
-    <property name="gopherProxySet" value="false"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/1/Desktop/rw/Railway-ticket-office/RailwayTicketOffice"/>
+    <property name="java.vm.version" value="11+28"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="path.separator" value=":"/>
+    <property name="path.separator" value=";"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
     <property name="user.country" value="RU"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/1/Desktop/rw/Railway-ticket-office/RailwayTicketOffice"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
-    <property name="java.runtime.version" value="9+181"/>
-    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="os.arch" value="x86_64"/>
-    <property name="java.io.tmpdir" value="/var/folders/4n/2sfc0k7x6ld9lv7kv6mlh3_m0000gn/T/"/>
+    <property name="user.dir" value="D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.runtime.version" value="11+28"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\DNKAEG~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/usr/local/Cellar/maven/3.6.0/libexec/bin/m2.conf"/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/Users/1/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
-    <property name="maven.conf" value="/usr/local/Cellar/maven/3.6.0/libexec/conf"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="C:\Program Files\maven\bin\..\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-11\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Users\DNKAE GURU\AppData\Local\Microsoft\WindowsApps;C:\Users\DNKAE GURU\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\maven\bin;;."/>
+    <property name="maven.conf" value="C:\Program Files\maven\bin\../conf"/>
     <property name="jdk.debug" value="release"/>
-    <property name="java.class.version" value="53.0"/>
+    <property name="java.class.version" value="55.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.15.7"/>
-    <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.6.0/libexec/lib/jansi-native"/>
-    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="user.home" value="/Users/1"/>
+    <property name="os.version" value="10.0"/>
+    <property name="library.jansi.path" value="C:\Program Files\maven\bin\..\lib\jansi-native"/>
+    <property name="user.home" value="C:\Users\DNKAE GURU"/>
     <property name="user.timezone" value="Europe/Minsk"/>
-    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="java.specification.version" value="9"/>
-    <property name="user.name" value="1"/>
-    <property name="java.class.path" value="/usr/local/Cellar/maven/3.6.0/libexec/boot/plexus-classworlds-2.5.2.jar"/>
-    <property name="java.vm.specification.version" value="9"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="file.encoding" value="Cp1251"/>
+    <property name="java.specification.version" value="11"/>
+    <property name="user.name" value="DNKAE GURU"/>
+    <property name="java.class.path" value="C:\Program Files\maven\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
-    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-11"/>
     <property name="user.language" value="ru"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="9"/>
+    <property name="java.version" value="11"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="/usr/local/Cellar/maven/3.6.0/libexec"/>
-    <property name="file.separator" value="/"/>
+    <property name="sun.stderr.encoding" value="cp866"/>
+    <property name="maven.home" value="C:\Program Files\maven\bin\.."/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2018-09-25"/>
     <property name="java.vendor.url.bug" value="http://bugreport.java.com/bugreport/"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="sun.cpu.isalist" value=""/>
+    <property name="java.vendor.version" value="18.9"/>
+    <property name="sun.stdout.encoding" value="cp866"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="DeleteTrainTest_True" time="0.122"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_Exception" time="0.063"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainByDateDepartureArrivalStationsTest_True" time="0.004"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainByDateDepartureArrivalStationsTest_Exception" time="0.006"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="SaveNewTrainTest_True" time="0.002"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="UpdateTrainInfoTest_Exception" time="0.003"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="SaveNewTrainTest_Exception" time="0.009"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="UpdateTrainInfoTest_True" time="0.006"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_True" time="0.002"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="DeleteTrainTest_Exception" time="0.003"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_Exception" time="0.006"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_True" time="0.031"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="DeleteTrainTest_True" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_Exception" time="0.012"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainByDateDepartureArrivalStationsTest_True" time="0.002"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainByDateDepartureArrivalStationsTest_Exception" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="SaveNewTrainTest_True" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="UpdateTrainInfoTest_Exception" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="SaveNewTrainTest_Exception" time="0"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="UpdateTrainInfoTest_True" time="0"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_True" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="DeleteTrainTest_Exception" time="0"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_Exception" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_True" time="0.001"/>
 </testsuite>

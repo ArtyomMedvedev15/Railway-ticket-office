@@ -13,7 +13,7 @@ create table if not exists trains(
            name_train varchar,
            type_train_id int references type_train(id_type),
            departure_station_id int references stations(id_station),
-           arrvial_station_id int references stations(id_station),
+           arrival_station_id int references stations(id_station),
            date_time_departure date,
            date_time_arrival date,
            available_ticket int,

@@ -1,14 +1,9 @@
 package com.railwayticket.service;
 
-import com.railwayticket.HomeController;
 import com.railwayticket.domain.ClientRailway;
-import com.railwayticket.domain.Trains;
 import com.railwayticket.service.exception.ClientServiceException;
-import com.railwayticket.service.exception.TrainServiceException;
 import com.railwayticket.service.servic_api.ClientServiceApi;
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
