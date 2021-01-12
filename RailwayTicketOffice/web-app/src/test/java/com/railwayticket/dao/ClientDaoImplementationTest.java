@@ -47,7 +47,7 @@ public class ClientDaoImplementationTest extends TestCase {
         boolean result_update_client = clientDaoApi.update(clientRailway);
 
         Assert.assertTrue(result_update_client);
-        Assert.assertEquals("NewNameClient",clientDaoApi.getOneById(1L).getName_client());
+        Assert.assertEquals("NewNameClient",clientDaoApi.getOneById(123L).getName_client());
     }
 
     @Test

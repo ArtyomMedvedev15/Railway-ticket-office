@@ -77,7 +77,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
         boolean result_update_train = trainDaoApi.update(trains);
 
-        Assert.assertEquals("NewNameTrain",trainDaoApi.getOneById(1L).getName_train());
+        Assert.assertEquals("NewNameTrain",trainDaoApi.getOneById(123L).getName_train());
     }
 
     @Test
