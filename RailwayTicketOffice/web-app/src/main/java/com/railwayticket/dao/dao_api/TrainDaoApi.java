@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TrainDaoApi extends BaseDaoApi<Trains> {
-    List<Trains> FindAllByDateDepartureArrivalStations(Date date, Stations departure, Stations arrival);
+    List<Trains> FindAllByDateDepartureArrivalStations(Date date_departure,Date date_arrival, Stations departure, Stations arrival);
 }

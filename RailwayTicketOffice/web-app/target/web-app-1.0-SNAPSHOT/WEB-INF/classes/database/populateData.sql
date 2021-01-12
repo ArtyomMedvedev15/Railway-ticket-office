@@ -31,54 +31,55 @@ SELECT 4, 'Reserved seat'
     );
 
 INSERT INTO stations
-(id_stations, name_station)
+(id_station, name_station)
 SELECT 1, 'Brest'
     WHERE
     NOT EXISTS (
-        SELECT id_stations FROM stations WHERE id_stations = 1
+        SELECT id_station FROM stations WHERE id_station = 1
     );
 
 INSERT INTO stations
-(id_stations, name_station)
+(id_station, name_station)
 SELECT 2, 'Minsk'
     WHERE
     NOT EXISTS (
-        SELECT id_stations FROM stations WHERE id_stations = 1
+        SELECT id_station FROM stations WHERE id_station = 2
     );
 
 INSERT INTO stations
-(id_stations, name_station)
+(id_station, name_station)
 SELECT 3, 'Grodno'
     WHERE
     NOT EXISTS (
-        SELECT id_stations FROM stations WHERE id_stations = 3
+        SELECT id_station FROM stations WHERE id_station = 3
     );
 
 INSERT INTO stations
-(id_stations, name_station)
+(id_station, name_station)
 SELECT 4, 'Vitebsk'
     WHERE
     NOT EXISTS (
-        SELECT id_stations FROM stations WHERE id_stations = 4
+        SELECT id_station FROM stations WHERE id_station = 4
     );
 
 INSERT INTO stations
-(id_stations, name_station)
+(id_station, name_station)
 SELECT 5, 'Mogilev'
     WHERE
     NOT EXISTS (
-        SELECT id_stations FROM stations WHERE id_stations = 5
+        SELECT id_station FROM stations WHERE id_station = 5
     );
 
 INSERT INTO stations
-(id_stations, name_station)
+(id_station, name_station)
 SELECT 6, 'Gomel'
     WHERE
     NOT EXISTS (
-        SELECT id_stations FROM stations WHERE id_stations = 6
+        SELECT id_station FROM stations WHERE id_station = 6
     );
 
-insert into trains(id_train,name_train,type_train_id,departure_station_id,arrival_station_id,date_time_departure,date_time_arrival,available_ticket,total_ticket,price_ticket)
-select 3,'First Train',1,1,2,'2020/09/11','2020/09/12',123,32,12 where not exists (
-        select id_train from trains where id_train=1
-);
+
+insert into trains(id_train, name_train, type_train_id, departure_station_id, arrival_station_id,
+                   date_time_departure, date_time_arrival, available_ticket, total_ticket, price_ticket)
+select 123,'TestTrain',1,1,2,'2020/09/12','2020/09/13',123,200,23.3
+ where not exists (select id_train from trains where id_train = 123)

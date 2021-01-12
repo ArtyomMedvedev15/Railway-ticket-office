@@ -16,7 +16,7 @@ public class TrainMapper implements RowMapper<Trains> {
         trains.setName_train(resultSet.getString("name_train"));
         trains.setTypeTrain(TypeTrain.getTypeById(resultSet.getLong("type_train_id")));
         trains.setDepartureStation(Stations.getStationById(resultSet.getLong("departure_station_id")));
-        trains.setArrivalStation(Stations.getStationById(resultSet.getLong("arrvial_station_id")));
+        trains.setArrivalStation(Stations.getStationById(resultSet.getLong("arrival_station_id")));
         trains.setDate_time_departure(resultSet.getDate("date_time_departure"));
         trains.setDate_time_arrival(resultSet.getDate("date_time_arrival"));
         trains.setAvailable_ticket(resultSet.getInt("available_ticket"));

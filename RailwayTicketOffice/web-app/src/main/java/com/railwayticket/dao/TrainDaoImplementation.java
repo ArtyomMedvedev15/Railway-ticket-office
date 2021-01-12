@@ -22,19 +22,19 @@ public class TrainDaoImplementation implements TrainDaoApi {
     }
 
     @Override
-    public List<Trains> FindAllByDateDepartureArrivalStations(Date date, Stations departure, Stations arrival) {
-        String sql_find_by_date_stations_train = "SELECT * FROM trains WHERE date_time_departure=? " +
-                "and departure_station_id=? and arrvial_station_id=?";
-        logger.info("Find all trains by date and stations. " + " Date: " + date.toString() +
+    public List<Trains> FindAllByDateDepartureArrivalStations(Date date_departure,Date date_arrival, Stations departure, Stations arrival) {
+        String sql_find_by_date_stations_train = "SELECT * FROM trains WHERE date_time_departure>=? and date_time_departure<=? " +
+                "and departure_station_id=? and arrival_station_id=?";
+        logger.info("Find all trains by date and stations. " + " Date: " + date_departure.toString() +
                 " Departure station: " + departure.getNameStation() +
                 " Arrival station: " + arrival.getNameStation()+
                 " Time: " + new java.util.Date().toString());
-        return databaseQuery.query(sql_find_by_date_stations_train,new TrainMapper(),date,departure.getId_station(),arrival.getId_station());
+        return databaseQuery.query(sql_find_by_date_stations_train,new TrainMapper(),date_departure,date_arrival,departure.getId_station(),arrival.getId_station());
     }
 
     @Override
     public boolean save(Trains trains) {
-        String sql_save_train = "INSERT INTO trains(name_train,type_train_id,departure_station_id,arrvial_station_id,date_time_departure,date_time_arrival,available_ticket,total_ticket,price_ticket)" +
+        String sql_save_train = "INSERT INTO trains(name_train,type_train_id,departure_station_id,arrival_station_id,date_time_departure,date_time_arrival,available_ticket,total_ticket,price_ticket)" +
                 "VALUES(?,?,?,?,?,?,?,?,?)";
         logger.info("Save new train to database. " + trains.toString() + " Time: " + new java.util.Date().toString());
         return databaseQuery.update(sql_save_train,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
@@ -44,7 +44,7 @@ public class TrainDaoImplementation implements TrainDaoApi {
 
     @Override
     public boolean update(Trains trains) {
-        String sql_update_train = "UPDATE trains SET name_train = ?,type_train_id=?,departure_station_id=?,arrvial_station_id=?,date_time_departure=?," +
+        String sql_update_train = "UPDATE trains SET name_train = ?,type_train_id=?,departure_station_id=?,arrival_station_id=?,date_time_departure=?," +
                 "date_time_arrival=?,available_ticket=?,total_ticket=?,price_ticket=? WHERE id_train=?";
         logger.info("Update train. " + trains.toString() + " Time: " + new java.util.Date().toString());
         return databaseQuery.update(sql_update_train,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
@@ -70,6 +70,6 @@ public class TrainDaoImplementation implements TrainDaoApi {
     public List<Trains> FindAll() {
         String sql_find_all_train = "SELECT * FROM trains";
         logger.info("Get all trains." + " Size: " + databaseQuery.query(sql_find_all_train,new TrainMapper()).size() + " Time: " + new java.util.Date().toString());
-        return null;
+        return databaseQuery.query(sql_find_all_train,new TrainMapper());
     }
 }
