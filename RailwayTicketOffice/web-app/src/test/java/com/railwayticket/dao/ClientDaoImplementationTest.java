@@ -30,7 +30,7 @@ public class ClientDaoImplementationTest extends TestCase {
         ClientRailway clientRailway = new ClientRailway();
         clientRailway.setName_client("Test");
         clientRailway.setSoname_client("Test");
-        clientRailway.setId_train(1L);
+        clientRailway.setId_train(123L);
         clientRailway.setDate_purchase(new Date(new java.util.Date().getTime()));
         clientRailway.setPhone_client("123123123");
 
@@ -41,7 +41,7 @@ public class ClientDaoImplementationTest extends TestCase {
 
     @Test
     public void UpdateClientTest() {
-        ClientRailway clientRailway = clientDaoApi.getOneById(1L);
+        ClientRailway clientRailway = clientDaoApi.getOneById(123L);
         clientRailway.setName_client("NewNameClient");
 
         boolean result_update_client = clientDaoApi.update(clientRailway);
@@ -52,7 +52,7 @@ public class ClientDaoImplementationTest extends TestCase {
 
     @Test
     public void DeleteClientTest() {
-        ClientRailway clientRailway = clientDaoApi.getOneById(123L);
+        ClientRailway clientRailway = clientDaoApi.getOneById(321L);
 
         boolean result_delete_client = clientDaoApi.delete(clientRailway);
 
@@ -61,7 +61,7 @@ public class ClientDaoImplementationTest extends TestCase {
 
     @Test
     public void GetOneClientById() {
-        ClientRailway clientRailway = clientDaoApi.getOneById(1L);
+        ClientRailway clientRailway = clientDaoApi.getOneById(123L);
 
         Assert.assertNotNull(clientRailway);
     }

@@ -58,8 +58,8 @@ public class TrainDaoImplementationTest extends TestCase {
     }
     @Test
     public void FindAllByDateDepartureArrivalStationsTest() throws ParseException {
-        String date_departure = "2020/08/19";
-        String date_arrival = "2020/08/22";
+        String date_departure = "2020/08/12";
+        String date_arrival = "2020/08/13";
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 
 
@@ -72,7 +72,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void UpdateTrainTest() {
-        Trains trains = trainDaoApi.getOneById(1L);
+        Trains trains = trainDaoApi.getOneById(123L);
         trains.setName_train("NewNameTrain");
 
         boolean result_update_train = trainDaoApi.update(trains);
@@ -91,7 +91,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void GetOneByIdTest() {
-        Trains trains = trainDaoApi.getOneById(1L);
+        Trains trains = trainDaoApi.getOneById(123L);
 
         assertNotNull(trains);
     }
