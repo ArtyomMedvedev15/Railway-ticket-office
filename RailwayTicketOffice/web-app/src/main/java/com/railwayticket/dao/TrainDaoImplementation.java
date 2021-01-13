@@ -23,13 +23,13 @@ public class TrainDaoImplementation implements TrainDaoApi {
 
     @Override
     public List<Trains> FindAllByDateDepartureArrivalStations(Date date_departure,Date date_arrival, Stations departure, Stations arrival) {
-        String sql_find_by_date_stations_train = "SELECT * FROM trains WHERE date_time_departure>=? and date_time_departure<=? " +
+        String sql_find_by_date_stations_train = "SELECT * FROM trains WHERE date_time_departure>=? and date_time_departure<=? and date_time_arrival>=? and date_time_arrival<=? " +
                 "and departure_station_id=? and arrival_station_id=?";
         logger.info("Find all trains by date and stations. " + " Date: " + date_departure.toString() +
                 " Departure station: " + departure.getNameStation() +
                 " Arrival station: " + arrival.getNameStation()+
                 " Time: " + new java.util.Date().toString());
-        return databaseQuery.query(sql_find_by_date_stations_train,new TrainMapper(),date_departure,date_arrival,departure.getId_station(),arrival.getId_station());
+        return databaseQuery.query(sql_find_by_date_stations_train,new TrainMapper(),date_departure,date_arrival,date_departure,date_arrival,departure.getId_station(),arrival.getId_station());
     }
 
     @Override

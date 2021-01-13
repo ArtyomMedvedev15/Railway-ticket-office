@@ -58,8 +58,8 @@ public class TrainDaoImplementationTest extends TestCase {
     }
     @Test
     public void FindAllByDateDepartureArrivalStationsTest() throws ParseException {
-        String date_departure = "2020/08/12";
-        String date_arrival = "2020/08/13";
+        String date_departure = "2020/09/12";
+        String date_arrival = "2020/09/13";
         DateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 
 
