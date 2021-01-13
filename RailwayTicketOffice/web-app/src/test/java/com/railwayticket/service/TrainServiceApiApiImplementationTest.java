@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 
 import java.sql.Date;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
 
@@ -165,8 +167,8 @@ public class TrainServiceApiApiImplementationTest extends TestCase {
         train.setDepartureStation(Stations.MINSK);
         train.setTotal_ticket(123);
 
-        Mockito.when(trainServiceApiApiImplementation.FindAll()).thenReturn(Optional.of(train));
-        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().isPresent();
+        Mockito.when(trainServiceApiApiImplementation.FindAll()).thenReturn(Stream.of(train).collect(Collectors.toList()));
+        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().size()>0;
 
         Assert.assertTrue(result_findall_trains);
         Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAll();
@@ -175,7 +177,7 @@ public class TrainServiceApiApiImplementationTest extends TestCase {
     @Test(expected = Exception.class)
     public void FindAllTrainsTest_Exception() {
         Mockito.when(trainServiceApiApiImplementation.FindAll()).thenThrow(Exception.class);
-        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().isPresent();
+        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().size()>0;
 
         Assert.assertFalse(result_findall_trains);
         Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAll();

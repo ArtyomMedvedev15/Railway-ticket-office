@@ -13,6 +13,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -28,15 +29,14 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         this.transactionTemplate.setTimeout(60);
     }
     @Override
-    public Optional<ClientRailway> FindByNameClient(String name_client) throws ClientServiceException {
+    public List<ClientRailway> FindByNameClient(String name_client) throws ClientServiceException {
         TransactionDefinition definition =
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(name_client!=null) {
-                ClientRailway clientRailway;
                 logger.info("Find client by name successfully. Name: " + name_client + " Time: " + new Date().toString());
-                return Optional.of(new ClientRailway());
+                return clientDao.FindByName(name_client);
             }else{
                 logger.error("Name for find client equal null" + " Time: " + new Date().toString());
                 throw new ClientServiceException("Error name for find client equal null");
@@ -44,7 +44,7 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         }catch (ClientServiceException ex){
             transactionTemplate.getTransactionManager().rollback(status);
             logger.error("Find client by name unsuccessfully. Name: null" + " Time: " + new Date().toString());
-            return Optional.empty();
+            return null;
         }finally {
             logger.info("Commit transaction with status: " + status + "Time: " + new Date().toString());
             transactionTemplate.getTransactionManager().commit(status);
@@ -58,9 +58,8 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(clientRailway!=null) {
-                //Dao executed here
                 logger.info("Save client successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
-                return true;
+                return clientDao.save(clientRailway);
             }else{
                 logger.error("Client for save equal null" + " Time: " + new Date().toString());
                 throw new ClientServiceException("Error client for save equal null");
@@ -82,9 +81,8 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(clientRailway.getId_client()!=null) {
-                //Dao executed here
                 logger.info("Update client successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
-                return true;
+                return clientDao.update(clientRailway);
             }else{
                 logger.error("id Client for update equal null" + " Time: " + new Date().toString());
                 throw new ClientServiceException("Error id client for update equal null");
@@ -106,9 +104,8 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(clientRailway.getId_client()!=null) {
-                //Dao executed here
                 logger.info("Delete client successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
-                return true;
+                return clientDao.delete(clientRailway);
             }else{
                 logger.error("id Client for delete equal null" + " Time: " + new Date().toString());
                 throw new ClientServiceException("Error id client for delete equal null");
@@ -130,10 +127,7 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(id!=null) {
-                //Dao executed here
-                ClientRailway clientRailway = new ClientRailway();
-                clientRailway.setName_client("Temp");
-                clientRailway.setId_client(1L);
+                ClientRailway clientRailway = clientDao.getOneById(id);
                 logger.info("Get one client by id successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
                 return clientRailway;
             }else{
@@ -151,14 +145,14 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
      }
 
     @Override
-    public Optional<ClientRailway> FindAll(){
+    public List<ClientRailway> FindAll(){
         TransactionDefinition definition =
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
-            //Dao executed here
-            logger.info("Find all client successfully. size list: "+ 1 + " Time:" + new Date().toString());
-            return Optional.of(new ClientRailway());
+            List<ClientRailway>clientRailways = clientDao.FindAll();
+            logger.info("Find all client successfully. size list: "+ clientRailways.size() + " Time:" + new Date().toString());
+            return clientRailways;
         }catch (Exception ex){
             transactionTemplate.getTransactionManager().rollback(status);
             logger.error("Find all client unsuccessfully." + "result - null"  + " Time:" + new Date().toString());

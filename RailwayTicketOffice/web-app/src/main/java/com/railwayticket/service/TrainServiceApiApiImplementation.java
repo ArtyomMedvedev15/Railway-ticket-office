@@ -12,6 +12,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -125,14 +126,14 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
      }
 
     @Override
-    public Optional<Trains> FindAll() {
+    public List<Trains> FindAll() {
         TransactionDefinition definition =
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             //Dao executed here
             logger.info("Find all train successfully. size list: "+ 1 + " Time:" + new Date().toString());
-            return Optional.of(new Trains());
+            return null;
         }catch (Exception ex){
             transactionTemplate.getTransactionManager().rollback(status);
             logger.error("Find all train unsuccessfully." + "result - null"  + " Time:" + new Date().toString());

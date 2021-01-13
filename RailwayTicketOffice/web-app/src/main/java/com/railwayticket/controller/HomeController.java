@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.apache.log4j.Logger;
+
 @Controller
 public class HomeController {
     final static Logger logger = Logger.getLogger(HomeController.class);
