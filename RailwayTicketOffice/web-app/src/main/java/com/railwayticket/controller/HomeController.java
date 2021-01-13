@@ -1,10 +1,20 @@
 package com.railwayticket.controller;
 
+import com.railwayticket.dao.ClientDaoImplementation;
+import com.railwayticket.domain.ClientRailway;
+import com.railwayticket.service.ClientServiceApiImplementation;
+import com.railwayticket.service.exception.ServiceException;
+import com.railwayticket.service.servic_api.ClientServiceApi;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.apache.log4j.Logger;
+
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -20,12 +30,6 @@ public class HomeController {
     public String listTrainPage(Model model){
         logger.info("Load list of train page");
         return "listtrain";
-    }
-
-    @GetMapping("/listClient")
-    public String listClientPage(Model model){
-        logger.info("Load list of client page");
-        return "listclient";
     }
 
     @GetMapping("/oneTrain/{id}")

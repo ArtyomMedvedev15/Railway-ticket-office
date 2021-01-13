@@ -65,9 +65,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.railwayticket.HomeControllerTest" name="testOneTrainPage" time="0.001"/>
+  <testcase classname="com.railwayticket.HomeControllerTest" name="testOneTrainPage" time="0"/>
   <testcase classname="com.railwayticket.HomeControllerTest" name="testResultFindTrainPage" time="0"/>
-  <testcase classname="com.railwayticket.HomeControllerTest" name="testHomePage" time="0"/>
+  <testcase classname="com.railwayticket.HomeControllerTest" name="testHomePage" time="0.001"/>
   <testcase classname="com.railwayticket.HomeControllerTest" name="testListClientPage" time="0"/>
   <testcase classname="com.railwayticket.HomeControllerTest" name="testListTrainPage" time="0"/>
 </testsuite>

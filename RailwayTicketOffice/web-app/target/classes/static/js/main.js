@@ -195,36 +195,6 @@
      }
  }
 
- function init_edit_modal_client() {
-     let open_modal_edit = document.querySelectorAll('#open_modal_edit');
-     let close_modal = document.querySelectorAll('#close_edit_modal');
-     let modal = document.getElementById('modal_edit');
-     let body = document.getElementsByTagName('body')[0];
-     for (let index = 0; index < open_modal_edit.length; index++) {
-         open_modal_edit[index].onclick = function(event) {
-             modal.classList.add('modal_vis');
-             modal.classList.remove('bounceOutDown');
-             body.classList.add('body_block');
-             $('#Train_number').text(this.dataset.train_number);
-             $('#Name_client').val(this.dataset.name_client);
-             $("#Soname_client").val(this.dataset.soname_client);
-             $('input[name=phone_client]').val(this.dataset.phone_client);
-             $('input[name=email_client]').val(this.dataset.email_client);
-
-             console.log(this.dataset.train_number);
-         };
-     }
-     for (let index = 0; index < close_modal.length; index++) {
-         close_modal[index].onclick = function() {
-             modal.classList.add('bounceOutDown');
-             window.setTimeout(function() {
-                 modal.classList.remove('modal_vis');
-                 body.classList.remove('body_block');
-             }, 500);
-         };
-     }
- }
-
  function buy() {
      alert("Dear clien thanks for choose us!")
      setTimeout('location.replace("/")', 1000);

@@ -200,6 +200,7 @@
      let close_modal = document.querySelectorAll('#close_edit_modal');
      let modal = document.getElementById('modal_edit');
      let body = document.getElementsByTagName('body')[0];
+     let form_edit = document.getElementsByClassName("form_buy_ticket");
      for (let index = 0; index < open_modal_edit.length; index++) {
          open_modal_edit[index].onclick = function(event) {
              modal.classList.add('modal_vis');
@@ -209,9 +210,8 @@
              $('#Name_client').val(this.dataset.name_client);
              $("#Soname_client").val(this.dataset.soname_client);
              $('input[name=phone_client]').val(this.dataset.phone_client);
-             $('input[name=email_client]').val(this.dataset.email_client);
+             $('form[class=form_buy_ticket]').attr("action","@{/EditClientInfo/{id}(id=" + this.dataset.id_client + ")}")
 
-             console.log(this.dataset.train_number);
          };
      }
      for (let index = 0; index < close_modal.length; index++) {

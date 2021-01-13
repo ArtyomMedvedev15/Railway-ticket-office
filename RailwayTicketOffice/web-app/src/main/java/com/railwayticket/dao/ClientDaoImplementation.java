@@ -21,6 +21,9 @@ public class ClientDaoImplementation implements ClientDaoApi {
         this.databaseQuery = new JdbcTemplate(dataSource);
     }
 
+    public ClientDaoImplementation() {
+    }
+
     @Override
     public boolean save(ClientRailway clientRailway) {
         String sql_save_client = "insert into client_railway( id_train, name_client, soname_client, date_purchase, phone_client)" +

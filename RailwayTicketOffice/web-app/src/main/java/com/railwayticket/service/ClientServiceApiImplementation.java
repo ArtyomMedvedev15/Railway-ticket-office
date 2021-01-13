@@ -23,10 +23,11 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
     private ClientDaoApi clientDao;
     final static Logger logger = Logger.getLogger(ClientServiceApiImplementation.class);
 
-    public ClientServiceApiImplementation(PlatformTransactionManager transactionManager) {
+    public ClientServiceApiImplementation(PlatformTransactionManager transactionManager,ClientDaoImplementation clientDaoImplementation) {
         this.transactionTemplate = new TransactionTemplate(transactionManager);
         this.transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_UNCOMMITTED);
         this.transactionTemplate.setTimeout(60);
+        this.clientDao = clientDaoImplementation;
     }
     @Override
     public List<ClientRailway> FindByNameClient(String name_client) throws ClientServiceException {
@@ -163,11 +164,4 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         }
     }
 
-    public void setClientDao(ClientDaoImplementation clientDao) {
-        this.clientDao = clientDao;
-    }
-
-    public ClientDaoApi getClientDao() {
-        return clientDao;
-    }
 }
