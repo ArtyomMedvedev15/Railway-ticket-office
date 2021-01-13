@@ -1,5 +1,7 @@
 package com.railwayticket.service;
 
+import com.railwayticket.dao.ClientDaoImplementation;
+import com.railwayticket.dao.dao_api.ClientDaoApi;
 import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.service.exception.ClientServiceException;
 import com.railwayticket.service.servic_api.ClientServiceApi;
@@ -17,7 +19,7 @@ import java.util.Optional;
 public class ClientServiceApiImplementation implements ClientServiceApi {
 
     private final TransactionTemplate transactionTemplate;
-
+    private ClientDaoApi clientDao;
     final static Logger logger = Logger.getLogger(ClientServiceApiImplementation.class);
 
     public ClientServiceApiImplementation(PlatformTransactionManager transactionManager) {
@@ -32,7 +34,7 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(name_client!=null) {
-                //Dao executed here
+                ClientRailway clientRailway;
                 logger.info("Find client by name successfully. Name: " + name_client + " Time: " + new Date().toString());
                 return Optional.of(new ClientRailway());
             }else{
@@ -165,5 +167,13 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
             logger.info("Commit transaction with status: " + status + "Time: " + new Date().toString());
             transactionTemplate.getTransactionManager().commit(status);
         }
+    }
+
+    public void setClientDao(ClientDaoImplementation clientDao) {
+        this.clientDao = clientDao;
+    }
+
+    public ClientDaoApi getClientDao() {
+        return clientDao;
     }
 }

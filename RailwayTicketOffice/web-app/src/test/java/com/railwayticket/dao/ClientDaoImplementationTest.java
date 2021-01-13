@@ -71,4 +71,10 @@ public class ClientDaoImplementationTest extends TestCase {
         List<ClientRailway>all_client = clientDaoApi.FindAll();
         Assert.assertTrue(all_client.size()>0);
     }
+
+    @Test
+    public void FindByNameTest() {
+        List<ClientRailway>all_client = clientDaoApi.FindByName("NewNameClient");
+        Assert.assertTrue(all_client.size()>0);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class ClientDaoImplementation implements ClientDaoApi {
 
@@ -54,5 +55,13 @@ public class ClientDaoImplementation implements ClientDaoApi {
         String sql_find_all = "SELECT * FROM client_railway";
         logger.info("Find all." + " Size: " + databaseQuery.query(sql_find_all,new ClientMapper()).size() + " Time: " + new Date().toString());
         return databaseQuery.query(sql_find_all,new ClientMapper());
+    }
+
+    @Override
+    public List<ClientRailway> FindByName(String name) {
+        String patter_for_find = "%"+name+"%";
+        String sql_find_by_name = "SELECT * FROM client_railway WHERE name_client LIKE ?";
+        logger.info("Find client by name. " + "Name: " + name + " Time: " + new Date().toString());
+        return databaseQuery.query(sql_find_by_name,new ClientMapper(),patter_for_find);
     }
 }

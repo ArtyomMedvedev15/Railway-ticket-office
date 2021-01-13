@@ -37,6 +37,7 @@
 
     <bean id="clientservice" name="clientservice" class="com.railwayticket.service.ClientServiceApiImplementation">
         <constructor-arg ref="transactionManager"/>
+        <property name="clientDao" ref="clientdao"/>
     </bean>
 
     <bean id="trainsservice" name="trainsservice" class="com.railwayticket.service.TrainServiceApiApiImplementation">
