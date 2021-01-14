@@ -1,7 +1,9 @@
 package com.railwayticket.dao;
 
 import com.railwayticket.dao.dao_api.TrainDaoApi;
+import com.railwayticket.dao.mapper.ClientMapper;
 import com.railwayticket.dao.mapper.TrainMapper;
+import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
 import com.railwayticket.service.ClientServiceApiImplementation;
@@ -30,6 +32,13 @@ public class TrainDaoImplementation implements TrainDaoApi {
                 " Arrival station: " + arrival.getNameStation()+
                 " Time: " + new java.util.Date().toString());
         return databaseQuery.query(sql_find_by_date_stations_train,new TrainMapper(),date_departure,date_arrival,date_departure,date_arrival,departure.getId_station(),arrival.getId_station());
+    }
+
+    @Override
+    public List<ClientRailway> GetAllClientTrain(Long idTrain) {
+        String sql_find_client_by_train = "SELECT * FROM client_railway WHERE id_train = ?";
+        logger.info("Get all client by train id." + " Train id: " + idTrain + " Time: " + new java.util.Date().toString());
+        return databaseQuery.query(sql_find_client_by_train,new ClientMapper(),idTrain);
     }
 
     @Override

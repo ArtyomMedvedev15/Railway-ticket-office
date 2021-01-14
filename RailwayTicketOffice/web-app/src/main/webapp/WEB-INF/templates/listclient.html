@@ -36,12 +36,18 @@
                 <p>List of client</p>
             </div>
             <div class="input-group col-md-4">
-                <input class="form-control" type="search" value="search by name" id="example-search-input">
-                <span class="input-group-append">
-                    <button class="btn btn-outline-dark" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
+                <form th:action="@{/FindClientByName}" th:method="post">
+                    <div class="row">
+                        <div class="col">
+                             <input class="form-control" type="search" placeholder="search by name" th:name="name_client" id="example-search-input"/>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-outline-dark" type="submit">
+                               find
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -61,7 +67,7 @@
                         <tbody class="table_body">
                             <tr class="table_row" th:each="client:${ClientList}">
                                 <td class="table_data" th:text="${client.getId_client()}"></td>
-                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${1})}">@123asd1sd</a></td>
+                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${client.getId_train()})}" th:text="${client.getId_train()}"> </a></td>
                                 <td class="table_data" th:text="${client.getName_client()}">Zoks</td>
                                 <td class="table_data" th:text="${client.getSoname_client()}"></td>
                                 <td class="table_data" th:text="${client.getDate_purchase()}"></td>

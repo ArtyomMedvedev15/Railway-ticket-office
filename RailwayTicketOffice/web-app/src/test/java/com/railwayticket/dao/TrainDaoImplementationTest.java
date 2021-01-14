@@ -1,6 +1,7 @@
 package com.railwayticket.dao;
 
 import com.railwayticket.dao.dao_api.TrainDaoApi;
+import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
 import com.railwayticket.domain.TypeTrain;
@@ -95,5 +96,12 @@ public class TrainDaoImplementationTest extends TestCase {
         List<Trains> list = trainDaoApi.FindAll();
 
         Assert.assertTrue(list.size()>0);
+    }
+
+    @Test
+    public void GetAllClientTrainTest() {
+        List<ClientRailway>getAllClient = trainDaoApi.GetAllClientTrain(123L);
+
+        Assert.assertTrue(getAllClient.size()>0);
     }
 }
