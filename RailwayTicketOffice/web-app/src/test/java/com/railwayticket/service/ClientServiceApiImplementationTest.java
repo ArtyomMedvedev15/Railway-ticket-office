@@ -11,7 +11,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -27,10 +31,10 @@ public class ClientServiceApiImplementationTest extends TestCase {
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.FindByNameClient("Temp")).thenReturn(Optional.of(clientTest));
+        Mockito.when(clientServiceApiImplementation.FindByNameClient("Temp")).thenReturn(Stream.of(clientTest).collect(Collectors.toList()));
 
-        Optional<ClientRailway> result_findbyname = clientServiceApiImplementation.FindByNameClient("Temp");
-        Assert.assertTrue(result_findbyname.isPresent());
+        List<ClientRailway> result_findbyname = clientServiceApiImplementation.FindByNameClient("Temp");
+        Assert.assertTrue(result_findbyname.size()>0);
 
         Mockito.verify(clientServiceApiImplementation,times(1)).FindByNameClient("Temp");
     }
@@ -38,11 +42,11 @@ public class ClientServiceApiImplementationTest extends TestCase {
     @Test
     public void FindCLientByNameTest_Exception() throws ClientServiceException {
         Mockito.when(clientServiceApiImplementation.FindByNameClient(Mockito.any(String.class))).thenThrow( new ClientServiceException("Error name for find client equal null"));
-        Optional<ClientRailway> result_findbyname = Optional.empty();
+        List<ClientRailway> result_findbyname = Collections.emptyList();
         try {
             result_findbyname = clientServiceApiImplementation.FindByNameClient(null);
         }catch (ClientServiceException clientServiceException){
-            Assert.assertFalse(result_findbyname.isPresent());
+            Assert.assertFalse(result_findbyname.size()>0);
             Assert.assertTrue(clientServiceException instanceof ServiceException);
             Assert.assertEquals(clientServiceException.getMessage(), "Error name for find client equal null");
         }
@@ -175,9 +179,9 @@ public class ClientServiceApiImplementationTest extends TestCase {
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.FindAll()).thenReturn(Optional.of(clientTest));
+        Mockito.when(clientServiceApiImplementation.FindAll()).thenReturn(Stream.of(clientTest).collect(Collectors.toList()));
 
-        boolean result_find_all = clientServiceApiImplementation.FindAll().isPresent();
+        boolean result_find_all = clientServiceApiImplementation.FindAll().size()>0;
 
         Assert.assertTrue(result_find_all);
         Mockito.verify(clientServiceApiImplementation,times(1)).FindAll();

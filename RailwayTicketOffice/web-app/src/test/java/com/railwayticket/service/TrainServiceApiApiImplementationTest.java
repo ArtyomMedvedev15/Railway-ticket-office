@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 
 import java.sql.Date;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
 
@@ -165,8 +167,8 @@ public class TrainServiceApiApiImplementationTest extends TestCase {
         train.setDepartureStation(Stations.MINSK);
         train.setTotal_ticket(123);
 
-        Mockito.when(trainServiceApiApiImplementation.FindAll()).thenReturn(Optional.of(train));
-        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().isPresent();
+        Mockito.when(trainServiceApiApiImplementation.FindAll()).thenReturn(Stream.of(train).collect(Collectors.toList()));
+        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().size()>0;
 
         Assert.assertTrue(result_findall_trains);
         Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAll();
@@ -175,7 +177,7 @@ public class TrainServiceApiApiImplementationTest extends TestCase {
     @Test(expected = Exception.class)
     public void FindAllTrainsTest_Exception() {
         Mockito.when(trainServiceApiApiImplementation.FindAll()).thenThrow(Exception.class);
-        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().isPresent();
+        boolean result_findall_trains = trainServiceApiApiImplementation.FindAll().size()>0;
 
         Assert.assertFalse(result_findall_trains);
         Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAll();
@@ -191,29 +193,29 @@ public class TrainServiceApiApiImplementationTest extends TestCase {
         train.setTotal_ticket(123);
         train.setDate_time_arrival(new Date(new java.util.Date().getTime()));
         Date date =  new Date(new java.util.Date().getTime());
-        Mockito.when(trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations(date,
+        Mockito.when(trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations(date,date,
                 Stations.BREST,Stations.MINSK)).
-                thenReturn(Optional.of(train));
+                thenReturn(Stream.of(train).collect(Collectors.toList()));
         boolean result_findallbydate_stations_trains = trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations
-                (date,Stations.BREST,Stations.MINSK).isPresent();
+                (date,date,Stations.BREST,Stations.MINSK).size()>0;
 
         Assert.assertTrue(result_findallbydate_stations_trains);
-        Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAllByDateDepartureArrivalStations(date,Stations.BREST,Stations.MINSK);
+        Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAllByDateDepartureArrivalStations(date,date,Stations.BREST,Stations.MINSK);
     }
 
     @Test
     public void FindAllTrainByDateDepartureArrivalStationsTest_Exception() throws TrainServiceException {
-        Mockito.when(trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations(null,Stations.BREST,Stations.MINSK)).
+        Mockito.when(trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations(null,null,Stations.BREST,Stations.MINSK)).
         thenThrow(new TrainServiceException("Date eqaul null and error in stations"));
         boolean result_findallbydate_stations_trains = false;
         try {
-          result_findallbydate_stations_trains =  trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations(null, Stations.BREST, Stations.MINSK).isPresent();
+          result_findallbydate_stations_trains =  trainServiceApiApiImplementation.FindAllByDateDepartureArrivalStations(null,null, Stations.BREST, Stations.MINSK).size()>0;
         }catch (TrainServiceException trainServiceException){
             Assert.assertFalse(result_findallbydate_stations_trains);
             Assert.assertTrue(trainServiceException instanceof ServiceException);
             Assert.assertEquals(trainServiceException.getMessage(), "Date eqaul null and error in stations");
         }
-         Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAllByDateDepartureArrivalStations(null,Stations.BREST,Stations.MINSK);
+         Mockito.verify(trainServiceApiApiImplementation,Mockito.times(1)).FindAllByDateDepartureArrivalStations(null,null,Stations.BREST,Stations.MINSK);
     }
 
 }

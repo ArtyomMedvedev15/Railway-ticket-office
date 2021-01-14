@@ -50,4 +50,5 @@
     <bean id="clientdao" name="clientdao" class="com.railwayticket.dao.ClientDaoImplementation">
         <constructor-arg ref="dataSource"/>
     </bean>
+
 </beans>

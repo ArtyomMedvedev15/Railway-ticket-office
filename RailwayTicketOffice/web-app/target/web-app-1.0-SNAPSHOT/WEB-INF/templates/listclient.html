@@ -36,12 +36,18 @@
                 <p>List of client</p>
             </div>
             <div class="input-group col-md-4">
-                <input class="form-control" type="search" value="search by name" id="example-search-input">
-                <span class="input-group-append">
-                    <button class="btn btn-outline-dark" type="button">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
+                <form th:action="@{/FindClientByName}" th:method="post">
+                    <div class="row">
+                        <div class="col">
+                             <input class="form-control" type="search" placeholder="search by name" th:name="name_client" id="example-search-input"/>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-outline-dark" type="submit">
+                               find
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="table-responsive">
@@ -52,7 +58,6 @@
                                 <th class="header__item"><a id="id_client" class="filter__link" href="#"> Number train</a></th>
                                 <th class="header__item"><a id="name_client" class="filter__link" href="#">Name</a></th>
                                 <th class="header__item"><a id="soname_client" class="filter__link" href="#">Soname</a></th>
-                                <th class="header__item"><a id="email_client" class="filter__link" href="#">Email</a></th>
                                 <th class="header__item"><a id="Date_purchase" class="filter__link" href="#">Date of purchase</a></th>
                                 <th class="header__item"><a id="phone_client" class="filter__link" href="#">Phone</a></th>
                                 <th class="header__item"><a id="btns" class="filter__link" href="#">Edit</a></th>
@@ -60,22 +65,21 @@
                             </tr>
                         </thead>
                         <tbody class="table_body">
-                            <tr class="table_row">
-                                <td class="table_data">3213</td>
-                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${1})}">@123asd1sd</a></td>
-                                <td class="table_data">Zoks</td>
-                                <td class="table_data">Jameson</td>
-                                <td class="table_data">artas_jameson@gmail.com</td>
-                                <td class="table_data">07/10/2022 02:04</td>
-                                <td class="table_data">+375(33)312-12-12</td>
+                            <tr class="table_row" th:each="client:${ClientList}">
+                                <td class="table_data" th:text="${client.getId_client()}"></td>
+                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${client.getId_train()})}" th:text="${client.getId_train()}"> </a></td>
+                                <td class="table_data" th:text="${client.getName_client()}">Zoks</td>
+                                <td class="table_data" th:text="${client.getSoname_client()}"></td>
+                                <td class="table_data" th:text="${client.getDate_purchase()}"></td>
+                                <td class="table_data" th:text="${client.getPhone_client()}"></td>
                                 <td class="table-data">
                                     <div class="default_btn transition">
-                                        <a id="open_modal_edit" data-train_number="a@123asd1sd" data-name_client="Artas" data-soname_client="Jameson" data-email_client="artas_jameson@gmail.com" data-phone_client="+375(33)3121212" class="transition" href="#">Edit</a>
+                                        <a id="open_modal_edit"   class="transition" th:href="@{/EditClientInfo/{id}(id=${client.getId_client()})}">Edit</a>
                                     </div>
                                 </td>
                                 <td class="table-data">
                                     <div class="default_btn transition">
-                                        <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                                        <a onclick="return confirmDelete();" class="transition" th:href="@{/deleteclient/{id}(id=${client.getId_client()})}">Delete</a>
                                     </div>
                                 </td>
                             </tr>
@@ -86,44 +90,6 @@
         </div>
     </section>
 
-    <div id="modal_edit" class="modal bounceIn">
-        <div id="close_edit_modal">+</div>
-        <div class="modal_edit_txt">
-            <div class="buy_ticket_content">
-                <form action="" method="post" onsubmit="edit_client();return false;" class="form_buy_ticket">
-                    <div class="title_buy_form">
-                        <p>Train number: <span id="Train_number"></span></p>
-                    </div>
-                    <div class="img-overlay"></div>
-                    <div class="buy_ticket_content_inner">
-                        <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name_client" id="Name_client" minlength="3" maxlength="35" required />
-                            <label for="Name_client" class="form__label">Name</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form__group field">
-                            <input type="input" class="form__field" placeholder="Soname" name="soname_client" id='Soname_client' minlength="3" maxlength="35" required />
-                            <label for="Soname_client" class="form__label">Soname</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form__group field">
-                            <input type="input" class="form__field" id="phone_client" placeholder="Phone number in format +373(33 or 29 or 44)" minlength="15" name="phone_client" pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required />
-                            <label for="phone_client" class="form__label">+373(35 or 29 or 44)</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form__group field">
-                            <input type="email" class="form__field" placeholder="Email" name="email_client" id='email_client' required />
-                            <label for="email_client" class="form__label">Email</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="default_btn transition">
-                            <button class="transition" type="submit">Edit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
@@ -141,7 +107,6 @@
             'id_train',
             'Date_purchase'
         ];
-        init_edit_modal_client();
         sort_table(properties_client);
     </script>
 </body>

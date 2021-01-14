@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="12" failures="0" name="com.railwayticket.service.TrainServiceApiApiImplementationTest" time="0.022" errors="0" skipped="0">
+<testsuite tests="12" failures="0" name="com.railwayticket.service.TrainServiceApiApiImplementationTest" time="0.021" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11+28"/>
@@ -66,14 +66,14 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="DeleteTrainTest_True" time="0.001"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_Exception" time="0.01"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_Exception" time="0.008"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainByDateDepartureArrivalStationsTest_True" time="0.001"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainByDateDepartureArrivalStationsTest_Exception" time="0.002"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="SaveNewTrainTest_True" time="0.001"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="UpdateTrainInfoTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="SaveNewTrainTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="UpdateTrainInfoTest_True" time="0.001"/>
-  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_True" time="0.001"/>
+  <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_True" time="0.002"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="DeleteTrainTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="GetOneTrainTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.TrainServiceApiApiImplementationTest" name="FindAllTrainsTest_True" time="0.001"/>

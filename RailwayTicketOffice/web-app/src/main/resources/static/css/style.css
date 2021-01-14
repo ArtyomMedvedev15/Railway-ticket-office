@@ -282,14 +282,6 @@ select::-ms-expand {
     transform: translateY(-50%);
 }
 
-.filter__link.desc::after {
-    content: '(desc)';
-}
-
-.filter__link.asc::after {
-    content: '(asc)';
-}
-
 .find_train_result {
     margin-top: 30px;
 }

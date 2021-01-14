@@ -1,31 +1,26 @@
 package com.railwayticket.dao;
 
 import com.railwayticket.dao.dao_api.TrainDaoApi;
+import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
 import com.railwayticket.domain.TypeTrain;
 import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.ClassRule;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/applicationContext-test.xml")
@@ -101,5 +96,12 @@ public class TrainDaoImplementationTest extends TestCase {
         List<Trains> list = trainDaoApi.FindAll();
 
         Assert.assertTrue(list.size()>0);
+    }
+
+    @Test
+    public void GetAllClientTrainTest() {
+        List<ClientRailway>getAllClient = trainDaoApi.GetAllClientTrain(123L);
+
+        Assert.assertTrue(getAllClient.size()>0);
     }
 }

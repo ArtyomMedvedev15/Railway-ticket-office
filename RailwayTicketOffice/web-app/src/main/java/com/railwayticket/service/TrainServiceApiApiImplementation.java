@@ -1,5 +1,9 @@
 package com.railwayticket.service;
 
+import com.railwayticket.dao.ClientDaoImplementation;
+import com.railwayticket.dao.TrainDaoImplementation;
+import com.railwayticket.dao.dao_api.ClientDaoApi;
+import com.railwayticket.dao.dao_api.TrainDaoApi;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
 import com.railwayticket.service.exception.TrainServiceException;
@@ -12,19 +16,23 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 public class TrainServiceApiApiImplementation implements TrainServiceApi {
 
     private final TransactionTemplate transactionTemplate;
-
+    private TrainDaoApi trainDaoApi;
+    private ClientDaoApi clientDaoApi;
     final static Logger logger = Logger.getLogger(TrainServiceApiApiImplementation.class);
 
-    public TrainServiceApiApiImplementation(PlatformTransactionManager transactionManager) {
+    public TrainServiceApiApiImplementation(PlatformTransactionManager transactionManager, TrainDaoImplementation trainDaoImplementation, ClientDaoImplementation clientDaoImplementation) {
         this.transactionTemplate = new TransactionTemplate(transactionManager);
         this.transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_UNCOMMITTED);
         this.transactionTemplate.setTimeout(60);
+        this.trainDaoApi = trainDaoImplementation;
+        this.clientDaoApi = clientDaoImplementation;
     }
 
     @Override
@@ -34,11 +42,10 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(trains!=null) {
-                //Dao executed here
                 logger.info("Save train successfully. Name: " + trains.getName_train() +
                         " station departure: " + trains.getDepartureStation().getNameStation() + " station arrival: "
                         + trains.getArrivalStation().getNameStation() + " Time: " + new Date().toString());
-                return true;
+                return trainDaoApi.save(trains);
             }else{
                 logger.error("Train for save equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Error train for save equal null");
@@ -60,9 +67,8 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(trains.getId_train()!=null) {
-                //Dao executed here
                 logger.info("Update train successfully. Train: " + trains.toString() + " Time: " + new Date().toString());
-                return true;
+                return trainDaoApi.update(trains);
             }else{
                 logger.error("Id train equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Id train equal null");
@@ -85,7 +91,8 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         try{
             if(trains.getId_train()!=null) {
                 logger.info("Delete train successfully. Train: " + trains.toString() + " Time: " + new Date().toString());
-                return true;
+                trainDaoApi.GetAllClientTrain(trains.getId_train()).forEach(o1->clientDaoApi.delete(clientDaoApi.getOneById(o1.getId_client())));
+                return trainDaoApi.delete(trains);
             }else{
                 logger.error("Id train equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Id equal null");
@@ -107,9 +114,9 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(id!=null) {
-                //Dao executed here
-                logger.info("Get one train successfully. Id train: " + new Trains().toString() + " Time:" + new Date().toString());
-                return new Trains();
+               Trains get_train = trainDaoApi.getOneById(id);
+                logger.info("Get one train successfully. Id train: " + get_train.toString() + " Time:" + new Date().toString());
+                return get_train;
             }else{
                 logger.error("Id for get train equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Id for get train equal null");
@@ -125,14 +132,13 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
      }
 
     @Override
-    public Optional<Trains> FindAll() {
+    public List<Trains> FindAll() {
         TransactionDefinition definition =
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
-            //Dao executed here
             logger.info("Find all train successfully. size list: "+ 1 + " Time:" + new Date().toString());
-            return Optional.of(new Trains());
+            return trainDaoApi.FindAll();
         }catch (Exception ex){
             transactionTemplate.getTransactionManager().rollback(status);
             logger.error("Find all train unsuccessfully." + "result - null"  + " Time:" + new Date().toString());
@@ -144,15 +150,14 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
     }
 
     @Override
-    public Optional<Trains> FindAllByDateDepartureArrivalStations(java.sql.Date date, Stations departure, Stations arrival)throws TrainServiceException{
+    public List<Trains> FindAllByDateDepartureArrivalStations(java.sql.Date date_departure,java.sql.Date date_arrival, Stations departure, Stations arrival)throws TrainServiceException{
         TransactionDefinition definition =
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
-            if(date!=null && !departure.equals(arrival)) {
-                //Dao executed here
-                logger.info("Find all by date and stations train successfully. size list: " + 1 + " Time:" + new Date().toString());
-                return Optional.of(new Trains());
+            if(date_arrival!=null && date_departure!=null && !departure.equals(arrival)) {
+                logger.info("Find all by date and stations train successfully. size list: " + trainDaoApi.FindAllByDateDepartureArrivalStations(date_departure,date_arrival,departure,arrival).size() + " Time:" + new Date().toString());
+                return trainDaoApi.FindAllByDateDepartureArrivalStations(date_departure,date_arrival,departure,arrival);
             }else {
                 logger.error("Date eqaul null and error in stations" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Date eqaul null and error in stations");

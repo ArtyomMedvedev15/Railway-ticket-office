@@ -61,26 +61,25 @@
                             </tr>
                         </thead>
                         <tbody class="table_body">
-                            <tr class="table_row">
-                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${1})}">@123asd1sd</a></td>
-                                <td class="table_data">Artas</td>
-                                <td class="table_data">Coupe</td>
-                                <td class="table_data">Brest</td>
-                                <td class="table_data">Minsk</td>
-                                <td class="table_data">09/10/2023 02:04</td>
-                                <td class="table_data">12/10/2023 04:04</td>
-                                <td class="table_data">10</td>
-                                <td class="table_data">241</td>
-                                <td class="table_data">12</td>
+                            <tr class="table_row" th:each="train:${TrainList}">
+                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${train.getId_train()})}" th:text="${train.getId_train()}"></a></td>
+                                <td class="table_data" th:text="${train.getName_train()}"></td>
+                                <td class="table_data" th:text="${train.getTypeTrain().getNameType()}"></td>
+                                <td class="table_data" th:text="${train.getDepartureStation().getNameStation()}"></td>
+                                <td class="table_data" th:text="${train.getArrivalStation().getNameStation()}"></td>
+                                <td class="table_data" th:text="${train.getDate_time_departure()}"></td>
+                                <td class="table_data" th:text="${train.getDate_time_arrival()}"></td>
+                                <td class="table_data" th:text="${train.getAvailable_ticket()}"></td>
+                                <td class="table_data" th:text="${train.getTotal_ticket()}"></td>
+                                <td class="table_data" th:text="${train.getPrice_ticket()}"></td>
                                 <td class="table-data">
                                     <div class="default_btn transition">
-                                        <a id="open_edit_modal" data-train_number="c@123asd1sd" data-name_train="Zoks" data-type_train="Business" data-departure_station="Brest" data-arrival_station="Minsk" data-date_time_departure="09/10/2023 02:04" data-date_time_arrival="12/10/2023 04:04"
-                                            data-total_ticket="231" data-price="12" class="transition" href="#">Edit</a>
+                                        <a id="open_edit_modal" class="transition" th:href="@{/EditTrainInfo/{id}(id=${train.getId_train()})}">Edit</a>
                                     </div>
                                 </td>
                                 <td class="table-data">
                                     <div class="default_btn transition">
-                                        <a onclick="return confirmDelete();" class="transition" href="#">Delete</a>
+                                        <a onclick="return confirmDelete();" class="transition" th:href="@{/DeleteTrain/{id}(id=${train.getId_train()})}">Delete</a>
                                     </div>
                                 </td>
                             </tr>
@@ -98,39 +97,43 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="add_train_content">
-                            <form th:action="@{/listTrain}" method="get" onsubmit="return add_new_train()" class="form_add_train_new">
+                            <form th:action="@{/SaveNewTrain}" th:method="post" onsubmit="return add_new_train()" class="form_add_train_new">
                                 <div class="title_buy_form">
                                     Add new train
                                 </div>
                                 <div class="img-overlay"></div>
                                 <div class="add_train_content_inner">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="input" class="form__field" placeholder="Name" name="name_train" id='name' minlength="3" maxlength="35" required />
+                                        <input type="input" class="form__field" placeholder="Name" th:name="name_train" id='name' minlength="3" maxlength="35" required />
                                         <label for="name_train" class="form__label">Name</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" name="Departure_station" required>
+                                        <select class="form__field form-control" th:name="departure_station" required>
                                             <option selected>Departure station</option>
-                                            <option>Brest</option>
-                                            <option>Minsk</option>
-                                            <option>Mogilev</option>
-                                            <option>Grodno</option>
+                                            <option value="Brest">Brest</option>
+                                            <option value="Minsk">Minsk</option>
+                                            <option value="Mogilev">Mogilev</option>
+                                            <option value="Grodno">Grodno</option>
+                                            <option value="Vitebsk">Vitebsk</option>
+                                            <option value="Gomel">Gomel</option>
                                         </select>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" name="arrival_station" required>
+                                        <select class="form__field form-control" th:name="arrival_station" required>
                                             <option selected>Arrival station</option>
-                                            <option>Brest</option>
-                                            <option>Minsk</option>
-                                            <option>Mogilev</option>
-                                            <option>Grodno</option>
+                                            <option value="Brest">Brest</option>
+                                            <option value="Minsk">Minsk</option>
+                                            <option value="Mogilev">Mogilev</option>
+                                            <option value="Grodno">Grodno</option>
+                                            <option value="Vitebsk">Vitebsk</option>
+                                            <option value="Gomel">Gomel</option>
                                         </select>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" name="type_train" required>
+                                        <select class="form__field form-control" th:name="type_train" required>
                                             <option selected> Type train</option>
                                             <option>Business</option>
                                             <option>Econom</option>
@@ -140,22 +143,27 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_departure_add" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep" required />
+                                        <input id="datepicker_departure_add" type="input" class="form__field" placeholder="Date and time departure" th:name="datetime_dep" required />
                                         <label for="datepicker_departure_add" class="form__label">Date and time departure</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_arriva_add" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr"  required />
+                                        <input id="datepicker_arriva_add" type="input" class="form__field" placeholder="Date and time arrival" th:name="datetime_arr"  required />
                                         <label for="datepicker_arriva_add" class="form__label">Date and time arrival</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="number" class="form__field" placeholder="Total ticket" name="total_ticket" required min="1" max="500" />
+                                        <input id="total_ticket" type="number" class="form__field" placeholder="Total ticket" th:name="total_ticket" required min="1" max="500" />
                                         <label for="total_ticket" class="form__label">Total ticket</label>
                                     </div>
                                     <div class="line-break"></div>
+                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
+                                        <input id="available_ticket" type="number" class="form__field" placeholder="Available ticket" th:name="available_ticket" required min="1" max="500" />
+                                        <label for="available_ticket" class="form__label">Available ticket</label>
+                                    </div>
+                                    <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="number" class="form__field" placeholder="Price" name="price" required min="1" max="500" />
+                                        <input type="number" class="form__field" placeholder="Price" th:name="price" step="0.01" required min="1" max="500" />
                                         <label for="price" class="form__label">Price</label>
                                     </div>
                                     <div class="line-break"></div>
@@ -168,82 +176,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="modal_edit" class="modal bounceIn">
-        <div id="close_edit_modal">+</div>
-        <div class="modal_edit_txt">
-            <div class="add_train_content">
-                <form th:action="@{/listTrain}" method="get" onsubmit="return edit()" class="form_add_train_new">
-                    <div class="title_buy_form">
-                        <p>Edit train</p>
-                        <p>Train number: <span id="train_number"></span></p>
-                    </div>
-                    <div class="img-overlay"></div>
-                    <div class="add_train_content_inner">
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id="name_train_edit" required />
-                            <label for="name" class="form__label">Name</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="departure_station_edit" required>
-                                <option selected>Departure station</option>
-                                <option>Brest</option>
-                                <option>Minsk</option>
-                                <option>Mogilev</option>
-                                <option>Grodno</option>
-                            </select>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="arrival_station_edit" required>
-                                <option selected>Arrival station</option>
-                                <option>Brest</option>
-                                <option>Minsk</option>
-                                <option>Mogilev</option>
-                                <option>Grodno</option>
-                            </select>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="type_train_edit" required>
-                                <option selected> Type train</option>
-                                <option>Business</option>
-                                <option>Econom</option>
-                                <option>Coupe</option>
-                                <option>Reserved seat</option>
-                            </select>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="datepicker_departure_edit" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep_edit" required/>
-                            <label for="datepicker_departure_edit" class="form__label">Date and time departure</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="datepicker_arrival_edit" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr_edit" required/>
-                            <label for="datepicker_arrival_edit" class="form__label">Date and time arrival</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="total_ticket" type="number" class="form__field" min="1" max="500" placeholder="Total ticket" name="total_ticket_edit" required/>
-                            <label for="total_ticket" class="form__label">Total ticket</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="price_ticket" type="number" class="form__field" min="1" max="500" placeholder="Price ticket" name="price_edit" required/>
-                            <label for="price" class="form__label">Price ticket</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="default_btn transition">
-                            <button class="transition" type="submit">Edit</button>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -270,7 +202,6 @@
             'price'
         ];
         sort_table(properties_train);
-        init_edit_modal_open_close_btn_list_train();
         init_modal_open_close_btn_add_train();
     </script>
 </body>
