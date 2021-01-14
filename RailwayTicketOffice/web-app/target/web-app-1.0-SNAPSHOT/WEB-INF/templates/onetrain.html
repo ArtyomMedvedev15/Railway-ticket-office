@@ -34,41 +34,40 @@
 <section class="list_train">
         <div class="container">
             <div class="title_list_train">
-                <p>Train number : {number}</p>
+                <p>Train number : <span th:text="${oneTrain.getId_train()}"></span></p>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card"  id="card_one" style="width: 20rem; margin: 0 auto;margin-bottom: 20px;">
                         <img class="card-img-top" th:src="@{/static/img/pngwing.com.png}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Gomel-Centrall &rarr; Minsk-Centrall</h5>
+                            <h5 class="card-title"><span th:text="${oneTrain.getDepartureStation().getNameStation()}"></span> &rarr; <span th:text="${oneTrain.getArrivalStation().getNameStation()}"></span></h5>
                             <p class="card-text">
-                                <p class="stations">Brest-Centrall &rarr; Minsk-Centrall</p>
+                                <p class="stations"><span th:text="${oneTrain.getDepartureStation().getNameStation()}"></span> &rarr; <span th:text="${oneTrain.getArrivalStation().getNameStation()}"></span></p>
                                 <div class="calendars_dep"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <p class="date">: 09/10/2023 02:04</p>
+                                    <p class="date" th:text="':' + ${oneTrain.getDate_time_departure()}"> </p>
                                 </div>
                                 <div class="calendars_arr"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <p class="date">: 09/10/2023 02:04</p>
+                                    <p class="date" th:text="':' + ${oneTrain.getDate_time_arrival()}">: </p>
                                 </div>
 
                                 <div class="type_train">
-                                    <p>Type:<strong> Bussiness</strong></p>
+                                    <p>Type:<strong th:text="${oneTrain.getTypeTrain().getNameType()}"></strong></p>
                                 </div>
 
                                 <div class="cost">
-                                    <p>Price: <strong>&#36;15</strong></p>
+                                    <p>Price: <strong>&#36;<span th:text="${oneTrain.getPrice_ticket()}"></span></strong></p>
                                 </div>
                             </p>
                             <div class="row">
                                 <div class="default_btn transition">
-                                    <a id="open_modal" data-total_price="15" data-train_number="asd212asd@1" data-name_train="test1trainName" data-train_from="Brest-Centrall" data-train_to="Minsk-Centrall" data-type_train="Bussiness" class="transition" href="#">Buy</a>
+                                    <a id="open_modal" th:data-total_price="${oneTrain.getPrice_ticket()}" th:data-train_number="${oneTrain.getId_train()}" th:data-name_train="${oneTrain.getName_train()}" th:data-train_from="${oneTrain.getDepartureStation().getNameStation()}" th:data-train_to="${oneTrain.getArrivalStation().getNameStation()}" th:data-type_train="${oneTrain.getTypeTrain().getNameType()}" class="transition" href="#">Buy</a>
                                 </div>
                                 <div class="default_btn transition">
-                                    <a id="open_edit_modal" data-train_number="c@123asd1sd" data-name_train="Zoks" data-type_train="Business" data-departure_station="Brest" data-arrival_station="Minsk" data-date_time_departure="09/10/2023 02:04" data-date_time_arrival="12/10/2023 04:04"
-                                        data-total_ticket="231" data-price="12" class="transition" href="#">Edit</a>
+                                    <a id="open_edit_modal" th:href="@{/EditTrainInfo/{id}(id=${oneTrain.getId_train()})}">Edit</a>
                                 </div>
                                 <div class="default_btn transition">
-                                    <a style="width: 200px;" class="transition" onclick="confirmDelete()" href="#">Delete</a>
+                                    <a style="width: 200px;" class="transition" onclick="confirmDelete()" th:href="@{/DeleteTrain/{id}(id=${oneTrain.getId_train()})}">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -83,13 +82,17 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="buy_ticket_content">
-                            <form action="/" method="get" onsubmit="buy();return false;" class="form_buy_ticket">
+                            <form th:action="@{/buyticket}" th:method="post" onsubmit="buy();" class="form_buy_ticket">
                                 <div class="title_buy_form">
                                     <p>Route <span id="train_from"></span> &rarr; <span id="train_to"></span></p>
-                                    <p>Train number: <span id="train_number"></span></p>
+                                    <p>Train number: <span id="train_number" th:name="train_id"></span></p>
                                 </div>
                                 <div class="img-overlay"></div>
                                 <div class="buy_ticket_content_inner">
+                                    <div class="form__group field" style="display: none">
+                                        <input type="input" class="form__field" placeholder="Name" minlength="5" maxlength="30" th:name="train_id" id='train_numbers' required />
+                                        <label for="train_numbers" class="form__label">Name</label>
+                                    </div>
                                     <div class="form__group field">
                                         <input type="input" class="form__field" placeholder="Name" minlength="5" maxlength="30" name="name_client" id='name_client' required />
                                         <label for="name_client" class="form__label">Name</label>
@@ -103,11 +106,6 @@
                                     <div class="form__group field">
                                         <input type="input" class="form__field" placeholder="Phone number in format +373(33 or 29 or 44) your phone number" name="phone_client" id='phone_client' pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required />
                                         <label for="phone_client" class="form__label">Phone +373(33 or 29 or 44)</label>
-                                    </div>
-                                    <div class="line-break"></div>
-                                    <div class="form__group field">
-                                        <input type="email" class="form__field" placeholder="Email" name="email_client" id='email_client' required />
-                                        <label for="email_client" class="form__label">Email</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="total">
@@ -126,81 +124,6 @@
             </div>
         </div>
     </div>
-    <div id="modal_edit" class="modal bounceIn">
-        <div id="close_edit_modal">+</div>
-        <div class="modal_edit_txt">
-            <div class="add_train_content">
-                <form th:action="@{/listTrain}" method="get" onsubmit="return edit()" class="form_add_train_new">
-                    <div class="title_buy_form">
-                        <p>Edit train</p>
-                        <p>Train number: <span id="train_number"></span></p>
-                    </div>
-                    <div class="img-overlay"></div>
-                    <div class="add_train_content_inner">
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input type="input" class="form__field" placeholder="Name" name="name" id="name_train_edit" required/>
-                            <label for="name_train_edit" class="form__label">Name</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="departure_station_edit" required>
-                                <option selected>Departure station</option>
-                                <option>Brest</option>
-                                <option>Minsk</option>
-                                <option>Mogilev</option>
-                                <option>Grodno</option>
-                            </select>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" name="arrival_station_edit" required>
-                                <option selected>Arrival station</option>
-                                <option>Brest</option>
-                                <option>Minsk</option>
-                                <option>Mogilev</option>
-                                <option>Grodno</option>
-                            </select>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                            <select class="form__field form-control" id="type_train" name="type_train_edit" required>
-                                <option selected> Type train</option>
-                                <option>Business</option>
-                                <option>Econom</option>
-                                <option>Coupe</option>
-                                <option>Reserved seat</option>
-                            </select>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="datepicker_departure_edit" type="input" class="form__field" placeholder="Date and time departure" name="datetime_dep" required/>
-                            <label for="datepicker_departure_edit" class="form__label">Date and time departure</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="datepicker_arrival_edit" type="input" class="form__field" placeholder="Date and time arrival" name="datetime_arr" required/>
-                            <label for="datepicker_arrival_edit" class="form__label">Date and time arrival</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="total_ticket" type="number" class="form__field" placeholder="Total ticket" name="total_ticket" required/>
-                            <label for="total_ticket" class="form__label">Total ticket</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                            <input id="price_ticket" type="input" class="form__field" placeholder="Price ticket" name="price_ticket" required/>
-                            <label for="price_ticket" class="form__label">Price ticket</label>
-                        </div>
-                        <div class="line-break"></div>
-                        <div class="default_btn transition">
-                            <button class="transition" type="submit">Edit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -212,8 +135,7 @@
     <script th:src="@{/static/js/JPages.min.js}"></script>
     <script th:src="@{/static/js/main.js}"></script>
     <script>
-        init_edit_modal_open_close_btn_list_train();
-        init_modal_open_close_btn_buy_ticket();
+         init_modal_open_close_btn_buy_ticket();
     </script>
 </body>
 

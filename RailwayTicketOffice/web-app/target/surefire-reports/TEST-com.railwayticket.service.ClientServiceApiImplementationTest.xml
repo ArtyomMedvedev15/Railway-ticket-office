@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="11" failures="0" name="com.railwayticket.service.ClientServiceApiImplementationTest" time="0.044" errors="0" skipped="0">
+<testsuite tests="11" failures="0" name="com.railwayticket.service.ClientServiceApiImplementationTest" time="0.045" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11+28"/>
@@ -65,15 +65,15 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_Exception" time="0.028"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_True" time="0.004"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_True" time="0.001"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_Exception" time="0.027"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_True" time="0.007"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_True" time="0"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_Exception" time="0.003"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="UpdateClientTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="DeleteClientTest_True" time="0.001"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="DeleteClientTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindCLientByNameTest_True" time="0.003"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindCLientByNameTest_Exception" time="0.001"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="UpdateClientTest_True" time="0.001"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindAllClientTest_True" time="0"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="UpdateClientTest_True" time="0"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindAllClientTest_True" time="0.001"/>
 </testsuite>

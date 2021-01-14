@@ -38,6 +38,8 @@
 
     <bean id="trainsservice" name="trainsservice" class="com.railwayticket.service.TrainServiceApiApiImplementation">
         <constructor-arg ref="transactionManager"/>
+        <constructor-arg name="trainDaoImplementation" ref="traindao"/>
+        <constructor-arg name="clientDaoImplementation" ref="clientdao"/>
     </bean>
 
     <bean id="traindao" name="traindao" class="com.railwayticket.dao.TrainDaoImplementation">
