@@ -30,14 +30,9 @@ import java.util.Locale;
 public class TrainController {
     final static Logger logger = Logger.getLogger(TrainController.class);
 
-    private TrainServiceApi trainServiceApi;
-
+    @Qualifier("TrainServiceImplementation")
     @Autowired
-    @Qualifier(value = "trainsservice")
-    public void setClientDao(TrainServiceApiApiImplementation trainServiceApiApiImplementation){
-        this.trainServiceApi = trainServiceApiApiImplementation;
-    }
-
+    private TrainServiceApi trainServiceApi;
 
     @GetMapping("/listTrain")
     public String listTrainPage(Model model){
@@ -73,8 +68,8 @@ public class TrainController {
                              @RequestParam("available_ticket")String available_ticket,
                              @RequestParam("price")String price) throws ServiceException, ParseException{
 
-        Date date_departure=new SimpleDateFormat("yyyy.MM.dd").parse(datetime_dep);
-        Date date_arrival=new SimpleDateFormat("yyyy.MM.dd").parse(datetime_arr);
+        Date date_departure=new SimpleDateFormat("yyyy-MM-dd").parse(datetime_dep);
+        Date date_arrival=new SimpleDateFormat("yyyy-MM-dd").parse(datetime_arr);
 
         Trains save_train = new Trains();
         save_train.setName_train(name_train);
@@ -104,8 +99,8 @@ public class TrainController {
                               @RequestParam("datetime_arr_edit")String datetime_arr_edit,
                               @RequestParam("total_ticket_edit")String total_ticket_edit,
                               @RequestParam("price_edit")String price_edit) throws ServiceException, ParseException {
-        Date date_departure=new SimpleDateFormat("yyyy.MM.dd").parse(datetime_dep_edit);
-        Date date_arrival=new SimpleDateFormat("yyyy.MM.dd").parse(datetime_arr_edit);
+        Date date_departure=new SimpleDateFormat("yyyy-MM-dd").parse(datetime_dep_edit);
+        Date date_arrival=new SimpleDateFormat("yyyy-MM-dd").parse(datetime_arr_edit);
 
         Trains trains_update = trainServiceApi.getOneById(Long.valueOf(id));
         trains_update.setName_train(name_train_edit);
@@ -142,8 +137,8 @@ public class TrainController {
                                   @RequestParam(name = "departure_station_find")String departure_station,
                                   @RequestParam(name = "arrival_station_find")String arrival_station,
                                   Model model) throws ParseException, TrainServiceException {
-        Date date_departure_find=new SimpleDateFormat("yyyy.MM.dd").parse(date_departure);
-        Date date_arrival_find=new SimpleDateFormat("yyyy.MM.dd").parse(arrival_date);
+        Date date_departure_find=new SimpleDateFormat("yyyy-MM-dd").parse(date_departure);
+        Date date_arrival_find=new SimpleDateFormat("yyyy-MM-dd").parse(arrival_date);
 
         System.out.println(date_arrival_find);
 

@@ -1,6 +1,8 @@
 com\railwayticket\service\ClientServiceApiImplementation.class
 com\railwayticket\service\servic_api\TrainServiceApi.class
+com\railwayticket\config\DispatcherServletInitializer.class
 com\railwayticket\controller\ClientController.class
 com\railwayticket\controller\TrainController.class
 com\railwayticket\service\TrainServiceApiApiImplementation.class
 com\railwayticket\service\servic_api\BaseServiceApi.class
+com\railwayticket\config\BeanConfig.class

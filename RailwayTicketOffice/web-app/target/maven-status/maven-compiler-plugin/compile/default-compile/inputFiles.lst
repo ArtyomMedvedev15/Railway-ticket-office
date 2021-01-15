@@ -7,8 +7,10 @@ D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\co
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\dao\ClientDaoImplementation.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\domain\TypeTrain.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\dao\dao_api\BaseDaoApi.java
+D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\config\BeanConfig.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\controller\ClientController.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\service\servic_api\TrainServiceApi.java
+D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\config\DispatcherServletInitializer.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\dao\TrainDaoImplementation.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\domain\Stations.java
 D:\Tim2020\rw\Railway-ticket-office\RailwayTicketOffice\web-app\src\main\java\com\railwayticket\service\servic_api\BaseServiceApi.java
