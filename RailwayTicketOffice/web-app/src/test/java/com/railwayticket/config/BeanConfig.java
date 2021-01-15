@@ -77,7 +77,7 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/railwayticketofficetest2");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/railwayticketofficetest");
         dataSource.setUsername("postgres");
         dataSource.setPassword("1234");
 
