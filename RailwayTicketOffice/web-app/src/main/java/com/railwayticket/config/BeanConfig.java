@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -23,6 +24,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.sql.DataSource;
+import java.util.Objects;
 
 @Configuration
 @ComponentScan("com.railwayticket")
@@ -30,6 +32,9 @@ import javax.sql.DataSource;
 public class BeanConfig extends WebMvcConfigurerAdapter {
 
     private final ApplicationContext applicationContext;
+
+    @Autowired
+    private Environment environment;
 
     @Autowired
     public BeanConfig(ApplicationContext applicationContext) {
@@ -45,13 +50,18 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/railwayticketoffice");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("1234");
 
-        Resource initSchema = new ClassPathResource("database/initializeDatabase.sql");
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(Objects.requireNonNull(this.environment.getProperty("spring.datasource.driver-class-name")));
+        dataSource.setUrl(this.environment.getProperty("spring.datasource.url"));
+        dataSource.setUsername(this.environment.getProperty("spring.datasource.username"));
+        dataSource.setPassword(this.environment.getProperty("spring.datasource.password"));
+        Resource initSchema;
+        if(this.environment.getActiveProfiles()[0].equals("dev")) {
+             initSchema = new ClassPathResource("database/initializeDatabaseMySql.sql");
+        }else{
+            initSchema = new ClassPathResource("database/initializeDatabase.sql");
+        }
         Resource initData = new ClassPathResource("database/populateData.sql");
         DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema, initData);
         DatabasePopulatorUtils.execute(databasePopulator, dataSource);
