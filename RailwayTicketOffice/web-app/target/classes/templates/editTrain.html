@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Railway ticket office</title>
     <link rel="stylesheet" th:href="@{/static/css/timepickeraddon.css}"/>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
     <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
     <link rel="Shortcut Icon" th:href="@{/static/img/train.png}"/>
@@ -45,13 +45,13 @@
                             <div class="img-overlay"></div>
                             <div class="add_train_content_inner">
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                    <input type="input" class="form__field" placeholder="Name" th:name="name_train_edit" th:value="${editTrain.getName_train()}" id="name_train_edit" required />
+                                    <input type="input" class="form__field" placeholder="Name" th:name="name_train_edit" th:value="${editTrain.getName_train()}" id="name_train_edit" required="required" />
                                     <label for="name_train_edit" class="form__label">Name</label>
                                 </div>
 
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                    <select class="form__field form-control" th:name="departure_station_edit" th:value="${editTrain.getDepartureStation()}" required>
+                                    <select class="form__field form-control" th:name="departure_station_edit" th:value="${editTrain.getDepartureStation()}" required="required">
                                         <option th:attrappend="selected=${editTrain.getDepartureStation()==null}?selected:''">Departure station</option>
                                         <option th:attrappend="selected=${editTrain.getDepartureStation().getNameStation()=='Brest'}?selected:''">Brest</option>
                                         <option th:attrappend="selected=${editTrain.getDepartureStation().getNameStation()=='Minsk'}?selected:''">Minsk</option>
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                    <select class="form__field form-control" th:name="arrival_station_edit" th:value="${editTrain.getArrivalStation()}" required>
+                                    <select class="form__field form-control" th:name="arrival_station_edit" th:value="${editTrain.getArrivalStation()}" required="required">
                                         <option th:attrappend="selected=${editTrain.getDepartureStation()==null}">Arrival station</option>
                                         <option th:attrappend="selected=${editTrain.getArrivalStation().getNameStation()=='Brest'}?selected:''">Brest</option>
                                         <option th:attrappend="selected=${editTrain.getArrivalStation().getNameStation()=='Minsk'}?selected:''">Minsk</option>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                    <select class="form__field form-control" th:name="type_train_edit" th:value="${editTrain.getTypeTrain()}" required>
+                                    <select class="form__field form-control" th:name="type_train_edit" th:value="${editTrain.getTypeTrain()}" required="required">
                                         <option th:attrappend="selected=${editTrain.getTypeTrain()==null}?selected:''"> Type train</option>
                                         <option th:attrappend="selected=${editTrain.getTypeTrain().getNameType()=='Business'}?selected:''" value="BUSINESS">Business</option>
                                         <option th:attrappend="selected=${editTrain.getTypeTrain().getNameType()=='Econom'}?selected:''" value="ECONOM">Econom</option>
@@ -85,22 +85,22 @@
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                    <input id="datepicker_departure_edit" type="input" th:value="${editTrain.getDate_time_departure()}" class="form__field" placeholder="Date and time departure" th:name="datetime_dep_edit" required/>
+                                    <input id="datepicker_departure_edit" type="input" th:value="${editTrain.getDate_time_departure()}" class="form__field" placeholder="Date and time departure" th:name="datetime_dep_edit" required="required"/>
                                     <label for="datepicker_departure_edit" class="form__label">Date and time departure</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                    <input id="datepicker_arrival_edit" type="input" th:value="${editTrain.getDate_time_arrival()}" class="form__field" placeholder="Date and time arrival" th:name="datetime_arr_edit" required/>
+                                    <input id="datepicker_arrival_edit" type="input" th:value="${editTrain.getDate_time_arrival()}" class="form__field" placeholder="Date and time arrival" th:name="datetime_arr_edit" required="required"/>
                                     <label for="datepicker_arrival_edit" class="form__label">Date and time arrival</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                    <input id="total_ticket" type="number" th:value="${editTrain.getTotal_ticket()}" class="form__field" min="1" max="500" placeholder="Total ticket" th:name="total_ticket_edit" required/>
+                                    <input id="total_ticket" type="number" th:value="${editTrain.getTotal_ticket()}" class="form__field" min="1" max="500" placeholder="Total ticket" th:name="total_ticket_edit" required="required"/>
                                     <label for="total_ticket" class="form__label">Total ticket</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                    <input id="price_ticket_edit" type="number" th:value="${editTrain.getPrice_ticket()}" class="form__field" step="0.01" min="1" max="500" placeholder="Price ticket" th:name="price_edit" required/>
+                                    <input id="price_ticket_edit" type="number" th:value="${editTrain.getPrice_ticket()}" class="form__field" step="0.01" min="1" max="500" placeholder="Price ticket" th:name="price_edit" required="required"/>
                                     <label for="price_ticket_edit" class="form__label">Price ticket</label>
                                 </div>
                                 <div class="line-break"></div>
@@ -112,6 +112,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
 
 
