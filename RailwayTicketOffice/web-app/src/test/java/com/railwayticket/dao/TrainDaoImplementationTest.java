@@ -31,7 +31,6 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {BeanConfig.class, DispatcherServletInitializer.class})
 @WebAppConfiguration
-@Sql(value = {"classpath:/database/populateDataTest.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class TrainDaoImplementationTest extends TestCase {
 
     @Qualifier("TrainDaoApiImplementation")

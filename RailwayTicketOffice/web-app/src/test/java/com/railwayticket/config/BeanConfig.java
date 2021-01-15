@@ -13,8 +13,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -72,9 +77,14 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/railwayticketofficetest");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/railwayticketofficetest2");
         dataSource.setUsername("postgres");
         dataSource.setPassword("1234");
+
+        Resource initSchema = new ClassPathResource("database/initializeDatabase.sql");
+        Resource initData = new ClassPathResource("database/populateDataTest.sql");
+        DatabasePopulator databasePopulator = new ResourceDatabasePopulator(initSchema, initData);
+        DatabasePopulatorUtils.execute(databasePopulator, dataSource);
         return dataSource;
     }
 
