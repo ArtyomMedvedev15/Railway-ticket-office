@@ -45,7 +45,7 @@
     <property name="java.class.path" value="C:\Program Files\maven\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11"/>
     <property name="user.language" value="ru"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -65,14 +65,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_Exception" time="0.027"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_True" time="0.007"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_True" time="0"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_Exception" time="0.003"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_Exception" time="0.03"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="GetOneByIdTest_True" time="0.005"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_True" time="0.001"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="SaveClientTest_Exception" time="0.002"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="UpdateClientTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="DeleteClientTest_True" time="0.001"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="DeleteClientTest_Exception" time="0.001"/>
-  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindCLientByNameTest_True" time="0.003"/>
+  <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindCLientByNameTest_True" time="0.002"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindCLientByNameTest_Exception" time="0.001"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="UpdateClientTest_True" time="0"/>
   <testcase classname="com.railwayticket.service.ClientServiceApiImplementationTest" name="FindAllClientTest_True" time="0.001"/>

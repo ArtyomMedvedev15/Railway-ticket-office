@@ -1,29 +1,30 @@
 package com.railwayticket.dao;
 
+import com.railwayticket.config.BeanConfig;
 import com.railwayticket.dao.dao_api.ClientDaoApi;
-import com.railwayticket.dao.dao_api.TrainDaoApi;
 import com.railwayticket.domain.ClientRailway;
 import junit.framework.TestCase;
 import org.junit.Assert;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-test.xml")
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ClientDaoImplementationTest extends TestCase {
+@ContextConfiguration(classes = BeanConfig.class)
+@WebAppConfiguration
+ public class ClientDaoImplementationTest extends TestCase {
 
-    ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:/applicationContext-test.xml");
-    ClientDaoApi clientDaoApi = context.getBean("clientdao",ClientDaoImplementation.class);
+    @Qualifier("ClientDaoApiImplementation")
+    @Autowired
+    private ClientDaoApi clientDaoApi;
 
     @Test
     public void SaveNewClientTest() {

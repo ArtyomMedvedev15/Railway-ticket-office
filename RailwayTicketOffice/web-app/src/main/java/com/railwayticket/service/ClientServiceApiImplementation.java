@@ -6,6 +6,8 @@ import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.service.exception.ClientServiceException;
 import com.railwayticket.service.servic_api.ClientServiceApi;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -20,15 +22,18 @@ import java.util.Optional;
 public class ClientServiceApiImplementation implements ClientServiceApi {
 
     private final TransactionTemplate transactionTemplate;
+
+    @Qualifier("ClientDaoApiImplementation")
+    @Autowired
     private ClientDaoApi clientDao;
+
     final static Logger logger = Logger.getLogger(ClientServiceApiImplementation.class);
 
-    public ClientServiceApiImplementation(PlatformTransactionManager transactionManager,ClientDaoImplementation clientDaoImplementation) {
+    public ClientServiceApiImplementation(PlatformTransactionManager transactionManager) {
         this.transactionTemplate = new TransactionTemplate(transactionManager);
         this.transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_UNCOMMITTED);
         this.transactionTemplate.setTimeout(60);
-        this.clientDao = clientDaoImplementation;
-    }
+     }
     @Override
     public List<ClientRailway> FindByNameClient(String name_client) throws ClientServiceException {
         TransactionDefinition definition =

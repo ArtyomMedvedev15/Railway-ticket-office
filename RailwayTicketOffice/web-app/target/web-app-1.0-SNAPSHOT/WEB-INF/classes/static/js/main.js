@@ -1,46 +1,46 @@
  $(function() {
      $("#datepicker_dep_find").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
      $("#datepicker_arr_find").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
      $("#datepicker_departure").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
 
      });
 
      $("#datepicker_arrival").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
 
      $("#datepicker_departure_edit").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
 
      $("#datepicker_arrival_edit").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
      $("#datepicker_departure_add").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
      $("#datepicker_arriva_add").datetimepicker({
          minDate: 0,
-         dateFormat: 'yy.mm.dd',
+         dateFormat: 'yy-mm-dd',
          timeFormat: 'HH:mm'
      });
 
@@ -192,13 +192,11 @@
  function add_new_train() {
      var arrival_data_time = $('#datepicker_arriva_add').val();
      var departure_data_time = $('#datepicker_departure_add').val();
-     var departure_station = $('select[name=Departure_station]').val();
+     var departure_station = $('select[name=departure_station]').val();
      var arrival_station = $('select[name=arrival_station]').val();
 
-     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station !== arrival_station) {
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station != arrival_station) {
          alert("Success add train")
-         history.pushState("", document.title, window.location.pathname);
-         setTimeout('location.replace("/listTrain")', 100);
          return true;
      } else {
          alert("Error illegal argument dates or stations")

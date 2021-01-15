@@ -1,5 +1,7 @@
 package com.railwayticket.dao;
 
+import com.railwayticket.config.BeanConfig;
+import com.railwayticket.config.DispatcherServletInitializer;
 import com.railwayticket.dao.dao_api.TrainDaoApi;
 import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
@@ -11,10 +13,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Date;
 import java.text.DateFormat;
@@ -23,12 +29,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/applicationContext-test.xml")
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@ContextConfiguration(classes = {BeanConfig.class, DispatcherServletInitializer.class})
+@WebAppConfiguration
 public class TrainDaoImplementationTest extends TestCase {
 
-    ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:/applicationContext-test.xml");
-    TrainDaoApi trainDaoApi = context.getBean("traindao",TrainDaoImplementation.class);
+    @Qualifier("TrainDaoApiImplementation")
+    @Autowired
+    public TrainDaoApi trainDaoApi;
 
     @Test
     public void SaveTrainTest() throws ParseException {

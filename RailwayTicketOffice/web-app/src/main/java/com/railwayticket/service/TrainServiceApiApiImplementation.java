@@ -1,7 +1,5 @@
 package com.railwayticket.service;
 
-import com.railwayticket.dao.ClientDaoImplementation;
-import com.railwayticket.dao.TrainDaoImplementation;
 import com.railwayticket.dao.dao_api.ClientDaoApi;
 import com.railwayticket.dao.dao_api.TrainDaoApi;
 import com.railwayticket.domain.Stations;
@@ -9,6 +7,8 @@ import com.railwayticket.domain.Trains;
 import com.railwayticket.service.exception.TrainServiceException;
 import com.railwayticket.service.servic_api.TrainServiceApi;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -18,21 +18,24 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class TrainServiceApiApiImplementation implements TrainServiceApi {
 
     private final TransactionTemplate transactionTemplate;
+    @Qualifier("TrainDaoApiImplementation")
+    @Autowired
     private TrainDaoApi trainDaoApi;
+
+    @Qualifier("ClientDaoApiImplementation")
+    @Autowired
     private ClientDaoApi clientDaoApi;
+
     final static Logger logger = Logger.getLogger(TrainServiceApiApiImplementation.class);
 
-    public TrainServiceApiApiImplementation(PlatformTransactionManager transactionManager, TrainDaoImplementation trainDaoImplementation, ClientDaoImplementation clientDaoImplementation) {
+    public TrainServiceApiApiImplementation(PlatformTransactionManager transactionManager) {
         this.transactionTemplate = new TransactionTemplate(transactionManager);
         this.transactionTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_UNCOMMITTED);
         this.transactionTemplate.setTimeout(60);
-        this.trainDaoApi = trainDaoImplementation;
-        this.clientDaoApi = clientDaoImplementation;
     }
 
     @Override

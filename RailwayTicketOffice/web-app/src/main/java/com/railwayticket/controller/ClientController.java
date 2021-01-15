@@ -20,13 +20,9 @@ public class ClientController {
 
     final static Logger logger = Logger.getLogger(ClientController.class);
 
-    private ClientServiceApi clientServiceApi;
-
+    @Qualifier("ClientServiceApiImplementation")
     @Autowired
-    @Qualifier(value = "clientservice")
-    public void setClientDao(ClientServiceApiImplementation clientServiceApiImplementation){
-        this.clientServiceApi = clientServiceApiImplementation;
-    }
+    private ClientServiceApi clientServiceApi;
 
     @GetMapping("/")
     public String homePage(){
