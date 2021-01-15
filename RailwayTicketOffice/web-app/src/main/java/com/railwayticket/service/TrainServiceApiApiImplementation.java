@@ -1,11 +1,11 @@
 package com.railwayticket.service;
 
-import com.railwayticket.dao.dao_api.ClientDaoApi;
 import com.railwayticket.dao.dao_api.TrainDaoApi;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
-import com.railwayticket.service.exception.TrainServiceException;
 import com.railwayticket.service.servic_api.TrainServiceApi;
+import com.railwayticket.dao.dao_api.ClientDaoApi;
+import com.railwayticket.service.exception.TrainServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -153,7 +153,7 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
     }
 
     @Override
-    public List<Trains> FindAllByDateDepartureArrivalStations(java.sql.Date date_departure,java.sql.Date date_arrival, Stations departure, Stations arrival)throws TrainServiceException{
+    public List<Trains> FindAllByDateDepartureArrivalStations(java.sql.Date date_departure, java.sql.Date date_arrival, Stations departure, Stations arrival)throws TrainServiceException{
         TransactionDefinition definition =
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);

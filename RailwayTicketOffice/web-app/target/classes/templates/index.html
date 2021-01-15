@@ -22,7 +22,7 @@
         </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a th:href="@{/}" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a id="home" th:href="@{/}" class="nav-link">Home</a></li>
                     <li class="nav-item"><a th:href="@{/listTrain}" class="nav-link">List train</a></li>
                     <li class="nav-item"><a th:href="@{/listClient}" class="nav-link">List client</a></li>
                 </ul>
@@ -42,18 +42,18 @@
                             <div class="img-overlay"></div>
                             <div class="find_train_content_inner">
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                    <input id="datepicker_dep_find" type="input" class="form__field" placeholder="Date and time" th:name="departure_date" required/>
+                                    <input id="datepicker_dep_find" type="input" class="form__field" placeholder="Date and time" th:name="departure_date" required="required"/>
                                     <label for="datepicker_dep_find" class="form__label">Date departure</label>
                                 </div>
                                 <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_arr_find" type="input" class="form__field" placeholder="Date and time" th:name="arrival_date" required/>
+                                        <input id="datepicker_arr_find" type="input" class="form__field" placeholder="Date and time" th:name="arrival_date" required="required"/>
                                         <label for="datepicker_arr_find" class="form__label">Date arrival</label>
                                     </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                    <select class="form__field form-control" required th:name="departure_station_find">
-                                        <option selected> Choose destination from</option>
+                                    <select class="form__field form-control" required="required" th:name="departure_station_find">
+                                        <option selected="selected"> Choose destination from</option>
                                         <option value="Brest">Brest</option>
                                         <option value="Minsk">Minsk</option>
                                         <option value="Mogilev">Mogilev</option>
@@ -64,8 +64,8 @@
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                    <select class="form__field form-control" required th:name="arrival_station_find">
-                                        <option selected> Choose destination from</option>
+                                    <select class="form__field form-control" required="required" th:name="arrival_station_find">
+                                        <option selected="selected"> Choose destination from</option>
                                         <option value="Brest">Brest</option>
                                         <option value="Minsk">Minsk</option>
                                         <option value="Mogilev">Mogilev</option>

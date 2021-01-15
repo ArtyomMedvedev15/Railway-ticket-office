@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Railway ticket office</title>
     <link rel="stylesheet" th:href="@{/static/css/timepickeraddon.css}"/>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"/>
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
     <link rel="stylesheet" th:href="@{/static/css/style.css}"/>
     <link rel="Shortcut Icon" th:href="@{/static/img/train.png}"/>
@@ -35,7 +35,7 @@
     <section class="list_train">
         <div class="container">
             <div class="title_list_train">
-                <p>List of trains</p>
+                <p id="name_page">List of trains</p>
             </div>
             <div class="default_btn transition modal_open_btn">
                 <a id="open_modal" class="transition" href="#">Add new train</a>
@@ -61,7 +61,7 @@
                             </tr>
                         </thead>
                         <tbody class="table_body">
-                            <tr class="table_row" th:each="train:${TrainList}">
+                            <tr class="table_row" th:each="train:${TrainList}" id="node">
                                 <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${train.getId_train()})}" th:text="${train.getId_train()}"></a></td>
                                 <td class="table_data" th:text="${train.getName_train()}"></td>
                                 <td class="table_data" th:text="${train.getTypeTrain().getNameType()}"></td>
@@ -104,13 +104,13 @@
                                 <div class="img-overlay"></div>
                                 <div class="add_train_content_inner">
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="input" class="form__field" placeholder="Name" th:name="name_train" id='name' minlength="3" maxlength="35" required />
+                                        <input type="input" class="form__field" placeholder="Name" th:name="name_train" id='name' minlength="3" maxlength="35" required="required" />
                                         <label for="name_train" class="form__label">Name</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" th:name="departure_station" required>
-                                            <option selected>Departure station</option>
+                                        <select class="form__field form-control" th:name="departure_station" required="required">
+                                            <option selected="selected">Departure station</option>
                                             <option value="Brest">Brest</option>
                                             <option value="Minsk">Minsk</option>
                                             <option value="Mogilev">Mogilev</option>
@@ -121,8 +121,8 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" th:name="arrival_station" required>
-                                            <option selected>Arrival station</option>
+                                        <select class="form__field form-control" th:name="arrival_station" required="required">
+                                            <option selected="selected">Arrival station</option>
                                             <option value="Brest">Brest</option>
                                             <option value="Minsk">Minsk</option>
                                             <option value="Mogilev">Mogilev</option>
@@ -133,8 +133,8 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-                                        <select class="form__field form-control" th:name="type_train" required>
-                                            <option selected> Type train</option>
+                                        <select class="form__field form-control" th:name="type_train" required="required">
+                                            <option selected="selected"> Type train</option>
                                             <option>Business</option>
                                             <option>Econom</option>
                                             <option>Coupe</option>
@@ -143,27 +143,27 @@
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_departure_add" type="input" class="form__field" placeholder="Date and time departure" th:name="datetime_dep" required />
+                                        <input id="datepicker_departure_add" type="input" class="form__field" placeholder="Date and time departure" th:name="datetime_dep" required="required" />
                                         <label for="datepicker_departure_add" class="form__label">Date and time departure</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="datepicker_arriva_add" type="input" class="form__field" placeholder="Date and time arrival" th:name="datetime_arr"  required />
+                                        <input id="datepicker_arriva_add" type="input" class="form__field" placeholder="Date and time arrival" th:name="datetime_arr"  required="required" />
                                         <label for="datepicker_arriva_add" class="form__label">Date and time arrival</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="total_ticket" type="number" class="form__field" placeholder="Total ticket" th:name="total_ticket" required min="1" max="500" />
+                                        <input id="total_ticket" type="number" class="form__field" placeholder="Total ticket" th:name="total_ticket" required="required" min="1" max="500" />
                                         <label for="total_ticket" class="form__label">Total ticket</label>
                                     </div>
                                     <div class="line-break"></div>
                                      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input id="available_ticket" type="number" class="form__field" placeholder="Available ticket" th:name="available_ticket" required min="1" max="500" />
+                                        <input id="available_ticket" type="number" class="form__field" placeholder="Available ticket" th:name="available_ticket" required="required" min="1" max="500" />
                                         <label for="available_ticket" class="form__label">Available ticket</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-                                        <input type="number" class="form__field" placeholder="Price" th:name="price" step="0.01" required min="1" max="500" />
+                                        <input type="number" class="form__field" placeholder="Price" th:name="price" step="0.01" required="required" min="1" max="500" />
                                         <label for="price" class="form__label">Price</label>
                                     </div>
                                     <div class="line-break"></div>

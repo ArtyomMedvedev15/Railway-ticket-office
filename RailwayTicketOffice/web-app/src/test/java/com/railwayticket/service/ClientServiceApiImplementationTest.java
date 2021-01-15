@@ -1,29 +1,38 @@
 package com.railwayticket.service;
 
+import com.railwayticket.config.BeanConfig;
+import com.railwayticket.config.DispatcherServletInitializer;
 import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.service.exception.ClientServiceException;
 import com.railwayticket.service.exception.ServiceException;
-import com.railwayticket.service.exception.TrainServiceException;
+import com.railwayticket.service.servic_api.ClientServiceApi;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 
-@RunWith(JUnit4.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {BeanConfig.class, DispatcherServletInitializer.class})
+@SpringBootTest
+@WebAppConfiguration
 public class ClientServiceApiImplementationTest extends TestCase {
 
-    private final ClientServiceApiImplementation clientServiceApiImplementation = mock(ClientServiceApiImplementation.class);
+    @MockBean
+    public ClientServiceApi clientServiceApi;
 
     @Test
     public void FindCLientByNameTest_True() throws ClientServiceException {
@@ -31,145 +40,145 @@ public class ClientServiceApiImplementationTest extends TestCase {
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.FindByNameClient("Temp")).thenReturn(Stream.of(clientTest).collect(Collectors.toList()));
+        Mockito.when(clientServiceApi.FindByNameClient("Temp")).thenReturn(Stream.of(clientTest).collect(Collectors.toList()));
 
-        List<ClientRailway> result_findbyname = clientServiceApiImplementation.FindByNameClient("Temp");
+        List<ClientRailway> result_findbyname = clientServiceApi.FindByNameClient("Temp");
         Assert.assertTrue(result_findbyname.size()>0);
 
-        Mockito.verify(clientServiceApiImplementation,times(1)).FindByNameClient("Temp");
+        Mockito.verify(clientServiceApi,times(1)).FindByNameClient("Temp");
     }
 
     @Test
     public void FindCLientByNameTest_Exception() throws ClientServiceException {
-        Mockito.when(clientServiceApiImplementation.FindByNameClient(Mockito.any(String.class))).thenThrow( new ClientServiceException("Error name for find client equal null"));
+        Mockito.when(clientServiceApi.FindByNameClient(Mockito.any(String.class))).thenThrow( new ClientServiceException("Error name for find client equal null"));
         List<ClientRailway> result_findbyname = Collections.emptyList();
         try {
-            result_findbyname = clientServiceApiImplementation.FindByNameClient(null);
+            result_findbyname = clientServiceApi.FindByNameClient(null);
         }catch (ClientServiceException clientServiceException){
             Assert.assertFalse(result_findbyname.size()>0);
             Assert.assertTrue(clientServiceException instanceof ServiceException);
             Assert.assertEquals(clientServiceException.getMessage(), "Error name for find client equal null");
         }
-        Mockito.verify(clientServiceApiImplementation,times(1)).FindByNameClient(null);
+        Mockito.verify(clientServiceApi,times(1)).FindByNameClient(null);
     }
 
     @Test
-    public void SaveClientTest_True() throws ClientServiceException {
+    public void SaveClientTest_True() throws ServiceException {
         ClientRailway clientRailway = new ClientRailway();
         clientRailway.setId_client(1L);
         clientRailway.setName_client("Temp");
 
-        Mockito.when(clientServiceApiImplementation.save(clientRailway)).thenReturn(true);
-        boolean result_save_client = clientServiceApiImplementation.save(clientRailway);
+        Mockito.when(clientServiceApi.save(clientRailway)).thenReturn(true);
+        boolean result_save_client = clientServiceApi.save(clientRailway);
 
         Assert.assertTrue(result_save_client);
-        Mockito.verify(clientServiceApiImplementation,times(1)).save(clientRailway);
+        Mockito.verify(clientServiceApi,times(1)).save(clientRailway);
     }
 
     @Test
-    public void SaveClientTest_Exception() throws ClientServiceException {
-        Mockito.when(clientServiceApiImplementation.save(Mockito.any(ClientRailway.class))).thenThrow( new ClientServiceException("Error client for save equal null"));
+    public void SaveClientTest_Exception() throws ServiceException {
+        Mockito.when(clientServiceApi.save(null)).thenThrow( new ClientServiceException("Error client for save equal null"));
         boolean result_save_client = false;
         try {
-             result_save_client = clientServiceApiImplementation.save(null);
+             result_save_client = clientServiceApi.save(null);
         }catch (ClientServiceException clientServiceException){
             Assert.assertFalse(result_save_client);
             Assert.assertTrue(clientServiceException instanceof ServiceException);
             Assert.assertEquals(clientServiceException.getMessage(), "Error client for save equal null");
         }
-         Mockito.verify(clientServiceApiImplementation,times(1)).save(null);
+         Mockito.verify(clientServiceApi,times(1)).save(null);
     }
 
     @Test
-    public void UpdateClientTest_True() throws ClientServiceException {
+    public void UpdateClientTest_True() throws ServiceException {
         ClientRailway clientTest = new ClientRailway();
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.update(clientTest)).thenReturn(true);
+        Mockito.when(clientServiceApi.update(clientTest)).thenReturn(true);
 
-        boolean result_update_client = clientServiceApiImplementation.update(clientTest);
+        boolean result_update_client = clientServiceApi.update(clientTest);
         Assert.assertTrue(result_update_client);
 
-        Mockito.verify(clientServiceApiImplementation,times(1)).update(clientTest);
+        Mockito.verify(clientServiceApi,times(1)).update(clientTest);
     }
 
     @Test
-    public void UpdateClientTest_Exception() throws ClientServiceException {
+    public void UpdateClientTest_Exception() throws ServiceException {
         ClientRailway clientTest = new ClientRailway();
         clientTest.setName_client("Temp");
 
-         Mockito.when(clientServiceApiImplementation.update(Mockito.any(ClientRailway.class))).thenThrow( new ClientServiceException("Error id client for update equal null"));
+         Mockito.when(clientServiceApi.update(Mockito.any(ClientRailway.class))).thenThrow( new ClientServiceException("Error id client for update equal null"));
         boolean result_update_client = false;
         try {
-            result_update_client = clientServiceApiImplementation.update(clientTest);
+            result_update_client = clientServiceApi.update(clientTest);
         }catch (ClientServiceException clientServiceException){
             Assert.assertFalse(result_update_client);
             Assert.assertTrue(clientServiceException instanceof ServiceException);
             Assert.assertEquals(clientServiceException.getMessage(), "Error id client for update equal null");
         }
-        Mockito.verify(clientServiceApiImplementation,times(1)).update(clientTest);
+        Mockito.verify(clientServiceApi,times(1)).update(clientTest);
     }
 
     @Test
-    public void DeleteClientTest_True() throws ClientServiceException {
+    public void DeleteClientTest_True() throws ServiceException {
         ClientRailway clientTest = new ClientRailway();
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.delete(clientTest)).thenReturn(true);
+        Mockito.when(clientServiceApi.delete(clientTest)).thenReturn(true);
 
-        boolean result_delete_client = clientServiceApiImplementation.delete(clientTest);
+        boolean result_delete_client = clientServiceApi.delete(clientTest);
         Assert.assertTrue(result_delete_client);
 
-        Mockito.verify(clientServiceApiImplementation,times(1)).delete(clientTest);
+        Mockito.verify(clientServiceApi,times(1)).delete(clientTest);
     }
 
     @Test
-    public void DeleteClientTest_Exception() throws ClientServiceException {
+    public void DeleteClientTest_Exception() throws ServiceException {
         ClientRailway clientTest = new ClientRailway();
         clientTest.setName_client("Temp");
 
-        Mockito.when(clientServiceApiImplementation.delete(clientTest)).thenThrow(new ClientServiceException("Error id client for delete client equal null"));
+        Mockito.when(clientServiceApi.delete(clientTest)).thenThrow(new ClientServiceException("Error id client for delete client equal null"));
         boolean result_delete_client = false;
         try {
-            result_delete_client = clientServiceApiImplementation.delete(clientTest);
+            result_delete_client = clientServiceApi.delete(clientTest);
         }catch (ClientServiceException clientServiceException){
             Assert.assertFalse(result_delete_client);
             Assert.assertTrue(clientServiceException instanceof ServiceException);
             Assert.assertEquals(clientServiceException.getMessage(), "Error id client for delete client equal null");
         }
 
-        Mockito.verify(clientServiceApiImplementation,times(1)).delete(clientTest);
+        Mockito.verify(clientServiceApi,times(1)).delete(clientTest);
     }
 
     @Test
-    public void GetOneByIdTest_True() throws ClientServiceException {
+    public void GetOneByIdTest_True() throws ServiceException {
         ClientRailway clientTest = new ClientRailway();
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.getOneById(1L)).thenReturn(clientTest);
+        Mockito.when(clientServiceApi.getOneById(1L)).thenReturn(clientTest);
 
-        ClientRailway result_getone_client = clientServiceApiImplementation.getOneById(1L);
+        ClientRailway result_getone_client = clientServiceApi.getOneById(1L);
         Assert.assertEquals("Temp", result_getone_client.getName_client());
 
-        Mockito.verify(clientServiceApiImplementation,times(1)).getOneById(1L);
+        Mockito.verify(clientServiceApi,times(1)).getOneById(1L);
     }
 
     @Test
-    public void GetOneByIdTest_Exception() throws ClientServiceException {
-        Mockito.when(clientServiceApiImplementation.getOneById(null)).thenThrow(new ClientServiceException("Error id for get one equal null"));
+    public void GetOneByIdTest_Exception() throws ServiceException {
+        Mockito.when(clientServiceApi.getOneById(null)).thenThrow(new ClientServiceException("Error id for get one equal null"));
         ClientRailway result_getone_client = null;
         try {
-            result_getone_client = clientServiceApiImplementation.getOneById(null);
+            result_getone_client = clientServiceApi.getOneById(null);
         }catch (ClientServiceException clientServiceException){
             Assert.assertNull(result_getone_client);
             Assert.assertTrue(clientServiceException instanceof ServiceException);
             Assert.assertEquals(clientServiceException.getMessage(), "Error id for get one equal null");
         }
 
-        Mockito.verify(clientServiceApiImplementation,times(1)).getOneById(null);
+        Mockito.verify(clientServiceApi,times(1)).getOneById(null);
     }
 
 
@@ -179,11 +188,11 @@ public class ClientServiceApiImplementationTest extends TestCase {
         clientTest.setName_client("Temp");
         clientTest.setId_client(1L);
 
-        Mockito.when(clientServiceApiImplementation.FindAll()).thenReturn(Stream.of(clientTest).collect(Collectors.toList()));
+        Mockito.when(clientServiceApi.FindAll()).thenReturn(Stream.of(clientTest).collect(Collectors.toList()));
 
-        boolean result_find_all = clientServiceApiImplementation.FindAll().size()>0;
+        boolean result_find_all = clientServiceApi.FindAll().size()>0;
 
         Assert.assertTrue(result_find_all);
-        Mockito.verify(clientServiceApiImplementation,times(1)).FindAll();
+        Mockito.verify(clientServiceApi,times(1)).FindAll();
     }
 }

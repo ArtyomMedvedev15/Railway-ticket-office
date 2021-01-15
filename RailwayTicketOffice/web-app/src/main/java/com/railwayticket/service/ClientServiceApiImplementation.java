@@ -1,6 +1,5 @@
 package com.railwayticket.service;
 
-import com.railwayticket.dao.ClientDaoImplementation;
 import com.railwayticket.dao.dao_api.ClientDaoApi;
 import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.service.exception.ClientServiceException;
@@ -17,7 +16,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class ClientServiceApiImplementation implements ClientServiceApi {
 

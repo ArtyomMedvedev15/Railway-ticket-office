@@ -20,7 +20,9 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BeanConfig.class)
 @WebAppConfiguration
- public class ClientDaoImplementationTest extends TestCase {
+@Sql(value = {"classpath:/script_before_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+public class ClientDaoImplementationTest extends TestCase {
 
     @Qualifier("ClientDaoApiImplementation")
     @Autowired

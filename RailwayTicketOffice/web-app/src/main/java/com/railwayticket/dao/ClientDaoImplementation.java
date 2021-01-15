@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class ClientDaoImplementation implements ClientDaoApi {
 

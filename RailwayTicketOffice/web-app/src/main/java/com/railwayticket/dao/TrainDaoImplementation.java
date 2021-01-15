@@ -1,12 +1,11 @@
 package com.railwayticket.dao;
 
+import com.railwayticket.dao.mapper.TrainMapper;
 import com.railwayticket.dao.dao_api.TrainDaoApi;
 import com.railwayticket.dao.mapper.ClientMapper;
-import com.railwayticket.dao.mapper.TrainMapper;
 import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
-import com.railwayticket.service.ClientServiceApiImplementation;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
