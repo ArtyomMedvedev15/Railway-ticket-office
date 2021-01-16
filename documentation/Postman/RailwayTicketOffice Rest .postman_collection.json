@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "2f8e4499-5cce-493a-872a-d78d2470f162",
+		"name": "RailwayTicketOffice Rest ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"id_train\":24,\r\n     \"name_client\":\"Tim\",\r\n     \"soname_client\":\"Medvedev\",\r\n     \"date_purchase\":\"2021-01-30\",\r\n     \"phone_client\":\"+375(33)3123123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/api/clients/saveClient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"clients",
+						"saveClient"
+					]
+				},
+				"description": "Get client by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Get client by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/clients/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"clients",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update client",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_client\":2,\r\n    \"id_train\":24,\r\n    \"name_client\":\"New Tim Name\",\r\n    \"soname_client\":\"New Tim Soname\",\r\n    \"date_purchase\":\"2021-03-23\",\r\n    \"phone_client\":\"+375(33)3212312\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/api/clients/updateClient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"clients",
+						"updateClient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete client by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/clients/deleteClient/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"clients",
+						"deleteClient",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/clients/allClient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"clients",
+						"allClient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by name client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/clients/findclientbyname/Te",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"clients",
+						"findclientbyname",
+						"Te"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one train by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/train/24",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"train",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save new train",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name_train\":\"Test train\",\r\n    \"typeTrain\":\"ECONOM\",\r\n    \"departureStation\":\"MINSK\",\r\n    \"arrivalStation\":\"BREST\",\r\n    \"date_time_departure\":\"2021-01-23\",\r\n    \"date_time_arrival\":\"2021-01-25\",\r\n    \"available_ticket\":123,\r\n    \"total_ticket\":123,\r\n    \"price_ticket\":23.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/api/train/saveTrain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"train",
+						"saveTrain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update train",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_train\":9,\r\n    \"name_train\":\"New test train\",\r\n    \"typeTrain\":\"ECONOM\",\r\n    \"departureStation\":\"MINSK\",\r\n    \"arrivalStation\":\"BREST\",\r\n    \"date_time_departure\":\"2021-01-23\",\r\n    \"date_time_arrival\":\"2021-01-25\",\r\n    \"available_ticket\":123,\r\n    \"total_ticket\":123,\r\n    \"price_ticket\":23.3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8181/api/train/updateTrain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"train",
+						"updateTrain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete train",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/train/deleteTrain/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"train",
+						"deleteTrain",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All train ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8181/api/train/allTrain",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"train",
+						"allTrain"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find All train by date and stations",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "departure_date",
+							"value": "2021-01-14",
+							"type": "text"
+						},
+						{
+							"key": "arrival_date",
+							"value": "2021-02-25",
+							"type": "text"
+						},
+						{
+							"key": "departure_station_find",
+							"value": "Brest",
+							"type": "text"
+						},
+						{
+							"key": "arrival_station_find",
+							"value": "Minsk",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8181/api/train/findtrainbydates",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"api",
+						"train",
+						"findtrainbydates"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
