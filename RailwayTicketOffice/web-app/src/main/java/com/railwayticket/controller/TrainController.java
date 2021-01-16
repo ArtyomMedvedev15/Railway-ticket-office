@@ -136,8 +136,6 @@ public class TrainController {
         Date date_departure_find=new SimpleDateFormat("yyyy-MM-dd").parse(date_departure);
         Date date_arrival_find=new SimpleDateFormat("yyyy-MM-dd").parse(arrival_date);
 
-        System.out.println(date_arrival_find);
-
         List<Trains>result_find = trainServiceApi.FindAllByDateDepartureArrivalStations(new java.sql.Date(date_departure_find.getTime()),
                 new java.sql.Date(date_arrival_find.getTime()),
                 Stations.valueOf(departure_station.toUpperCase()),Stations.valueOf(arrival_station.toUpperCase()));
