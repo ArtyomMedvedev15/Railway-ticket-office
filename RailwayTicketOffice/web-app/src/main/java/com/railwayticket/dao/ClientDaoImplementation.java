@@ -4,6 +4,7 @@ import com.railwayticket.dao.dao_api.ClientDaoApi;
 import com.railwayticket.dao.mapper.ClientMapper;
 import com.railwayticket.domain.ClientRailway;
 import org.apache.log4j.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -47,9 +48,13 @@ public class ClientDaoImplementation implements ClientDaoApi {
 
     @Override
     public ClientRailway getOneById(Long id) {
-        String sql_get_one = "SELECT * FROM client_railway WHERE id_client=?";
-        logger.info("Get one client. " + " id client: " + id + " Time: " + new Date().toString());
-        return databaseQuery.queryForObject(sql_get_one,new ClientMapper(),id);
+        try {
+            String sql_get_one = "SELECT * FROM client_railway WHERE id_client=?";
+            logger.info("Get one client. " + " id client: " + id + " Time: " + new Date().toString());
+            return databaseQuery.queryForObject(sql_get_one, new ClientMapper(), id);
+        }catch (EmptyResultDataAccessException resultDataAccessException){
+            return null;
+        }
     }
 
     @Override

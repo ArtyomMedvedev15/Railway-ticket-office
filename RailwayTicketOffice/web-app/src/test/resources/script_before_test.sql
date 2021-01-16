@@ -18,6 +18,10 @@ SELECT 777,321,'DeleteUser','TestClient','2020/09/12','+375333231231' WHERE NOT 
 (SELECT id_client FROM client_railway WHERE id_client = 777);
 
 insert into client_railway(id_client, id_train, name_client, soname_client, date_purchase, phone_client)
+SELECT 778,321,'DeleteUser','TestClient','2020/09/12','+375333231231' WHERE NOT EXISTS
+(SELECT id_client FROM client_railway WHERE id_client = 778);
+
+insert into client_railway(id_client, id_train, name_client, soname_client, date_purchase, phone_client)
 SELECT 123,123,'TestClient','TestClient','2020/09/12','+375333231231' WHERE NOT EXISTS (SELECT id_client FROM client_railway WHERE id_client = 123);
 
 insert into client_railway(id_client, id_train, name_client, soname_client, date_purchase, phone_client)

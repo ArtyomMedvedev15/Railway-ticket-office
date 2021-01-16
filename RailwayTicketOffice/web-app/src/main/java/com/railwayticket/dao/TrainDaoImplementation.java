@@ -7,6 +7,7 @@ import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
 import org.apache.log4j.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -69,9 +70,14 @@ public class TrainDaoImplementation implements TrainDaoApi {
 
     @Override
     public Trains getOneById(Long id) {
+
         String sql_getone_train = "SELECT * FROM trains WHERE id_train=?";
         logger.info("Get one train by id." + " id train: " + id + " Time: " + new java.util.Date().toString());
-        return databaseQuery.queryForObject(sql_getone_train,new TrainMapper(),id);
+        try {
+            return databaseQuery.queryForObject(sql_getone_train, new TrainMapper(), id);
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -131,9 +132,13 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(id!=null) {
-                ClientRailway clientRailway = clientDao.getOneById(id);
-                logger.info("Get one client by id successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
-                return clientRailway;
+                try {
+                    ClientRailway clientRailway = clientDao.getOneById(id);
+                    logger.info("Get one client by id successfully. Client Name: " + clientRailway.getName_client() + " id: " + clientRailway.getId_client() + "Time: " + new Date().toString());
+                    return clientRailway;
+                }catch (NullPointerException nullPointerException){
+                    return null;
+                }
             }else{
                 logger.error("id Client for get one equal null" + " Time: " + new Date().toString());
                 throw new ClientServiceException("Error id client for get one by id equal null");

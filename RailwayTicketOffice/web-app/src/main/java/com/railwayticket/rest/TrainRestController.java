@@ -96,9 +96,9 @@ public class TrainRestController {
 
     @RequestMapping(value = "/findtrainbydates",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Trains>>FindAllTrainsByDatesAndStations(@RequestParam(name = "departure_date")String date_departure,
-                                                                  @RequestParam(name = "arrival_date")String arrival_date,
-                                                                  @RequestParam(name = "departure_station_find")String departure_station_find,
-                                                                  @RequestParam(name = "arrival_station_find")String arrival_station_find) throws ClientServiceException, ParseException, TrainServiceException {
+                                                                      @RequestParam(name = "arrival_date")String arrival_date,
+                                                                      @RequestParam(name = "departure_station_find")String departure_station_find,
+                                                                      @RequestParam(name = "arrival_station_find")String arrival_station_find) throws ClientServiceException, ParseException, TrainServiceException {
 
         Date date_departure_find=new SimpleDateFormat("yyyy-MM-dd").parse(date_departure);
         Date date_arrival_find=new SimpleDateFormat("yyyy-MM-dd").parse(arrival_date);
