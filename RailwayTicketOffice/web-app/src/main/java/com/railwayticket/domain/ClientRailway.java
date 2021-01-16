@@ -78,7 +78,7 @@ public class ClientRailway {
                 ", id_train=" + id_train +
                 ", name_client='" + name_client + '\'' +
                 ", soname_client='" + soname_client + '\'' +
-                ", date_purchase=" + date_purchase +
+                ", date_purchase=" + date_purchase.toString() +
                 ", phone_client='" + phone_client + '\'' +
                 '}';
     }
