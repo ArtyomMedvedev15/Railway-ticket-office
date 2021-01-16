@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -38,13 +37,13 @@ public class ClientControllerTest extends TestCase {
     private ClientServiceApi clientServiceApi;
 
 
-    @Test(expected = EmptyResultDataAccessException.class)
+    @Test
     public void DeleteClientTest() throws Exception {
-        Assert.assertNotNull(clientServiceApi.getOneById(777L));
-        mockMvc.perform(get("/deleteclient/777"))
+        Assert.assertNotNull(clientServiceApi.getOneById(778L));
+        mockMvc.perform(get("/deleteclient/778"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listClient"));
-        clientServiceApi.getOneById(777L);
+        Assert.assertNull(clientServiceApi.getOneById(778L));
     }
 
     @Test
@@ -59,7 +58,7 @@ public class ClientControllerTest extends TestCase {
         mockMvc.perform(get("/listClient"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.xpath(" //*[@id='node']")
-                        .nodeCount(5))
+                        .nodeCount(6))
                 .andExpect(MockMvcResultMatchers.xpath("//*[@id='name_page']")
                         .string("List of client"));
     }

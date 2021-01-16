@@ -45,10 +45,10 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(trains!=null) {
-                logger.info("Save train successfully. Name: " + trains.getName_train() +
-                        " station departure: " + trains.getDepartureStation().getNameStation() + " station arrival: "
-                        + trains.getArrivalStation().getNameStation() + " Time: " + new Date().toString());
-                return trainDaoApi.save(trains);
+                    logger.info("Save train successfully. Name: " + trains.getName_train() +
+                            " station departure: " + trains.getDepartureStation().getNameStation() + " station arrival: "
+                            + trains.getArrivalStation().getNameStation() + " Time: " + new Date().toString());
+                    return trainDaoApi.save(trains);
             }else{
                 logger.error("Train for save equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Error train for save equal null");
@@ -117,9 +117,13 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
             if(id!=null) {
-               Trains get_train = trainDaoApi.getOneById(id);
-                logger.info("Get one train successfully. Id train: " + get_train.toString() + " Time:" + new Date().toString());
-                return get_train;
+                try {
+                    Trains get_train = trainDaoApi.getOneById(id);
+                    logger.info("Get one train successfully. Id train: " + get_train.toString() + " Time:" + new Date().toString());
+                    return get_train;
+                }catch (NullPointerException e){
+                    return null;
+                }
             }else{
                 logger.error("Id for get train equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Id for get train equal null");

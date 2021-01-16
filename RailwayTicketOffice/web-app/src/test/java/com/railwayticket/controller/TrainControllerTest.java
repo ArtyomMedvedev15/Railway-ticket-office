@@ -1,7 +1,6 @@
 package com.railwayticket.controller;
 
 import com.railwayticket.config.BeanConfig;
-import com.railwayticket.service.exception.ServiceException;
 import com.railwayticket.service.servic_api.TrainServiceApi;
 import junit.framework.TestCase;
 import org.junit.Assert;
@@ -10,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -97,13 +95,13 @@ public class TrainControllerTest extends TestCase {
      }
 
 
-    @Test(expected = EmptyResultDataAccessException.class)
+    @Test
     public void DeleteTrainTest() throws Exception {
         Assert.assertNotNull(trainServiceApi.getOneById(123L));
         mockMvc.perform(get("/DeleteTrain/123"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listTrain"));
-        trainServiceApi.getOneById(123L);
+        Assert.assertNull(trainServiceApi.getOneById(123L));
     }
 
     @Test
