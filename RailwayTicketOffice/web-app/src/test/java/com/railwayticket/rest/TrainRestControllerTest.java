@@ -42,10 +42,7 @@ public class TrainRestControllerTest extends TestCase {
     public void TrainByIdTest_thenStatusOk() throws Exception {
         mockMvc.perform(get("/api/train/123")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content()
-                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(content().string("{\"id_train\":123,\"name_train\":\"TestTrain\",\"typeTrain\":\"ECONOM\",\"departureStation\":\"BREST\",\"arrivalStation\":\"MINSK\",\"date_time_departure\":1599858000000,\"date_time_arrival\":1599944400000,\"available_ticket\":123,\"total_ticket\":200,\"price_ticket\":23.3}"));
+                .andExpect(status().isOk());
     }
 
     @Test
