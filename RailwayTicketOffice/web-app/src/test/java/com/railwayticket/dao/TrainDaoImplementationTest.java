@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@TestPropertySource("/application-test.properties")
 @ContextConfiguration(classes = {BeanConfig.class, DispatcherServletInitializer.class})
 @WebAppConfiguration
 @Sql(value = {"classpath:/script_before_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
