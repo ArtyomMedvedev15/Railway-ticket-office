@@ -8,6 +8,7 @@ import com.railwayticket.service.ClientServiceApiImplementation;
 import com.railwayticket.service.TrainServiceApiApiImplementation;
 import com.railwayticket.service.servic_api.ClientServiceApi;
 import com.railwayticket.service.servic_api.TrainServiceApi;
+import com.railwayticket.service_rest.ClientRestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -83,5 +85,15 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ClientServiceApi ClientServiceApiImplementation(){
         return new ClientServiceApiImplementation(transactionManager());
+    }
+
+    @Bean
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+
+    @Bean
+    public ClientServiceApi ClientServiceServiceRest(){
+        return new ClientRestServiceImpl();
     }
 }

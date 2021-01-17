@@ -7,13 +7,13 @@ import com.railwayticket.service.servic_api.ClientServiceApi;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +26,9 @@ public class ClientController {
     @Autowired
     private ClientServiceApi clientServiceApi;
 
-
+    @Qualifier("ClientServiceServiceRest")
+    @Autowired
+    private ClientServiceApi clientServiceApiRest;
 
     @GetMapping("/")
     public String homePage(){
@@ -36,7 +38,7 @@ public class ClientController {
 
     @GetMapping("/listClient")
     public String listClientPage(Model model) throws ServiceException {
-        List<ClientRailway> ClientList = clientServiceApi.FindAll();
+        List<ClientRailway> ClientList = clientServiceApiRest.FindAll();
         logger.info("Client list page load. " + "List client size: " + ClientList.size() + " Time: " + new Date().toString());
         model.addAttribute("ClientList",ClientList);
         return "listclient";
@@ -44,8 +46,8 @@ public class ClientController {
 
     @GetMapping("/deleteclient/{id}")
     public String deleteClientById(@PathVariable(name = "id")String id) throws ServiceException {
-        ClientRailway clientDelete = clientServiceApi.getOneById(Long.valueOf(id));
-        clientServiceApi.delete(clientDelete);
+        ClientRailway clientDelete = clientServiceApiRest.getOneById(Long.valueOf(id));
+        clientServiceApiRest.delete(clientDelete);
         logger.info("Delete client by id. " + " Client info: " + clientDelete.toString() + " Time: " + new Date().toString());
         return "redirect:/listClient";
     }
@@ -71,7 +73,7 @@ public class ClientController {
         client_update.setSoname_client(soname_client);
         client_update.setPhone_client(phone_client);
         logger.info("Update client info." + " Client: " + client_update.toString() + " Time: " + new Date().toString());
-        clientServiceApi.update(client_update);
+        clientServiceApiRest.update(client_update);
         return "redirect:/listClient";
     }
 
@@ -79,7 +81,7 @@ public class ClientController {
     public String buyTicket(@RequestParam(name = "name_client")String name_client,
                             @RequestParam(name = "soname_client")String soname_client,
                             @RequestParam(name = "phone_client")String phone_client,
-                            @RequestParam(name="train_id")String id_train) throws ServiceException {
+                            @RequestParam(name="train_id")String id_train, Model model) throws ServiceException {
         ClientRailway clientRailway_save = new ClientRailway();
         clientRailway_save.setName_client(name_client);
         clientRailway_save.setSoname_client(soname_client);
@@ -89,7 +91,7 @@ public class ClientController {
 
         logger.info("Save client info." + " Client: " + clientRailway_save.toString() + " Time: " + new Date().toString());
 
-        clientServiceApi.save(clientRailway_save);
+        clientServiceApiRest.save(clientRailway_save);
 
         return "redirect:/listClient";
     }
@@ -99,16 +101,23 @@ public class ClientController {
         List<ClientRailway> ClientList;
 
         if(!name_client.equals("")) {
-            ClientList = clientServiceApi.FindByNameClient(name_client);
+            ClientList = clientServiceApiRest.FindByNameClient(name_client);
             logger.info("Find client by name. " + "Name: " + name_client + " Time: " + new Date().toString());
         }else{
-            ClientList = clientServiceApi.FindAll();
+            ClientList = clientServiceApiRest.FindAll();
             logger.info("Find all client. " + "Name: Empty"  + " Time: " + new Date().toString());
         }
 
         model.addAttribute("ClientList", ClientList);
 
         return "listclient";
+    }
+
+    @GetMapping("/oneClient/{id}")
+    public String oneClient(@PathVariable(name = "id")String id,Model model) throws ServiceException {
+        model.addAttribute("oneClient",clientServiceApiRest.getOneById(Long.valueOf(id)));
+        logger.info("One client by id. " + " Client id: " + id);
+        return "oneClient";
     }
 
 }

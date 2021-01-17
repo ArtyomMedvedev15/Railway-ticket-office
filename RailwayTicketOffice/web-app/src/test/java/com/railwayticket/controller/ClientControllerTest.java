@@ -1,14 +1,17 @@
 package com.railwayticket.controller;
 
 import com.railwayticket.config.BeanConfig;
+import com.railwayticket.rest.ClientRestController;
 import com.railwayticket.service.servic_api.ClientServiceApi;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -22,29 +25,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestPropertySource("/application-test.properties")
 @SpringBootTest
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = {BeanConfig.class})
 @Sql(value = {"classpath:/script_before_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@TestPropertySource("/application-test.properties")
 public class ClientControllerTest extends TestCase {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private ClientServiceApi clientServiceApi;
-
-
     @Test
     public void DeleteClientTest() throws Exception {
-        Assert.assertNotNull(clientServiceApi.getOneById(778L));
-        mockMvc.perform(get("/deleteclient/778"))
+         mockMvc.perform(get("/deleteclient/777"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listClient"));
-        Assert.assertNull(clientServiceApi.getOneById(778L));
-    }
+     }
 
     @Test
     public void HomePageLoadTest() throws Exception {
@@ -81,8 +78,6 @@ public class ClientControllerTest extends TestCase {
                 .param("phone_client","12"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listClient"));
-
-        Assert.assertEquals("NewUpdateName", clientServiceApi.getOneById(421L).getName_client());
     }
 
     @Test
@@ -91,12 +86,11 @@ public class ClientControllerTest extends TestCase {
                 .param("name_client","NewTempNameClient")
                 .param("soname_client","NewTempSonameClient")
                 .param("phone_client","NewTempPhoneClient")
-                .param("train_id","321"))
+                .param("train_id","123"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listClient"));
 
-        Assert.assertEquals("NewTempNameClient", clientServiceApi.FindByNameClient("NewTempNameClient").get(0).getName_client());
-    }
+     }
 
     @Test
     public void FindByNameTest() throws Exception {
@@ -104,7 +98,7 @@ public class ClientControllerTest extends TestCase {
                 .param("name_client","Tes"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.xpath(" //*[@id='node']")
-                        .nodeCount(4))
+                        .nodeCount(3))
                 .andExpect(MockMvcResultMatchers.xpath("//*[@id='name_page']")
                         .string("List of client"));
     }

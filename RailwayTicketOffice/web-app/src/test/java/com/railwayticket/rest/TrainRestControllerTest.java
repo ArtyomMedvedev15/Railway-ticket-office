@@ -2,7 +2,6 @@ package com.railwayticket.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.railwayticket.config.BeanConfig;
-import com.railwayticket.domain.ClientRailway;
 import com.railwayticket.domain.Stations;
 import com.railwayticket.domain.Trains;
 import com.railwayticket.domain.TypeTrain;
@@ -23,7 +22,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.sql.Date;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
