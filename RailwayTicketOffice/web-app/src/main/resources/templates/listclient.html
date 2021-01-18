@@ -66,7 +66,7 @@
                         </thead>
                         <tbody class="table_body">
                             <tr id="node" class="table_row" th:each="client:${ClientList}">
-                                <td class="table_data" th:text="${client.getId_client()}"></td>
+                                <td class="table_data"><a th:text="${client.getId_client()}" th:href="@{/oneClient/{id}(id=${client.getId_client()})}"></a></td>
                                 <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${client.getId_train()})}" th:text="${client.getId_train()}"> </a></td>
                                 <td class="table_data" th:text="${client.getName_client()}">Zoks</td>
                                 <td class="table_data" th:text="${client.getSoname_client()}"></td>
@@ -107,6 +107,7 @@
             'id_train',
             'Date_purchase'
         ];
+
         sort_table(properties_client);
     </script>
 </body>
