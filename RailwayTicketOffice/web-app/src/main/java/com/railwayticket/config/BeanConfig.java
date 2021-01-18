@@ -8,7 +8,8 @@ import com.railwayticket.service.ClientServiceApiImplementation;
 import com.railwayticket.service.TrainServiceApiApiImplementation;
 import com.railwayticket.service.servic_api.ClientServiceApi;
 import com.railwayticket.service.servic_api.TrainServiceApi;
-import com.railwayticket.service_rest.ClientRestServiceImpl;
+import com.railwayticket.service.service_rest.ClientRestServiceImpl;
+import com.railwayticket.service.service_rest.TrainRestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -59,8 +60,12 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         dataSource.setUsername(this.environment.getProperty("spring.datasource.username"));
         dataSource.setPassword(this.environment.getProperty("spring.datasource.password"));
         Resource initSchema;
-        if(this.environment.getActiveProfiles()[0].equals("dev")) {
-             initSchema = new ClassPathResource("database/initializeDatabaseMySql.sql");
+        if (this.environment.getActiveProfiles().length!=0) {
+            if (this.environment.getActiveProfiles()[0].equals("dev")) {
+                initSchema = new ClassPathResource("database/initializeDatabaseMySql.sql");
+            } else {
+                initSchema = new ClassPathResource("database/initializeDatabase.sql");
+            }
         }else{
             initSchema = new ClassPathResource("database/initializeDatabase.sql");
         }
@@ -101,7 +106,13 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ClientServiceApi ClientServiceServiceRest(){
+    public ClientServiceApi ClientServiceRestImpl(){
         return new ClientRestServiceImpl();
+    }
+
+
+    @Bean(name = "TrainServiceRest")
+    public TrainServiceApi TrainServiceRestImpl(){
+        return new TrainRestServiceImpl();
     }
 }

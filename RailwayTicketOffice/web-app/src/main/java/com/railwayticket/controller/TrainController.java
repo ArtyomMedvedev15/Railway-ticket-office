@@ -26,13 +26,13 @@ import java.util.Locale;
 public class TrainController {
     final static Logger logger = Logger.getLogger(TrainController.class);
 
-    @Qualifier("TrainServiceImplementation")
+    @Qualifier("TrainServiceRest")
     @Autowired
-    private TrainServiceApi trainServiceApi;
+    private TrainServiceApi trainServiceApiRest;
 
     @GetMapping("/listTrain")
     public String listTrainPage(Model model){
-        List<Trains>TrainList = trainServiceApi.FindAll();
+        List<Trains>TrainList = trainServiceApiRest.FindAll();
         model.addAttribute("TrainList",TrainList);
         logger.info("All train list page load." + " List train size: " + TrainList.size() + " Time: " + new Date().toString());
         return "listtrain";
@@ -40,16 +40,16 @@ public class TrainController {
 
     @GetMapping("/oneTrain/{id}")
     public String oneTrainPage(@PathVariable(name = "id")String id, Model model) throws ServiceException {
-        model.addAttribute("oneTrain",trainServiceApi.getOneById(Long.valueOf(id)));
-        logger.info("Get one train by id. " + " Train: " + trainServiceApi.getOneById(Long.valueOf(id)) + " Time: " + new Date().toString());
+        model.addAttribute("oneTrain", trainServiceApiRest.getOneById(Long.valueOf(id)));
+        logger.info("Get one train by id. " + " Train: " + trainServiceApiRest.getOneById(Long.valueOf(id)) + " Time: " + new Date().toString());
         return "onetrain";
     }
 
     @GetMapping("/EditTrainInfo/{id}")
     public String updateTrain(@PathVariable(name = "id")String id,Model model) throws ServiceException {
         model.addAttribute("id",id);
-        model.addAttribute("editTrain",trainServiceApi.getOneById(Long.valueOf(id)));
-        logger.info("Update train. " + " Train: " + trainServiceApi.getOneById(Long.valueOf(id)) + " Time: " + new Date().toString());
+        model.addAttribute("editTrain", trainServiceApiRest.getOneById(Long.valueOf(id)));
+        logger.info("Update train. " + " Train: " + trainServiceApiRest.getOneById(Long.valueOf(id)) + " Time: " + new Date().toString());
         return "editTrain";
     }
 
@@ -80,7 +80,7 @@ public class TrainController {
 
         logger.info("Save new train. " + " Train: " + save_train.toString() + " Time: " + new Date().toString());
 
-        trainServiceApi.save(save_train);
+        trainServiceApiRest.save(save_train);
 
         return "redirect:/listTrain";
     }
@@ -98,7 +98,7 @@ public class TrainController {
         Date date_departure=new SimpleDateFormat("yyyy-MM-dd").parse(datetime_dep_edit);
         Date date_arrival=new SimpleDateFormat("yyyy-MM-dd").parse(datetime_arr_edit);
 
-        Trains trains_update = trainServiceApi.getOneById(Long.valueOf(id));
+        Trains trains_update = trainServiceApiRest.getOneById(Long.valueOf(id));
         trains_update.setName_train(name_train_edit);
         trains_update.setDepartureStation(Stations.valueOf(departure_station_edit.toUpperCase(Locale.ROOT)));
         trains_update.setArrivalStation(Stations.valueOf(arrival_station_edit.toUpperCase(Locale.ROOT)));
@@ -110,7 +110,7 @@ public class TrainController {
 
         logger.info("Update train. " + " Train: " + trains_update.toString() + " Time: " + new Date().toString());
 
-        trainServiceApi.update(trains_update);
+        trainServiceApiRest.update(trains_update);
 
         return "redirect:/listTrain";
 
@@ -118,11 +118,11 @@ public class TrainController {
 
     @GetMapping("/DeleteTrain/{id}")
     public String deleteTrain(@PathVariable("id")String id) throws ServiceException {
-        Trains delete_train = trainServiceApi.getOneById(Long.valueOf(id));
+        Trains delete_train = trainServiceApiRest.getOneById(Long.valueOf(id));
 
         logger.info("Delete train. " + " Train: " + delete_train.toString() + " Time: " + new Date().toString());
 
-        trainServiceApi.delete(delete_train);
+        trainServiceApiRest.delete(delete_train);
 
         return "redirect:/listTrain";
     }
@@ -136,7 +136,7 @@ public class TrainController {
         Date date_departure_find=new SimpleDateFormat("yyyy-MM-dd").parse(date_departure);
         Date date_arrival_find=new SimpleDateFormat("yyyy-MM-dd").parse(arrival_date);
 
-        List<Trains>result_find = trainServiceApi.FindAllByDateDepartureArrivalStations(new java.sql.Date(date_departure_find.getTime()),
+        List<Trains>result_find = trainServiceApiRest.FindAllByDateDepartureArrivalStations(new java.sql.Date(date_departure_find.getTime()),
                 new java.sql.Date(date_arrival_find.getTime()),
                 Stations.valueOf(departure_station.toUpperCase()),Stations.valueOf(arrival_station.toUpperCase()));
 

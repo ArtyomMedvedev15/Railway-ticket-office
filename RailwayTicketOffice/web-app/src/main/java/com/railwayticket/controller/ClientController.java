@@ -22,12 +22,8 @@ public class ClientController {
 
     final static Logger logger = Logger.getLogger(ClientController.class);
 
-    @Qualifier("ClientServiceApiImplementation")
     @Autowired
-    private ClientServiceApi clientServiceApi;
-
-    @Qualifier("ClientServiceServiceRest")
-    @Autowired
+    @Qualifier("ClientServiceRestImpl")
     private ClientServiceApi clientServiceApiRest;
 
     @GetMapping("/")
@@ -55,7 +51,7 @@ public class ClientController {
     @GetMapping("/EditClientInfo/{id}")
     public String UpdateClientById(@PathVariable(name = "id")String id, Model model) throws ServiceException {
         model.addAttribute("id",id);
-        model.addAttribute("editClient",clientServiceApi.getOneById(Long.valueOf(id)));
+        model.addAttribute("editClient",clientServiceApiRest.getOneById(Long.valueOf(id)));
         logger.info("Update client info page load." + " Client id: " + id + " Time: " + new Date().toString());
         return "editClient";
     }
@@ -67,7 +63,7 @@ public class ClientController {
                                     @RequestParam(name="phone_client")String phone_client,
                                     @PathVariable(name = "id")String id) throws ServiceException {
 
-        ClientRailway client_update = clientServiceApi.getOneById(Long.valueOf(id));
+        ClientRailway client_update = clientServiceApiRest.getOneById(Long.valueOf(id));
         client_update.setId_client(Long.valueOf(id));
         client_update.setName_client(name_client);
         client_update.setSoname_client(soname_client);

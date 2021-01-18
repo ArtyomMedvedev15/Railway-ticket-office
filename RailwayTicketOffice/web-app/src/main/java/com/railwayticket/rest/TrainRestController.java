@@ -8,6 +8,7 @@ import com.railwayticket.service.exception.ServiceException;
 import com.railwayticket.service.exception.TrainServiceException;
 import com.railwayticket.service.servic_api.TrainServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +26,7 @@ import java.util.List;
 public class TrainRestController {
 
     @Autowired
+    @Qualifier("TrainServiceImplementation")
     private TrainServiceApi trainServiceApi;
 
     @RequestMapping(value = "{id}",method = RequestMethod.GET,produces  = MediaType.APPLICATION_JSON_UTF8_VALUE)

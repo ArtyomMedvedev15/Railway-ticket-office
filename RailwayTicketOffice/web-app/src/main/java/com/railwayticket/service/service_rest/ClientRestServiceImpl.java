@@ -1,23 +1,14 @@
-package com.railwayticket.service_rest;
+package com.railwayticket.service.service_rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.railwayticket.domain.ClientRailway;
-import com.railwayticket.rest.ClientRestController;
 import com.railwayticket.service.exception.ClientServiceException;
 import com.railwayticket.service.exception.ServiceException;
 import com.railwayticket.service.servic_api.ClientServiceApi;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +22,7 @@ public class ClientRestServiceImpl implements ClientServiceApi {
     @Override
     public boolean save(ClientRailway clientRailway) throws ServiceException {
             ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8181/api/clients/saveClient", clientRailway , String.class );
-            if(response.getStatusCode().toString().equals("CREATED")){
+            if(response.getStatusCode().toString().equals("201 CREATED")){
                 logger.info("Save new client. " + "Client name: " + clientRailway.getName_client() + "With status Created");
                 return true;
             }else{
@@ -43,7 +34,7 @@ public class ClientRestServiceImpl implements ClientServiceApi {
     @Override
     public boolean update(ClientRailway clientRailway) throws ServiceException {
         ResponseEntity<String> response_request_update = restTemplate.postForEntity( "http://localhost:8181/api/clients/updateClient", clientRailway , String.class );
-        if(response_request_update.getStatusCode().toString().equals("OK")){
+        if(response_request_update.getStatusCode().toString().equals("200 OK")){
             logger.info("Update client. " + "Client name: " + clientRailway.getName_client() + "With status Ok");
             return true;
         }else{
@@ -56,7 +47,7 @@ public class ClientRestServiceImpl implements ClientServiceApi {
     public boolean delete(ClientRailway clientRailway) throws ServiceException {
         ResponseEntity<String> result_request_delete = restTemplate.getForEntity("http://localhost:8181/api/clients/deleteClient/"+clientRailway.getId_client(),String.class);
 
-        if(result_request_delete.getStatusCode().toString().equals("NO_CONTENT")){
+        if(result_request_delete.getStatusCode().toString().equals("204 NO_CONTENT")){
             logger.info("Delete client. " + "Client name: " + clientRailway.getName_client() + "With status No content");
             return true;
         }else{
@@ -96,7 +87,7 @@ public class ClientRestServiceImpl implements ClientServiceApi {
     public List<ClientRailway> FindByNameClient(String name_client) throws ClientServiceException {
         List<ClientRailway> clientRailwayAllClientByName =  Arrays.asList(restTemplate.getForObject("http://localhost:8181/api/clients/findclientbyname/"+name_client,ClientRailway[].class).clone());
 
-        if (clientRailwayAllClientByName!=null){
+        if (name_client != null){
             logger.info("Get all client by name. " + " List size: " + clientRailwayAllClientByName.size() + " With status Ok");
             return clientRailwayAllClientByName;
         }else{
