@@ -1,0 +1,522 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&display=swap');
+a {
+    text-decoration: none !important;
+}
+
+body {
+    font-family: 'Castoro', serif;
+    background-image: url(../img/background.jpg);
+}
+
+.navbar-nav li {
+    padding-right: 20px;
+}
+
+.nav-link {
+    font-size: 1em !important;
+}
+
+.find_train {
+    margin-top: 80px;
+}
+
+.find_train_content,
+.buy_ticket_content,
+.add_train_content {
+    background: rgba(0, 0, 0, 0.5);
+    background-size: 50%;
+}
+
+.title_find_form,
+.title_list_train,
+.title_buy_form {
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    padding-top: 40px;
+}
+
+.find_train_content_inner,
+.buy_ticket_content_inner,
+.add_train_content_inner {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 90%;
+}
+
+.form__field {
+    font-family: inherit;
+    width: 100% !important;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    outline: 0;
+    font-size: 1.1rem !important;
+    font-weight: 500;
+    color: white;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+    color: transparent;
+}
+
+.form__field:placeholder-shown~.form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+}
+
+.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #8a7ae7, #0e42ee);
+    border-image-slice: 1;
+}
+
+.form__field:focus~.form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #8a7ae7;
+    font-weight: 700;
+}
+
+.form__field:required,
+.form__field:invalid {
+    box-shadow: none;
+}
+
+.line-break {
+    width: 100%;
+}
+
+.selectdiv {
+    position: relative;
+    float: left;
+    width: 100% !important;
+}
+
+select::-ms-expand {
+    display: none;
+    color: black;
+}
+
+.selectdiv:after {
+    content: "<>";
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    right: 20px;
+    /*Adjust for position however you want*/
+    top: 18px;
+    padding: 0 0 2px;
+    border-bottom: 1px solid #fff;
+    /*left line */
+    position: absolute;
+    pointer-events: none;
+    font-size: 1rem;
+    color: white;
+}
+
+.selectdiv select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Add some styling */
+    display: block;
+    width: 100% !important;
+    height: 50px;
+    float: right;
+    margin: 5px 0px;
+    padding: 0px 24px;
+    font-size: 1rem;
+    color: white;
+    line-height: 1.75;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid #fff;
+    -ms-word-break: normal;
+    word-break: normal;
+}
+
+.selectdiv select option {
+    color: black;
+}
+
+.default_btn {
+    margin: 0 auto;
+}
+
+.transition {
+    transition: .8s;
+}
+
+#ui-datepicker-div {
+    top: 147px !important;
+    left: 25px !important;
+}
+
+.default_btn button {
+    width: 150px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid white;
+    font-family: 'PT Serif', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: white;
+    margin-bottom: 20px;
+    transition: .8s;
+}
+
+.default_btn a {
+    width: 70px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid black;
+    font-family: 'PT Serif', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: black !important;
+    padding: 6px;
+}
+
+.default_btn a:hover {
+    background: linear-gradient(to right, #8a7ae7, #0e42ee);
+    color: white !important;
+    border: 2px solid white;
+}
+
+.default_btn button:hover {
+    background: linear-gradient(to right, #8a7ae7, #0e42ee);
+    color: white;
+    border: 2px solid white;
+}
+
+.modal_open_btn a {
+    max-width: 130px;
+    width: 100%;
+    float: right;
+    margin-top: -20px;
+}
+
+.modal_open_btn a {
+    max-width: 130px;
+    width: 100%;
+    float: right;
+    margin-top: -20px;
+}
+
+.table {
+    margin-top: 60px;
+    width: 100%;
+    border: 1px solid #EEEEEE;
+    background: white;
+    overflow: auto;
+}
+
+.table-header {
+    display: flex;
+    width: 100%;
+    background: #000;
+    padding: 18px 0;
+    overflow: auto;
+}
+
+.table-row {
+    display: flex;
+    width: 100%;
+    padding: 18px 0;
+    overflow: auto;
+}
+
+.table-row:nth-of-type(odd) {
+    background: white;
+}
+
+.filter__link {
+    color: white;
+    text-decoration: none;
+}
+
+/*.filter__link::before {*/
+/*    content: 'sort:';*/
+/*    position: absolute;*/
+/*    right: 60px;*/
+/*    bottom: 300px;*/
+/*    color: white;*/
+/*    font-size: 20px;*/
+/*    transform: translateY(-50%);*/
+/*    font-weight: 400;*/
+/*}*/
+
+.filter__link::after {
+    content: '';
+    position: absolute;
+    right: 0px;
+    bottom: 315px;
+    color: white;
+    font-size: 20px;
+    transform: translateY(-50%);
+}
+
+.find_train_result {
+    margin-top: 30px;
+}
+
+.find_train_result_inner {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.image_card img {
+    width: 120px;
+    padding-top: 52px;
+}
+
+.card_info {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stations {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 900;
+    font-size: 16px;
+    text-align: left;
+}
+
+.calendars_dep,
+.calendars_arr {
+    width: 100%;
+    bottom: 20px;
+}
+
+.calendars_arr {
+    bottom: 40px;
+}
+
+.calendars_dep img,
+.calendars_arr img {
+    display: inline-block;
+    width: 22px;
+    height: 20px;
+}
+
+.date {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 5px;
+    display: inline-block;
+    bottom: 4px;
+}
+
+.type_train {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    bottom: 60px;
+    width: 100%;
+}
+
+.cost {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    bottom: 80px;
+}
+
+.btn_card a {
+    width: 90px;
+    width: 70px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid black;
+    font-family: 'PT Serif', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: black;
+    padding: 9px 25px;
+    position: relative;
+    bottom: 39px;
+    left: 51px;
+}
+
+.btn_card a:hover {
+    background: linear-gradient(to right, #8a7ae7, #0e42ee);
+    color: white;
+    border: 2px solid white;
+}
+
+.modal,
+.modal_edit {
+    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+    overflow: auto;
+}
+
+.modal_vis {
+    display: block;
+}
+
+.body_block {
+    overflow: hidden;
+    margin-right: 17px;
+}
+
+#close_modal,
+#close_edit_modal {
+    color: #BFE2FF;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Times, sans-serif;
+    border-radius: 50%;
+    border: 4px solid #BFE2FF;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    box-sizing: content-box;
+}
+
+#close_modal:hover,
+#close_edit_modal:hover {
+    color: #FFF;
+    transform: rotate(135deg);
+}
+
+#close_modal:hover,
+#close_edit_modal:hover {
+    color: #FFF;
+    transform: rotate(135deg);
+}
+
+.modal_txt,
+.modal_edit_txt {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
+    background: #FFF;
+    padding: 9px;
+    margin: 100px auto;
+    max-width: 800px;
+}
+
+.buy_ticket_content,
+.add_train_content {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.buy_ticket_content_inner .form__group,
+.add_train_content_inner .form__group {
+    width: 76%;
+    margin-bottom: 15px;
+}
+
+.add_train_content_inner .selectdiv {
+    margin: 6px 12%;
+}
+
+.total {
+    font-size: 28.8px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.holder {
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.holder a {
+    font-size: 19px;
+    cursor: pointer;
+    margin: 0 5px;
+    color: #000 !important;
+}
+
+.holder a:hover {
+    background-color: #222;
+    color: #fff !important;
+}
+
+.holder a.jp-previous {
+    margin-right: 15px;
+}
+
+.holder a.jp-next {
+    margin-left: 15px;
+}
+
+.holder a.jp-current,
+a.jp-current:hover {
+    color: #FF4242;
+    font-weight: bold;
+}
+
+.holder a.jp-disabled,
+a.jp-disabled:hover {
+    color: #000 !important;
+}
+
+.holder a.jp-current,
+a.jp-current:hover,
+.holder a.jp-disabled,
+a.jp-disabled:hover {
+    cursor: default;
+    background: none;
+}
+
+.holder span {
+    margin: 0 5px;
+}
+
+.ui-state-default .ui-state-highlight {
+    color: #000 !important;
+}
+
+@media screen and (max-width: 335px) {
+     #card_one{
+         width: 18rem !important;
+     }
+}

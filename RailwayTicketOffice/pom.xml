@@ -7,7 +7,8 @@
     <artifactId>RailwayTicketOffice</artifactId>
      <version>1.0-SNAPSHOT</version>
       <modules>
-        <module>web-app</module>
+        <module>railwayticket-web-ui</module>
+         <module>railwayticket-rest</module>
       </modules>
 
     <parent>
