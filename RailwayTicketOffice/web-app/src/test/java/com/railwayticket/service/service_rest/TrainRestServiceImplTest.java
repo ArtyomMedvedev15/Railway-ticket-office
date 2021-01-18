@@ -163,18 +163,5 @@ public class TrainRestServiceImplTest extends TestCase {
         Mockito.verify(trainServiceApi,Mockito.times(1)).FindAllByDateDepartureArrivalStations(date,
                 date,Stations.BREST,Stations.GRODNO);
     }
-
-    @Test
-    public void FindAllByDateDepartureArrivalStations_ThenListNull() throws TrainServiceException {
-        Mockito.when(trainServiceApi.FindAllByDateDepartureArrivalStations(new Date(new java.util.Date().getTime()),
-                null,Stations.BREST,Stations.GRODNO)).thenReturn(null);
-
-        List<Trains> result_find_dates_stations = trainServiceApi.FindAllByDateDepartureArrivalStations(new Date(new java.util.Date().getTime()),
-                null,Stations.BREST,Stations.GRODNO);
-
-        assertNull(result_find_dates_stations);
-
-        Mockito.verify(trainServiceApi,Mockito.times(1)).FindAllByDateDepartureArrivalStations(new Date(new java.util.Date().getTime()),null
-               ,Stations.BREST,Stations.GRODNO);
-    }
+    
 }
