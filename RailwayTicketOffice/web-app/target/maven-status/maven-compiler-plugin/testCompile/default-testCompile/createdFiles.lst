@@ -1,6 +1,0 @@
-com\railwayticket\dao\TrainDaoImplementationTest.class
-com\railwayticket\service\TrainServiceApiApiImplementationTest.class
-com\railwayticket\config\DispatcherServletInitializer.class
-com\railwayticket\service\ClientServiceApiImplementationTest.class
-com\railwayticket\config\BeanConfig.class
-com\railwayticket\dao\ClientDaoImplementationTest.class

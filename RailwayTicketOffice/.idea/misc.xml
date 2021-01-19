@@ -11,6 +11,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/railwayticket-web-ui/pom.xml" />
       </list>
     </option>
   </component>
