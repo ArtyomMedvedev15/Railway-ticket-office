@@ -1,21 +1,18 @@
-package com.railwayticket.config;
+package com.railwayticket.restclient.config;
 
-import com.railwayticket.dao.ClientDaoImplementation;
-import com.railwayticket.dao.TrainDaoImplementation;
-import com.railwayticket.dao.dao_api.ClientDaoApi;
-import com.railwayticket.dao.dao_api.TrainDaoApi;
-import com.railwayticket.service.ClientServiceApiImplementation;
-import com.railwayticket.service.TrainServiceApiApiImplementation;
-import com.railwayticket.service.servic_api.ClientServiceApi;
-import com.railwayticket.service.servic_api.TrainServiceApi;
-import com.railwayticket.service.service_rest.ClientRestServiceImpl;
-import com.railwayticket.service.service_rest.TrainRestServiceImpl;
+import com.railwayticket.restclient.dao.ClientDaoImplementation;
+import com.railwayticket.restclient.dao.TrainDaoImplementation;
+import com.railwayticket.restclient.dao.dao_api.ClientDaoApi;
+import com.railwayticket.restclient.dao.dao_api.TrainDaoApi;
+import com.railwayticket.restclient.service.ClientServiceApiImplementation;
+import com.railwayticket.restclient.service.TrainServiceApiApiImplementation;
+import com.railwayticket.restclient.service.service_api.ClientServiceApi;
+import com.railwayticket.restclient.service.service_api.TrainServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -24,13 +21,14 @@ import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.sql.DataSource;
-import java.util.Objects;
 
 @Configuration
-@ComponentScan("com.railwayticket")
+@ComponentScan("com.railwayticket.restclient")
 @EnableWebMvc
 public class BeanConfig extends WebMvcConfigurerAdapter {
 
@@ -93,14 +91,4 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         return new RestTemplate();
     }
 
-    @Bean
-    public ClientServiceApi ClientServiceRestImpl(){
-        return new ClientRestServiceImpl();
-    }
-
-
-    @Bean(name = "TrainServiceRest")
-    public TrainServiceApi TrainServiceRestImpl(){
-        return new TrainRestServiceImpl();
-    }
 }

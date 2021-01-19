@@ -39,7 +39,6 @@ public class ClientControllerTest{
     private MockMvc mockMvc;
 
     @MockBean
-    @Qualifier("ClientServiceRestImpl")
     private ClientServiceApi clientServiceApi;
 
 

@@ -44,8 +44,7 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         return new ClientRestServiceImpl();
     }
 
-
-    @Bean(name = "TrainServiceRest")
+    @Bean
     public TrainServiceApi TrainServiceRestImpl(){
         return new TrainRestServiceImpl();
     }

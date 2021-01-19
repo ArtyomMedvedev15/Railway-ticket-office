@@ -47,7 +47,6 @@ public class TrainControllerTest extends TestCase {
     private MockMvc mockMvc;
 
     @MockBean
-    @Qualifier("TrainServiceRest")
     private TrainServiceApi trainServiceApi;
 
 
