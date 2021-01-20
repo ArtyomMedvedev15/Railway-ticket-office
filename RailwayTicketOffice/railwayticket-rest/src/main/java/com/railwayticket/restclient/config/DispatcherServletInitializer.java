@@ -15,7 +15,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{BeanConfig.class};
+        return new Class[]{BeanConfig.class,SwaggerConfig.class};
     }
 
     @Override

@@ -1,14 +1,25 @@
 package com.railwayticket.restclient.domain;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.sql.Date;
 import java.util.Objects;
 
+@ApiModel(description = "Details info about the clients")
 public class ClientRailway {
+    @ApiModelProperty(notes = "The unique id of the client")
     private Long id_client;
+    @ApiModelProperty(notes = "The ID train which the customer bought the ticket for")
     private Long id_train;
+    @ApiModelProperty(notes = "The client's name")
     private String name_client;
+    @ApiModelProperty(notes = "The client's soname")
     private String soname_client;
+    @ApiModelProperty(notes = "Date when the ticket was purchased")
     private Date date_purchase;
+    @ApiModelProperty(notes = "The client's phone number")
     private String phone_client;
 
     public ClientRailway() {
