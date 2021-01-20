@@ -2,11 +2,14 @@ com\railwayticket\service\servic_api\TrainServiceApi.class
 com\railwayticket\config\DispatcherServletInitializer.class
 com\railwayticket\controller\ClientController.class
 com\railwayticket\domain\Trains.class
+com\railwayticket\service\service_rest\ClientRestServiceImpl.class
 com\railwayticket\service\exception\ServiceException.class
 com\railwayticket\service\exception\ClientServiceException.class
 com\railwayticket\domain\TypeTrain.class
 com\railwayticket\service\exception\TrainServiceException.class
 com\railwayticket\controller\TrainController.class
+com\railwayticket\AppMain.class
+com\railwayticket\service\service_rest\TrainRestServiceImpl.class
 com\railwayticket\service\servic_api\BaseServiceApi.class
 com\railwayticket\service\servic_api\ClientServiceApi.class
 com\railwayticket\config\BeanConfig.class

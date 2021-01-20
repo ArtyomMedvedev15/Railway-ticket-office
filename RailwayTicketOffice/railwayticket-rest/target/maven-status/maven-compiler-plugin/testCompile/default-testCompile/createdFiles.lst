@@ -1,0 +1,8 @@
+com\railwayticket\restclient\restclient\TrainRestControllerTest.class
+com\railwayticket\restclient\service\TrainServiceApiApiImplementationTest.class
+com\railwayticket\restclient\service\ClientServiceApiImplementationTest.class
+com\railwayticket\restclient\config\DispatcherServletInitializer.class
+com\railwayticket\restclient\dao\ClientDaoImplementationTest.class
+com\railwayticket\restclient\dao\TrainDaoImplementationTest.class
+com\railwayticket\restclient\config\BeanConfig.class
+com\railwayticket\restclient\restclient\ClientRestControllerTest.class
