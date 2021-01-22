@@ -1,18 +1,18 @@
 package com.railwayticket.service.service_rest;
 
+import com.domain.Stations;
+import com.domain.Trains;
+import com.domain.TypeTrain;
 import com.railwayticket.config.BeanConfig;
 import com.railwayticket.config.DispatcherServletInitializer;
-import com.railwayticket.domain.Stations;
-import com.railwayticket.domain.Trains;
-import com.railwayticket.domain.TypeTrain;
-import com.railwayticket.service.exception.ServiceException;
-import com.railwayticket.service.exception.TrainServiceException;
-import com.railwayticket.service.servic_api.TrainServiceApi;
+
+import com.railwayticket.services_api.TrainServiceApi;
+import com.railwayticket.services_api.exception.ServiceException;
+import com.railwayticket.services_api.exception.TrainServiceException;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;

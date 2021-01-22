@@ -1,6 +1,0 @@
-com\railwayticket\controller\ClientControllerTest.class
-com\railwayticket\service\service_rest\TrainRestServiceImplTest.class
-com\railwayticket\config\DispatcherServletInitializer.class
-com\railwayticket\service\service_rest\ClientRestServiceImplTest.class
-com\railwayticket\config\BeanConfig.class
-com\railwayticket\controller\TrainControllerTest.class

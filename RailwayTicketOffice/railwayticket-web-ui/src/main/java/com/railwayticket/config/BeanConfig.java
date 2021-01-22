@@ -1,9 +1,10 @@
 package com.railwayticket.config;
 
-import com.railwayticket.service.servic_api.ClientServiceApi;
-import com.railwayticket.service.servic_api.TrainServiceApi;
-import com.railwayticket.service.service_rest.ClientRestServiceImpl;
-import com.railwayticket.service.service_rest.TrainRestServiceImpl;
+
+import com.railwayticket.service_rest.ClientRestServiceImpl;
+import com.railwayticket.service_rest.TrainRestServiceImpl;
+import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.TrainServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;

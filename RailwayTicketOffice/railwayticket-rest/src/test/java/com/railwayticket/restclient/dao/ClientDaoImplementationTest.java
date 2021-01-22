@@ -1,8 +1,10 @@
 package com.railwayticket.restclient.dao;
 
+import com.domain.ClientRailway;
+import com.railwayticket.dao_api.ClientDaoApi;
+
 import com.railwayticket.restclient.config.BeanConfig;
-import com.railwayticket.restclient.dao.dao_api.ClientDaoApi;
-import com.railwayticket.restclient.domain.ClientRailway;
+
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;

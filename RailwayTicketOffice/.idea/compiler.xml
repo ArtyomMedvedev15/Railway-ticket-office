@@ -8,13 +8,29 @@
         <outputRelativeToContentRoot value="true" />
         <module name="railwayticket-rest" />
         <module name="railwayticket-web-ui" />
+        <module name="dao" />
+        <module name="domain" />
+        <module name="dao-api" />
+        <module name="service-impl" />
+        <module name="service-rest" />
+        <module name="service-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="domains" target="1.9" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dao" options="-parameters" />
+      <module name="dao-api" options="-parameters" />
+      <module name="domain" options="-parameters" />
+      <module name="domains" options="-parameters" />
       <module name="railwayticket-rest" options="-parameters" />
       <module name="railwayticket-web-ui" options="-parameters" />
+      <module name="service-api" options="-parameters" />
+      <module name="service-impl" options="-parameters" />
+      <module name="service-rest" options="-parameters" />
     </option>
   </component>
 </project>

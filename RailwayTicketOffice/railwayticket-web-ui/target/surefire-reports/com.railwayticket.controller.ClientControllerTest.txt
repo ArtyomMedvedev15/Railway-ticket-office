@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.railwayticket.controller.ClientControllerTest
--------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.269 s - in com.railwayticket.controller.ClientControllerTest
