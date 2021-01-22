@@ -1,16 +1,16 @@
 package com.railwayticket.service.service_rest;
 
+import com.domain.ClientRailway;
 import com.railwayticket.config.BeanConfig;
 import com.railwayticket.config.DispatcherServletInitializer;
-import com.railwayticket.domain.ClientRailway;
-import com.railwayticket.service.exception.ClientServiceException;
-import com.railwayticket.service.exception.ServiceException;
-import com.railwayticket.service.servic_api.ClientServiceApi;
+
+import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.exception.ClientServiceException;
+import com.railwayticket.services_api.exception.ServiceException;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +18,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.client.RestTemplate;
 
 import java.sql.Date;
 import java.util.List;

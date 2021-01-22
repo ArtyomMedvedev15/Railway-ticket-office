@@ -1,23 +1,22 @@
 package com.railwayticket.controller;
 
+import com.domain.Stations;
+import com.domain.Trains;
+import com.domain.TypeTrain;
 import com.railwayticket.config.BeanConfig;
-import com.railwayticket.domain.Stations;
-import com.railwayticket.domain.Trains;
-import com.railwayticket.domain.TypeTrain;
-import com.railwayticket.service.servic_api.TrainServiceApi;
+
+import com.railwayticket.services_api.TrainServiceApi;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -52,7 +51,7 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void ListTrainPageTest() throws Exception {
-        Trains trains = new Trains("Temp",TypeTrain.ECONOM,Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
+        Trains trains = new Trains("Temp", TypeTrain.ECONOM, Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
         List<Trains>result_train = Arrays.asList(trains,trains,trains);
         Mockito.when(trainServiceApi.FindAll()).thenReturn(result_train);
         mockMvc.perform(get("/listTrain"))

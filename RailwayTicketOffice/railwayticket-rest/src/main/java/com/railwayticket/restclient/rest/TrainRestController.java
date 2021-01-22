@@ -1,15 +1,14 @@
 package com.railwayticket.restclient.rest;
 
-import com.railwayticket.restclient.domain.ClientRailway;
-import com.railwayticket.restclient.domain.Stations;
-import com.railwayticket.restclient.domain.Trains;
-import com.railwayticket.restclient.service.exception.ClientServiceException;
-import com.railwayticket.restclient.service.exception.ServiceException;
-import com.railwayticket.restclient.service.exception.TrainServiceException;
-import com.railwayticket.restclient.service.service_api.TrainServiceApi;
+
+import com.domain.Stations;
+import com.domain.Trains;
+import com.railwayticket.services_api.TrainServiceApi;
+import com.railwayticket.services_api.exception.ClientServiceException;
+import com.railwayticket.services_api.exception.ServiceException;
+import com.railwayticket.services_api.exception.TrainServiceException;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

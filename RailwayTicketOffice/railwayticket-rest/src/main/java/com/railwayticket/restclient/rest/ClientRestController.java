@@ -1,13 +1,14 @@
 package com.railwayticket.restclient.rest;
 
-import com.railwayticket.restclient.domain.ClientRailway;
-import com.railwayticket.restclient.service.exception.ClientServiceException;
-import com.railwayticket.restclient.service.exception.ServiceException;
-import com.railwayticket.restclient.service.service_api.ClientServiceApi;
+
+
+import com.domain.ClientRailway;
+import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.exception.ClientServiceException;
+import com.railwayticket.services_api.exception.ServiceException;
 import io.swagger.annotations.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

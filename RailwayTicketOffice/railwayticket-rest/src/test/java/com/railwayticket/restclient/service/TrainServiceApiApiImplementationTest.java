@@ -1,12 +1,12 @@
 package com.railwayticket.restclient.service;
 
+import com.domain.Stations;
+import com.domain.Trains;
 import com.railwayticket.restclient.config.BeanConfig;
 import com.railwayticket.restclient.config.DispatcherServletInitializer;
-import com.railwayticket.restclient.domain.Stations;
-import com.railwayticket.restclient.domain.Trains;
-import com.railwayticket.restclient.service.exception.ServiceException;
-import com.railwayticket.restclient.service.exception.TrainServiceException;
-import com.railwayticket.restclient.service.service_api.TrainServiceApi;
+import com.railwayticket.services_api.TrainServiceApi;
+import com.railwayticket.services_api.exception.ServiceException;
+import com.railwayticket.services_api.exception.TrainServiceException;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;

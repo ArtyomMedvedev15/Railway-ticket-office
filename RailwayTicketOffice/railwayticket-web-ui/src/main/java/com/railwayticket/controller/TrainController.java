@@ -1,11 +1,12 @@
 package com.railwayticket.controller;
 
-import com.railwayticket.domain.Stations;
-import com.railwayticket.domain.Trains;
-import com.railwayticket.domain.TypeTrain;
-import com.railwayticket.service.exception.ServiceException;
-import com.railwayticket.service.exception.TrainServiceException;
-import com.railwayticket.service.servic_api.TrainServiceApi;
+
+import com.domain.Stations;
+import com.domain.Trains;
+import com.domain.TypeTrain;
+import com.railwayticket.services_api.TrainServiceApi;
+import com.railwayticket.services_api.exception.ServiceException;
+import com.railwayticket.services_api.exception.TrainServiceException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

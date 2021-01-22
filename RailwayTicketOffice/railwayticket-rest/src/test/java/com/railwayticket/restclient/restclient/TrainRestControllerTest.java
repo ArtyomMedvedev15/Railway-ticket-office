@@ -1,10 +1,11 @@
 package com.railwayticket.restclient.restclient;
 
+import com.domain.Stations;
+import com.domain.Trains;
+import com.domain.TypeTrain;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.railwayticket.restclient.config.BeanConfig;
-import com.railwayticket.restclient.domain.Stations;
-import com.railwayticket.restclient.domain.Trains;
-import com.railwayticket.restclient.domain.TypeTrain;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;

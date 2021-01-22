@@ -1,13 +1,12 @@
 package com.railwayticket.restclient.config;
 
-import com.railwayticket.restclient.dao.ClientDaoImplementation;
-import com.railwayticket.restclient.dao.TrainDaoImplementation;
-import com.railwayticket.restclient.dao.dao_api.ClientDaoApi;
-import com.railwayticket.restclient.dao.dao_api.TrainDaoApi;
-import com.railwayticket.restclient.service.ClientServiceApiImplementation;
-import com.railwayticket.restclient.service.TrainServiceApiApiImplementation;
-import com.railwayticket.restclient.service.service_api.ClientServiceApi;
-import com.railwayticket.restclient.service.service_api.TrainServiceApi;
+
+import com.railwayticket.dao.ClientDaoImplementation;
+import com.railwayticket.dao.TrainDaoImplementation;
+import com.railwayticket.dao_api.ClientDaoApi;
+import com.railwayticket.dao_api.TrainDaoApi;
+import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.TrainServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import service.ClientServiceApiImplementation;
+import service.TrainServiceApiApiImplementation;
 
 import javax.sql.DataSource;
 

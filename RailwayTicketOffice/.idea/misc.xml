@@ -12,7 +12,13 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/railwayticket-web-ui/pom.xml" />
+        <option value="$PROJECT_DIR$/railwayticket-rest/domains/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/domains/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="false" project-jdk-name="15" project-jdk-type="JavaSDK">
