@@ -17,6 +17,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Configuration
 @EnableSwagger2
 @EnableWebMvc
@@ -25,10 +28,12 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     @Bean
     public Docket apiDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .directModelSubstitute(LocalDateTime.class, java.sql.Date.class)
                 .select()
                 .paths(PathSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage("com.railwayticket.restclient"))
                 .build()
+                .directModelSubstitute(LocalDate.class, java.sql.Date.class)
                 .apiInfo(metaData());
     }
 

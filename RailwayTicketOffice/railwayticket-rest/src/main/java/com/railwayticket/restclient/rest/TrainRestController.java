@@ -37,7 +37,7 @@ public class TrainRestController {
             @ApiResponse(code = 400,message = "Error id train equal null"),
             @ApiResponse(code = 404,message = "Train was not found by this id")
     })
-    public ResponseEntity<Trains> TrainById(@ApiParam(name = "ID train",value = "ID value for find train by id.",required = true)@PathVariable("id") Long id_client) throws ServiceException {
+    public ResponseEntity<Trains> TrainById(@ApiParam(name = "id",value = "ID value for find train by id.",required = true)@PathVariable("id") Long id_client) throws ServiceException {
 
         if(id_client==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -98,7 +98,7 @@ public class TrainRestController {
             @ApiResponse(code = 204,message = "Successfully delete train."),
             @ApiResponse(code = 404,message = "Error train for delete equal null"),
     })
-    public ResponseEntity<Trains>deleteTrains(@ApiParam(name = "Train id delete",value = "ID value for delete train.",required = true)@PathVariable("id")Long id_train) throws ServiceException {
+    public ResponseEntity<Trains>deleteTrains(@ApiParam(name = "id",value = "ID value for delete train.",required = true)@PathVariable("id")Long id_train) throws ServiceException {
         Trains trainsDelete = trainServiceApi.getOneById(id_train);
 
         if(trainsDelete==null){

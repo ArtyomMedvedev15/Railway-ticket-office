@@ -1,16 +1,10 @@
 package com.domain;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-@ApiModel(description = "com.domain.Stations where trains arrive")
 public enum Stations {
     BREST(1,"Brest"),MINSK(2,"Minsk"),GRODNO(3,"Grodno"),
     VITEBSK(4,"Vitebsk"),MOGILEV(5,"Mogilev"),GOMEL(6,"Gomel");
 
-    @ApiModelProperty(notes = "The station's name")
     private final String nameStation;
-    @ApiModelProperty(notes = "The station's id")
     private final int id_station;
 
     Stations(int id_station,String nameStation) {

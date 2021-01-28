@@ -1,16 +1,10 @@
 package com.domain;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-@ApiModel(description = "Type trains")
 public enum TypeTrain {
 
     ECONOM(1,"Econom"),BUSINESS(2,"Business"),COUPE(3,"Coupe"),RESERVED_SEAT(4,"Reserved seat");
 
-    @ApiModelProperty(notes = "The type's name")
     private final String nameType;
-    @ApiModelProperty(notes = "The type's id")
     private final int id_type;
 
     TypeTrain(int id_type,String nameType) {
