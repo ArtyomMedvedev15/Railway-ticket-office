@@ -33,41 +33,41 @@
 
 <section class="list_train">
         <div class="container">
-            <div class="title_list_train">
-                <p>Train number : <span id="train_numb" th:text="${oneTrain.getId_train()}"></span></p>
+            <div class="title_list_train" th:object="${oneTrain}">
+                <p>Train number : <span id="train_numb" th:text="${idTrain}"></span></p>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="card"  id="card_one" style="width: 20rem; margin: 0 auto;margin-bottom: 20px;">
+                    <div class="card"  id="card_one" style="width: 20rem; margin: 0 auto;margin-bottom: 20px;" th:object="${oneTrain}">
                         <img class="card-img-top" th:src="@{/static/img/pngwing.com.png}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"><span th:text="${oneTrain.getDepartureStation().getNameStation()}"></span> &rarr; <span th:text="${oneTrain.getArrivalStation().getNameStation()}"></span></h5>
+                            <h5 class="card-title"><span th:text="*{departureStation.getValue()}"></span> &rarr; <span th:text="*{arrivalStation.getValue()}"></span></h5>
                             <p class="card-text">
-                                <p class="stations"><span th:text="${oneTrain.getDepartureStation().getNameStation()}"></span> &rarr; <span th:text="${oneTrain.getArrivalStation().getNameStation()}"></span></p>
+                                <p class="stations"><span th:text="*{arrivalStation.getValue()}"></span> &rarr; <span th:text="*{arrivalStation.getValue()}"></span></p>
                                 <div class="calendars_dep"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <p class="date" th:text="':' + ${oneTrain.getDate_time_departure()}"> </p>
+                                    <p class="date" th:text="':' + *{dateTimeDeparture}"> </p>
                                 </div>
                                 <div class="calendars_arr"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <p class="date" th:text="':' + ${oneTrain.getDate_time_arrival()}">: </p>
+                                    <p class="date" th:text="':' + *{dateTimeArrival}">: </p>
                                 </div>
 
                                 <div class="type_train">
-                                    <p>Type:<strong th:text="${oneTrain.getTypeTrain().getNameType()}"></strong></p>
+                                    <p>Type:<strong th:text="*{typeTrain.getValue()}"></strong></p>
                                 </div>
 
                                 <div class="cost">
-                                    <p>Price: <strong>&#36;<span th:text="${oneTrain.getPrice_ticket()}"></span></strong></p>
+                                    <p>Price: <strong>&#36;<span th:text="*{priceTicket}"></span></strong></p>
                                 </div>
                             </p>
                             <div class="row">
                                 <div class="default_btn transition">
-                                    <a id="open_modal" th:data-total_price="${oneTrain.getPrice_ticket()}" th:data-train_number="${oneTrain.getId_train()}" th:data-name_train="${oneTrain.getName_train()}" th:data-train_from="${oneTrain.getDepartureStation().getNameStation()}" th:data-train_to="${oneTrain.getArrivalStation().getNameStation()}" th:data-type_train="${oneTrain.getTypeTrain().getNameType()}" class="transition" href="#">Buy</a>
+                                    <a id="open_modal" th:data-total_price="*{priceTicket}" th:data-train_number="*{typeTrain.getValue()}" th:data-name_train="*{nameTrain}" th:data-train_from="*{departureStation.getValue()}" th:data-train_to="*{arrivalStation.getValue()}" th:data-type_train="*{typeTrain.getValue()}" class="transition" href="#">Buy</a>
                                 </div>
                                 <div class="default_btn transition">
-                                    <a id="open_edit_modal" th:href="@{/EditTrainInfo/{id}(id=${oneTrain.getId_train()})}">Edit</a>
+                                    <a id="open_edit_modal" th:href="@{/EditTrainInfo/{id}(id=*{idTrain})}">Edit</a>
                                 </div>
                                 <div class="default_btn transition">
-                                    <a style="width: 200px;" class="transition" onclick="confirmDelete()" th:href="@{/DeleteTrain/{id}(id=${oneTrain.getId_train()})}">Delete</a>
+                                    <a style="width: 200px;" class="transition" onclick="confirmDelete()" th:href="@{/DeleteTrain/{id}(id=*{idTrain})}">Delete</a>
                                 </div>
                             </div>
                         </div>

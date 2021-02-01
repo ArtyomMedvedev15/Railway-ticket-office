@@ -119,7 +119,7 @@ public class ClientRestController {
 
     @RequestMapping(value = "/allClient",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find all client.",notes = "Allows you to get all client.",
-            response = Iterable.class,
+            response = ClientRailway.class,responseContainer = "List",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Successfully find all client."),
@@ -140,7 +140,8 @@ public class ClientRestController {
 
     @RequestMapping(value = "/findclientbyname/{name}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find all client by name.",notes = "Allows you to get all by name client.",
-            response = Iterable.class,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            response = ClientRailway.class,responseContainer = "List"
+            ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Successfully find all client by name."),
             @ApiResponse(code = 404,message = "List of client was empty"),

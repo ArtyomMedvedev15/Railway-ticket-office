@@ -1,5 +1,6 @@
 package com.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,7 +17,8 @@ public class ClientRailway {
     private String name_client;
     @ApiModelProperty(notes = "The client's soname")
     private String soname_client;
-    @ApiModelProperty(notes = "Date when the ticket was purchased")
+    @ApiModelProperty(notes = "Date when the ticket was purchased",example = "2020-09-15")
+    @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     private Date date_purchase;
     @ApiModelProperty(notes = "The client's phone number")
     private String phone_client;

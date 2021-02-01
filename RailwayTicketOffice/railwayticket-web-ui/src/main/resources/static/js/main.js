@@ -196,10 +196,10 @@
      var arrival_station = $('select[name=arrival_station]').val();
 
      if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station != arrival_station) {
-         alert("Success add train")
+         alert("Success add train!")
          return true;
      } else {
-         alert("Error illegal argument dates or stations")
+         alert("Error illegal argument dates or stations!")
          return false;
      }
 
@@ -210,35 +210,31 @@
      var departure_data_time = $('#datepicker_departure_edit').val();
      var departure_station = $('select[name=departure_station_edit]').val();
      var arrival_station = $('select[name=arrival_station_edit]').val();
-     var arr_date = Date.parse(arrival_data_time);
-     var dep_date = Date.parse(departure_data_time);
 
 
-     if (arr_date.getTime() > dep_date.getTime() && departure_station !== arrival_station) {
-         alert("Success edit train")
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station !== arrival_station) {
+         alert("Success edit train!")
          history.pushState("", document.title, window.location.pathname);
          setTimeout('location.replace("/listTrain")', 100);
          return true;
      } else {
-         alert("Error illegal argument dates or stations")
+         alert("Error illegal argument dates or stations!")
          return false;
      }
-
  }
 
  function find_train(){
-     var arrival_data_time = $('#datepicker_dep_find').val();
-     var departure_data_time = $('#ddatepicker_arr_find').val();
+     var arrival_data_time = $('#datepicker_arr_find').val();
+     var departure_data_time = $('#datepicker_dep_find').val();
      var departure_station = $('select[name=departure_station_find]').val();
      var arrival_station = $('select[name=arrival_station_find]').val();
-     var arr_date = Date.parse(arrival_data_time);
-     var dep_date = Date.parse(departure_data_time);
 
-     if (arr_date.getTime() > dep_date.getTime() && departure_station !== arrival_station) {
-         alert("Success edit train")
+
+     if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station !== arrival_station) {
+         alert("Success find train!")
          return true;
      } else {
-         alert("Error illegal argument dates or stations")
+         alert("Error illegal argument dates or stations!")
          return false;
      }
  }

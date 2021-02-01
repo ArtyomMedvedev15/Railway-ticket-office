@@ -11,7 +11,7 @@ import java.util.Arrays;
 @SpringBootApplication
 public class AppMain {
     public static void main(String[] args) {
-        SpringApplication.run(AppMain.class, args);
+        SpringApplication.run(AppMain.class,args);
     }
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {

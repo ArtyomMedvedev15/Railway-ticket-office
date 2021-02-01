@@ -32,35 +32,35 @@
 </nav>
 
 <section class="list_train">
-    <div class="container">
+    <div class="container" th:object = "${oneClient}">
         <div class="title_list_train">
-            <p>Client name : <span id="name_client_edit" th:text="${oneClient.getName_client()}"></span></p>
+            <p>Client name : <span id="name_client_edit" th:utext="*{nameClient}"></span></p>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="modal_edit_txt">
                     <div class="buy_ticket_content">
                              <div class="title_buy_form">
-                                <p>Train number: <span id="Train_number" th:text="${oneClient.getId_train()}"></span></p>
+                                <p>Train number: <span id="Train_number" th:utext="*{idTrain}"></span></p>
                             </div>
                             <div class="img-overlay"></div>
                             <div class="buy_ticket_content_inner">
                                 <div class="form__group field">
-                                    <input readonly="readonly" type="input" class="form__field" placeholder="Name" th:name="name_client" id="Name_client" minlength="3" maxlength="35" th:value="${oneClient.getName_client()}" required="required" />
+                                    <input readonly="readonly" type="input" class="form__field" placeholder="Name" th:name="name_client" id="Name_client" minlength="3" maxlength="35" th:value="*{nameClient}" required="required" />
                                     <label for="Name_client" class="form__label">Name</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form__group field">
-                                    <input readonly="readonly" type="input" class="form__field" placeholder="Soname" th:name="soname_client" id='Soname_client' minlength="3" maxlength="35" th:value="${oneClient.getSoname_client()}" required="required" />
+                                    <input readonly="readonly" type="input" class="form__field" placeholder="Soname" th:name="soname_client" id='Soname_client' minlength="3" maxlength="35" th:value="*{sonameClient}" required="required" />
                                     <label for="Soname_client" class="form__label">Soname</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form__group field">
-                                    <input readonly="readonly" type="input" class="form__field" id="phone_client" placeholder="Phone number in format +373(33 or 29 or 44)" minlength="15" th:name="phone_client" th:value="${oneClient.getPhone_client()}" pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required="required" />
+                                    <input readonly="readonly" type="input" class="form__field" id="phone_client" placeholder="Phone number in format +373(33 or 29 or 44)" minlength="15" th:name="phone_client" th:value="*{phoneClient}" pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required="required" />
                                     <label for="phone_client" class="form__label">+373(35 or 29 or 44)</label>
                                 </div>
                                 <div class="line-break"></div>
-                                    <a style="margin-bottom: 20px;" th:href="@{/EditClientInfo/{id}(id=${oneClient.getId_client()})}" class="btn btn-dark">Edit</a>
+                                    <a style="margin-bottom: 20px;" th:href="@{/EditClientInfo/{id}(id=*{idClient})}" class="btn btn-dark">Edit</a>
                                 <div class="line-break"></div>
                             </div>
                      </div>

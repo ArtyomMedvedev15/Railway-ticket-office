@@ -33,31 +33,31 @@
 
 <section class="list_train">
     <div class="container">
-        <div class="title_list_train">
-            <p>Client name : <span id="name_client_edit" th:text="${editClient.getName_client()}"></span></p>
+        <div class="title_list_train" th:object="${editClient}">
+            <p>Client name : <span id="name_client_edit" th:text="*{nameClient}"></span></p>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="modal_edit_txt">
                     <div class="buy_ticket_content">
                         <form th:action="@{/EditClientInfo/{id}(id=${id})}" th:method="post" onsubmit="edit_client();" class="form_buy_ticket">
-                            <div class="title_buy_form">
-                                <p>Train number: <span id="Train_number" th:text="${editClient.getId_train()}"></span></p>
+                            <div class="title_buy_form" th:object="${editClient}">
+                                <p>Train number: <span id="Train_number" th:utext="*{idTrain}"></span></p>
                             </div>
                             <div class="img-overlay"></div>
-                            <div class="buy_ticket_content_inner">
+                            <div class="buy_ticket_content_inner" th:object="${editClient}">
                                 <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Name" th:name="name_client" id="Name_client" minlength="3" maxlength="35" th:value="${editClient.getName_client()}" required="required" />
+                                    <input type="input" class="form__field" placeholder="Name" th:name="name_client" id="Name_client" minlength="3" maxlength="35" th:value="*{nameClient}" required="required" />
                                     <label for="Name_client" class="form__label">Name</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form__group field">
-                                    <input type="input" class="form__field" placeholder="Soname" th:name="soname_client" id='Soname_client' minlength="3" maxlength="35" th:value="${editClient.getSoname_client()}" required="required" />
+                                    <input type="input" class="form__field" placeholder="Soname" th:name="soname_client" id='Soname_client' minlength="3" maxlength="35" th:value="*{sonameClient}" required="required" />
                                     <label for="Soname_client" class="form__label">Soname</label>
                                 </div>
                                 <div class="line-break"></div>
                                 <div class="form__group field">
-                                    <input type="input" class="form__field" id="phone_client" placeholder="Phone number in format +373(33 or 29 or 44)" minlength="15" th:name="phone_client" th:value="${editClient.getPhone_client()}" pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required="required" />
+                                    <input type="input" class="form__field" id="phone_client" placeholder="Phone number in format +373(33 or 29 or 44)" minlength="15" th:name="phone_client" th:value="*{phoneClient}" pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required="required" />
                                     <label for="phone_client" class="form__label">+373(35 or 29 or 44)</label>
                                 </div>
                                 <div class="line-break"></div>

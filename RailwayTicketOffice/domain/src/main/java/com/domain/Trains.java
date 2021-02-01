@@ -1,10 +1,11 @@
 package com.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.sql.Date;
-import java.util.Objects;
+ import java.util.Objects;
 
 
 @ApiModel(description = "Details info about the trains")
@@ -19,10 +20,15 @@ public class Trains {
     private Stations departureStation;
     @ApiModelProperty(notes = "The station where the train arrives")
     private Stations arrivalStation;
-    @ApiModelProperty(notes = "Date of departure of the train from the station")
+
+    @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+    @ApiModelProperty(notes = "Date of departure of the train from the station",example = "2020-09-15")
     private Date date_time_departure;
-    @ApiModelProperty(notes = "Date of arrival of the train at the st")
+
+    @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+    @ApiModelProperty(notes = "Date of arrival of the train at the st",example = "2020-09-15")
     private Date date_time_arrival;
+
     @ApiModelProperty(notes = "Number of available tickets")
     private Integer available_ticket;
     @ApiModelProperty(notes = "Total number of tickets")

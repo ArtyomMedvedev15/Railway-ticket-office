@@ -1,1 +1,16 @@
 */target/**
+/railwayticket-web-ui/src/main/java/com/railwayticket/src/main/java/
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/.swagger-codegen-ignore
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/.travis.yml
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/build.gradle
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/build.sbt
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/git_push.sh
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/gradle.properties
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/gradlew
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/gradlew.bat
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/pom.xml
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/README.md
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/settings.gradle
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/.swagger-codegen/
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/docs/
+/railwayticket-web-ui/src/main/java/com/railwayticket/rest/gradle/wrapper/

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -38,14 +40,21 @@ public class ClientControllerTest{
     private MockMvc mockMvc;
 
     @MockBean
-    private ClientServiceApi clientServiceApi;
+    private com.rest.ClientRestControllerApi controllerApi;
 
 
     @Test
     public void DeleteClientTest() throws Exception {
-        ClientRailway oneById_delete = new ClientRailway(778L,123L,"Temp","temp",new Date(new java.util.Date().getTime()),"temp");
-        Mockito.when(clientServiceApi.getOneById(778L)).thenReturn(oneById_delete);
-        Mockito.when(clientServiceApi.delete(oneById_delete)).thenReturn(true);
+        io.swagger.client.model.ClientRailway oneById_delete = new io.swagger.client.model.ClientRailway();
+         oneById_delete.setIdClient(778L);
+        oneById_delete.setIdTrain(123L);
+        oneById_delete.setNameClient("Temp");
+        oneById_delete.setSonameClient("temp");
+        oneById_delete.setDatePurchase("2020-09-15");
+        oneById_delete.setPhoneClient("temp");
+
+        Mockito.when(controllerApi.clientRailwayByIdUsingGET(778L)).thenReturn(oneById_delete);
+        Mockito.when(controllerApi.deleteClientUsingGET(oneById_delete.getIdClient())).thenReturn(oneById_delete);
           mockMvc.perform(get("/deleteclient/778"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listClient"));
@@ -60,8 +69,14 @@ public class ClientControllerTest{
 
     @Test
     public void ListPageClientTest() throws Exception {
-        ClientRailway client = new ClientRailway(778L,123L,"Temp","temp",new Date(new java.util.Date().getTime()),"temp");
-        Mockito.when(clientServiceApi.FindAll()).thenReturn(Stream.of(client,client,client,client,client,client).collect(Collectors.toList()));
+        io.swagger.client.model.ClientRailway findalll = new io.swagger.client.model.ClientRailway();
+        findalll.setIdClient(778L);
+        findalll.setIdTrain(123L);
+        findalll.setNameClient("Temp");
+        findalll.setSonameClient("temp");
+        findalll.setDatePurchase("2020-09-15");
+        findalll.setPhoneClient("temp");
+        Mockito.when(controllerApi.allClientUsingGET()).thenReturn(Stream.of(findalll,findalll,findalll,findalll,findalll,findalll).collect(Collectors.toList()));
         mockMvc.perform(get("/listClient"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.xpath(" //*[@id='node']")
@@ -74,8 +89,14 @@ public class ClientControllerTest{
 
     @Test
     public void UpdateClientPageLoadTest() throws Exception {
-        ClientRailway client = new ClientRailway(421L,123L,"TestClient","temp",new Date(new java.util.Date().getTime()),"temp");
-        Mockito.when(clientServiceApi.getOneById(421L)).thenReturn(client);
+        io.swagger.client.model.ClientRailway edit_client = new io.swagger.client.model.ClientRailway();
+        edit_client.setIdClient(421L);
+        edit_client.setIdTrain(123L);
+        edit_client.setNameClient("TestClient");
+        edit_client.setSonameClient("temp");
+        edit_client.setDatePurchase("2020-09-15");
+        edit_client.setPhoneClient("temp");
+        Mockito.when(controllerApi.clientRailwayByIdUsingGET(421L)).thenReturn(edit_client);
         mockMvc.perform(get("/EditClientInfo/421"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.xpath("//*[@id='name_client_edit']")
@@ -84,10 +105,16 @@ public class ClientControllerTest{
 
     @Test
     public void UpdateClientTest() throws Exception {
-        ClientRailway client_update = new ClientRailway(421L,123L,"Temp","temp",new Date(new java.util.Date().getTime()),"temp");
+        io.swagger.client.model.ClientRailway edit_client = new io.swagger.client.model.ClientRailway();
+        edit_client.setIdClient(421L);
+        edit_client.setIdTrain(123L);
+        edit_client.setNameClient("TestClient");
+        edit_client.setSonameClient("temp");
+        edit_client.setDatePurchase("2020-09-15");
+        edit_client.setPhoneClient("temp");
 
-        Mockito.when(clientServiceApi.getOneById(421L)).thenReturn(client_update);
-        Mockito.when(clientServiceApi.update(client_update)).thenReturn(true);
+        Mockito.when(controllerApi.clientRailwayByIdUsingGET(421L)).thenReturn(edit_client);
+        Mockito.when(controllerApi.updateClientUsingPOST(edit_client)).thenReturn(edit_client);
         this.mockMvc.perform(post("/EditClientInfo/421")
                 .param("name_client","NewUpdateName")
                 .param("soname_client","asd")
@@ -98,13 +125,15 @@ public class ClientControllerTest{
 
     @Test
     public void BuyTicketTest() throws Exception {
-        ClientRailway clientRailway_save = new ClientRailway();
-        clientRailway_save.setName_client("NewTempNameClient");
-        clientRailway_save.setSoname_client("NewTempSonameClient");
-        clientRailway_save.setPhone_client("NewTempPhoneClient");
-        clientRailway_save.setId_train(123L);
-        clientRailway_save.setDate_purchase(new Date(new java.util.Date().getTime()));
-        Mockito.when(clientServiceApi.save(clientRailway_save)).thenReturn(true);
+        io.swagger.client.model.ClientRailway save_client = new io.swagger.client.model.ClientRailway();
+        save_client.setIdClient(421L);
+        save_client.setIdTrain(123L);
+        save_client.setNameClient("TestClient");
+        save_client.setSonameClient("temp");
+        save_client.setDatePurchase("2020-09-15");
+        save_client.setPhoneClient("temp");
+
+         Mockito.when(controllerApi.saveClientUsingPOST(save_client)).thenReturn(save_client);
         this.mockMvc.perform(post("/buyticket")
                 .param("name_client","NewTempNameClient")
                 .param("soname_client","NewTempSonameClient")
@@ -117,9 +146,15 @@ public class ClientControllerTest{
 
     @Test
     public void FindByNameTest() throws Exception {
-        ClientRailway findbyname = new ClientRailway(778L,123L,"Tes","temp",new Date(new java.util.Date().getTime()),"temp");
+        io.swagger.client.model.ClientRailway find_byname = new io.swagger.client.model.ClientRailway();
+        find_byname.setIdClient(421L);
+        find_byname.setIdTrain(123L);
+        find_byname.setNameClient("TestClient");
+        find_byname.setSonameClient("temp");
+        find_byname.setDatePurchase("2020-09-15");
+        find_byname.setPhoneClient("temp");
 
-        Mockito.when(clientServiceApi.FindByNameClient("Tes")).thenReturn(Stream.of(findbyname,findbyname,findbyname,findbyname).collect(Collectors.toList()));
+        Mockito.when(controllerApi.findAllClientByNameUsingGET("Tes")).thenReturn(Stream.of(find_byname,find_byname,find_byname,find_byname).collect(Collectors.toList()));
         this.mockMvc.perform(post("/FindClientByName")
                 .param("name_client","Tes"))
                 .andExpect(status().isOk())

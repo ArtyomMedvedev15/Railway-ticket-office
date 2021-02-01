@@ -27,13 +27,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {BeanConfig.class, DispatcherServletInitializer.class})
+@ContextConfiguration(classes = BeanConfig.class)
 @SpringBootTest
-@WebAppConfiguration
 public class TrainRestServiceImplTest extends TestCase {
 
     @MockBean
-    @Qualifier("TrainServiceRest")
+    @Qualifier("TrainServiceRestImpl")
     private TrainServiceApi trainServiceApi;
 
     @Test

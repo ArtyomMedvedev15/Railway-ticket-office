@@ -18,6 +18,8 @@ tags:
     description: 'Operations for work with clients in railway tickets '
   - name: train-rest-controller
     description: 'Operations for work with trains in railway tickets '
+schemes:
+  - http
 paths:
   "/api/clients/allClient":
     get:
@@ -32,7 +34,9 @@ paths:
         '200':
           description: Successfully find all client.
           schema:
-            "$ref": "#/definitions/Iterable"
+            type: array
+            items:
+              "$ref": "#/definitions/ClientRailway"
         '401':
           description: Unauthorized
         '403':
@@ -91,7 +95,9 @@ paths:
         '200':
           description: Successfully find all client by name.
           schema:
-            "$ref": "#/definitions/Iterable"
+            type: array
+            items:
+              "$ref": "#/definitions/ClientRailway"
         '401':
           description: Unauthorized
         '403':
@@ -212,7 +218,9 @@ paths:
         '200':
           description: Successfully find all train.
           schema:
-            "$ref": "#/definitions/Iterable"
+            type: array
+            items:
+              "$ref": "#/definitions/Trains"
         '401':
           description: Unauthorized
         '403':
@@ -296,7 +304,9 @@ paths:
         '200':
           description: Successfully find all train by dates and stations.
           schema:
-            "$ref": "#/definitions/Iterable"
+            type: array
+            items:
+              "$ref": "#/definitions/Trains"
         '201':
           description: Created
         '401':
@@ -412,7 +422,7 @@ definitions:
     properties:
       date_purchase:
         type: string
-        format: date
+        example: '2020-09-15'
         description: Date when the ticket was purchased
       id_client:
         type: integer
@@ -433,9 +443,6 @@ definitions:
         description: The client's soname
     title: ClientRailway
     description: Details info about the clients
-  Iterable:
-    type: object
-    title: Iterable
   Trains:
     type: object
     properties:
@@ -455,11 +462,11 @@ definitions:
         description: Number of available tickets
       date_time_arrival:
         type: string
-        format: date
+        example: '2020-09-15'
         description: Date of arrival of the train at the st
       date_time_departure:
         type: string
-        format: date
+        example: '2020-09-15'
         description: Date of departure of the train from the station
       departureStation:
         type: string
