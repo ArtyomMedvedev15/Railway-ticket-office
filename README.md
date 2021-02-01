@@ -79,3 +79,38 @@ POST: localhost:8181/api/train/findtrainbydates Form data:
   departure_station_find:Brest
   arrival_station_find:Minsk
 } - find train by dates and stations
+
+
+## Generate rest api
+### For generate use code from this file 
+yaml config : https://github.com/Tim01Bro/Railway-ticket-office/blob/sw_generator/RailwayTicketOffice/railwayticket-web-ui/src/main/resources/restclient-api.yaml
+
+### And after that, paste this into the pom module where you want to generate the rest api
+
+    <plugin>
+        <groupId>io.swagger</groupId>
+        <artifactId>swagger-codegen-maven-plugin</artifactId>
+        <version>2.3.1</version>
+        <executions>
+            <execution>
+                <goals>
+                    <goal>generate</goal>
+                </goals>
+                <configuration>
+                    <inputSpec>${project.basedir}/src/main/resources/restclient-api.yaml</inputSpec>
+                    <language>java</language>
+                    <library>resttemplate</library>
+                    <apiPackage>com.rest</apiPackage>
+                    <generateApiTests>false</generateApiTests>
+                      <output>${project.basedir}/src/main/java/com/railwayticket/rest</output>
+                    <configOptions>
+                        <dateLibrary>java8</dateLibrary>
+                        <java8>true</java8>
+                    </configOptions>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+
+### Final step this complete this command
+## mvn clean compile
