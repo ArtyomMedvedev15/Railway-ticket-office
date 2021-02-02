@@ -31,7 +31,7 @@
         </div>
     </nav>
     <section class="list_train">
-        <div class="container">
+        <div class="container-fluid">
             <div class="title_list_train">
                 <p id="name_page">List of client</p>
             </div>
@@ -53,7 +53,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class="thead-dark">
-                            <tr >
+                            <tr>
                                 <th class="header__item"><a id="number_train" class="filter__link" href="#">Id client</a></th>
                                 <th class="header__item"><a id="id_client" class="filter__link" href="#"> Number train</a></th>
                                 <th class="header__item"><a id="name_client" class="filter__link" href="#">Name</a></th>
@@ -65,23 +65,23 @@
                             </tr>
                         </thead>
                         <tbody class="table_body">
-                            <tr id="node" class="table_row" th:each="client:${ClientList}">
-                                <td class="table_data"><a th:text="${client.getId_client()}" th:href="@{/oneClient/{id}(id=${client.getId_client()})}"></a></td>
-                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${client.getId_train()})}" th:text="${client.getId_train()}"> </a></td>
-                                <td class="table_data" th:text="${client.getName_client()}">Zoks</td>
-                                <td class="table_data" th:text="${client.getSoname_client()}"></td>
-                                <td class="table_data" th:text="${client.getDate_purchase()}"></td>
-                                <td class="table_data" th:text="${client.getPhone_client()}"></td>
-                                <td class="table-data">
-                                    <div class="default_btn transition">
-                                        <a id="open_modal_edit"   class="transition" th:href="@{/EditClientInfo/{id}(id=${client.getId_client()})}">Edit</a>
-                                    </div>
-                                </td>
-                                <td class="table-data">
-                                    <div class="default_btn transition">
-                                        <a onclick="return confirmDelete();" class="transition" th:href="@{/deleteclient/{id}(id=${client.getId_client()})}">Delete</a>
-                                    </div>
-                                </td>
+                            <tr id="node" class="table_row" th:each="client:${ClientList}" th:object="${client}">
+                                    <td class="table_data"><a th:text="*{nameClient}" th:href="@{/oneClient/{id}(id=*{idClient})}"></a></td>
+                                    <td class="table_data"><a th:href="@{/oneTrain/{id}(id=*{idTrain})}" th:utext="*{idTrain}"> </a></td>
+                                    <td class="table_data" th:text="*{nameClient}"></td>
+                                    <td class="table_data" th:text="*{sonameClient}"></td>
+                                    <td class="table_data" th:text="*{datePurchase}"></td>
+                                    <td class="table_data" th:text="*{phoneClient}"></td>
+                                    <td class="table-data">
+                                        <div class="default_btn transition">
+                                            <a id="open_modal_edit"   class="transition" th:href="@{/EditClientInfo/{id}(id=*{idClient})}">Edit</a>
+                                        </div>
+                                    </td>
+                                    <td class="table-data">
+                                        <div class="default_btn transition">
+                                            <a onclick="return confirmDelete();" class="transition" th:href="@{/deleteclient/{id}(id=*{idClient})}">Delete</a>
+                                        </div>
+                                    </td>
                             </tr>
                         </tbody>
                     </table>

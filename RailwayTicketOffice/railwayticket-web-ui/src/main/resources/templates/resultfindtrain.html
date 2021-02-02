@@ -39,31 +39,31 @@
         </div>
 
         <div class="container my-3">
-            <div id="itemContainer" class="row" th:each="resultTrain:${ResultList}">
+            <div id="itemContainer" class="row" th:each="resultTrain:${ResultList}" th:object="${resultTrain}">
                 <div class="col-xs-12 col-sm-6 col-md-12 col-lg-4">
                     <div class="card" style="width: 16rem;margin-bottom: 40px;">
                         <img class="card-img-top" th:src="@{static/img/pngwing.com.png}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"><span th:text="${resultTrain.getDepartureStation().getNameStation()}"></span> &rarr; <span th:text="${resultTrain.getArrivalStation().getNameStation()}"></span></h5>
+                            <h5 class="card-title"><span th:text="*{departureStation.getValue()}"></span> &rarr; <span th:text="*{arrivalStation.getValue()}"></span></h5>
                             <p class="card-text">
-                                <p class="stations"><span th:text="${resultTrain.getDepartureStation().getNameStation()}"></span> &rarr; <span th:text="${resultTrain.getArrivalStation().getNameStation()}"></span></p>
+                                <p class="stations"><span th:text="*{departureStation.getValue()}"></span> &rarr; <span th:text="*{arrivalStation.getValue()}"></span></p>
                                 <div class="calendars_dep"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <p class="date" th:text="':' + ${resultTrain.getDate_time_departure()}"> </p>
+                                    <p class="date" th:text="':' + *{dateTimeDeparture}"> </p>
                                 </div>
                                 <div class="calendars_arr"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    <p class="date" th:text="':' + ${resultTrain.getDate_time_arrival()}">: </p>
+                                    <p class="date" th:text="':' + *{dateTimeArrival}">: </p>
                                 </div>
 
                                 <div class="type_train">
-                                    <p>Type:<strong th:text="${resultTrain.getTypeTrain().getNameType()}"></strong></p>
+                                    <p>Type:<strong th:text="*{typeTrain.getValue()}"></strong></p>
                                 </div>
 
                                 <div class="cost">
-                                    <p>Price: <strong>&#36;<span th:text="${resultTrain.getPrice_ticket()}"></span></strong></p>
+                                    <p>Price: <strong>&#36;<span th:text="*{priceTicket}"></span></strong></p>
                                 </div>
                             </p>
                             <div class="default_btn transition">
-                                <a id="open_modal" th:data-total_price="${resultTrain.getPrice_ticket()}" th:data-train_number="${resultTrain.getId_train()}" th:data-name_train="${resultTrain.getName_train()}" th:data-train_from="${resultTrain.getDepartureStation().getNameStation()}" th:data-train_to="${resultTrain.getArrivalStation().getNameStation()}" th:data-type_train="${resultTrain.getTypeTrain().getNameType()}" class="transition" href="#">Buy</a>
+                                <a id="open_modal" th:data-total_price="*{priceTicket}" th:data-train_number="*{idTrain}" th:data-name_train="*{nameTrain}" th:data-train_from="*{departureStation.getValue()}" th:data-train_to="*{arrivalStation.getValue()}" th:data-type_train="*{typeTrain.getValue()}" class="transition" href="#">Buy</a>
                             </div>
                         </div>
                     </div>
@@ -92,17 +92,17 @@
                                         <label for="train_numbers" class="form__label">Name</label>
                                     </div>
                                     <div class="form__group field">
-                                        <input type="input" class="form__field" placeholder="Name" minlength="5" maxlength="30" name="name_client" id='name_client' required />
+                                        <input type="input" class="form__field" placeholder="Name" minlength="5" maxlength="30" th:name="name_client" id='name_client' required />
                                         <label for="name_client" class="form__label">Name</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form__group field">
-                                        <input type="input" class="form__field" placeholder="Soname" minlength="5" maxlength="30" name="soname_client" id='soname_client' required />
+                                        <input type="input" class="form__field" placeholder="Soname" minlength="5" maxlength="30" th:name="soname_client" id='soname_client' required />
                                         <label for="soname_client" class="form__label">Soname</label>
                                     </div>
                                     <div class="line-break"></div>
                                     <div class="form__group field">
-                                        <input type="input" class="form__field" placeholder="Phone number in format +373(33 or 29 or 44) your phone number" name="phone_client" id='phone_client' pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required />
+                                        <input type="input" class="form__field" placeholder="Phone number in format +373(33 or 29 or 44) your phone number" th:name="phone_client" id='phone_client' pattern="^[\+]?[(]?[3][7][5][)]?[-\s\.]?[(]?[0-9]{2}?[)][-\s\.]?[0-9]{4,8}$" required />
                                         <label for="phone_client" class="form__label">Phone +373(33 or 29 or 44)</label>
                                     </div>
                                     <div class="line-break"></div>

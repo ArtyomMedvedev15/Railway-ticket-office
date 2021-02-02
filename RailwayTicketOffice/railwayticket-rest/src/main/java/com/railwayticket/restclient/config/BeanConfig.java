@@ -106,5 +106,4 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         return new RestTemplate();
     }
 
-
 }

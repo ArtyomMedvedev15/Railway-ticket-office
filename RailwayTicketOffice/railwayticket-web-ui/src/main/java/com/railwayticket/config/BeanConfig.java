@@ -1,10 +1,13 @@
 package com.railwayticket.config;
 
 
+import com.ApiClient;
 import com.railwayticket.service_rest.ClientRestServiceImpl;
 import com.railwayticket.service_rest.TrainRestServiceImpl;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.TrainServiceApi;
+import com.rest.ClientRestControllerApi;
+import com.rest.TrainRestControllerApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -52,4 +55,16 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     public TrainServiceApi TrainServiceRestImpl(){
         return new TrainRestServiceImpl();
     }
+
+    @Bean
+    public ClientRestControllerApi ClientRestApi(){
+        return new com.rest.ClientRestControllerApi();
+    }
+
+    @Bean
+    public com.rest.TrainRestControllerApi TrainRestApi(){
+        return new TrainRestControllerApi();
+    }
+
+
 }

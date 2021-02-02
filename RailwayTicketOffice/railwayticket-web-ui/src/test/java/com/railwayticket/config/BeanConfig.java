@@ -33,7 +33,6 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
 
     }
 
-
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
@@ -47,5 +46,15 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     @Bean
     public TrainServiceApi TrainServiceRestImpl(){
         return new TrainRestServiceImpl();
+    }
+
+    @Bean
+    public com.rest.ClientRestControllerApi ClientRestApi(){
+        return new com.rest.ClientRestControllerApi();
+    }
+
+    @Bean
+    public com.rest.TrainRestControllerApi TrainRestApi(){
+        return new com.rest.TrainRestControllerApi();
     }
 }

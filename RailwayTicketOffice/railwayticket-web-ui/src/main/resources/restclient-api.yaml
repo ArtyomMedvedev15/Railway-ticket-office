@@ -1,0 +1,505 @@
+---
+swagger: '2.0'
+info:
+  description: '"Spring Boot REST API for railway ticket office online"'
+  version: 1.0.0
+  title: RailwayTicketOffice Rest API
+  contact:
+    name: Artsiom Miadzvedzeu
+    url: https://github.com/Tim01Bro/Railway-ticket-office
+    email: artyommedvedev15@gmail.com
+  license:
+    name: Apache License Version 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0"
+host: localhost:8181
+basePath: "/"
+tags:
+  - name: client-rest-controller
+    description: 'Operations for work with clients in railway tickets '
+  - name: train-rest-controller
+    description: 'Operations for work with trains in railway tickets '
+schemes:
+  - http
+paths:
+  "/api/clients/allClient":
+    get:
+      tags:
+        - client-rest-controller
+      summary: Find all client.
+      description: Allows you to get all client.
+      operationId: AllClientUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: Successfully find all client.
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/ClientRailway"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: List of client was empty
+      deprecated: false
+  "/api/clients/deleteClient/{id}":
+    get:
+      tags:
+        - client-rest-controller
+      summary: Delete client.
+      description: Allows you to delete client by id.
+      operationId: deleteClientUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: id
+          in: path
+          description: ID value for delete client.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+        '204':
+          description: Successfully delete client.
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Error client for delete equal null
+      deprecated: false
+  "/api/clients/findclientbyname/{name}":
+    get:
+      tags:
+        - client-rest-controller
+      summary: Find all client by name.
+      description: Allows you to get all by name client.
+      operationId: FindAllClientByNameUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: name
+          in: path
+          description: Name value for find.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully find all client by name.
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/ClientRailway"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: List of client was empty
+      deprecated: false
+  "/api/clients/saveClient":
+    post:
+      tags:
+        - client-rest-controller
+      summary: Save new client.
+      description: Allows you to save new client to database.
+      operationId: saveClientUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: client_save
+          description: Client model for save new client with full field.
+          required: true
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+        '201':
+          description: Successfully save client.
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+        '400':
+          description: Error client for save equal null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  "/api/clients/updateClient":
+    post:
+      tags:
+        - client-rest-controller
+      summary: Update client.
+      description: Allows you to update client.
+      operationId: updateClientUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: client_update
+          description: Client model for update client info with full field.
+          required: true
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+      responses:
+        '200':
+          description: Successfully update client.
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+        '201':
+          description: Created
+        '400':
+          description: Error client for update equal null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  "/api/clients/{id}":
+    get:
+      tags:
+        - client-rest-controller
+      summary: Find client by id.
+      description: Allows you to get a single client by ID
+      operationId: clientRailwayByIdUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: id
+          in: path
+          description: ID value for find client by id.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successfully get client by id.
+          schema:
+            "$ref": "#/definitions/ClientRailway"
+        '400':
+          description: Error id client equal null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Client was not found by this id
+      deprecated: false
+  "/api/train/allTrain":
+    get:
+      tags:
+        - train-rest-controller
+      summary: Find all train.
+      description: Allows you to get all trains.
+      operationId: allTrainUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: Successfully find all train.
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Trains"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: List of train was empty
+      deprecated: false
+  "/api/train/deleteTrain/{id}":
+    get:
+      tags:
+        - train-rest-controller
+      summary: Delete train.
+      description: Allows you to delete train by id.
+      operationId: deleteTrainsUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: id
+          in: path
+          description: ID value for delete train.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Trains"
+        '204':
+          description: Successfully delete train.
+          schema:
+            "$ref": "#/definitions/Trains"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Error train for delete equal null
+      deprecated: false
+  "/api/train/findtrainbydates":
+    post:
+      tags:
+        - train-rest-controller
+      summary: Find all train by dates and stations.
+      description: Allows you to get all train by dates and stations.
+      operationId: FindAllTrainsByDatesAndStationsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: arrival_date
+          in: query
+          description: Date when train arrival
+          required: true
+          type: string
+          default: '2021-02-02'
+          allowEmptyValue: false
+        - name: arrival_station_find
+          in: query
+          description: The station where the train arrives
+          required: true
+          type: string
+          default: Minsk
+          allowEmptyValue: false
+        - name: departure_date
+          in: query
+          description: Date when train departure
+          required: true
+          type: string
+          default: '2021-01-28'
+          allowEmptyValue: false
+        - name: departure_station_find
+          in: query
+          description: The station where the train starts from
+          required: true
+          type: string
+          default: Brest
+          allowEmptyValue: false
+      responses:
+        '200':
+          description: Successfully find all train by dates and stations.
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/Trains"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: List of train was empty
+      deprecated: false
+  "/api/train/saveTrain":
+    post:
+      tags:
+        - train-rest-controller
+      summary: Save new train.
+      description: Allows you to save new train to database.
+      operationId: saveTrainUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: Train Save
+          description: Train model for save new train with full field.
+          required: true
+          schema:
+            "$ref": "#/definitions/Trains"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Trains"
+        '201':
+          description: Successfully save train.
+          schema:
+            "$ref": "#/definitions/Trains"
+        '400':
+          description: Error train for save equal null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  "/api/train/updateTrain":
+    post:
+      tags:
+        - train-rest-controller
+      summary: Update train.
+      description: Allows you to update train.
+      operationId: updateTrainUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: Train update
+          description: Train model for update train info with full field.
+          required: true
+          schema:
+            "$ref": "#/definitions/Trains"
+      responses:
+        '200':
+          description: Successfully update train.
+          schema:
+            "$ref": "#/definitions/Trains"
+        '201':
+          description: Created
+        '400':
+          description: Error train for update equal null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  "/api/train/{id}":
+    get:
+      tags:
+        - train-rest-controller
+      summary: Find train by id.
+      description: Allows you to get a single train by ID
+      operationId: TrainByIdUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: id
+          in: path
+          description: ID value for find train by id.
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successfully get train by id.
+          schema:
+            "$ref": "#/definitions/Trains"
+        '400':
+          description: Error id train equal null
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Train was not found by this id
+      deprecated: false
+definitions:
+  ClientRailway:
+    type: object
+    properties:
+      date_purchase:
+        type: string
+        example: '2020-09-15'
+        description: Date when the ticket was purchased
+      id_client:
+        type: integer
+        format: int64
+        description: The unique id of the client
+      id_train:
+        type: integer
+        format: int64
+        description: The ID train which the customer bought the ticket for
+      name_client:
+        type: string
+        description: The client's name
+      phone_client:
+        type: string
+        description: The client's phone number
+      soname_client:
+        type: string
+        description: The client's soname
+    title: ClientRailway
+    description: Details info about the clients
+  Trains:
+    type: object
+    properties:
+      arrivalStation:
+        type: string
+        description: The station where the train arrives
+        enum:
+          - BREST
+          - MINSK
+          - GRODNO
+          - VITEBSK
+          - MOGILEV
+          - GOMEL
+      available_ticket:
+        type: integer
+        format: int32
+        description: Number of available tickets
+      date_time_arrival:
+        type: string
+        example: '2020-09-15'
+        description: Date of arrival of the train at the st
+      date_time_departure:
+        type: string
+        example: '2020-09-15'
+        description: Date of departure of the train from the station
+      departureStation:
+        type: string
+        description: The station where the train starts from
+        enum:
+          - BREST
+          - MINSK
+          - GRODNO
+          - VITEBSK
+          - MOGILEV
+          - GOMEL
+      id_train:
+        type: integer
+        format: int64
+        description: The unique id of the train
+      name_train:
+        type: string
+        description: The train's name
+      price_ticket:
+        type: number
+        format: float
+        description: The price for a ticket
+      total_ticket:
+        type: integer
+        format: int32
+        description: Total number of tickets
+      typeTrain:
+        type: string
+        description: The train's type
+        enum:
+          - ECONOM
+          - BUSINESS
+          - COUPE
+          - RESERVED_SEAT
+    title: Trains
+    description: Details info about the trains

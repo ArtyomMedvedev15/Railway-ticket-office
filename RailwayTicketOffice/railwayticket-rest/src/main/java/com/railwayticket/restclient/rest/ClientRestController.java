@@ -36,7 +36,7 @@ public class ClientRestController {
             @ApiResponse(code = 400,message = "Error id client equal null"),
             @ApiResponse(code = 404,message = "Client was not found by this id")
     })
-    public ResponseEntity<ClientRailway>clientRailwayById(@ApiParam(name = "ID client",value = "ID value for find client by id.",required = true) @PathVariable("id") Long id_client) throws ServiceException {
+    public ResponseEntity<ClientRailway>clientRailwayById(@ApiParam(name = "id",value = "ID value for find client by id.",required = true) @PathVariable("id") Long id_client) throws ServiceException {
 
         if(id_client==null){
             logger.error("Get client by id failed. " + " Id: null" + " With status Bad request");
@@ -61,7 +61,7 @@ public class ClientRestController {
             @ApiResponse(code = 201,message = "Successfully save client."),
             @ApiResponse(code = 400,message = "Error client for save equal null"),
     })
-    public ResponseEntity<ClientRailway>saveClient(@ApiParam(name = "Client Save",value = "Client model for save new client with full field.",required = true)@RequestBody ClientRailway clientRailway) throws ServiceException {
+    public ResponseEntity<ClientRailway>saveClient(@ApiParam(name = "client_save",value = "Client model for save new client with full field.",required = true)@RequestBody ClientRailway clientRailway) throws ServiceException {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         if(clientRailway==null){
@@ -83,7 +83,7 @@ public class ClientRestController {
             @ApiResponse(code = 200,message = "Successfully update client."),
             @ApiResponse(code = 400,message = "Error client for update equal null"),
     })
-    public ResponseEntity<ClientRailway>updateClient(@ApiParam(name = "Client update",value = "Client model for update client info with full field.",required = true)@RequestBody ClientRailway clientRailway, UriComponentsBuilder uriComponentsBuilder) throws ServiceException {
+    public ResponseEntity<ClientRailway>updateClient(@ApiParam(name = "client_update",value = "Client model for update client info with full field.",required = true)@RequestBody ClientRailway clientRailway, UriComponentsBuilder uriComponentsBuilder) throws ServiceException {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         if(clientRailway==null){
@@ -103,7 +103,7 @@ public class ClientRestController {
             @ApiResponse(code = 204,message = "Successfully delete client."),
             @ApiResponse(code = 404,message = "Error client for delete equal null"),
     })
-    public ResponseEntity<ClientRailway>deleteClient(@ApiParam(name = "Client id delete",value = "ID value for delete client.",required = true)@PathVariable("id")Long id_client) throws ServiceException {
+    public ResponseEntity<ClientRailway>deleteClient(@ApiParam(name = "id",value = "ID value for delete client.",required = true)@PathVariable("id")Long id_client) throws ServiceException {
         ClientRailway clientRailwayDelete = clientServiceApi.getOneById(id_client);
 
         if(clientRailwayDelete==null){
@@ -119,7 +119,7 @@ public class ClientRestController {
 
     @RequestMapping(value = "/allClient",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find all client.",notes = "Allows you to get all client.",
-            response = Iterable.class,
+            response = ClientRailway.class,responseContainer = "List",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Successfully find all client."),
@@ -140,12 +140,13 @@ public class ClientRestController {
 
     @RequestMapping(value = "/findclientbyname/{name}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find all client by name.",notes = "Allows you to get all by name client.",
-            response = Iterable.class,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            response = ClientRailway.class,responseContainer = "List"
+            ,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Successfully find all client by name."),
             @ApiResponse(code = 404,message = "List of client was empty"),
     })
-    public ResponseEntity<List<ClientRailway>>FindAllClientByName(@ApiParam(name = "Name for find",value = "Name value for find.",required = true)@PathVariable("name")String name) throws ClientServiceException {
+    public ResponseEntity<List<ClientRailway>>FindAllClientByName(@ApiParam(name = "name",value = "Name value for find.",required = true)@PathVariable("name")String name) throws ClientServiceException {
         List<ClientRailway>allClient = clientServiceApi.FindByNameClient(name);
 
         if(allClient.isEmpty()){

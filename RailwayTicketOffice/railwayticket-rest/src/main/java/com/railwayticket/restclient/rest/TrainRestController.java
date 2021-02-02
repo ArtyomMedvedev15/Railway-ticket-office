@@ -18,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class TrainRestController {
             @ApiResponse(code = 400,message = "Error id train equal null"),
             @ApiResponse(code = 404,message = "Train was not found by this id")
     })
-    public ResponseEntity<Trains> TrainById(@ApiParam(name = "ID train",value = "ID value for find train by id.",required = true)@PathVariable("id") Long id_client) throws ServiceException {
+    public ResponseEntity<Trains> TrainById(@ApiParam(name = "id",value = "ID value for find train by id.",required = true)@PathVariable("id") Long id_client) throws ServiceException {
 
         if(id_client==null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -98,7 +99,7 @@ public class TrainRestController {
             @ApiResponse(code = 204,message = "Successfully delete train."),
             @ApiResponse(code = 404,message = "Error train for delete equal null"),
     })
-    public ResponseEntity<Trains>deleteTrains(@ApiParam(name = "Train id delete",value = "ID value for delete train.",required = true)@PathVariable("id")Long id_train) throws ServiceException {
+    public ResponseEntity<Trains>deleteTrains(@ApiParam(name = "id",value = "ID value for delete train.",required = true)@PathVariable("id")Long id_train) throws ServiceException {
         Trains trainsDelete = trainServiceApi.getOneById(id_train);
 
         if(trainsDelete==null){
@@ -112,7 +113,7 @@ public class TrainRestController {
 
     @RequestMapping(value = "/allTrain",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find all train.",notes = "Allows you to get all trains.",
-            response = Iterable.class,
+            response = Trains.class,responseContainer = "List",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Successfully find all train."),
@@ -130,7 +131,7 @@ public class TrainRestController {
 
     @RequestMapping(value = "/findtrainbydates",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Find all train by dates and stations.",notes = "Allows you to get all train by dates and stations.",
-            response = Iterable.class,
+            response = Trains.class,responseContainer = "List",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiResponses(value = {
             @ApiResponse(code = 200,message = "Successfully find all train by dates and stations."),
@@ -150,7 +151,7 @@ public class TrainRestController {
                         Stations.valueOf(departure_station_find.toUpperCase()),Stations.valueOf(arrival_station_find.toUpperCase()));
 
         if(allTrain.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(Collections.emptyList(),HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(allTrain,HttpStatus.OK);

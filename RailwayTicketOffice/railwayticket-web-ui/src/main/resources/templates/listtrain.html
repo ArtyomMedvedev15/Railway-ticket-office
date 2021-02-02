@@ -61,25 +61,25 @@
                             </tr>
                         </thead>
                         <tbody class="table_body">
-                            <tr class="table_row" th:each="train:${TrainList}" id="node">
-                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=${train.getId_train()})}" th:text="${train.getId_train()}"></a></td>
-                                <td class="table_data" th:text="${train.getName_train()}"></td>
-                                <td class="table_data" th:text="${train.getTypeTrain().getNameType()}"></td>
-                                <td class="table_data" th:text="${train.getDepartureStation().getNameStation()}"></td>
-                                <td class="table_data" th:text="${train.getArrivalStation().getNameStation()}"></td>
-                                <td class="table_data" th:text="${train.getDate_time_departure()}"></td>
-                                <td class="table_data" th:text="${train.getDate_time_arrival()}"></td>
-                                <td class="table_data" th:text="${train.getAvailable_ticket()}"></td>
-                                <td class="table_data" th:text="${train.getTotal_ticket()}"></td>
-                                <td class="table_data" th:text="${train.getPrice_ticket()}"></td>
+                            <tr class="table_row" th:each="train:${TrainList}" th:object="${train}" id="node">
+                                <td class="table_data"><a th:href="@{/oneTrain/{id}(id=*{idTrain})}" th:text="*{idTrain}"></a></td>
+                                <td class="table_data" th:text="*{nameTrain}"></td>
+                                <td class="table_data" th:text="*{typeTrain.getValue()}"></td>
+                                <td class="table_data" th:text="*{departureStation.getValue()}"></td>
+                                <td class="table_data" th:text="*{arrivalStation.getValue()}"></td>
+                                <td class="table_data" th:text="${train.getDateTimeDeparture()}"></td>
+                                <td class="table_data" th:text="${train.getDateTimeArrival()}"></td>
+                                <td class="table_data" th:text="*{availableTicket}"></td>
+                                <td class="table_data" th:text="*{totalTicket}"></td>
+                                <td class="table_data" th:text="*{priceTicket}"></td>
                                 <td class="table-data">
                                     <div class="default_btn transition">
-                                        <a id="open_edit_modal" class="transition" th:href="@{/EditTrainInfo/{id}(id=${train.getId_train()})}">Edit</a>
+                                        <a id="open_edit_modal" class="transition" th:href="@{/EditTrainInfo/{id}(id=*{idTrain})}">Edit</a>
                                     </div>
                                 </td>
                                 <td class="table-data">
                                     <div class="default_btn transition">
-                                        <a onclick="return confirmDelete();" class="transition" th:href="@{/DeleteTrain/{id}(id=${train.getId_train()})}">Delete</a>
+                                        <a onclick="return confirmDelete();" class="transition" th:href="@{/DeleteTrain/{id}(id=*{idTrain})}">Delete</a>
                                     </div>
                                 </td>
                             </tr>

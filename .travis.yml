@@ -9,9 +9,8 @@ before_script:
   - psql -c "CREATE USER foo WITH PASSWORD 'bar';" -U postgres
  
 script:
-  - mvn install
+  - mvn clean install
   - mvn checkstyle:checkstyle
   - mvn spotbugs:spotbugs
 after_success:
   - mvn clean test jacoco:report coveralls:report
-  - mvn clean

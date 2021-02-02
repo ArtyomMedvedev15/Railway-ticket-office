@@ -46,14 +46,23 @@ public class TrainControllerTest extends TestCase {
     private MockMvc mockMvc;
 
     @MockBean
-    private TrainServiceApi trainServiceApi;
+    private com.rest.TrainRestControllerApi trainServiceApi;
 
 
     @Test
     public void ListTrainPageTest() throws Exception {
-        Trains trains = new Trains("Temp", TypeTrain.ECONOM, Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
-        List<Trains>result_train = Arrays.asList(trains,trains,trains);
-        Mockito.when(trainServiceApi.FindAll()).thenReturn(result_train);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("date");
+        trains.setDateTimeDeparture("Date");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);
+        List<io.swagger.client.model.Trains>result_train = Arrays.asList(trains,trains,trains);
+        Mockito.when(trainServiceApi.allTrainUsingGET()).thenReturn(result_train);
         mockMvc.perform(get("/listTrain"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.xpath(" //*[@id='node']")
@@ -64,21 +73,38 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void OneTrainPageTest() throws Exception {
-        Trains trains = new Trains("Temp",TypeTrain.ECONOM,Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
-        trains.setId_train(321L);
-        Mockito.when(trainServiceApi.getOneById(321L)).thenReturn(trains);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setIdTrain(321L);
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("date");
+        trains.setDateTimeDeparture("Date");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);
+        Mockito.when(trainServiceApi.trainByIdUsingGET(321L)).thenReturn(trains);
         mockMvc.perform(get("/oneTrain/321"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void UpdateTrainLoadPageTest() throws Exception {
-        Trains trains = new Trains("Temp",TypeTrain.ECONOM,Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
-        trains.setId_train(321L);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setIdTrain(321L);
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("date");
+        trains.setDateTimeDeparture("Date");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);
+        Mockito.when(trainServiceApi.trainByIdUsingGET(321L)).thenReturn(trains);
 
-        Mockito.when(trainServiceApi.getOneById(321L)).thenReturn(trains);
-
-        Mockito.when(trainServiceApi.update(trains)).thenReturn(true);
+        Mockito.when(trainServiceApi.updateTrainUsingPOST(trains)).thenReturn(trains);
         mockMvc.perform(get("/EditTrainInfo/321"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.xpath("//*[@id='train_number']")
@@ -87,17 +113,26 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void UpdateTrainTest() throws Exception {
-        Trains trains = new Trains("Temp",TypeTrain.ECONOM,Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
-        trains.setId_train(321L);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setIdTrain(321L);
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("date");
+        trains.setDateTimeDeparture("Date");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);
 
-        Mockito.when(trainServiceApi.getOneById(321L)).thenReturn(trains);
-        Mockito.when(trainServiceApi.update(trains)).thenReturn(true);
+        Mockito.when(trainServiceApi.trainByIdUsingGET(321L)).thenReturn(trains);
+        Mockito.when(trainServiceApi.updateTrainUsingPOST(trains)).thenReturn(trains);
 
         this.mockMvc.perform(post("/EditTrainInfo/321")
                 .param("name_train_edit","NewUpdateName")
-                .param("departure_station_edit","Minsk")
-                .param("arrival_station_edit","Brest")
-                .param("type_train_edit","Econom")
+                .param("departure_station_edit","MINSK")
+                .param("arrival_station_edit","BREST")
+                .param("type_train_edit","ECONOM")
                 .param("datetime_dep_edit","2021-09-12")
                 .param("datetime_arr_edit","2021-19-12")
                 .param("total_ticket_edit","12")
@@ -108,17 +143,18 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void SaveTrainTest() throws Exception {
-        Trains save_train = new Trains();
-        save_train.setName_train("NewSaveName");
-        save_train.setDepartureStation(Stations.MINSK);
-        save_train.setArrivalStation(Stations.BREST);
-        save_train.setTypeTrain(TypeTrain.ECONOM);
-        save_train.setDate_time_departure(new Date(new java.util.Date().getTime()));
-        save_train.setDate_time_arrival(new Date(new java.util.Date().getTime()));
-        save_train.setTotal_ticket(321);
-        save_train.setPrice_ticket(12.2F);
-        save_train.setAvailable_ticket(321);
-        Mockito.when(trainServiceApi.update(save_train)).thenReturn(true);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setIdTrain(321L);
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("date");
+        trains.setDateTimeDeparture("Date");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);
+        Mockito.when(trainServiceApi.saveTrainUsingPOST(trains)).thenReturn(trains);
         this.mockMvc.perform(post("/SaveNewTrain")
                 .param("name_train","NewSaveName")
                 .param("departure_station","Minsk")
@@ -136,11 +172,20 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void DeleteTrainTest() throws Exception {
-        Trains trains = new Trains("Temp",TypeTrain.ECONOM,Stations.BREST,Stations.GRODNO,new Date(new java.util.Date().getTime()),new Date(new java.util.Date().getTime()),123,123,20.2F);
-        trains.setId_train(123L);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setIdTrain(123L);
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("date");
+        trains.setDateTimeDeparture("Date");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);
 
-        Mockito.when(trainServiceApi.getOneById(123L)).thenReturn(trains);
-        Mockito.when(trainServiceApi.delete(trains)).thenReturn(true);
+        Mockito.when(trainServiceApi.trainByIdUsingGET(123L)).thenReturn(trains);
+        Mockito.when(trainServiceApi.deleteTrainsUsingGET(trains.getIdTrain())).thenReturn(trains);
         mockMvc.perform(get("/DeleteTrain/123"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/listTrain"));
@@ -148,13 +193,20 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void FindTrainByDateTest() throws Exception {
-        java.util.Date date_departure_find=new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-12");
-        java.util.Date date_arrival_find=new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-13");
-        Trains trains = new Trains("Temp",TypeTrain.ECONOM,Stations.BREST,Stations.GRODNO,new Date(date_departure_find.getTime()),new Date(date_arrival_find.getTime()),123,123,20.2F);
-        trains.setId_train(123L);
+        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        trains.setIdTrain(321L);
+        trains.setNameTrain("Temp");
+        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setDateTimeArrival("2020-09-15");
+        trains.setDateTimeDeparture("2020-09-20");
+        trains.setAvailableTicket(123);
+        trains.setPriceTicket(20.0F);
+        trains.setTotalTicket(123);;
 
-        Mockito.when(trainServiceApi.FindAllByDateDepartureArrivalStations(new Date(date_departure_find.getTime()),new Date(date_arrival_find.getTime()),Stations.BREST,Stations.MINSK))
-                .thenReturn(Stream.of(trains,trains).collect(Collectors.toList()));
+        Mockito.when(trainServiceApi.findAllTrainsByDatesAndStationsUsingPOST("2020-09-15","BREST","2020-09-20","MINSK")
+        ).thenReturn(Stream.of(trains,trains).collect(Collectors.toList()));
         this.mockMvc.perform(post("/FindTrain")
                 .param("departure_date","2020-09-12")
                 .param("arrival_date","2020-09-13")
