@@ -2,7 +2,7 @@ package com.rest;
 
 import com.ApiClient;
 
-import io.swagger.client.model.Trains;
+import com.rest.domains.Trains;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-01T20:23:28.079+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-02-03T14:40:23.884+03:00")
 @Component("com.rest.TrainRestControllerApi")
 public class TrainRestControllerApi {
     private ApiClient apiClient;

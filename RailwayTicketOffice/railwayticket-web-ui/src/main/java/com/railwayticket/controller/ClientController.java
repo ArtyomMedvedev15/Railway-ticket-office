@@ -1,11 +1,10 @@
 package com.railwayticket.controller;
 
 
-import com.domain.ClientRailway;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
 import com.railwayticket.services_api.exception.ServiceException;
- import org.apache.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +37,7 @@ public class ClientController {
 
     @GetMapping("/listClient")
     public String listClientPage(Model model) throws ServiceException {
-        List<io.swagger.client.model.ClientRailway> ClientList = clientRestApi.allClientUsingGET();
+        List<com.rest.domains.ClientRailway> ClientList = clientRestApi.allClientUsingGET();
         logger.info("Client list page load. " + "List client size: " + ClientList.size() + " Time: " + new Date().toString());
         model.addAttribute("ClientList",ClientList);
         return "listclient";
@@ -46,7 +45,7 @@ public class ClientController {
 
     @GetMapping("/deleteclient/{id}")
     public String deleteClientById(@PathVariable(name = "id")String id) throws ServiceException {
-        io.swagger.client.model.ClientRailway clientDelete = clientRestApi.clientRailwayByIdUsingGET(Long.valueOf(id));
+        com.rest.domains.ClientRailway clientDelete = clientRestApi.clientRailwayByIdUsingGET(Long.valueOf(id));
         clientRestApi.deleteClientUsingGET(Long.valueOf(id));
         logger.info("Delete client by id. " + " Client info: " + clientDelete.toString() + " Time: " + new Date().toString());
         return "redirect:/listClient";
@@ -67,7 +66,7 @@ public class ClientController {
                                     @RequestParam(name="phone_client")String phone_client,
                                     @PathVariable(name = "id")String id) throws ServiceException {
 
-        io.swagger.client.model.ClientRailway client_update = clientRestApi.clientRailwayByIdUsingGET(Long.valueOf(id));
+        com.rest.domains.ClientRailway client_update = clientRestApi.clientRailwayByIdUsingGET(Long.valueOf(id));
         client_update.setIdClient(Long.valueOf(id));
         client_update.setNameClient(name_client);
         client_update.setSonameClient(soname_client);
@@ -84,7 +83,7 @@ public class ClientController {
                             @RequestParam(name="train_id")String id_train, Model model) throws ServiceException {
         final DateTimeFormatter date_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        io.swagger.client.model.ClientRailway clientRailway_save = new io.swagger.client.model.ClientRailway();
+        com.rest.domains.ClientRailway clientRailway_save = new com.rest.domains.ClientRailway();
         clientRailway_save.setIdTrain(Long.valueOf(id_train));
         clientRailway_save.setNameClient(name_client);
         clientRailway_save.setSonameClient(soname_client);
@@ -101,7 +100,7 @@ public class ClientController {
 
     @PostMapping("/FindClientByName")
     public String FindByName(@RequestParam(name = "name_client")String name_client,Model model) throws ClientServiceException {
-        List<io.swagger.client.model.ClientRailway> ClientList;
+        List<com.rest.domains.ClientRailway> ClientList;
 
         if(!name_client.equals("")) {
             ClientList = clientRestApi.findAllClientByNameUsingGET(name_client);

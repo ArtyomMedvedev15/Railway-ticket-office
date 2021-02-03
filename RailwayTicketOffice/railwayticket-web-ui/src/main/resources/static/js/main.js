@@ -214,8 +214,6 @@
 
      if (new Date(arrival_data_time).getTime() > new Date(departure_data_time).getTime() && departure_station !== arrival_station) {
          alert("Success edit train!")
-         history.pushState("", document.title, window.location.pathname);
-         setTimeout('location.replace("/listTrain")', 100);
          return true;
      } else {
          alert("Error illegal argument dates or stations!")

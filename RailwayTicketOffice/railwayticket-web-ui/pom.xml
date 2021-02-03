@@ -161,6 +161,7 @@
                             <language>java</language>
                             <library>resttemplate</library>
                             <apiPackage>com.rest</apiPackage>
+                            <modelPackage>com.rest.domains</modelPackage>
                             <generateApiTests>false</generateApiTests>
                               <output>${project.basedir}/src/main/java/com/railwayticket/rest</output>
                             <configOptions>

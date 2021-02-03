@@ -51,17 +51,17 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void ListTrainPageTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("date");
         trains.setDateTimeDeparture("Date");
         trains.setAvailableTicket(123);
         trains.setPriceTicket(20.0F);
         trains.setTotalTicket(123);
-        List<io.swagger.client.model.Trains>result_train = Arrays.asList(trains,trains,trains);
+        List<com.rest.domains.Trains>result_train = Arrays.asList(trains,trains,trains);
         Mockito.when(trainServiceApi.allTrainUsingGET()).thenReturn(result_train);
         mockMvc.perform(get("/listTrain"))
                 .andExpect(status().isOk())
@@ -73,12 +73,12 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void OneTrainPageTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setIdTrain(321L);
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("date");
         trains.setDateTimeDeparture("Date");
         trains.setAvailableTicket(123);
@@ -91,12 +91,12 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void UpdateTrainLoadPageTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setIdTrain(321L);
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("date");
         trains.setDateTimeDeparture("Date");
         trains.setAvailableTicket(123);
@@ -113,12 +113,12 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void UpdateTrainTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setIdTrain(321L);
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("date");
         trains.setDateTimeDeparture("Date");
         trains.setAvailableTicket(123);
@@ -143,12 +143,12 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void SaveTrainTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setIdTrain(321L);
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("date");
         trains.setDateTimeDeparture("Date");
         trains.setAvailableTicket(123);
@@ -172,12 +172,12 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void DeleteTrainTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setIdTrain(123L);
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("date");
         trains.setDateTimeDeparture("Date");
         trains.setAvailableTicket(123);
@@ -193,12 +193,12 @@ public class TrainControllerTest extends TestCase {
 
     @Test
     public void FindTrainByDateTest() throws Exception {
-        io.swagger.client.model.Trains trains = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains trains = new com.rest.domains.Trains();
         trains.setIdTrain(321L);
         trains.setNameTrain("Temp");
-        trains.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.ECONOM);
-        trains.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.MINSK);
-        trains.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.BREST);
+        trains.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.ECONOM);
+        trains.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.MINSK);
+        trains.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.BREST);
         trains.setDateTimeArrival("2020-09-15");
         trains.setDateTimeDeparture("2020-09-20");
         trains.setAvailableTicket(123);
