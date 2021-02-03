@@ -7,8 +7,8 @@ info:
     url: https://github.com/Tim01Bro/Railway-ticket-office
     email: artyommedvedev15@gmail.com
   license:
-    name: Apache License Version 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0"
+    name: Github
+    url: https://github.com/Tim01Bro/Railway-ticket-office
   version: 1.0.0
 servers:
   - url: http://localhost:8181/
