@@ -1,0 +1,2 @@
+insert into client_railway(id_client, id_train, name_client, soname_client, date_purchase, phone_client)
+select 56,23,'Tim','Medvedev','2020-05-12','+375(33)3423123' WHERE NOT EXISTS (SELECT id_client FROM client_railway Where id_client=56)

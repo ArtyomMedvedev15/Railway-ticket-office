@@ -61,7 +61,7 @@
                             </p>
                             <div class="row">
                                 <div class="default_btn transition">
-                                    <a id="open_modal" th:data-total_price="*{priceTicket}" th:data-train_number="*{typeTrain.getValue()}" th:data-name_train="*{nameTrain}" th:data-train_from="*{departureStation.getValue()}" th:data-train_to="*{arrivalStation.getValue()}" th:data-type_train="*{typeTrain.getValue()}" class="transition" href="#">Buy</a>
+                                    <a id="open_modal" th:data-total_price="*{priceTicket}" th:data-train_number="*{idTrain}" th:data-name_train="*{nameTrain}" th:data-train_from="*{departureStation.getValue()}" th:data-train_to="*{arrivalStation.getValue()}" th:data-type_train="*{typeTrain.getValue()}" class="transition" href="#">Buy</a>
                                 </div>
                                 <div class="default_btn transition">
                                     <a id="open_edit_modal" th:href="@{/EditTrainInfo/{id}(id=*{idTrain})}">Edit</a>
