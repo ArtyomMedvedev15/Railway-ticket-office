@@ -1,10 +1,6 @@
 package com.railwayticket.controller;
 
-import com.domain.ClientRailway;
 import com.railwayticket.config.BeanConfig;
-
-
-import com.railwayticket.services_api.ClientServiceApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -12,15 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.sql.Date;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,8 +38,8 @@ public class ClientControllerTest{
 
     @Test
     public void DeleteClientTest() throws Exception {
-        io.swagger.client.model.ClientRailway oneById_delete = new io.swagger.client.model.ClientRailway();
-         oneById_delete.setIdClient(778L);
+        com.rest.domains.ClientRailway oneById_delete = new com.rest.domains.ClientRailway();
+        oneById_delete.setIdClient(778L);
         oneById_delete.setIdTrain(123L);
         oneById_delete.setNameClient("Temp");
         oneById_delete.setSonameClient("temp");
@@ -69,7 +62,7 @@ public class ClientControllerTest{
 
     @Test
     public void ListPageClientTest() throws Exception {
-        io.swagger.client.model.ClientRailway findalll = new io.swagger.client.model.ClientRailway();
+        com.rest.domains.ClientRailway findalll = new com.rest.domains.ClientRailway();
         findalll.setIdClient(778L);
         findalll.setIdTrain(123L);
         findalll.setNameClient("Temp");
@@ -89,7 +82,7 @@ public class ClientControllerTest{
 
     @Test
     public void UpdateClientPageLoadTest() throws Exception {
-        io.swagger.client.model.ClientRailway edit_client = new io.swagger.client.model.ClientRailway();
+        com.rest.domains.ClientRailway edit_client = new com.rest.domains.ClientRailway();
         edit_client.setIdClient(421L);
         edit_client.setIdTrain(123L);
         edit_client.setNameClient("TestClient");
@@ -105,7 +98,7 @@ public class ClientControllerTest{
 
     @Test
     public void UpdateClientTest() throws Exception {
-        io.swagger.client.model.ClientRailway edit_client = new io.swagger.client.model.ClientRailway();
+        com.rest.domains.ClientRailway edit_client = new com.rest.domains.ClientRailway();
         edit_client.setIdClient(421L);
         edit_client.setIdTrain(123L);
         edit_client.setNameClient("TestClient");
@@ -125,7 +118,7 @@ public class ClientControllerTest{
 
     @Test
     public void BuyTicketTest() throws Exception {
-        io.swagger.client.model.ClientRailway save_client = new io.swagger.client.model.ClientRailway();
+        com.rest.domains.ClientRailway save_client = new com.rest.domains.ClientRailway();
         save_client.setIdClient(421L);
         save_client.setIdTrain(123L);
         save_client.setNameClient("TestClient");
@@ -146,7 +139,7 @@ public class ClientControllerTest{
 
     @Test
     public void FindByNameTest() throws Exception {
-        io.swagger.client.model.ClientRailway find_byname = new io.swagger.client.model.ClientRailway();
+        com.rest.domains.ClientRailway find_byname = new com.rest.domains.ClientRailway();
         find_byname.setIdClient(421L);
         find_byname.setIdTrain(123L);
         find_byname.setNameClient("TestClient");

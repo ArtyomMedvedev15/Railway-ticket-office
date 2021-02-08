@@ -2,13 +2,10 @@ package com.railwayticket.controller;
 
 
 import com.domain.Stations;
-import com.domain.Trains;
-import com.domain.TypeTrain;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ServiceException;
 import com.railwayticket.services_api.exception.TrainServiceException;
 import org.apache.log4j.Logger;
-import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,15 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 public class TrainController {
@@ -41,7 +37,7 @@ public class TrainController {
 
     @GetMapping("/listTrain")
     public String listTrainPage(Model model) throws ParseException {
-        List<io.swagger.client.model.Trains>TrainList = trainRestApi.allTrainUsingGET();
+        List<com.rest.domains.Trains>TrainList = trainRestApi.allTrainUsingGET();
         model.addAttribute("TrainList",TrainList);
         logger.info("All train list page load." + " List train size: " + TrainList.size() + " Time: " + new Date().toString());
         return "listtrain";
@@ -76,11 +72,11 @@ public class TrainController {
 
         final DateTimeFormatter date_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        io.swagger.client.model.Trains save_train = new io.swagger.client.model.Trains();
+        com.rest.domains.Trains save_train = new com.rest.domains.Trains();
         save_train.setNameTrain(name_train);
-        save_train.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.valueOf(departure_station.toUpperCase()));
-        save_train.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.valueOf(arrival_station.toUpperCase()));
-        save_train.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.valueOf(type_train.toUpperCase()));
+        save_train.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.valueOf(departure_station.toUpperCase()));
+        save_train.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.valueOf(arrival_station.toUpperCase()));
+        save_train.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.valueOf(type_train.toUpperCase()));
         save_train.setDateTimeDeparture(datetime_dep);
         save_train.setDateTimeArrival(datetime_arr);
         save_train.setTotalTicket(Integer.valueOf(total_ticket));
@@ -107,11 +103,11 @@ public class TrainController {
         final DateTimeFormatter date_formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
-        io.swagger.client.model.Trains trains_update = trainRestApi.trainByIdUsingGET(Long.valueOf(id));
+        com.rest.domains.Trains trains_update = trainRestApi.trainByIdUsingGET(Long.valueOf(id));
         trains_update.setNameTrain(name_train_edit);
-        trains_update.setDepartureStation(io.swagger.client.model.Trains.DepartureStationEnum.valueOf(departure_station_edit));
-        trains_update.setArrivalStation(io.swagger.client.model.Trains.ArrivalStationEnum.valueOf(arrival_station_edit));
-        trains_update.setTypeTrain(io.swagger.client.model.Trains.TypeTrainEnum.valueOf(type_train_edit));
+        trains_update.setDepartureStation(com.rest.domains.Trains.DepartureStationEnum.valueOf(departure_station_edit));
+        trains_update.setArrivalStation(com.rest.domains.Trains.ArrivalStationEnum.valueOf(arrival_station_edit));
+        trains_update.setTypeTrain(com.rest.domains.Trains.TypeTrainEnum.valueOf(type_train_edit));
         trains_update.setDateTimeDeparture(datetime_dep_edit);
         trains_update.setDateTimeArrival(datetime_arr_edit);
         trains_update.setTotalTicket(Integer.valueOf(total_ticket_edit));
@@ -127,7 +123,7 @@ public class TrainController {
 
     @GetMapping("/DeleteTrain/{id}")
     public String deleteTrain(@PathVariable("id")String id) throws ServiceException {
-        io.swagger.client.model.Trains delete_train = trainRestApi.trainByIdUsingGET(Long.valueOf(id));
+        com.rest.domains.Trains delete_train = trainRestApi.trainByIdUsingGET(Long.valueOf(id));
 
         logger.info("Delete train. " + " Train: " + delete_train.toString() + " Time: " + new Date().toString());
 
@@ -144,10 +140,13 @@ public class TrainController {
                                   Model model) throws ParseException, TrainServiceException {
         Date date_departure_find=new SimpleDateFormat("yyyy-MM-dd").parse(date_departure);
         Date date_arrival_find=new SimpleDateFormat("yyyy-MM-dd").parse(arrival_date);
-
-        List<io.swagger.client.model.Trains>result_find = trainRestApi.findAllTrainsByDatesAndStationsUsingPOST
-                (arrival_date,arrival_station.toUpperCase(),date_departure,departure_station.toUpperCase());
-
+        List<com.rest.domains.Trains> result_find;
+        try {
+           result_find = trainRestApi.findAllTrainsByDatesAndStationsUsingPOST
+                    (arrival_date, arrival_station.toUpperCase(), date_departure, departure_station.toUpperCase());
+        }catch (HttpClientErrorException httpClientErrorException){
+            result_find = Collections.emptyList();
+        }
         logger.info("Find train by dates and stations. " + " Date departure: " + date_departure_find.toString() +
                 " Date arrival: " + date_arrival_find.toString() + " Departure station: " + Stations.valueOf(departure_station.toUpperCase())
         +" Arrival station: " + Stations.valueOf(arrival_station.toUpperCase()).getNameStation());
