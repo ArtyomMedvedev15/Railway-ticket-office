@@ -1,0 +1,12 @@
+.example-sidenav-content {
+  display: flex;
+  justify-content: left;
+  margin-left: 150px;
+  margin-top: 20px;
+}
+
+.sidenav {
+  padding: 20px;
+  width:200px;
+  position: fixed;
+}

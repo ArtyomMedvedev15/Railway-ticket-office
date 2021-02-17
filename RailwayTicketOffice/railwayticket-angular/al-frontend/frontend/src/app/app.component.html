@@ -1,20 +1,34 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark stiky-top" style="opacity: 0.8;">
-   <div class="container">
-     <a href="" class="navbar-brand"><img src="assets/logo.png" alt="logo" width="100" height="70"/></a>
-     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-     <div class="collapse navbar-collapse" id="navbarResponsive">
-       <ul class="navbar-nav ml-auto">
-         <li class="nav-item"><a routerLink="trainfind" routerLinkActive="active" class="nav-link">Home</a></li>
-         <li class="nav-item"><a routerLink="allTrain" class="nav-link">List train</a></li>
-         <li class="nav-item"><a routerLink="allClient" class="nav-link">List client</a></li>
-       </ul>
-     </div>
-   </div>
- </nav>
+<mat-drawer-container class="example-container" autosize style="height: 100%;">
+  <mat-drawer #drawer class="sidenav" mode="side" style="background-color:rgba(0,0,0,0.8); height: 100%">
+    <ul class="nav flex-column" style="color:white">
+      <li class="nav-item" >
+        <a routerLink="trainfind" class="navbar-brand"><img src="assets/logo.png" alt="logo" width="100" height="70"/></a>
+      </li>
+      <li class="nav-item">
+        <a style="color:white;" class="nav-link" routerLink="trainfind"
+        ><mat-icon style="position: relative;top: 6px;right: 3px">search</mat-icon>
+          Find Train</a>
+      </li>
+      <li class="nav-item">
+        <a style="color:white;" class="nav-link" routerLink="allTrain"
+        ><mat-icon style="position: relative;top: 6px;right: 3px">list</mat-icon>List of train</a>
+      </li>
+      <li class="nav-item">
+        <a style="color:white;" class="nav-link" routerLink="allClient">
+          <mat-icon style="position: relative;top: 6px;right: 3px">list</mat-icon>List of clients</a>
+      </li>
+    </ul>
+  </mat-drawer>
 
- <div class="container">
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div class="container" style="height: 100%">
     <router-outlet></router-outlet>
- </div>
+  </div>
+</mat-drawer-container>
+
+
 

@@ -21,6 +21,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 @NgModule({
   declarations: [
@@ -36,19 +37,20 @@ import {MatSortModule} from "@angular/material/sort";
     TrainFindComponent,
     TrainResultfindComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSortModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSelectModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSortModule,
+        MatSidenavModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
