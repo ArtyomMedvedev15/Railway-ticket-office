@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="find_train_content">
+      <form (ngSubmit)="findtrainByDate()">
+        <div class="title_find_form">
+          <p>Find your train!</p>
+        </div>
+        <div class="img-overlay"></div>
+        <div class="find_train_content_inner">
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
+            <input id="datepicker_dep_find" type="input" class="form__field" [(ngModel)]="departureDate" placeholder="Date and time" name="departure_date" required="required"/>
+            <label for="datepicker_dep_find" class="form__label">Date departure</label>
+          </div>
+          <div class="line-break"></div>
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
+            <input id="datepicker_arr_find" type="input" class="form__field" [(ngModel)]="arrivalDate" placeholder="Date and time" name="arrival_date" required="required"/>
+            <label for="datepicker_arr_find" class="form__label">Date arrival</label>
+          </div>
+          <div class="line-break"></div>
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
+            <select class="form__field form-control" [(ngModel)]="departureStationFind" required="required" name="departure_station_find">
+              <option selected="selected"> Choose destination from</option>
+              <option value="Brest">Brest</option>
+              <option value="Minsk">Minsk</option>
+              <option value="Mogilev">Mogilev</option>
+              <option value="Grodno">Grodno</option>
+              <option value="Vitebsk">Vitebsk</option>
+              <option value="Gomel">Gomel</option>
+            </select>
+          </div>
+          <div class="line-break"></div>
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
+            <select class="form__field form-control" [(ngModel)]="arrivalStationFind" required="required" name="arrival_station_find">
+              <option selected="selected"> Choose destination from</option>
+              <option value="Brest">Brest</option>
+              <option value="Minsk">Minsk</option>
+              <option value="Mogilev">Mogilev</option>
+              <option value="Grodno">Grodno</option>
+              <option value="Vitebsk">Vitebsk</option>
+              <option value="Gomel">Gomel</option>
+            </select>
+          </div>
+          <div class="line-break"></div>
+          <div class="default_btn transition">
+            <button class="btn btn-dark" type="submit">Find</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="title_list_train">
+  <p>Train number : <span id="train_numb"></span></p>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="card"  id="card_one" style="width: 20rem; margin: 0 auto;margin-bottom: 20px;">
+      <img class="card-img-top" src="assets/logo.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><span>{{trainById.departureStation}}</span> &rarr; <span>{{trainById.arrivalStation}}</span></h5>
+        <p class="card-text">
+        <p class="stations"><span>{{trainById.departureStation}}</span> &rarr; <span>{{trainById.arrivalStation}}</span></p>
+        <div class="calendars_dep"> <i class="fa fa-calendar" aria-hidden="true"></i>
+          <p class="date">:{{trainById.date_time_arrival}} </p>
+        </div>
+        <div class="calendars_arr"> <i class="fa fa-calendar" aria-hidden="true"></i>
+          <p class="date">:{{trainById.date_time_arrival}}</p>
+        </div>
+
+        <div class="type_train">
+          <p>Type:<strong>{{trainById.typeTrain}}</strong></p>
+        </div>
+
+        <div class="cost">
+          <p>Price: <strong>&#36;<span>{{trainById.price_ticket}}</span></strong></p>
+        </div>
+
+        <div class="row">
+          <div class="default_btn transition">
+            <button (click)="buyTicket()" class="btn btn-dark">Buy</button>
+          </div>
+          <div class="default_btn transition">
+            <button (click)="editTrain(trainById.id_train)" class="btn btn-dark">Edit</button>
+          </div>
+          <div class="default_btn transition">
+            <button (click)="deleteTrain(trainById.id_train)" class="btn btn-danger">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

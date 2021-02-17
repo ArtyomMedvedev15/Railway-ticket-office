@@ -1,0 +1,36 @@
+<h2 class="text-left">Client railway list</h2>
+<form (ngSubmit)="findclientbyname(name_client)">
+  <input type="text" class="form__field" placeholder="Name" [(ngModel)]="name_client" minlength="5" maxlength="30" name="name_find" id='name_find' required="required" />
+  <button type="submit">find</button>
+</form>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th>Id client</th>
+      <th>Number train</th>
+      <th>Name</th>
+      <th>Soname</th>
+      <th>Date of purchase</th>
+      <th>Phone</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody class="table_body">
+    <tr *ngFor="let clientrw of clientsrailway_list">
+      <td>{{clientrw.id_client}}</td>
+      <td>{{clientrw.id_train}}</td>
+      <td>{{clientrw.name_client}}</td>
+      <td>{{clientrw.soname_client}}</td>
+      <td>{{clientrw.date_purchase}}</td>
+      <td>{{clientrw.phone_client}}</td>
+      <td><button (click)="editClient(clientrw.id_client)" class="btn btn-dark">Edit</button></td>
+      <td><button (click)="deleteClient(clientrw.id_client)" class="btn btn-danger">Remove</button></td>
+      <td><button (click)="clientById(clientrw.id_client)" class="btn btn-dark">Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
