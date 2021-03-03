@@ -6,7 +6,7 @@ import { ClientrailwayListComponent } from './clientrailway-list/clientrailway-l
 import {AppRoutingModule} from "./app-routing.module";
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { TrainListComponent } from './train-list/train-list.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UpdateClientComponent } from './update-client/update-client.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { TrainCreateComponent } from './train-create/train-create.component';
@@ -22,6 +22,11 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from "@angular/material/input";
+import {MatCardModule} from "@angular/material/card";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -37,20 +42,26 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     TrainFindComponent,
     TrainResultfindComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatSelectModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSortModule,
-        MatSidenavModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSelectModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSortModule,
+    MatSidenavModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatDividerModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

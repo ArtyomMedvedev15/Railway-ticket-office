@@ -1,83 +1,103 @@
+<h2 mat-dialog-title>Add new Train</h2>
+<mat-dialog-content class="mat-typography">
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="add_train_content">
-      <form (ngSubmit)="saveTrain()">
-        <div class="title_buy_form">
-          Add new train
+      <form (ngSubmit)="saveTrain()" ngNativeValidate>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Name Train</mat-label>
+            <input [(ngModel)]="train_save.name_train" name="name_train" minlength="5" maxlength="40" matInput placeholder="Name Train" required="required">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
         </div>
-        <div class="img-overlay"></div>
-        <div class="add_train_content_inner">
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-            <input type="input" class="form__field" placeholder="Name" [(ngModel)]="train_save.name_train" name="name_train" id='name_train' minlength="3" maxlength="35" required="required" />
-            <label for="name_train" class="form__label">Name</label>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-            <select class="form__field form-control" [(ngModel)]="train_save.departureStation" name="departure_station" required="required">
-              <option selected="selected">Departure station</option>
-              <option value="BREST">Brest</option>
-              <option value="MINSK">Minsk</option>
-              <option value="MOGILEV">Mogilev</option>
-              <option value="GRODNO">Grodno</option>
-              <option value="VITEBSK">Vitebsk</option>
-              <option value="GOMEL">Gomel</option>
-            </select>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-            <select class="form__field form-control" [(ngModel)]="train_save.arrivalStation" name="arrival_station" required="required">
-              <option selected="selected">Arrival station</option>
-              <option value="BREST">Brest</option>
-              <option value="MINSK">Minsk</option>
-              <option value="MOGILEV">Mogilev</option>
-              <option value="GRODNO">Grodno</option>
-              <option value="VITEBSK">Vitebsk</option>
-              <option value="GOMEL">Gomel</option>
-            </select>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7 selectdiv">
-            <select class="form__field form-control" [(ngModel)]="train_save.typeTrain" name="type_train" required="required">
-              <option selected="selected"> Type train</option>
-              <option value="BUSINESS">Business</option>
-              <option value="ECONOM">Econom</option>
-              <option value="COUPE">Coupe</option>
-              <option value="RESERVED_SEAT">Reserved seat</option>
-            </select>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-            <input id="datepicker_departure_add" type="input" [(ngModel)]="train_save.date_time_departure" class="form__field" placeholder="Date and time departure" name="datetime_dep" required="required" />
-            <label for="datepicker_departure_add" class="form__label">Date and time departure</label>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-            <input id="datepicker_arriva_add" type="input" class="form__field"  [(ngModel)]="train_save.date_time_arrival" placeholder="Date and time arrival" name="datetime_arr"  required="required" />
-            <label for="datepicker_arriva_add" class="form__label">Date and time arrival</label>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-            <input id="total_ticket" type="number" class="form__field" [(ngModel)]="train_save.total_ticket" placeholder="Total ticket" name="total_ticket" required="required" min="1" max="500" />
-            <label for="total_ticket" class="form__label">Total ticket</label>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-            <input id="available_ticket" type="number" class="form__field" [(ngModel)]="train_save.available_ticket" placeholder="Available ticket" name="available_ticket" required="required" min="1" max="500" />
-            <label for="available_ticket" class="form__label">Available ticket</label>
-          </div>
-          <div class="line-break"></div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7  form__group field">
-            <input type="number" class="form__field" placeholder="Price" [(ngModel)]="train_save.price_ticket" name="price" id="price" step="0.01" required="required" min="1" max="500" />
-            <label for="price" class="form__label">Price</label>
-          </div>
-          <div class="line-break"></div>
-
-          <div class="default_btn transition">
-            <button class="transition" type="submit">Add</button>
-          </div>
-
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Departure station</mat-label>
+            <mat-select [(ngModel)]="train_save.departureStation" name="departure_station" required="required">
+              <mat-option value="BREST">Brest</mat-option>
+              <mat-option value="MINSK">Minsk</mat-option>
+              <mat-option value="MOGILEV">Mogilev</mat-option>
+              <mat-option value="GRODNO">Grodno</mat-option>
+              <mat-option value="VITEBSK">Vitebsk</mat-option>
+              <mat-option value="GOMEL">Gomel</mat-option>
+            </mat-select>
+            <mat-hint align="end">Choose departure station</mat-hint>
+          </mat-form-field>
         </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Arrival station:</mat-label>
+            <mat-select [(ngModel)]="train_save.arrivalStation" name="arrival_station" required="required">
+              <mat-option value="BREST">Brest</mat-option>
+              <mat-option value="MINSK">Minsk</mat-option>
+              <mat-option value="MOGILEV">Mogilev</mat-option>
+              <mat-option value="GRODNO">Grodno</mat-option>
+              <mat-option value="VITEBSK">Vitebsk</mat-option>
+              <mat-option value="GOMEL">Gomel</mat-option>
+            </mat-select>
+            <mat-hint align="end">Choose arrival station</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Type of train</mat-label>
+            <mat-select [(ngModel)]="train_save.typeTrain" name="type_train" required="required">
+              <mat-option value="BUSINESS">Business</mat-option>
+              <mat-option value="ECONOM">Econom</mat-option>
+              <mat-option value="COUPE">Coupe</mat-option>
+              <mat-option value="RESERVED_SEAT">Reserved seat</mat-option>
+            </mat-select>
+            <mat-hint align="end">Choose type of train</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Date and time departure</mat-label>
+            <input [(ngModel)]="train_save.date_time_departure" name="date_time_departure" matInput [matDatepicker]="dp" [formControl]="date" required="required">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Date and time arrival</mat-label>
+            <input [(ngModel)]="train_save.date_time_arrival" name="date_time_arrival" matInput [matDatepicker]="dp2" [formControl]="date" required="required">
+            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+            <mat-datepicker #dp2></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Total ticket</mat-label>
+            <input [(ngModel)]="train_save.total_ticket" name="total_ticket" matInput type="number" min="1" max="800" placeholder="Total ticket" required="required"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+        <mat-form-field appearance="fill">
+            <mat-label>Available ticket</mat-label>
+            <input [(ngModel)]="train_save.available_ticket" name="available_ticket" type="number" min="1" max="800" matInput placeholder="Available ticket" required="required"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Price ticket</mat-label>
+            <input [(ngModel)]="train_save.price_ticket" name="price_ticket" type="number" min="1" max="1000" matInput placeholder="Price ticket" required="required"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </div>
+        <button type="submit" mat-flat-button color="primary">Add</button>
       </form>
     </div>
   </div>
 </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

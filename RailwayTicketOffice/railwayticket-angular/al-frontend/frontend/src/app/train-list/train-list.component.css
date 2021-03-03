@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .mat-form-field {
@@ -18,4 +19,11 @@ td, th {
 
 .mat-icon{
   margin-top: -23px;
+}
+
+.add_btn{
+  float: right;
+  margin-bottom: 15px;
+  width: 40px;
+  height: 40px;
 }

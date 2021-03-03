@@ -308,7 +308,6 @@ paths:
           allowEmptyValue: false
           schema:
             type: string
-            default: 2021-02-02
         - name: arrival_station_find
           in: query
           description: The station where the train arrives
@@ -316,7 +315,6 @@ paths:
           allowEmptyValue: false
           schema:
             type: string
-            default: Minsk
         - name: departure_date
           in: query
           description: Date when train departure
@@ -324,7 +322,6 @@ paths:
           allowEmptyValue: false
           schema:
             type: string
-            default: 2021-01-28
         - name: departure_station_find
           in: query
           description: The station where the train starts from
@@ -332,7 +329,6 @@ paths:
           allowEmptyValue: false
           schema:
             type: string
-            default: Brest
       responses:
         200:
           description: Successfully find all train by dates and stations.

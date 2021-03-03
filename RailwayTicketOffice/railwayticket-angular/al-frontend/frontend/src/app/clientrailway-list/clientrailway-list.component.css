@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 5%;
+}
+
+.btns-table{
+  width:35px;
+  height: 35px;
+}
+
+.mat-icon{
+  margin-top: -23px;
+}
+

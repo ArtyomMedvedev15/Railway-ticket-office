@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Clientrailway} from "../clientrailway";
 import {ClientsService} from "../clients.service";
 import {Router} from "@angular/router";
+import {MatTableDataSource} from "@angular/material/table";
+import {Train} from "../train";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {MatDialog} from "@angular/material/dialog";
+import {TrainCreateComponent} from "../train-create/train-create.component";
+import {UpdateClientComponent} from "../update-client/update-client.component";
 
 @Component({
   selector: 'app-clientrailway-list',
@@ -9,31 +16,66 @@ import {Router} from "@angular/router";
   styleUrls: ['./clientrailway-list.component.css']
 })
 export class ClientrailwayListComponent implements OnInit {
-  clientsrailway_list: Clientrailway[]
+  displayedColumns: string[] = ['Id client', 'Number train', 'Name', 'Soname', 'Date of purchase',
+    'Phone', 'Edit', 'Delete', 'Details'];
+  dataSource: MatTableDataSource<Clientrailway>;
+  clientsrailway_list: Clientrailway[];
   name_client:string;
 
-  constructor(private   clientService: ClientsService,private router:Router) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit(): void {
-      this.getAllClients();
+  constructor(private   clientService: ClientsService,private router:Router,private dialog:MatDialog) {
+    this.dataSource = new MatTableDataSource(this.clientsrailway_list);
   }
 
+  ngOnInit(): void {
+    this.getAllClients();
+
+    this.dialog.afterAllClosed.subscribe(data => {
+      this.getAllClients();
+    });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   private getAllClients(){
-    this.clientService.getAllClients().subscribe(data=>{
-      this.clientsrailway_list=data;
-    })
+    this.clientService.getAllClients().subscribe((data: Clientrailway[]) => {
+      this.dataSource.data = data;
+    });
   }
 
   editClient(id_client:number){
-    this.router.navigate(['updateClient',id_client]);
+    const dialogRef = this.dialog.open(UpdateClientComponent, {
+      data: {
+        message: 'HelloWorld',
+        buttonText: {
+          cancel: 'Done'
+        },
+        id_client: id_client.toString()
+      },
+    });
+    this.dialog.afterAllClosed.subscribe(data => {
+      this.getAllClients();
+    });
   }
 
   deleteClient(id_client: number) {
-      this.clientService.deleteClient(id_client).subscribe(data=>{
+      this.clientService.deleteClient(id_client).subscribe(data => {
         this.getAllClients();
-        console.log(data);
-      })
+       });
   }
 
   clientById(id_client:number){
@@ -42,9 +84,9 @@ export class ClientrailwayListComponent implements OnInit {
 
   findclientbyname(name:string){
     if(name!=="") {
-      this.clientService.findClientByName(name).subscribe(data => {
-        this.clientsrailway_list = data;
-      })
+      this.clientService.findClientByName(name).subscribe( (data: Clientrailway[]) => {
+        this.dataSource.data = data;
+      });
     }else{
       this.getAllClients();
     }

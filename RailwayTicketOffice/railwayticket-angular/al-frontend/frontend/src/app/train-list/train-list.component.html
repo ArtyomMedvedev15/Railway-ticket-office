@@ -1,6 +1,11 @@
+<h2 class="text-left" style="font-family: 'Noto Sans JP', sans-serif;">Train list</h2>
+<div class="example-button-container">
+  <button (click)="AddNewTrain()" mat-fab color="primary" type="button" class="add_btn"  aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 <div class="mat-elevation-z8 table-responsive" style="margin-top: 20px">
   <table mat-table [dataSource]="dataSource" matSort>
-
     <!-- Number train Column -->
     <ng-container matColumnDef="Number train">
       <th mat-header-cell *matHeaderCellDef> Number train </th>
@@ -94,10 +99,9 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter</td>
+      <td class="mat-cell" colspan="4">No data for show</td>
     </tr>
   </table>
 

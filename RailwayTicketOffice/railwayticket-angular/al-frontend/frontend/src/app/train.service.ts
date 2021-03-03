@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Clientrailway} from "./clientrailway";
 import {Train} from "./train";
@@ -9,10 +9,8 @@ import {Train} from "./train";
 })
 export class TrainService {
 
-  private base_url = "http://localhost:8181/api/train/"
-  param_find:HttpParams = new HttpParams();
-
-
+  private base_url = "http://localhost:8181/api/train/";
+  formDt: FormData = new FormData();
   constructor(private httpClient: HttpClient) { }
 
   getAllTrain():Observable<Train[]>{
@@ -35,11 +33,12 @@ export class TrainService {
     return this.httpClient.get(this.base_url+"deleteTrain/"+id);
   }
 
-  findtrainbydates(arrivalDate:string,arrivalStationFind:string,departureDate:string,departureStationFind:string):Observable<Train[]>{
-    this.param_find.set("arrivalDate",arrivalDate);
-    this.param_find.set("arrivalStationFind",arrivalStationFind);
-    this.param_find.set("departureDate",departureDate);
-    this.param_find.set("departureStationFind",departureStationFind);
-    return this.httpClient.post<Train[]>(this.base_url+"findtrainbydates",this.param_find);
+  findtrainbydates(arrivalDate:string, arrivalStationFind:string,departureDate:string,departureStationFind:string):Observable<Train[]>{
+    this.formDt.append('arrival_date', arrivalDate);
+    this.formDt.append('arrival_station_find', arrivalStationFind.toUpperCase());
+    this.formDt.append('departure_date', departureDate);
+    this.formDt.append('departure_station_find', departureStationFind.toUpperCase());
+
+    return this.httpClient.post<Train[]>(this.base_url+"findtrainbydates", this.formDt);
   }
 }

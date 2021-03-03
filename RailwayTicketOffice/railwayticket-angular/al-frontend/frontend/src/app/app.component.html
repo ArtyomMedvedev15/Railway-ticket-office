@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize style="height: 100%;">
+<mat-drawer-container autosize style="height: 100%;">
   <mat-drawer #drawer class="sidenav" mode="side" style="background-color:rgba(0,0,0,0.8); height: 100%">
     <ul class="nav flex-column" style="color:white">
       <li class="nav-item" >
@@ -20,14 +20,16 @@
     </ul>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </div>
-  <div class="container" style="height: 100%">
-    <router-outlet></router-outlet>
-  </div>
+  <mat-drawer-content style="margin-left: 0">
+    <div class="container" style="height: 100%;position: relative;z-index: 1;margin-top: 15px">
+      <div class="example-sidenav-content" style="float: right;">
+        <button type="button" mat-button (click)="drawer.toggle()" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
 </mat-drawer-container>
 
 

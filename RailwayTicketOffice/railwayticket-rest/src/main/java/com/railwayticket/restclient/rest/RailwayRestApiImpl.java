@@ -158,6 +158,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
     }
 
     @Override
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<Trains>> findAllTrainsByDatesAndStationsUsingPOST(String arrivalDate, String arrivalStationFind, String departureDate, String departureStationFind) {
         Date date_departure_find= null;
 

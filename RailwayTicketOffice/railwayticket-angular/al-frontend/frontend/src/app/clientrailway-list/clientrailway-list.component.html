@@ -1,36 +1,106 @@
-<h2 class="text-left">Client railway list</h2>
+<h2 class="text-left" style="font-family: 'Noto Sans JP', sans-serif;">Client railway list</h2>
 <form (ngSubmit)="findclientbyname(name_client)">
-  <input type="text" class="form__field" placeholder="Name" [(ngModel)]="name_client" minlength="5" maxlength="30" name="name_find" id='name_find' required="required" />
-  <button type="submit">find</button>
+  <div class="row">
+    <div class="form-group col">
+      <mat-form-field>
+        <mat-label>Name Client</mat-label>
+        <input [(ngModel)]="name_client" name="name_train" minlength="3" maxlength="40" matInput placeholder="Name Client">
+        <mat-hint>Name client for find</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="form-group col" style="margin-top: 20px">
+      <div class="example-button-container btns-table">
+        <button type="submit" class="btns-table" mat-fab color="primary">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </form>
 
-<div class="table-responsive">
-  <table class="table">
-    <thead class="thead-dark">
-    <tr>
-      <th>Id client</th>
-      <th>Number train</th>
-      <th>Name</th>
-      <th>Soname</th>
-      <th>Date of purchase</th>
-      <th>Phone</th>
-      <th>Edit</th>
-      <th>Delete</th>
-      <th>Details</th>
+<div class="mat-elevation-z8 table-responsive" style="margin-top: 20px">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Id client Column -->
+    <ng-container matColumnDef="Id client">
+      <th mat-header-cell *matHeaderCellDef> Id client </th>
+      <td mat-cell *matCellDef="let row"> {{row.id_client}}</td>
+    </ng-container>
+
+    <!-- Number train Column -->
+    <ng-container matColumnDef="Number train">
+      <th mat-header-cell *matHeaderCellDef> Number train </th>
+      <td mat-cell *matCellDef="let row"> {{row.id_train}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name_client}} </td>
+    </ng-container>
+
+    <!-- Soname Column -->
+    <ng-container matColumnDef="Soname">
+      <th mat-header-cell *matHeaderCellDef> Soname </th>
+      <td mat-cell *matCellDef="let row"> {{row.soname_client}} </td>
+    </ng-container>
+
+    <!-- Date of purchase Column -->
+    <ng-container matColumnDef="Date of purchase">
+      <th mat-header-cell *matHeaderCellDef> Date of purchase </th>
+      <td mat-cell *matCellDef="let row"> {{row.date_purchase}} </td>
+    </ng-container>
+
+    <!-- Phone Column -->
+    <ng-container matColumnDef="Phone">
+      <th mat-header-cell *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef="let row" > {{row.phone_client}} </td>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="Edit">
+      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <td mat-cell *matCellDef="let row" >
+        <div class="example-button-container btns-table">
+          <button class="btns-table" mat-fab color="primary" (click)="deleteClient(row.id_client)" aria-label="Example icon button with a delete icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Delete Column -->
+    <ng-container matColumnDef="Delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let row" >
+        <div class="example-button-container btns-table">
+          <button class="btns-table" mat-fab color="primary" (click)="editClient(row.id_client)" aria-label="Example icon button with a delete icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Details Column -->
+    <ng-container matColumnDef="Details">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let row" >
+        <div class="example-button-container" >
+          <button class="btns-table" mat-fab color="primary" (click)="clientById(row.id_client)" aria-label="Example icon button with a delete icon">
+            <mat-icon>description</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+     <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data for show</td>
     </tr>
-    </thead>
-    <tbody class="table_body">
-    <tr *ngFor="let clientrw of clientsrailway_list">
-      <td>{{clientrw.id_client}}</td>
-      <td>{{clientrw.id_train}}</td>
-      <td>{{clientrw.name_client}}</td>
-      <td>{{clientrw.soname_client}}</td>
-      <td>{{clientrw.date_purchase}}</td>
-      <td>{{clientrw.phone_client}}</td>
-      <td><button (click)="editClient(clientrw.id_client)" class="btn btn-dark">Edit</button></td>
-      <td><button (click)="deleteClient(clientrw.id_client)" class="btn btn-danger">Remove</button></td>
-      <td><button (click)="clientById(clientrw.id_client)" class="btn btn-dark">Details</button></td>
-    </tr>
-    </tbody>
   </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
+
+
