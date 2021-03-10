@@ -3,7 +3,7 @@ import {TrainService} from "../train.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Train} from "../train";
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import * as _moment from 'moment';
@@ -42,20 +42,39 @@ export const MY_FORMATS = {
 export class TrainCreateComponent implements OnInit {
 
   train_save:Train = new Train();
-  date = new FormControl(moment());
+  dateDeparture = new FormControl(moment());
+  dateArrival = new FormControl(moment());
+
+  addForm: FormGroup;
 
   constructor(private trainService: TrainService, private route: ActivatedRoute,private router:Router,
-              private dialog: MatDialog
-              ) { }
+              private dialog: MatDialog, private formBuilder: FormBuilder
+              ) {
+    this.addForm = this.formBuilder.group({
+          nameTrain: ['', [Validators.required, Validators.maxLength(70), Validators.minLength(4)]],
+          departureStation: ['', Validators.required],
+          arrivalStation: ['', [Validators.required]],
+          typeTrain: ['', Validators.required],
+          dateDeparture: ['', Validators.required],
+          dateArrival: ['', Validators.required],
+          totalTicket: ['', [Validators.required, Validators.max(800), Validators.min(1)]],
+          availableTicket: ['', [Validators.required, Validators.max(800), Validators.min(1)]],
+          priceTicket: ['', [Validators.required, Validators.max(1000), Validators.min(1)]]
+        });
+  }
 
   ngOnInit(): void {
   }
 
-  saveTrain(){
-    this.trainService.saveTrain(this.train_save).subscribe(data =>{
-      this.dialog.closeAll();
-      this.router.navigate(['allTrain']);
-     },error => console.log(error));
+  saveTrain() {
+    if (this.train_save.departureStation !== this.train_save.arrivalStation) {
+      this.trainService.saveTrain(this.train_save).subscribe(data => {
+        this.dialog.closeAll();
+        this.router.navigate(['allTrain']);
+      }, error => console.log(error));
+    }else{
+      alert('Error in staions');
+    }
   }
 
 }
