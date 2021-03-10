@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class TrainRestServiceImpl implements TrainServiceApi {
@@ -100,8 +101,8 @@ public class TrainRestServiceImpl implements TrainServiceApi {
         MultiValueMap<String, String> map= new LinkedMultiValueMap<String, String>();
         map.add("departure_date", date_departure.toString());
         map.add("arrival_date", date_arrival.toString());
-        map.add("departure_station_find", departure.getNameStation());
-        map.add("arrival_station_find", arrival.getNameStation());
+        map.add("departure_station_find", departure.getNameStation().toUpperCase(Locale.ROOT));
+        map.add("arrival_station_find", arrival.getNameStation().toUpperCase(Locale.ROOT));
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 

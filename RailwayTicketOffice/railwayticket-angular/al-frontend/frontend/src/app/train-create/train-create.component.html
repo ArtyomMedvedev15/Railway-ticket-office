@@ -1,0 +1,120 @@
+<h2 mat-dialog-title>Add new Train</h2>
+<mat-dialog-content class="mat-typography">
+<div class="row" style="max-width: 500px; width: 100%">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="add_train_content">
+      <form [formGroup]="addForm" (ngSubmit)="saveTrain()" ngNativeValidate>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill" >
+            <mat-label>Name Train</mat-label>
+            <input formControlName="nameTrain" [(ngModel)]="train_save.name_train" name="name_train" minlength="5" maxlength="40" matInput placeholder="Name Train" required="required">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Name train</mat-hint>
+            <mat-error *ngIf="addForm.controls.nameTrain.errors?.required">Name is required</mat-error>
+            <mat-error *ngIf="addForm.controls.nameTrain.errors?.maxLength">You have more than 60 characters</mat-error>
+            <mat-error *ngIf="addForm.controls.nameTrain.errors?.minLength">You have less than 3 characters</mat-error>
+           </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Departure station</mat-label>
+            <mat-select formControlName="departureStation" [(ngModel)]="train_save.departureStation" name="departure_station" required="required">
+              <mat-option value="BREST">Brest</mat-option>
+              <mat-option value="MINSK">Minsk</mat-option>
+              <mat-option value="MOGILEV">Mogilev</mat-option>
+              <mat-option value="GRODNO">Grodno</mat-option>
+              <mat-option value="VITEBSK">Vitebsk</mat-option>
+              <mat-option value="GOMEL">Gomel</mat-option>
+            </mat-select>
+            <mat-hint align="end">Choose departure station</mat-hint>
+            <mat-error *ngIf="addForm.controls.departureStation.errors?.required">Departure station is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Arrival station:</mat-label>
+            <mat-select formControlName="arrivalStation" [(ngModel)]="train_save.arrivalStation" name="arrival_station" required="required">
+              <mat-option value="BREST">Brest</mat-option>
+              <mat-option value="MINSK">Minsk</mat-option>
+              <mat-option value="MOGILEV">Mogilev</mat-option>
+              <mat-option value="GRODNO">Grodno</mat-option>
+              <mat-option value="VITEBSK">Vitebsk</mat-option>
+              <mat-option value="GOMEL">Gomel</mat-option>
+            </mat-select>
+            <mat-hint align="end">Choose arrival station</mat-hint>
+            <mat-error *ngIf="addForm.controls.arrivalStation.errors?.required">Arrival station is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Type of train</mat-label>
+            <mat-select formControlName="typeTrain" [(ngModel)]="train_save.typeTrain" name="type_train" required="required">
+              <mat-option value="BUSINESS">Business</mat-option>
+              <mat-option value="ECONOM">Econom</mat-option>
+              <mat-option value="COUPE">Coupe</mat-option>
+              <mat-option value="RESERVED_SEAT">Reserved seat</mat-option>
+            </mat-select>
+            <mat-hint align="end">Choose type of train</mat-hint>
+            <mat-error *ngIf="addForm.controls.typeTrain.errors?.required">Type train is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Date and time departure</mat-label>
+            <input formControlName="dateDeparture" [(ngModel)]="train_save.date_time_departure" name="date_time_departure" matInput [matDatepicker]="dp" [formControl]="dateDeparture" required="required">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+            <mat-error *ngIf="addForm.controls.dateDeparture.errors?.required">Date departure is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Date and time arrival</mat-label>
+            <input formControlName="dateArrival" [(ngModel)]="train_save.date_time_arrival" name="date_time_arrival" matInput [matDatepicker]="dp2" [formControl]="dateArrival" required="required">
+            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+            <mat-datepicker #dp2></mat-datepicker>
+            <mat-error *ngIf="addForm.controls.dateArrival.errors?.required">Date arrival is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Total ticket</mat-label>
+            <input formControlName="totalTicket" [(ngModel)]="train_save.total_ticket" name="total_ticket" matInput type="number" min="1" max="800" placeholder="Total ticket" required="required"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Total ticket</mat-hint>
+            <mat-error *ngIf="addForm.controls.totalTicket.errors?.required">Total ticket is required</mat-error>
+            <mat-error *ngIf="addForm.controls.totalTicket.errors?.max">You have more than 800 number</mat-error>
+            <mat-error *ngIf="addForm.controls.totalTicket.errors?.min">You have less than 1 number</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+        <mat-form-field appearance="fill">
+            <mat-label>Available ticket</mat-label>
+            <input formControlName="availableTicket" [(ngModel)]="train_save.available_ticket" name="available_ticket" type="number" min="1" max="800" matInput placeholder="Available ticket" required="required"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Available ticket</mat-hint>
+            <mat-error *ngIf="addForm.controls.availableTicket.errors?.required">Available ticket is required</mat-error>
+            <mat-error *ngIf="addForm.controls.availableTicket.errors?.max">You have more than 800 number</mat-error>
+            <mat-error *ngIf="addForm.controls.availableTicket.errors?.min">You have less than 1 number</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-7">
+          <mat-form-field appearance="fill">
+            <mat-label>Price ticket</mat-label>
+            <input formControlName="priceTicket" [(ngModel)]="train_save.price_ticket" name="price_ticket" type="number" min="1" max="1000" matInput placeholder="Price ticket" required="required"/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Price ticket</mat-hint>
+            <mat-error *ngIf="addForm.controls.priceTicket.errors?.required">Price ticket is required</mat-error>
+            <mat-error *ngIf="addForm.controls.priceTicket.errors?.max">You have more than 1000 number</mat-error>
+            <mat-error *ngIf="addForm.controls.priceTicket.errors?.min">You have less than 1 number</mat-error>
+          </mat-form-field>
+        </div>
+        <button type="submit" mat-flat-button color="primary">Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

@@ -16,6 +16,7 @@
           <module>service-impl</module>
           <module>domain</module>
           <module>service-rest</module>
+          <module>railwayticket-angular</module>
       </modules>
 
     <parent>

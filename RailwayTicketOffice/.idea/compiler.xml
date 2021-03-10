@@ -6,14 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="railwayticket-rest" />
-        <module name="railwayticket-web-ui" />
-        <module name="dao" />
-        <module name="domain" />
-        <module name="dao-api" />
-        <module name="service-impl" />
         <module name="service-rest" />
+        <module name="dao" />
+        <module name="railwayticket-web-ui" />
+        <module name="dao-api" />
         <module name="service-api" />
+        <module name="domain" />
+        <module name="service-impl" />
+        <module name="railwayticket-angular" />
+        <module name="railwayticket-rest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -26,6 +27,7 @@
       <module name="dao-api" options="-parameters" />
       <module name="domain" options="-parameters" />
       <module name="domains" options="-parameters" />
+      <module name="railwayticket-angular" options="-parameters" />
       <module name="railwayticket-rest" options="-parameters" />
       <module name="railwayticket-web-ui" options="-parameters" />
       <module name="service-api" options="-parameters" />

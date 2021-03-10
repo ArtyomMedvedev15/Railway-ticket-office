@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+.card{
+  max-width: 300px;
+  max-height: 570px;
+  top: 10px;
+  margin: 0 auto;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.btns-table{
+  width:45px;
+  height: 45px;
+  margin: 10px;
+}
+
+.mat-icon{
+  margin-top: -17px;
+}
+.calendars_arr,.calendars_dep,.type_train,.cost{
+  color: #3f51b5;
+}
+.card-titles{
+  color: #3f51b5;
+  padding-top: 6px
+}
+.card-subtitles{
+  margin-top: 10px !important;
+  color: #3f51b5;
+  font-weight: 800;
+  font-size: 17px;
+}
+.card-icon{
+  position: relative;
+  top: 5px;
+}
+
+.action_details{
+  display: block;
+  margin: 0 auto;
+  width: 60px;
+  position: relative;
+  bottom: 15px;
+}

@@ -1,0 +1,56 @@
+<h2 class="text-left" style="font-family: 'Noto Sans JP', sans-serif;">Train by id - {{trainById.id_train}}</h2>
+
+<mat-card class="card">
+  <img style="box-shadow: 0 0 10px rgba(0,0,0,0.5);" mat-card-image src="assets/logo.png" alt="logo">
+  <mat-card-header>
+    <div mat-card-avatar style="padding-top: 2px" class="example-header-image">
+      <img style="border-radius: 30% !important;" mat-card-avatar src="assets/route.png" alt="logo">
+    </div>
+    <mat-card-title class="card-titles">{{trainById.departureStation}}<mat-icon style="position:relative;top: 5px">arrow_right_alt</mat-icon>
+      {{trainById.arrivalStation}}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-subtitle class="card-subtitles">
+    Name: <span style="font-family:Roboto;font-weight: 800!important;">{{trainById.name_train}}</span> <br/>
+    <mat-divider></mat-divider>
+    Number: <span style="font-family:Roboto;font-weight: 800!important;">{{trainById.id_train}}</span>
+  </mat-card-subtitle>
+  <mat-card-content class="card-body">
+    <div class="calendars_dep"> <i class="fa fa-calendar" aria-hidden="true"></i>
+      <p><mat-icon class="card-icon">calendar_today</mat-icon>Date arrival:
+        <span style="font-family:Roboto;font-weight: 800!important;">{{trainById.date_time_arrival}}</span>
+      </p>
+    </div>
+    <div class="calendars_arr"> <i class="fa fa-calendar" aria-hidden="true"></i>
+      <p class="date"><mat-icon class="card-icon">calendar_today</mat-icon>Date departure:
+        <span style="font-family:Roboto;font-weight: 800!important;">{{trainById.date_time_departure}}</span>
+      </p>
+    </div>
+    <div class="type_train">
+      <p><mat-icon class="card-icon">train</mat-icon>Type:
+        <span style="font-family:Roboto;font-weight: 800!important;">{{trainById.typeTrain}}</span></p>
+    </div>
+
+    <div class="cost">
+      <p><mat-icon class="card-icon"> attach_money</mat-icon>Price:
+        <span style="font-family:Roboto;font-weight: 800!important;">{{trainById.price_ticket}}</span>
+      </p>
+    </div>
+
+    <div class="action_details">
+      <button class="btns-table" mat-fab color="primary" (click)="editTrain(trainById.id_train)" aria-label="Button for edit">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button class="btns-table" mat-fab color="primary" (click)="deleteTrain(trainById.id_train)" aria-label="Button for delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <button class="btns-table" mat-fab color="primary" (click)="buyTicket(trainById.id_train)" aria-label="Button for buy">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+

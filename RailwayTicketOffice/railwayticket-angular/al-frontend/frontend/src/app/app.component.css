@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+.example-sidenav-content {
+  display: flex;
+  justify-content: left;
+  margin-left: 5px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.example-sidenav-content button{
+  z-index: 100;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.sidenav {
+  padding: 20px;
+  width:200px;
+  position: fixed;
+  z-index: 999999;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
