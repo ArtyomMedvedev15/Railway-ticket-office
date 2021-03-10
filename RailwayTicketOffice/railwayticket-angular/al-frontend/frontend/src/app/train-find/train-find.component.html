@@ -5,29 +5,29 @@
         <p style="text-align: center;">Find your train!</p>
       </div>
 
-      <form (ngSubmit)="findtrainByDate()">
+      <form [formGroup]="findForm" (ngSubmit)="findtrainByDate()">
         <div class="img-overlay"></div>
         <div class="find_train_content_inner">
           <div class="form-group col-xs-6 col-sm-12 col-md-12 col-lg-7"  style="display:block;margin: 0 auto">
             <mat-form-field appearance="fill" class="dt_inp">
               <mat-label>Date and time departure</mat-label>
-              <input class="dt_inp" [(ngModel)]="departureDate" name="departure_date" matInput [matDatepicker]="dp1" [formControl]="date" required="required">
+              <input formControlName="departureDate" class="dt_inp" [(ngModel)]="departureDate" name="departure_date" matInput [matDatepicker]="dp1" [formControl]="dateDeparture" required="required">
               <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
               <mat-datepicker #dp1></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="form-group col-xs-6 col-sm-12 col-md-12 col-lg-7"  style="display:block;margin: 0 auto">
             <mat-form-field appearance="fill" class="dt_inp">
-              <mat-label>Date and time departure</mat-label>
-              <input class="dt_inp" [(ngModel)]="arrivalDate" name="arrival_date" matInput [matDatepicker]="dp" [formControl]="date" required="required">
+              <mat-label>Date and time arrival</mat-label>
+              <input formControlName="arrivalDate" class="dt_inp" [(ngModel)]="arrivalDate" name="arrival_date" matInput [matDatepicker]="dp" [formControl]="dateArrival" required="required">
               <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
               <mat-datepicker #dp></mat-datepicker>
             </mat-form-field>
           </div>
-          <div class="form-group col-xs-6 col-sm-12 col-md-12 col-lg-7"  style="display:block;margin: 0 auto">
+          <div  class="form-group col-xs-6 col-sm-12 col-md-12 col-lg-7"  style="display:block;margin: 0 auto">
             <mat-form-field appearance="fill" class="dt_inp">
               <mat-label>Departure station:</mat-label>
-              <mat-select [(ngModel)]="departureStationFind" name="departure_station_find" required="required">
+              <mat-select [errorStateMatcher]="matcher" formControlName="departureStationFind" [(ngModel)]="departureStationFind" required="required">
                 <mat-option value="BREST">Brest</mat-option>
                 <mat-option value="MINSK">Minsk</mat-option>
                 <mat-option value="MOGILEV">Mogilev</mat-option>
@@ -36,12 +36,15 @@
                 <mat-option value="GOMEL">Gomel</mat-option>
               </mat-select>
               <mat-hint align="end">Choose Departure station</mat-hint>
-            </mat-form-field>
+                <mat-error *ngIf="findForm.hasError('stationError')">
+                  Station isn't equal <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
           </div>
           <div class="form-group col-xs-6 col-sm-12 col-md-12 col-lg-7"  style="display:block;margin: 0 auto">
             <mat-form-field appearance="fill" class="dt_inp">
               <mat-label>Arrival station:</mat-label>
-              <mat-select [(ngModel)]="arrivalStationFind" name="arrival_station_find" required="required">
+              <mat-select [errorStateMatcher]="matcher" formControlName="arrivalStationsFind" [(ngModel)]="arrivalStationFind" required="required" >
                 <mat-option value="BREST">Brest</mat-option>
                 <mat-option value="MINSK">Minsk</mat-option>
                 <mat-option value="MOGILEV">Mogilev</mat-option>
@@ -50,6 +53,10 @@
                 <mat-option value="GOMEL">Gomel</mat-option>
               </mat-select>
               <mat-hint align="end">Choose arrival station</mat-hint>
+              <mat-error *ngIf="findForm.hasError('stationError')">
+                Station isn't equal <strong>required</strong>
+              </mat-error>
+              <div></div>
             </mat-form-field>
           </div>
            <div class="default_btn transition" >
