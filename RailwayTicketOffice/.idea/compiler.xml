@@ -7,14 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="service-rest" />
+        <module name="dao" />
         <module name="railwayticket-web-ui" />
-        <module name="railwayticket-angular" />
         <module name="dao-api" />
         <module name="service-api" />
-        <module name="service-impl" />
-        <module name="dao" />
-        <module name="railwayticket-rest" />
         <module name="domain" />
+        <module name="service-impl" />
+        <module name="railwayticket-angular" />
+        <module name="railwayticket-rest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
