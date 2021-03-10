@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Train} from "../train";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TrainService} from "../train.service";
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
@@ -42,12 +42,26 @@ export const MY_FORMATS = {
 export class UpdateTrainComponent implements OnInit {
 
   trainUpdate:Train = new Train();
-  date = new FormControl(moment());
+  dateDeparture = new FormControl(moment());
+  dateArrival = new FormControl(moment());
+  updateForm: FormGroup;
 
   constructor(private trainService:TrainService,private router:ActivatedRoute,private route:Router
   ,@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialog:MatDialog
-  ) {}
+              private dialog:MatDialog, private formBuilder: FormBuilder
+  ) {
+    this.updateForm = this.formBuilder.group({
+      nameTrain: ['', [Validators.required, Validators.maxLength(70), Validators.minLength(4)]],
+      departureStation: ['', Validators.required],
+      arrivalStation: ['', [Validators.required]],
+      typeTrain: ['', Validators.required],
+      dateDeparture: ['', Validators.required],
+      dateArrival: ['', Validators.required],
+      totalTicket: ['', [Validators.required, Validators.max(800), Validators.min(1)]],
+      availableTicket: ['', [Validators.required, Validators.max(800), Validators.min(1)]],
+      priceTicket: ['', [Validators.required, Validators.max(1000), Validators.min(1)]]
+    });
+  }
 
   ngOnInit(): void {
     this.trainService.getOneTrainById(this.data.id_train).subscribe(data=>{
@@ -56,8 +70,14 @@ export class UpdateTrainComponent implements OnInit {
   }
 
   eidtTrain() {
-    this.trainService.editTrain(this.trainUpdate).subscribe(data =>{
-       this.dialog.closeAll();
-    },error => console.log(error));
+    if (this.trainUpdate.departureStation !== this.trainUpdate.arrivalStation &&
+      new Date(this.trainUpdate.date_time_departure).getTime() <
+      new Date(this.trainUpdate.date_time_arrival).getTime()) {
+      this.trainService.editTrain(this.trainUpdate).subscribe(data => {
+        this.dialog.closeAll();
+      }, error => console.log(error));
+    }else{
+      alert('Error in station or dates');
+    }
   }
 }

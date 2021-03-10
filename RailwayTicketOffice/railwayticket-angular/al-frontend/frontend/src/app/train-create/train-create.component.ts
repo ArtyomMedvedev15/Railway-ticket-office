@@ -67,7 +67,9 @@ export class TrainCreateComponent implements OnInit {
   }
 
   saveTrain() {
-    if (this.train_save.departureStation !== this.train_save.arrivalStation) {
+    if (this.train_save.departureStation !== this.train_save.arrivalStation&&
+      new Date(this.train_save.date_time_departure).getTime() <
+      new Date(this.train_save.date_time_arrival).getTime()) {
       this.trainService.saveTrain(this.train_save).subscribe(data => {
         this.dialog.closeAll();
         this.router.navigate(['allTrain']);
