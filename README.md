@@ -4,7 +4,7 @@
 
 ## Profiles
 The project has the ability to change the configuration before starting. To do this, go to the settings of the file to run picture 1.
-[pic1]: https://github.com/Tim01Bro/Railway-ticket-office/blob/spring_profiles/documentation/pic1.PNG
+![pic1](https://github.com/Tim01Bro/Railway-ticket-office/blob/spring_profiles/documentation/pic1.PNG)
 
 
 ## Rest Client
@@ -135,5 +135,40 @@ Go to the terminal and run the following command:
 > **mvn clean compile.**
 
 **After that, go to the path set in the configuration and use the generated code.**
+
+## Angular module
+
+#### First, let's install everything you need to work.
+
+> - First you need to go to the site **https://nodejs.org/en/** download the recommended version. After installation, we check in the console. 
+![check version]()
+> - We also check the installed npm.
+![check version]()
+> - After you have installed node js, you need to install the angular cli to work with it. To install, go to the site **https://cli.angular.io** where the installation guideline is described. After installing angular, check the version in the console.
+![check version]()
+> - And also in the console we write the command to load the libraries 
+> **npm install**
+
+>  *Everything* is ready to **run**.
+
+#### Starting angular module.
+Before running the module with angular, we need to run our module with rest as they interact with each other. 
+For run angular, you need to open the console and, through the cantilever directory change commands, go to the directory with the angular module.
+
+Then enter the command into the conosli:
+
+> **ng serve**
+
+This command starts a server with a frontend.
+
+![check version]()
+
+After that, in the browser, go to the address:
+> **http://localhost:4200/**
+
+![check version]()
+
+
+
 
 
