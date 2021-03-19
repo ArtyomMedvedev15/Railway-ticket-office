@@ -141,11 +141,11 @@ Go to the terminal and run the following command:
 #### First, let's install everything you need to work.
 
 > - First you need to go to the site **https://nodejs.org/en/** download the recommended version. After installation, we check in the console. 
-![check version]()
+![check version](https://github.com/Tim01Bro/Railway-ticket-office/blob/master/documentation/nodescreen.png)
 > - We also check the installed npm.
-![check version]()
+![check version](https://github.com/Tim01Bro/Railway-ticket-office/blob/master/documentation/npmscreen.png)
 > - After you have installed node js, you need to install the angular cli to work with it. To install, go to the site **https://cli.angular.io** where the installation guideline is described. After installing angular, check the version in the console.
-![check version]()
+![check version](https://github.com/Tim01Bro/Railway-ticket-office/blob/master/documentation/angularscreen.png)
 > - And also in the console we write the command to load the libraries 
 > **npm install**
 
@@ -161,12 +161,12 @@ Then enter the command into the conosli:
 
 This command starts a server with a frontend.
 
-![check version]()
+![check version](https://github.com/Tim01Bro/Railway-ticket-office/blob/master/documentation/ngservescreen.png)
 
 After that, in the browser, go to the address:
 > **http://localhost:4200/**
 
-![check version]()
+![check version](https://github.com/Tim01Bro/Railway-ticket-office/blob/master/documentation/mainppagescreen.png)
 
 
 
