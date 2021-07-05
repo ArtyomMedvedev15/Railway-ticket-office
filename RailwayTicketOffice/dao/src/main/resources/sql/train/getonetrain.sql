@@ -1,0 +1,1 @@
+SELECT * FROM trains WHERE id_train=?

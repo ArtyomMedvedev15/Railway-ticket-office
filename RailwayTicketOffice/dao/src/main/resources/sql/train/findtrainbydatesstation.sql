@@ -1,0 +1,1 @@
+SELECT * FROM trains WHERE date_time_departure>=? and date_time_departure<=? and date_time_arrival>=? and date_time_arrival<=? and departure_station_id=? and arrival_station_id=?

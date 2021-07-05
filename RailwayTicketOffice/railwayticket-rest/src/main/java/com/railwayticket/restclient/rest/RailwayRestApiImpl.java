@@ -56,11 +56,6 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
     public ResponseEntity<List<Trains>> allTrainUsingGET() {
         List<com.domain.Trains>allTrain= trainServiceApi.FindAll();
 
-        if(allTrain.isEmpty()){
-            logger.error("Empty list trains. " + "List size: 0" + " With status No found");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
         logger.info("All trains. " + " List size: " + allTrain.size() + " With status Ok");
         return new ResponseEntity<List<Trains>>(ConvertDomain.convertDomainTrainsList(allTrain),HttpStatus.OK);
 

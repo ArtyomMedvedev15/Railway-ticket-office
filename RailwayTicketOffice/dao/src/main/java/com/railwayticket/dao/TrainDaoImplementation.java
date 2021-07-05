@@ -10,6 +10,8 @@ import com.railwayticket.dao.mapper.TrainMapper;
 
 
 import com.railwayticket.dao_api.TrainDaoApi;
+import com.railwayticket.dao_api.sql_annotation.SqlQuery;
+import com.railwayticket.dao_api.sql_annotation.SqlQueryImpl;
 import org.apache.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,10 +20,31 @@ import javax.sql.DataSource;
 import java.sql.Date;
 import java.util.List;
 
-public class TrainDaoImplementation implements TrainDaoApi {
+public class TrainDaoImplementation extends SqlQueryImpl implements TrainDaoApi {
 
     private JdbcTemplate databaseQuery;
     final static Logger logger = Logger.getLogger(TrainDaoImplementation.class);
+
+    @SqlQuery(sqlfilename = "sql/train/findtrainbydatesstation.sql")
+    public String SQL_FINDALLTRAINBY_DATE_STATION_TRAIN;
+
+    @SqlQuery(sqlfilename = "sql/train/getalltrainclient.sql")
+    public String SQL_GETALLCLIENT_TRAIN;
+
+    @SqlQuery(sqlfilename = "sql/train/inserttrain.sql")
+    public String SQL_INSERT_TRAIN;
+
+    @SqlQuery(sqlfilename = "sql/train/updatetrain.sql")
+    public String SQL_UPDATE_TRAIN;
+
+    @SqlQuery(sqlfilename = "sql/train/deletetrain.sql")
+    public String SQL_DELETE_TRAIN;
+
+    @SqlQuery(sqlfilename = "sql/train/getonetrain.sql")
+    public String SQL_GETONE_TRAIN;
+
+    @SqlQuery(sqlfilename = "sql/train/findalltrain.sql")
+    public String SQL_FINDALL_TRAIN;
 
     public TrainDaoImplementation(DataSource dataSource) {
         this.databaseQuery = new JdbcTemplate(dataSource);
@@ -29,56 +52,47 @@ public class TrainDaoImplementation implements TrainDaoApi {
 
     @Override
     public List<Trains> FindAllByDateDepartureArrivalStations(Date date_departure, Date date_arrival, Stations departure, Stations arrival) {
-        String sql_find_by_date_stations_train = "SELECT * FROM trains WHERE date_time_departure>=? and date_time_departure<=? and date_time_arrival>=? and date_time_arrival<=? " +
-                "and departure_station_id=? and arrival_station_id=?";
+
         logger.info("Find all trains by date and stations. " + " Date: " + date_departure.toString() +
                 " Departure station: " + departure.getNameStation() +
                 " Arrival station: " + arrival.getNameStation()+
                 " Time: " + new java.util.Date().toString());
-        return databaseQuery.query(sql_find_by_date_stations_train,new TrainMapper(),date_departure,date_arrival,date_departure,date_arrival,departure.getId_station(),arrival.getId_station());
+        return databaseQuery.query(SQL_FINDALLTRAINBY_DATE_STATION_TRAIN,new TrainMapper(),date_departure,date_arrival,date_departure,date_arrival,departure.getId_station(),arrival.getId_station());
     }
 
     @Override
     public List<ClientRailway> GetAllClientTrain(Long idTrain) {
-        String sql_find_client_by_train = "SELECT * FROM client_railway WHERE id_train = ?";
-        logger.info("Get all client by train id." + " Train id: " + idTrain + " Time: " + new java.util.Date().toString());
-        return databaseQuery.query(sql_find_client_by_train,new ClientMapper(),idTrain);
+         logger.info("Get all client by train id." + " Train id: " + idTrain + " Time: " + new java.util.Date().toString());
+        return databaseQuery.query(SQL_GETALLCLIENT_TRAIN,new ClientMapper(),idTrain);
     }
 
     @Override
     public boolean save(Trains trains) {
-        String sql_save_train = "INSERT INTO trains(name_train,type_train_id,departure_station_id,arrival_station_id,date_time_departure,date_time_arrival,available_ticket,total_ticket,price_ticket)" +
-                "VALUES(?,?,?,?,?,?,?,?,?)";
         logger.info("Save new train to database. " + trains.toString() + " Time: " + new java.util.Date().toString());
-        return databaseQuery.update(sql_save_train,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
+        return databaseQuery.update(SQL_INSERT_TRAIN,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
                 trains.getArrivalStation().getId_station(),trains.getDate_time_departure(),trains.getDate_time_arrival(),trains.getAvailable_ticket(),
                 trains.getTotal_ticket(),trains.getPrice_ticket())>0;
     }
 
     @Override
     public boolean update(Trains trains) {
-        String sql_update_train = "UPDATE trains SET name_train = ?,type_train_id=?,departure_station_id=?,arrival_station_id=?,date_time_departure=?," +
-                "date_time_arrival=?,available_ticket=?,total_ticket=?,price_ticket=? WHERE id_train=?";
         logger.info("Update train. " + trains.toString() + " Time: " + new java.util.Date().toString());
-        return databaseQuery.update(sql_update_train,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
+        return databaseQuery.update(SQL_UPDATE_TRAIN,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
                 trains.getArrivalStation().getId_station(),trains.getDate_time_departure(),trains.getDate_time_arrival(),trains.getAvailable_ticket(),
                 trains.getTotal_ticket(),trains.getPrice_ticket(),trains.getId_train())>0;
     }
 
     @Override
     public boolean delete(Trains trains) {
-        String sql_delete_train = "DELETE FROM trains WHERE id_train=?";
-        logger.info("Delete train. " + trains.toString() + " Time: " + new java.util.Date().toString());
-        return databaseQuery.update(sql_delete_train,trains.getId_train())>0;
+         logger.info("Delete train. " + trains.toString() + " Time: " + new java.util.Date().toString());
+        return databaseQuery.update(SQL_DELETE_TRAIN,trains.getId_train())>0;
     }
 
     @Override
     public Trains getOneById(Long id) {
-
-        String sql_getone_train = "SELECT * FROM trains WHERE id_train=?";
         logger.info("Get one train by id." + " id train: " + id + " Time: " + new java.util.Date().toString());
         try {
-            return databaseQuery.queryForObject(sql_getone_train, new TrainMapper(), id);
+            return databaseQuery.queryForObject(SQL_GETONE_TRAIN, new TrainMapper(), id);
         }catch (EmptyResultDataAccessException e){
             return null;
         }
@@ -86,8 +100,10 @@ public class TrainDaoImplementation implements TrainDaoApi {
 
     @Override
     public List<Trains> FindAll() {
-        String sql_find_all_train = "SELECT * FROM trains";
-        logger.info("Get all trains." + " Size: " + databaseQuery.query(sql_find_all_train,new TrainMapper()).size() + " Time: " + new java.util.Date().toString());
-        return databaseQuery.query(sql_find_all_train,new TrainMapper());
+        System.out.println("SQLSQLSQL" + SQL_INSERT_TRAIN);
+        logger.info("Get all trains." + " Size: " + databaseQuery.query(SQL_FINDALL_TRAIN,new TrainMapper()).size() + " Time: " + new java.util.Date().toString());
+        return databaseQuery.query(SQL_FINDALL_TRAIN,new TrainMapper());
     }
+
+
 }

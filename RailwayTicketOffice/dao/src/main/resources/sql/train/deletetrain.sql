@@ -1,0 +1,1 @@
+DELETE FROM trains WHERE id_train=?
