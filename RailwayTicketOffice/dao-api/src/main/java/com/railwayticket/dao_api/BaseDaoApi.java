@@ -1,5 +1,7 @@
 package com.railwayticket.dao_api;
 
+import com.railwayticket.dao_api.sql_annotation.SqlQueryImpl;
+
 import java.util.List;
 
 public interface BaseDaoApi<T> {

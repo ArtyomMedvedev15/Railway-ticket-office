@@ -5,6 +5,8 @@ import com.domain.ClientRailway;
 import com.railwayticket.dao.mapper.ClientMapper;
 
 import com.railwayticket.dao_api.ClientDaoApi;
+import com.railwayticket.dao_api.sql_annotation.SqlQuery;
+import com.railwayticket.dao_api.sql_annotation.SqlQueryImpl;
 import org.apache.log4j.Logger;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,9 +16,12 @@ import javax.sql.DataSource;
 import java.util.Date;
 import java.util.List;
 
-public class ClientDaoImplementation implements ClientDaoApi {
+public class ClientDaoImplementation extends SqlQueryImpl implements ClientDaoApi {
 
     private JdbcTemplate databaseQuery;
+
+    @SqlQuery(sqlfilename = "sql/clients/findallclient.sql")
+    public String SQL_FINDALLCLIENT;
 
     final static Logger logger = Logger.getLogger(ClientDaoImplementation.class);
 
@@ -62,9 +67,9 @@ public class ClientDaoImplementation implements ClientDaoApi {
 
     @Override
     public List<ClientRailway> FindAll() {
-        String sql_find_all = "SELECT * FROM client_railway";
-        logger.info("Find all." + " Size: " + databaseQuery.query(sql_find_all,new ClientMapper()).size() + " Time: " + new Date().toString());
-        return databaseQuery.query(sql_find_all,new ClientMapper());
+        System.out.println("SQL" + SQL_FINDALLCLIENT);
+        logger.info("Find all." + " Size: " + databaseQuery.query(SQL_FINDALLCLIENT,new ClientMapper()).size() + " Time: " + new Date().toString());
+        return databaseQuery.query(SQL_FINDALLCLIENT,new ClientMapper());
     }
 
     @Override
