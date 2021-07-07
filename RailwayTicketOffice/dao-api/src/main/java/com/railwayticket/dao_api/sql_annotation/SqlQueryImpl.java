@@ -1,8 +1,5 @@
 package com.railwayticket.dao_api.sql_annotation;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Scanner;
@@ -17,25 +14,17 @@ public abstract class SqlQueryImpl {
             try {
                 Field field = clazz.getDeclaredField("name");
                 field.setAccessible(true);
-                File directory = new File("./");
-                String final_filepath = directory.getCanonicalPath()+ "/dao/src/main/resources/";
-                FileReader fr= new FileReader(final_filepath+annotation.sqlfilename());
-                Scanner scan = new Scanner(fr);
-                String test = "t";
-                while (scan.hasNextLine()) {
-                    test = scan.nextLine();
 
+                InputStream input = SqlQueryImpl.class.getResourceAsStream("/"+annotation.sqlfilename());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                String sql_query="";
+                String buff;
+                while((buff = reader.readLine())!=null){
+                    sql_query = buff;
                 }
-                field.set(this,test);
-                fr.close();
+                field.set(this,sql_query);
 
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }catch (FileNotFoundException e){
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (IllegalAccessException | NoSuchFieldException | IOException e) {
                 e.printStackTrace();
             }
             return;
@@ -49,18 +38,15 @@ public abstract class SqlQueryImpl {
             }
             declaredField.setAccessible(true);
             try {
-                File directory = new File("./");
-                String final_filepath = directory.getCanonicalPath()+ "/dao/src/main/resources/";
-                FileReader frdecl= new FileReader(final_filepath+annotation.sqlfilename());
-                Scanner scan = new Scanner(frdecl);
-                String test = "t";
-                while (scan.hasNextLine()) {
-                    test = scan.nextLine();
-
+                InputStream input = SqlQueryImpl.class.getResourceAsStream("/"+annotation.sqlfilename());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                String sql_query="";
+                String buff;
+                while((buff = reader.readLine())!=null){
+                    sql_query = buff;
                 }
-                declaredField.set(this, test);
-                frdecl.close();
-            } catch (IllegalAccessException | FileNotFoundException e) {
+                declaredField.set(this,sql_query);
+             } catch (IllegalAccessException | FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
