@@ -84,13 +84,9 @@ public class TrainRestServiceImpl implements TrainServiceApi {
     public List<Trains> FindAll() {
         List<Trains> trainAllClient =  Arrays.asList(restTemplate.getForObject("http://localhost:8181/api/train/allTrain",Trains[].class).clone());
 
-        if (trainAllClient!=null){
-            logger.info("Get all train. " + " List size: " + trainAllClient.size() + " With status Ok");
-            return trainAllClient;
-        }else{
-            logger.info("Get all train failed. " + " List size: 0" + " With status not found");
-            return null;
-        }
+    logger.info("Get all train. " + " List size: " + trainAllClient.size() + " With status Ok");
+    return trainAllClient;
+
     }
 
     @Override

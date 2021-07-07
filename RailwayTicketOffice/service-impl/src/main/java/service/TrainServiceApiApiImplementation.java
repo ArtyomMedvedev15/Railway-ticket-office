@@ -145,7 +145,7 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
-            logger.info("Find all train successfully. size list: "+ 1 + " Time:" + new Date().toString());
+            logger.info("Find all train successfully. size list: "+ trainDaoApi.FindAll().size() + " Time:" + new Date().toString());
             return trainDaoApi.FindAll();
         }catch (Exception ex){
             transactionTemplate.getTransactionManager().rollback(status);

@@ -1,0 +1,1 @@
+UPDATE client_railway SET id_train=?,name_client=?,soname_client=?,date_purchase=?,phone_client=? WHERE id_client=?
