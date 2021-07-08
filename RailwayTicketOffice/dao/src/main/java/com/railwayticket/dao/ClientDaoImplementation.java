@@ -29,7 +29,7 @@ public class ClientDaoImplementation extends SqlQueryImpl implements ClientDaoAp
     @SqlQuery(sqlfilename = "sql/clients/updateclient.sql")
     public String SQL_UPDATE_CLIENT;
 
-    @SqlQuery(sqlfilename = "sql/clients/findallclient.sql")
+    @SqlQuery(sqlfilename = "sql/clients/deleteclient.sql")
     public String SQL_DELETE_CLIENT;
 
     @SqlQuery(sqlfilename = "sql/clients/getoneclient.sql")

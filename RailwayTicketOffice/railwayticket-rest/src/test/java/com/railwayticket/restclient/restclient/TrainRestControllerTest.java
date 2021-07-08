@@ -5,6 +5,7 @@ import com.domain.Trains;
 import com.domain.TypeTrain;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.github.javafaker.Faker;
 import com.railwayticket.restclient.config.BeanConfig;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -37,6 +38,9 @@ public class TrainRestControllerTest extends TestCase {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private Faker fake_data;
+
     @Test
     public void TrainByIdTest_thenStatusOk() throws Exception {
         mockMvc.perform(get("/api/train/123")
@@ -60,8 +64,12 @@ public class TrainRestControllerTest extends TestCase {
 
     @Test
     public void SaveTrainTest_thenStatusCreated() throws Exception {
-        Trains trains = new Trains("Test", TypeTrain.BUSINESS, Stations.BREST,Stations.GOMEL,new Date(new java.util.Date().getTime()),
-                new Date(new java.util.Date().getTime()),123,123,23.3F);
+        String name_train = fake_data.cat().name();
+        int total_tickets = fake_data.number().numberBetween(1,567);
+        int available_tickets = fake_data.number().numberBetween(1,total_tickets);
+        float price_tickets = (float) fake_data.number().randomDouble(2,1,150);
+        Trains trains = new Trains(name_train, TypeTrain.BUSINESS, Stations.BREST,Stations.GOMEL,new Date(new java.util.Date().getTime()),
+                new Date(new java.util.Date().getTime()),available_tickets,total_tickets,price_tickets);
          mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/train/saveTrain")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -80,8 +88,13 @@ public class TrainRestControllerTest extends TestCase {
 
     @Test
     public void UpdateTrainTest_thenStatusOk() throws Exception {
-        Trains trains = new Trains("Test", TypeTrain.BUSINESS, Stations.BREST,Stations.GOMEL,new Date(new java.util.Date().getTime()),
-                new Date(new java.util.Date().getTime()),123,123,23.3F);
+        String name_train = fake_data.cat().name();
+        int total_tickets = fake_data.number().numberBetween(1,567);
+        int available_tickets = fake_data.number().numberBetween(1,total_tickets);
+        float price_tickets = (float) fake_data.number().randomDouble(2,1,150);
+
+        Trains trains = new Trains(name_train, TypeTrain.BUSINESS, Stations.BREST,Stations.GOMEL,new Date(new java.util.Date().getTime()),
+                new Date(new java.util.Date().getTime()),available_tickets,total_tickets,price_tickets);
         trains.setId_train(1243L);
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/train/updateTrain")
@@ -101,7 +114,7 @@ public class TrainRestControllerTest extends TestCase {
 
     @Test
     public void DeleteTrainsTest_thenStatusNoContent() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/train/deleteTrain/123")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/train/deleteTrain/321")
                         .contentType(MediaType.APPLICATION_JSON))
                         .andExpect(status().isNoContent());
     }

@@ -100,8 +100,7 @@ public class TrainDaoImplementation extends SqlQueryImpl implements TrainDaoApi 
 
     @Override
     public List<Trains> FindAll() {
-        System.out.println("SQLSQLSQL" + SQL_INSERT_TRAIN);
-        logger.info("Get all trains." + " Size: " + databaseQuery.query(SQL_FINDALL_TRAIN,new TrainMapper()).size() + " Time: " + new java.util.Date().toString());
+         logger.info("Get all trains." + " Size: " + databaseQuery.query(SQL_FINDALL_TRAIN,new TrainMapper()).size() + " Time: " + new java.util.Date().toString());
         return databaseQuery.query(SQL_FINDALL_TRAIN,new TrainMapper());
     }
 
