@@ -169,6 +169,11 @@ After that, in the browser, go to the address:
 ![check version](https://github.com/Tim01Bro/Railway-ticket-office/blob/master/documentation/mainppagescreen.png)
 
 
+## Java Faker Library
+In test rest endpoint use java faker for generated fake data. You can change the localization for the data generator. To do this, set the java_faker_lang variable in the test configuration, look at picture. All locale you can check here https://github.com/DiUS/java-faker .
 
+![java faker](https://github.com/Tim01Bro/Railway-ticket-office/blob/java_faker/documentation/javafaker.png)
+
+If you do not set a value for this variable, then by default, the localization will be in English.
 
 
