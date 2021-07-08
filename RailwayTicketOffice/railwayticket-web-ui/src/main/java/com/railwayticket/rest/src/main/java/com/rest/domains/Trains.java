@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Details info about the trains
  */
 @ApiModel(description = "Details info about the trains")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-07-08T19:19:26.298+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-07-08T19:38:14.572+03:00")
 public class Trains {
   /**
    * The station where the train arrives

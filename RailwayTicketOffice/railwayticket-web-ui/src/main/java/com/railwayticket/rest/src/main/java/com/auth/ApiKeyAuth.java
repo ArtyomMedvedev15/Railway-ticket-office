@@ -3,7 +3,7 @@ package com.auth;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-07-08T19:19:26.298+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-07-08T19:38:14.572+03:00")
 public class ApiKeyAuth implements Authentication {
     private final String location;
     private final String paramName;
