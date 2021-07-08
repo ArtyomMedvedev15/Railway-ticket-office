@@ -2,8 +2,7 @@ package com.railwayticket.restclient.restclient;
 
 import com.domain.ClientRailway;
 import com.fasterxml.jackson.databind.ObjectMapper;
- import com.railwayticket.restclient.config.BeanConfig;
-
+import com.railwayticket.restclient.config.BeanConfig;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +16,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
+import com.github.javafaker.*;
 import java.sql.Date;
+import java.util.Locale;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,6 +35,9 @@ public class ClientRestControllerTest extends TestCase {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private Faker fake_data;
+
     @Test
     public void ClientRailwayByIdTest_thenStatus200() throws Exception {
         mockMvc.perform(get("/api/clients/123")
@@ -47,7 +50,8 @@ public class ClientRestControllerTest extends TestCase {
         mockMvc.perform(get("/api/clients/null")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest());
-    }
+        System.out.println(fake_data.phoneNumber().phoneNumber());
+      }
 
     @Test
     public void ClientRailwayByIdTest_thenStatusNotFound() throws Exception {
@@ -58,7 +62,12 @@ public class ClientRestControllerTest extends TestCase {
 
     @Test
     public void SaveClient_thenStatusCreated() throws Exception {
-        ClientRailway clientRailway = new ClientRailway(1L,123L,"Test Client","Test Client",new Date(new java.util.Date().getTime()),"+373(33)332323");
+
+        long id_client = fake_data.number().numberBetween(1,999);
+        String name_client = fake_data.name().firstName();
+        String soname_client = fake_data.name().lastName();
+
+        ClientRailway clientRailway = new ClientRailway(id_client,123L,name_client,soname_client,new Date(new java.util.Date().getTime()),"+373(33)332323");
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/clients/saveClient")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -77,7 +86,10 @@ public class ClientRestControllerTest extends TestCase {
 
     @Test
     public void UpdateClient_thenStatusCreated() throws Exception {
-        ClientRailway clientRailway = new ClientRailway(123L,123L,"Update Test Client","Test Client",new Date(new java.util.Date().getTime()),"+373(33)332323");
+        String name_client = fake_data.name().firstName();
+        String soname_client = fake_data.name().lastName();
+
+        ClientRailway clientRailway = new ClientRailway(123L,123L,name_client,soname_client,new Date(new java.util.Date().getTime()),"+373(33)332323");
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/clients/updateClient")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -124,7 +136,8 @@ public class ClientRestControllerTest extends TestCase {
 
     @Test
     public void GetAllClientByName_thenStatusNotFound() throws Exception {
-        mockMvc.perform(get("/api/clients/findclientbyname/zzzzzzzzzzz")
+        String name_client = fake_data.name().firstName();
+         mockMvc.perform(get("/api/clients/findclientbyname/"+name_client)
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isNotFound());
     }

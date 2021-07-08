@@ -1,6 +1,7 @@
 package com.railwayticket.restclient.config;
 
 
+import com.github.javafaker.Faker;
 import com.railwayticket.dao.ClientDaoImplementation;
 import com.railwayticket.dao.TrainDaoImplementation;
 import com.railwayticket.dao_api.ClientDaoApi;
@@ -27,6 +28,7 @@ import service.ClientServiceApiImplementation;
 import service.TrainServiceApiApiImplementation;
 
 import javax.sql.DataSource;
+import java.util.Locale;
 
 @Configuration
 @ComponentScan("com.railwayticket.restclient")
@@ -92,4 +94,12 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         return new RestTemplate();
     }
 
+    @Bean
+    public Faker fakerGenerate(){
+        if(System.getenv("java_faker_lang")!=null) {
+            return new Faker(new Locale(System.getenv("java_faker_lang")));
+        }else{
+            return new Faker(new Locale("en"));
+        }
+    }
 }
