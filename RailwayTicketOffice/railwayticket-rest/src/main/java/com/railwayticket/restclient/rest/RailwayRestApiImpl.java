@@ -9,6 +9,7 @@ import com.railwayticket.restclient.restapi.ApiApiDelegate;
 import com.railwayticket.restclient.util.ClientsExcelExporter;
 import com.railwayticket.restclient.util.ConvertDomain;
 import com.railwayticket.restclient.util.TrainsExcelExporter;
+import com.railwayticket.restclient.util.TrainsExcelImporter;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
@@ -19,9 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.service.ResponseMessage;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -333,4 +334,19 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         excelExporter.ExportDataToExcel(response);
         logger.info("Export client to file");
     }
+
+     @PostMapping("/api/train/excel/import")
+    public void importExcelToSql(@RequestParam("file")MultipartFile file) throws IOException {
+        List<com.domain.Trains>allTrains = trainServiceApi.FindAll();
+        TrainsExcelImporter excelImporter = new TrainsExcelImporter();
+        List<Trains>importsTrains = excelImporter.ImportFromExcel(file,ConvertDomain.convertDomainTrainsList(allTrains));
+
+        importsTrains.forEach(o1-> {
+            try {
+                trainServiceApi.save(ConvertDomain.convertDomainTrains(o1));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
+     }
 }

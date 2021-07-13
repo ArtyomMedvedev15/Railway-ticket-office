@@ -9,6 +9,7 @@ import com.railwayticket.services_api.exception.TrainServiceException;
 import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,7 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
@@ -30,10 +35,11 @@ public class TrainRestServiceImpl implements TrainServiceApi {
 
     final static Logger logger = Logger.getLogger(TrainRestServiceImpl.class);
 
+    private String base_url = "http://localhost:8181/api/train/";
 
     @Override
     public boolean save(Trains trains) throws ServiceException {
-        ResponseEntity<String> response = restTemplate.postForEntity( "http://localhost:8181/api/train/saveTrain", trains , String.class );
+        ResponseEntity<String> response = restTemplate.postForEntity( base_url+"saveTrain", trains , String.class );
         if(response.getStatusCode().toString().equals("201 CREATED")){
             logger.info("Save new train. " + "Train: " + trains.toString() + "With status Created");
             return true;
@@ -57,7 +63,7 @@ public class TrainRestServiceImpl implements TrainServiceApi {
 
     @Override
     public boolean delete(Trains trains) throws ServiceException {
-        ResponseEntity<String> result_request_delete = restTemplate.getForEntity("http://localhost:8181/api/train/deleteTrain/"+trains.getId_train(),String.class);
+        ResponseEntity<String> result_request_delete = restTemplate.getForEntity(base_url+"deleteTrain/"+trains.getId_train(),String.class);
 
         if(result_request_delete.getStatusCode().toString().equals("204 NO_CONTENT")){
             logger.info("Delete train. " + "Train: " + trains.toString() + "With status No content");
@@ -70,7 +76,7 @@ public class TrainRestServiceImpl implements TrainServiceApi {
 
     @Override
     public Trains getOneById(Long id) throws ServiceException {
-        Trains trains = restTemplate.getForObject("http://localhost:8181/api/train/"+id,Trains.class);
+        Trains trains = restTemplate.getForObject(base_url+id,Trains.class);
         if (trains != null) {
             logger.info("Get one client. " + "Train: " + trains.toString() + "With status OK");
             return trains;
@@ -82,7 +88,7 @@ public class TrainRestServiceImpl implements TrainServiceApi {
 
     @Override
     public List<Trains> FindAll() {
-        List<Trains> trainAllClient =  Arrays.asList(restTemplate.getForObject("http://localhost:8181/api/train/allTrain",Trains[].class).clone());
+        List<Trains> trainAllClient =  Arrays.asList(restTemplate.getForObject(base_url+"allTrain",Trains[].class).clone());
 
     logger.info("Get all train. " + " List size: " + trainAllClient.size() + " With status Ok");
     return trainAllClient;
@@ -102,7 +108,7 @@ public class TrainRestServiceImpl implements TrainServiceApi {
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
-        ResponseEntity<Trains[]> response = restTemplate.postForEntity( "http://localhost:8181/api/train/findtrainbydates", request , Trains[].class );
+        ResponseEntity<Trains[]> response = restTemplate.postForEntity( base_url+"findtrainbydates", request , Trains[].class );
 
         List<Trains>allTrainByDatesStations = Arrays.asList(Objects.requireNonNull(response.getBody()));
 
@@ -113,5 +119,36 @@ public class TrainRestServiceImpl implements TrainServiceApi {
             logger.info("Get all train by dates and stations faild. " + " List size: 0" + " With status not found");
             return null;
         }
+    }
+
+    @Override
+    public void ImportExcel(MultipartFile file) {
+
+        MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
+        bodyMap.add("file", new FileSystemResource(convert(file)));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(bodyMap, headers);
+
+        ResponseEntity<Void> response = restTemplate.postForEntity( base_url+"excel/import", request , Void.class );
+
+        logger.info("Import excel to database");
+    }
+
+    public static File convert(MultipartFile file)
+    {
+        File convFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
+        try {
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(file.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return convFile;
     }
 }

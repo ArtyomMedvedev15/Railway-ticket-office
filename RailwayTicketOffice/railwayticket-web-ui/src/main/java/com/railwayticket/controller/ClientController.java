@@ -130,12 +130,5 @@ public class ClientController {
         return "oneClient";
     }
 
-    @GetMapping("/clients/exportto/excel")
-    public String exportToExcel(){
-        clientServiceApiRest.ExportToExcel();
-        logger.info("Export clients to excel " + new Date());
-
-        return "redirect:/listClient";
-    }
 
 }

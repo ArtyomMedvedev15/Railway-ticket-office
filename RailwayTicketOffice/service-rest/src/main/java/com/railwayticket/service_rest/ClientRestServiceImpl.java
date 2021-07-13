@@ -105,10 +105,4 @@ public class ClientRestServiceImpl implements ClientServiceApi {
 
     }
 
-    @Override
-    public void ExportToExcel() {
-       logger.info("Export client to excel file" + new Date());
-       restTemplate.getForEntity(base_url+"listclients/export/excel",Void.class);
-    }
-
 }

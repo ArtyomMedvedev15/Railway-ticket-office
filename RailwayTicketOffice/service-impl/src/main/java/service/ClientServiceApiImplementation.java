@@ -57,10 +57,6 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         }
      }
 
-    @Override
-    public void ExportToExcel() {
-
-    }
 
     @Override
     public boolean save(ClientRailway clientRailway) throws ClientServiceException {

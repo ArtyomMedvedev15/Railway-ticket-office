@@ -46,10 +46,10 @@
                 <div class="col" style="margin-bottom: 30px">
                     <a style="color: white" class="btn btn-outline-dark transition" href="http://localhost:8181/api/trains/listtrains/export/excel">Export to excel</a>
                 </div>
-                <form style="margin-left: 15px; margin-bottom: 30px" enctype="multipart/form-data" method="post" action="/listtrains/import/excel">
+                <form style="margin-left: 15px; margin-bottom: 30px" enctype="multipart/form-data" method="post" action="/import/excel">
                     <div class="row">
                         <div class="col">
-                            <input class="form-control" placeholder="Import excel file" th:type="file" name="file">
+                            <input class="form-control" placeholder="Import excel file" type="file" name="file">
                         </div>
                         <div class="col">
                             <button style="color: white" class="btn btn-outline-dark" type="submit">Import</button>

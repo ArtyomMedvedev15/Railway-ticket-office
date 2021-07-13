@@ -34,6 +34,9 @@ public class TrainDaoImplementation extends SqlQueryImpl implements TrainDaoApi 
     @SqlQuery(sqlfilename = "sql/train/inserttrain.sql")
     public String SQL_INSERT_TRAIN;
 
+    @SqlQuery(sqlfilename = "sql/train/inserttrainWithID.sql")
+    public String SQL_INSERT_TRAIN_WITH_ID;
+
     @SqlQuery(sqlfilename = "sql/train/updatetrain.sql")
     public String SQL_UPDATE_TRAIN;
 
@@ -68,10 +71,17 @@ public class TrainDaoImplementation extends SqlQueryImpl implements TrainDaoApi 
 
     @Override
     public boolean save(Trains trains) {
-        logger.info("Save new train to database. " + trains.toString() + " Time: " + new java.util.Date().toString());
-        return databaseQuery.update(SQL_INSERT_TRAIN,trains.getName_train(),trains.getTypeTrain().getId_type(),trains.getDepartureStation().getId_station(),
-                trains.getArrivalStation().getId_station(),trains.getDate_time_departure(),trains.getDate_time_arrival(),trains.getAvailable_ticket(),
-                trains.getTotal_ticket(),trains.getPrice_ticket())>0;
+        if(trains.getId_train()==null) {
+            logger.info("Save new train to database. " + trains.toString() + " Time: " + new java.util.Date().toString());
+            return databaseQuery.update(SQL_INSERT_TRAIN, trains.getName_train(), trains.getTypeTrain().getId_type(), trains.getDepartureStation().getId_station(),
+                    trains.getArrivalStation().getId_station(), trains.getDate_time_departure(), trains.getDate_time_arrival(), trains.getAvailable_ticket(),
+                    trains.getTotal_ticket(), trains.getPrice_ticket()) > 0;
+        }else{
+            logger.info("Save new train to database with id. " + trains.toString() + " Time: " + new java.util.Date().toString());
+            return databaseQuery.update(SQL_INSERT_TRAIN_WITH_ID,trains.getId_train(), trains.getName_train(), trains.getTypeTrain().getId_type(), trains.getDepartureStation().getId_station(),
+                    trains.getArrivalStation().getId_station(), trains.getDate_time_departure(), trains.getDate_time_arrival(), trains.getAvailable_ticket(),
+                    trains.getTotal_ticket(), trains.getPrice_ticket()) > 0;
+        }
     }
 
     @Override

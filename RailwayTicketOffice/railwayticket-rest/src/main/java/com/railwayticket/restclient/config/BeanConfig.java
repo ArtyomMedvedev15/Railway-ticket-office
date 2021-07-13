@@ -1,6 +1,8 @@
 package com.railwayticket.restclient.config;
 
 
+ import com.fasterxml.jackson.databind.ObjectMapper;
+ import com.fasterxml.jackson.databind.SerializationFeature;
  import com.railwayticket.dao.ClientDaoImplementation;
  import com.railwayticket.dao.TrainDaoImplementation;
  import com.railwayticket.dao_api.ClientDaoApi;
@@ -15,7 +17,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+ import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
@@ -109,4 +112,13 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         return new RestTemplate();
     }
 
+
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        MappingJackson2HttpMessageConverter converter =
+                new MappingJackson2HttpMessageConverter(mapper);
+        return converter;
+    }
 }

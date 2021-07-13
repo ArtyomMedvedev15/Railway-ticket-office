@@ -15,6 +15,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.TrainServiceException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,8 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
-            if(trains!=null) {
+            Trains trainFromDB = trainDaoApi.getOneById(trains.getId_train());
+            if(trainFromDB==null) {
                     logger.info("Save train successfully. Name: " + trains.getName_train() +
                             " station departure: " + trains.getDepartureStation().getNameStation() + " station arrival: "
                             + trains.getArrivalStation().getNameStation() + " Time: " + new Date().toString());
@@ -179,4 +181,9 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
             transactionTemplate.getTransactionManager().commit(status);
         }
      }
+
+    @Override
+    public void ImportExcel(MultipartFile file) {
+
+    }
 }
