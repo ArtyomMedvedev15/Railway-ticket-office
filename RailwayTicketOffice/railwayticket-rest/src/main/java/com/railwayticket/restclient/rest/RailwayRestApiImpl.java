@@ -1,10 +1,12 @@
 package com.railwayticket.restclient.rest;
 
 import com.domain.Stations;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.mysql.cj.xdevapi.Client;
 import com.railwayticket.restclient.domains.ClientRailway;
 import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
+import com.railwayticket.restclient.util.ClientsExcelExporter;
 import com.railwayticket.restclient.util.ConvertDomain;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.TrainServiceApi;
@@ -17,8 +19,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -289,5 +295,23 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
 
         logger.info("Update train. " + "Train: " + trainUpdate.getNameTrain() + " With status OK");
         return new ResponseEntity<>(trainUpdate,httpHeaders,HttpStatus.OK);
+    }
+
+    @GetMapping("/api/clients/listclients/export/excel")
+    public void exportClientsToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        String filename = "clientsExcel_"+dateFormat.format(new Date())+".xlsx";
+        String headerValue = "attachement; filename="+filename;
+
+        response.setHeader(headerKey,headerValue);
+
+        List<com.domain.ClientRailway>AllClient = clientServiceApi.FindAll();
+
+        ClientsExcelExporter excelExporter = new ClientsExcelExporter(ConvertDomain.convertDomainClientRailwayList(AllClient));
+        excelExporter.ExportDataToExcel(response);
+        logger.info("Export client to file");
     }
 }
