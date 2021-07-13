@@ -8,6 +8,7 @@ import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
 import com.railwayticket.restclient.util.ClientsExcelExporter;
 import com.railwayticket.restclient.util.ConvertDomain;
+import com.railwayticket.restclient.util.TrainsExcelExporter;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
@@ -311,6 +312,24 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         List<com.domain.ClientRailway>AllClient = clientServiceApi.FindAll();
 
         ClientsExcelExporter excelExporter = new ClientsExcelExporter(ConvertDomain.convertDomainClientRailwayList(AllClient));
+        excelExporter.ExportDataToExcel(response);
+        logger.info("Export client to file");
+    }
+
+    @GetMapping("/api/trains/listtrains/export/excel")
+    public void exportTrainsToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        String filename = "trainsExcel"+dateFormat.format(new Date())+".xlsx";
+        String headerValue = "attachement; filename="+filename;
+
+        response.setHeader(headerKey,headerValue);
+
+        List<com.domain.Trains>AllTrains = trainServiceApi.FindAll();
+
+        TrainsExcelExporter excelExporter = new TrainsExcelExporter(ConvertDomain.convertDomainTrainsList(AllTrains));
         excelExporter.ExportDataToExcel(response);
         logger.info("Export client to file");
     }
