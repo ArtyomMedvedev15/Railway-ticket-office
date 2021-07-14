@@ -95,4 +95,9 @@ export class TrainListComponent implements OnInit {
   trainDetails(id_train: number){
     this.router.navigate(['trainone/', id_train]);
   }
+
+  exportToExcel():void{
+    this.trainService.ExportTrainsToExcel();
+  }
+
 }

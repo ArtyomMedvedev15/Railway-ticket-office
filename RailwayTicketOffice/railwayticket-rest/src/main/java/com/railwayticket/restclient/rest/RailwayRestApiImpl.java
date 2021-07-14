@@ -314,7 +314,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         logger.info("Export client to file");
     }
 
-    @GetMapping("/api/trains/listtrains/export/excel")
+    @GetMapping("/api/train/listtrains/export/excel")
     public void exportTrainsToExcel(HttpServletResponse response) throws IOException {
         response.setContentType("application/octet-stream");
         String headerKey = "Content-Disposition";

@@ -17,7 +17,11 @@
     </div>
   </div>
 </form>
-
+<div class="example-button-container" >
+  <button style="margin-right: 10px" (click)="ExportToExcel()" mat-fab color="primary" type="button" class="add_btn"  aria-label="Example icon button with a delete icon">
+    <mat-icon>arrow_downward</mat-icon>
+  </button>
+</div>
 <div class="mat-elevation-z8 table-responsive" style="margin-top: 20px">
   <table mat-table [dataSource]="dataSource" matSort>
     <!-- Id client Column -->

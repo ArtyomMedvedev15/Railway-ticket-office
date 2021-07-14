@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Clientrailway} from "./clientrailway";
 import {Train} from "./train";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class TrainService {
 
   private base_url = "http://localhost:8181/api/train/";
   formDt: FormData = new FormData();
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   getAllTrain():Observable<Train[]>{
     return this.httpClient.get<Train[]>(this.base_url+"allTrain");
@@ -41,4 +42,8 @@ export class TrainService {
 
     return this.httpClient.post<Train[]>(this.base_url+"findtrainbydates", this.formDt);
   }
+
+  ExportTrainsToExcel():void{
+    window.location.href = this.base_url+"listtrains/export/excel";
+   }
 }

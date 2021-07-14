@@ -92,4 +92,8 @@ export class ClientrailwayListComponent implements OnInit {
     }
   }
 
+  ExportToExcel(){
+    this.clientService.exportToExcel();
+  }
+
 }

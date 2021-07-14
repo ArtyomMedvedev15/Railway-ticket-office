@@ -35,4 +35,8 @@ export class ClientsService {
   findClientByName(name:string):Observable<Clientrailway[]>{
     return this.httpClient.get<Clientrailway[]>(this.base_url+"findclientbyname/"+name);
   }
+
+  exportToExcel():void{
+    window.location.href = this.base_url+"listclients/export/excel";
+  }
 }
