@@ -26,6 +26,9 @@ public class ClientDaoImplementation extends SqlQueryImpl implements ClientDaoAp
     @SqlQuery(sqlfilename = "sql/clients/insertclient.sql")
     public String SQL_INSERT_CLIENT;
 
+    @SqlQuery(sqlfilename = "sql/clients/insertclientWithID.sql")
+    public String SQL_INSERT_CLIENT_WITH_ID;
+
     @SqlQuery(sqlfilename = "sql/clients/updateclient.sql")
     public String SQL_UPDATE_CLIENT;
 
@@ -49,8 +52,13 @@ public class ClientDaoImplementation extends SqlQueryImpl implements ClientDaoAp
 
     @Override
     public boolean save(ClientRailway clientRailway) {
-         logger.info("Save new client." + "Client name: " + clientRailway.getName_client() +  " Time: " +  new Date().toString());
-        return databaseQuery.update(SQL_INSERT_CLIENT,clientRailway.getId_train(),clientRailway.getName_client(),clientRailway.getSoname_client(),clientRailway.getDate_purchase(),clientRailway.getPhone_client())>0;
+        if(clientRailway.getId_client()==null) {
+            logger.info("Save new client." + "Client name: " + clientRailway.getName_client() + " Time: " + new Date().toString());
+            return databaseQuery.update(SQL_INSERT_CLIENT, clientRailway.getId_train(), clientRailway.getName_client(), clientRailway.getSoname_client(), clientRailway.getDate_purchase(), clientRailway.getPhone_client()) > 0;
+        }else{
+            logger.info("Save new client with id." + "Client name: " + clientRailway.getName_client() + " Time: " + new Date().toString());
+            return databaseQuery.update(SQL_INSERT_CLIENT_WITH_ID, clientRailway.getId_client(),clientRailway.getId_train(), clientRailway.getName_client(), clientRailway.getSoname_client(), clientRailway.getDate_purchase(), clientRailway.getPhone_client()) > 0;
+        }
     }
 
     @Override

@@ -6,10 +6,7 @@ import com.mysql.cj.xdevapi.Client;
 import com.railwayticket.restclient.domains.ClientRailway;
 import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
-import com.railwayticket.restclient.util.ClientsExcelExporter;
-import com.railwayticket.restclient.util.ConvertDomain;
-import com.railwayticket.restclient.util.TrainsExcelExporter;
-import com.railwayticket.restclient.util.TrainsExcelImporter;
+import com.railwayticket.restclient.util.*;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
@@ -336,7 +333,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
     }
 
      @PostMapping("/api/train/excel/import")
-    public void importExcelToSql(@RequestParam("file")MultipartFile file) throws IOException {
+    public void importExcelToSqlTrains(@RequestParam("file")MultipartFile file) throws IOException {
         List<com.domain.Trains>allTrains = trainServiceApi.FindAll();
         TrainsExcelImporter excelImporter = new TrainsExcelImporter();
         List<Trains>importsTrains = excelImporter.ImportFromExcel(file,ConvertDomain.convertDomainTrainsList(allTrains));
@@ -349,4 +346,19 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
             }
         });
      }
+
+    @PostMapping("/api/clients/excel/import")
+    public void importExcelToSqlClients(@RequestParam("file")MultipartFile file) throws IOException {
+        List<com.domain.ClientRailway>allClients = clientServiceApi.FindAll();
+        ClientsExcelImporter excelImporter = new ClientsExcelImporter();
+        List<ClientRailway>importsClients = excelImporter.ImportFromExcel(file,ConvertDomain.convertDomainClientRailwayList(allClients));
+
+        importsClients.forEach(o1-> {
+            try {
+                clientServiceApi.save(ConvertDomain.convertDomainClientRailway(o1));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }

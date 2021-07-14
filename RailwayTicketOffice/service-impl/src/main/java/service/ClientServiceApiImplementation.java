@@ -13,6 +13,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.Date;
@@ -57,6 +58,11 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         }
      }
 
+    @Override
+    public void ImportExcel(MultipartFile file) {
+
+    }
+
 
     @Override
     public boolean save(ClientRailway clientRailway) throws ClientServiceException {
@@ -64,7 +70,8 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
                 new DefaultTransactionDefinition();
         TransactionStatus status = Objects.requireNonNull(transactionTemplate.getTransactionManager()).getTransaction(definition);
         try{
-            if(clientRailway!=null) {
+            ClientRailway fromDB = clientDao.getOneById(clientRailway.getId_client());
+            if(fromDB==null) {
                 logger.info("Save client successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
                 return clientDao.save(clientRailway);
             }else{

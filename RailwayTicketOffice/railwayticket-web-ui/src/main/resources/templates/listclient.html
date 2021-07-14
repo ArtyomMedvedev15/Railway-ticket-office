@@ -56,10 +56,10 @@
                 <div class="col" style="margin-bottom: 30px">
                     <a style="color: white" class="btn btn-outline-dark" href="http://localhost:8181//api/clients/listclients/export/excel" >Export to excel</a>
                 </div>
-                <form enctype="multipart/form-data" method="post" action="/listclients/import/excel" style="margin-left: 15px">
+                <form enctype="multipart/form-data" method="post" action="/client/import/excel" style="margin-left: 15px">
                     <div class="row">
                         <div class="col">
-                            <input class="form-control" placeholder="Import excel file" th:type="file" name="file">
+                            <input class="form-control" placeholder="Import excel file" type="file" name="file">
                         </div>
                         <div class="col">
                             <button style="color: white" class="btn btn-outline-dark" type="submit">Import</button>

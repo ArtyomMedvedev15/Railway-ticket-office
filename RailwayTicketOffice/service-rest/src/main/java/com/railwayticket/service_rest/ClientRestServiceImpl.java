@@ -8,15 +8,22 @@ import com.railwayticket.services_api.exception.ServiceException;
  import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class ClientRestServiceImpl implements ClientServiceApi {
 
@@ -105,4 +112,34 @@ public class ClientRestServiceImpl implements ClientServiceApi {
 
     }
 
+    @Override
+    public void ImportExcel(MultipartFile file) {
+
+        MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
+        bodyMap.add("file", new FileSystemResource(convert(file)));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(bodyMap, headers);
+
+        ResponseEntity<Void> response = restTemplate.postForEntity( base_url+"excel/import", request , Void.class );
+
+        logger.info("Import excel to database");
+    }
+
+    public static File convert(MultipartFile file)
+    {
+        File convFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
+        try {
+            convFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write(file.getBytes());
+            fos.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return convFile;
+    }
 }

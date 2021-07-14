@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
@@ -130,5 +131,11 @@ public class ClientController {
         return "oneClient";
     }
 
+    @PostMapping("/client/import/excel")
+    public String importtoExcel(@RequestParam(name = "file") MultipartFile file){
+        clientServiceApiRest.ImportExcel(file);
+        logger.info("Import data to database from excel");
+        return "redirect:/listClient";
+    }
 
 }
