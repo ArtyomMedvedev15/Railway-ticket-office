@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Clientrailway} from "./clientrailway";
+import {Train} from "./train";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import {Clientrailway} from "./clientrailway";
 export class ClientsService {
 
   private base_url = "http://localhost:8181/api/clients/"
+  formDt: FormData = new FormData();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -38,5 +40,17 @@ export class ClientsService {
 
   exportToExcel():void{
     window.location.href = this.base_url+"listclients/export/excel";
+  }
+
+  importFromExcel(file: File): Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', this.base_url + 'excel/import', formData, {
+      reportProgress: true
+    });
+
+    return this.httpClient.request(req);
   }
 }
