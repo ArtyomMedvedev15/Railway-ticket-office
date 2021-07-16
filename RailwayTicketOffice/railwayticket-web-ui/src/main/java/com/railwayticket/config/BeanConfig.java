@@ -2,6 +2,8 @@ package com.railwayticket.config;
 
 
 import com.ApiClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.railwayticket.service_rest.ClientRestServiceImpl;
 import com.railwayticket.service_rest.TrainRestServiceImpl;
 import com.railwayticket.services_api.ClientServiceApi;
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -66,5 +69,13 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         return new TrainRestControllerApi();
     }
 
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        MappingJackson2HttpMessageConverter converter =
+                new MappingJackson2HttpMessageConverter(mapper);
+        return converter;
+    }
 
 }

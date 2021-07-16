@@ -1,11 +1,12 @@
 package com.railwayticket.restclient.rest;
 
 import com.domain.Stations;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.mysql.cj.xdevapi.Client;
 import com.railwayticket.restclient.domains.ClientRailway;
 import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
-import com.railwayticket.restclient.util.ConvertDomain;
+import com.railwayticket.restclient.util.*;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
@@ -16,9 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import springfox.documentation.service.ResponseMessage;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -289,5 +294,71 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
 
         logger.info("Update train. " + "Train: " + trainUpdate.getNameTrain() + " With status OK");
         return new ResponseEntity<>(trainUpdate,httpHeaders,HttpStatus.OK);
+    }
+
+    @GetMapping("/api/clients/listclients/export/excel")
+    public void exportClientsToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        String filename = "clientsExcel_"+dateFormat.format(new Date())+".xlsx";
+        String headerValue = "attachement; filename="+filename;
+
+        response.setHeader(headerKey,headerValue);
+
+        List<com.domain.ClientRailway>AllClient = clientServiceApi.FindAll();
+
+        ClientsExcelExporter excelExporter = new ClientsExcelExporter(ConvertDomain.convertDomainClientRailwayList(AllClient));
+        excelExporter.ExportDataToExcel(response);
+        logger.info("Export client to file");
+    }
+
+    @GetMapping("/api/train/listtrains/export/excel")
+    public void exportTrainsToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        String filename = "trainsExcel"+dateFormat.format(new Date())+".xlsx";
+        String headerValue = "attachement; filename="+filename;
+
+        response.setHeader(headerKey,headerValue);
+
+        List<com.domain.Trains>AllTrains = trainServiceApi.FindAll();
+
+        TrainsExcelExporter excelExporter = new TrainsExcelExporter(ConvertDomain.convertDomainTrainsList(AllTrains));
+        excelExporter.ExportDataToExcel(response);
+        logger.info("Export client to file");
+    }
+
+     @PostMapping("/api/train/excel/import")
+    public void importExcelToSqlTrains(@RequestParam("file")MultipartFile file) throws IOException {
+        List<com.domain.Trains>allTrains = trainServiceApi.FindAll();
+        TrainsExcelImporter excelImporter = new TrainsExcelImporter();
+        List<Trains>importsTrains = excelImporter.ImportFromExcel(file,ConvertDomain.convertDomainTrainsList(allTrains));
+
+        importsTrains.forEach(o1-> {
+            try {
+                trainServiceApi.save(ConvertDomain.convertDomainTrains(o1));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
+     }
+
+    @PostMapping("/api/clients/excel/import")
+    public void importExcelToSqlClients(@RequestParam("file")MultipartFile file) throws IOException {
+        List<com.domain.ClientRailway>allClients = clientServiceApi.FindAll();
+        ClientsExcelImporter excelImporter = new ClientsExcelImporter();
+        List<ClientRailway>importsClients = excelImporter.ImportFromExcel(file,ConvertDomain.convertDomainClientRailwayList(allClients));
+
+        importsClients.forEach(o1-> {
+            try {
+                clientServiceApi.save(ConvertDomain.convertDomainClientRailway(o1));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -154,6 +155,13 @@ public class TrainController {
         model.addAttribute("ResultList",result_find);
 
         return "resultfindtrain";
+    }
+
+    @PostMapping("/import/excel")
+    public String importtoExcel(@RequestParam(name = "file")MultipartFile file){
+        trainServiceApiRest.ImportExcel(file);
+        logger.info("Import data to database from excel");
+        return "redirect:/listTrain";
     }
 
 }

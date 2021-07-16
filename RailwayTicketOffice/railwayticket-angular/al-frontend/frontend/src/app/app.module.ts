@@ -27,6 +27,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
+import {NgxMatFileInputModule} from "@angular-material-components/file-input";
 
 @NgModule({
   declarations: [
@@ -42,26 +43,27 @@ import {MatDividerModule} from "@angular/material/divider";
     TrainFindComponent,
     TrainResultfindComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSelectModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSortModule,
-    MatSidenavModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatDividerModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSelectModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSortModule,
+        MatSidenavModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatDividerModule,
+        NgxMatFileInputModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

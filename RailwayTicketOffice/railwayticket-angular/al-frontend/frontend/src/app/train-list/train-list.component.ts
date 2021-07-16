@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {TrainCreateComponent} from "../train-create/train-create.component";
 import {MatDialog} from '@angular/material/dialog';
 import {UpdateTrainComponent} from "../update-train/update-train.component";
+import {HttpEventType, HttpResponse} from "@angular/common/http";
 
 
 @Component({
@@ -23,7 +24,10 @@ export class TrainListComponent implements OnInit {
   dataSource: MatTableDataSource<Train>;
   train_list: Train[];
   trainUpdate:Train;
-
+  selectedFiles?: FileList;
+  currentFile?: File;
+  message = '';
+  errorMsg = '';
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -95,4 +99,48 @@ export class TrainListComponent implements OnInit {
   trainDetails(id_train: number){
     this.router.navigate(['trainone/', id_train]);
   }
+
+  exportToExcel():void{
+    this.trainService.ExportTrainsToExcel();
+  }
+
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files;
+  }
+
+  upload(): void {
+    this.errorMsg = '';
+
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
+
+      if (file) {
+        this.currentFile = file;
+
+        this.trainService.ImportTrainFromExcel(this.currentFile).subscribe(
+          (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              console.log(Math.round(100 * event.loaded / event.total));
+
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.responseMessage;
+            }
+          },
+          (err: any) => {
+            console.log(err);
+
+            if (err.error && err.error.responseMessage) {
+              this.errorMsg = err.error.responseMessage;
+            } else {
+              this.errorMsg = 'Error occurred while uploading a file!';
+            }
+
+            this.currentFile = undefined;
+            this.getAllTrain();
+          });
+      }
+      this.selectedFiles = undefined;
+    }
+  }
+
 }

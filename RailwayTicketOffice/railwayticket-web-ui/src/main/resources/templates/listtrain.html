@@ -33,13 +33,33 @@
     </nav>
 
     <section class="list_train">
+        <div class="title_list_train" style="text-align: center">
+            <p id="name_page">List of trains</p>
+        </div>
+
         <div class="container">
-            <div class="title_list_train">
-                <p id="name_page">List of trains</p>
+            <div class="col" style="margin-bottom: 30px">
+                <a style="color: white" id="open_modal" class="btn btn-outline-dark transition" href="#">Add new train</a>
             </div>
-            <div class="default_btn transition modal_open_btn">
-                <a id="open_modal" class="transition" href="#">Add new train</a>
+
+            <div class="export_import_btn">
+                <div class="col" style="margin-bottom: 30px">
+                    <a style="color: white" class="btn btn-outline-dark transition" href="http://localhost:8181/api/train/listtrains/export/excel">Export to excel</a>
+                </div>
+                <form style="margin-left: 15px; margin-bottom: 30px" enctype="multipart/form-data" method="post" action="/import/excel">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control" placeholder="Import excel file" type="file" name="file">
+                        </div>
+                        <div class="col">
+                            <button style="color: white" class="btn btn-outline-dark" type="submit">Import</button>
+                        </div>
+                    </div>
+                </form>
             </div>
+        </div>
+
+            <div class="container">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                 <div class="table-responsive">

@@ -12,9 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,9 +41,14 @@ public class ClientController {
 
     @GetMapping("/listClient")
     public String listClientPage(Model model) throws ServiceException {
-        List<com.rest.domains.ClientRailway> ClientList = clientRestApi.allClientUsingGET();
-        logger.info("Client list page load. " + "List client size: " + ClientList.size() + " Time: " + new Date().toString());
-        model.addAttribute("ClientList",ClientList);
+        try {
+            List<com.rest.domains.ClientRailway> ClientList = clientRestApi.allClientUsingGET();
+            logger.info("Client list page load. " + "List client size: " + ClientList.size() + " Time: " + new Date().toString());
+            model.addAttribute("ClientList", ClientList);
+        }catch (HttpClientErrorException ex){
+            List<com.rest.domains.ClientRailway> ClientList = new ArrayList<>();
+            model.addAttribute("ClientList", ClientList);
+        }
         return "listclient";
     }
 
@@ -120,6 +129,13 @@ public class ClientController {
         model.addAttribute("oneClient",clientRestApi.clientRailwayByIdUsingGET(Long.valueOf(id)));
         logger.info("One client by id. " + " Client id: " + id);
         return "oneClient";
+    }
+
+    @PostMapping("/client/import/excel")
+    public String importtoExcel(@RequestParam(name = "file") MultipartFile file){
+        clientServiceApiRest.ImportExcel(file);
+        logger.info("Import data to database from excel");
+        return "redirect:/listClient";
     }
 
 }

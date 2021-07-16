@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Clientrailway} from "./clientrailway";
+import {Train} from "./train";
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,21 @@ export class ClientsService {
 
   findClientByName(name:string):Observable<Clientrailway[]>{
     return this.httpClient.get<Clientrailway[]>(this.base_url+"findclientbyname/"+name);
+  }
+
+  exportToExcel():void{
+    window.location.href = this.base_url+"listclients/export/excel";
+  }
+
+  importFromExcel(file: File): Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', this.base_url + 'excel/import', formData, {
+      reportProgress: true
+    });
+
+    return this.httpClient.request(req);
   }
 }

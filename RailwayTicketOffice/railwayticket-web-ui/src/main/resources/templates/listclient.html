@@ -31,24 +31,45 @@
         </div>
     </nav>
     <section class="list_train">
-        <div class="container-fluid">
-            <div class="title_list_train">
-                <p id="name_page">List of client</p>
+        <div class="title_list_train" style="text-align: center">
+            <p id="name_page">List of client</p>
+        </div>
+
+        <div class="container">
+            <div class="col">
+                <div class="export_import_btn" style="margin-bottom: 30px;">
+                    <form th:action="@{/FindClientByName}" th:method="post">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-control" type="search" placeholder="search by name" th:name="name_client" id="example-search-input"/>
+                            </div>
+                            <div class="col">
+                                <button style="color: white" class="btn btn-outline-dark" type="submit">
+                                    find
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="input-group col-md-4">
-                <form th:action="@{/FindClientByName}" th:method="post">
+            <div class="export_import_btn">
+                <div class="col" style="margin-bottom: 30px">
+                    <a style="color: white" class="btn btn-outline-dark" href="http://localhost:8181//api/clients/listclients/export/excel" >Export to excel</a>
+                </div>
+                <form enctype="multipart/form-data" method="post" action="/client/import/excel" style="margin-left: 15px">
                     <div class="row">
                         <div class="col">
-                             <input class="form-control" type="search" placeholder="search by name" th:name="name_client" id="example-search-input"/>
+                            <input class="form-control" placeholder="Import excel file" type="file" name="file">
                         </div>
                         <div class="col">
-                            <button class="btn btn-outline-dark" type="submit">
-                               find
-                            </button>
+                            <button style="color: white" class="btn btn-outline-dark" type="submit">Import</button>
                         </div>
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="container">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="table-responsive">
                     <table class="table">
