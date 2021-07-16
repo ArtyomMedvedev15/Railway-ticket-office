@@ -10,7 +10,6 @@ import {Train} from "./train";
 export class ClientsService {
 
   private base_url = "http://localhost:8181/api/clients/"
-  formDt: FormData = new FormData();
 
   constructor(private httpClient: HttpClient) { }
 

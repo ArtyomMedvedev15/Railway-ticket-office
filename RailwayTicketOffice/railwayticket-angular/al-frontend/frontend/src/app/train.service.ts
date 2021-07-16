@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Clientrailway} from "./clientrailway";
 import {Train} from "./train";
@@ -45,5 +45,17 @@ export class TrainService {
 
   ExportTrainsToExcel():void{
     window.location.href = this.base_url+"listtrains/export/excel";
+   }
+
+   ImportTrainFromExcel(file: File): Observable<HttpEvent<any>>{
+     const formData: FormData = new FormData();
+
+     formData.append('file', file);
+
+     const req = new HttpRequest('POST', this.base_url + 'excel/import', formData, {
+       reportProgress: true
+     });
+
+     return this.httpClient.request(req);
    }
 }
