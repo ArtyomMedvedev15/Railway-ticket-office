@@ -2,6 +2,7 @@ package com.railwayticket.controller;
 
 
 import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
 import com.railwayticket.services_api.exception.ServiceException;
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +34,9 @@ public class ClientController {
 
     @Autowired
     private com.rest.ClientRestControllerApi clientRestApi;
+
+    @Autowired
+    private MailSenderApi mailSender;
 
     @GetMapping("/")
     public String homePage(){
@@ -138,4 +143,22 @@ public class ClientController {
         return "redirect:/listClient";
     }
 
-}
+    @GetMapping("/contactform")
+    public String contactForm(){
+        return "contactForm";
+    }
+
+    @PostMapping("/contactform")
+    public String sendContactForm(@RequestParam(name = "email")String email,
+                                  @RequestParam(name = "subject")String subject,
+                                  @RequestParam(name = "message")String message,
+                                  @RequestParam(name = "file")MultipartFile file) throws MessagingException {
+        try {
+            mailSender.SendMessageWithAttchement(email,subject,message,file);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/contactform";
+    }
+
+ }

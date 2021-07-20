@@ -5,8 +5,10 @@ import com.ApiClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.railwayticket.service_rest.ClientRestServiceImpl;
+import com.railwayticket.service_rest.MailSenderRestServiceImpl;
 import com.railwayticket.service_rest.TrainRestServiceImpl;
 import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.rest.ClientRestControllerApi;
 import com.rest.TrainRestControllerApi;
@@ -76,6 +78,11 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         MappingJackson2HttpMessageConverter converter =
                 new MappingJackson2HttpMessageConverter(mapper);
         return converter;
+    }
+
+    @Bean
+    public MailSenderApi MailServiceRestService(){
+        return new MailSenderRestServiceImpl();
     }
 
 }
