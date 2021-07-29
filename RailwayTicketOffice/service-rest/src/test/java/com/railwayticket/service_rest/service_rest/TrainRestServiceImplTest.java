@@ -1,11 +1,9 @@
-package com.railwayticket.service.service_rest;
+package com.railwayticket.service_rest.service_rest;
 
 import com.domain.Stations;
 import com.domain.Trains;
 import com.domain.TypeTrain;
-import com.railwayticket.config.BeanConfig;
-import com.railwayticket.config.DispatcherServletInitializer;
-
+import com.railwayticket.service_rest.config.BeanConfig;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ServiceException;
 import com.railwayticket.services_api.exception.TrainServiceException;
@@ -19,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.sql.Date;
 import java.util.List;

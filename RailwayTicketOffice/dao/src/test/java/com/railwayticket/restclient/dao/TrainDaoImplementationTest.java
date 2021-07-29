@@ -5,8 +5,6 @@ import com.domain.Stations;
 import com.domain.Trains;
 import com.domain.TypeTrain;
 import com.railwayticket.dao_api.TrainDaoApi;
-
-
 import com.railwayticket.restclient.config.BeanConfig;
 import com.railwayticket.restclient.config.DispatcherServletInitializer;
 import junit.framework.TestCase;

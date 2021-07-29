@@ -1,9 +1,8 @@
-package com.railwayticket.service.service_rest;
+package com.railwayticket.service_rest.service_rest;
 
 import com.domain.ClientRailway;
-import com.railwayticket.config.BeanConfig;
-import com.railwayticket.config.DispatcherServletInitializer;
-
+import com.railwayticket.service_rest.config.BeanConfig;
+import com.railwayticket.service_rest.config.DispatcherServletInitializer;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
 import com.railwayticket.services_api.exception.ServiceException;

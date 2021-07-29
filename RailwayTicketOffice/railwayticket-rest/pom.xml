@@ -203,12 +203,14 @@
             <artifactId>spring-context-support</artifactId>
             <version>5.1.6.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>com.railwayticket.service-rest</groupId>
             <artifactId>service-rest</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
