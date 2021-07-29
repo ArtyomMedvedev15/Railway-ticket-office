@@ -28,7 +28,6 @@ import javax.sql.DataSource;
 import java.util.Locale;
 
 @Configuration
-@EnableWebMvc
 public class BeanConfig {
 
     private final ApplicationContext applicationContext;
