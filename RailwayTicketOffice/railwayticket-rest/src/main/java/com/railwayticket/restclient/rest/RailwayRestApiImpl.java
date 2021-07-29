@@ -8,6 +8,7 @@ import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
 import com.railwayticket.restclient.util.*;
 import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
 import com.railwayticket.services_api.exception.ServiceException;
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.service.ResponseMessage;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,6 +46,8 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
     @Autowired
     private TrainServiceApi trainServiceApi;
 
+    @Autowired
+    private MailSenderApi mailSender;
 
     @Override
     @CrossOrigin(origins = "http://localhost:4200")
@@ -360,5 +366,19 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
                 e.printStackTrace();
             }
         });
+    }
+
+    @PostMapping("/sendemail")
+    public ResponseEntity<Boolean>SendMessage(@RequestParam(name = "email")String email,
+                                              @RequestParam(name = "subject")String subject,
+                                              @RequestParam(name = "message")String message,
+                                              @RequestParam(name = "file")MultipartFile file) throws IOException, MessagingException {
+        if(mailSender.SendMessageWithAttchement(email,subject,message,file)) {
+            logger.info("Send email with email - " + email + new Date());
+            return new ResponseEntity<>(Boolean.TRUE,HttpStatus.OK);
+        }else{
+            logger.error("Not send email.");
+            return new ResponseEntity<>(Boolean.FALSE,HttpStatus.BAD_REQUEST);
+        }
     }
 }

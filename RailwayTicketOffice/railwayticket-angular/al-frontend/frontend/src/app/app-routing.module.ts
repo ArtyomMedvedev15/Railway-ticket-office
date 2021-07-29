@@ -10,6 +10,7 @@ import {UpdateTrainComponent} from "./update-train/update-train.component";
 import {TrainDetailsComponent} from "./train-details/train-details.component";
 import {TrainResultfindComponent} from "./train-resultfind/train-resultfind.component";
 import {TrainFindComponent} from "./train-find/train-find.component";
+import {ContactUSComponent} from "./contact-us/contact-us.component";
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path:'updateTrain/:id_train',component:UpdateTrainComponent},
   {path:'trainone/:id_train',component:TrainDetailsComponent},
   {path:'resultfind/:arrivalDate/:arrivalStationFind/:departureDate/:departureStationFind',component:TrainResultfindComponent},
-  {path:'trainfind',component:TrainFindComponent}
+  {path:'trainfind', component:TrainFindComponent},
+  {path:'contactus', component:ContactUSComponent}
 ];
 
 @NgModule({

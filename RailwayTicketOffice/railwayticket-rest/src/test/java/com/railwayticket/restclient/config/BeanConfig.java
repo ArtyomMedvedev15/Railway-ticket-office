@@ -7,6 +7,7 @@ import com.railwayticket.dao.TrainDaoImplementation;
 import com.railwayticket.dao_api.ClientDaoApi;
 import com.railwayticket.dao_api.TrainDaoApi;
 import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import service.ClientServiceApiImplementation;
+import service.MailServiceApiImplementation;
 import service.TrainServiceApiApiImplementation;
 
 import javax.sql.DataSource;
@@ -101,5 +103,10 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
         }else{
             return new Faker(new Locale("en"));
         }
+    }
+
+    @Bean
+    public MailSenderApi getMailService(){
+        return new MailServiceApiImplementation();
     }
 }

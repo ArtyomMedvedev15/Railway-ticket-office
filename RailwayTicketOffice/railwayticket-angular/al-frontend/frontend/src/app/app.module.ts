@@ -28,6 +28,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {NgxMatFileInputModule} from "@angular-material-components/file-input";
+import { ContactUSComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {NgxMatFileInputModule} from "@angular-material-components/file-input";
     UpdateTrainComponent,
     TrainDetailsComponent,
     TrainFindComponent,
-    TrainResultfindComponent
+    TrainResultfindComponent,
+    ContactUSComponent
   ],
     imports: [
         BrowserModule,

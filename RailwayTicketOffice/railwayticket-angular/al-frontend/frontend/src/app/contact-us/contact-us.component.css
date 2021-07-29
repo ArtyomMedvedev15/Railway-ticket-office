@@ -1,0 +1,50 @@
+h1 {
+  color: #fff;
+  padding-top: 20px;
+  margin: 0;
+  text-align: center;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white;
+}
+::ng-deep mat-form-field .mat-hint, ::ng-deep mat-form-field input, ::ng-deep mat-form-field ::placeholder, ::ng-deep mat-form-field .mat-form-field-label {
+  color: white;
+}
+form {
+  width: 50%;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.mat-focused .mat-form-field-label {
+  color: #fff !important;
+}
+.mat-input-element {
+  caret-color: #fff !important;
+}
+.mat-form-field-ripple {
+  background-color: #fff !important;
+}
+.mat-form-field {
+  width: 100%;
+}
+.btn-custom {
+  background-color: #808e9b !important;
+  color: #fff !important;
+  padding-right: 8px !important;
+  height: 40px;
+}
+.btn-custom .material-icons {
+  padding-left: 8px !important;
+}
+@media (max-width: 786px) {
+  form {
+    width: 70%;
+  }
+}
