@@ -50,7 +50,7 @@ import com.auth.HttpBasicAuth;
 import com.auth.ApiKeyAuth;
 import com.auth.OAuth;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-07-22T22:02:48.142+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-07-29T21:20:29.345+03:00")
 @Component("com.ApiClient")
 public class ApiClient {
     public enum CollectionFormat {
