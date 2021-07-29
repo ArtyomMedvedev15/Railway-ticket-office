@@ -1,0 +1,28 @@
+<h2 class="text-left" style="font-family: 'Noto Sans JP', sans-serif;">Contact us</h2>
+
+<div class="content">
+  <form ngNativeValidate>
+  <mat-form-field>
+    <input [(ngModel)]="emailSend" type="email" name="email" matInput placeholder="Enter your email" required/>
+    <mat-icon matSuffix>drafts</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <input [(ngModel)]="subject" name="subject" matInput placeholder="Subject" required>
+    <mat-icon matSuffix>create</mat-icon>
+  </mat-form-field>
+  <div class="row">
+    <div class="col">
+      <label class="btn btn-default p-0">
+        <input type="file" name="file" (change)="selectFile($event)"/>
+      </label>
+    </div>
+  </div>
+  <mat-form-field>
+    <textarea [(ngModel)]="messages" name="message" matInput placeholder="Textarea" required></textarea>
+    <mat-icon matSuffix>save</mat-icon>
+  </mat-form-field>
+  <button (click)="send()" mat-raised-button color="primary">Send Now<i class="material-icons">
+    send
+  </i></button>
+  </form>
+</div>

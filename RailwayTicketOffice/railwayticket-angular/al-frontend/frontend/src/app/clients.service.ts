@@ -52,4 +52,19 @@ export class ClientsService {
 
     return this.httpClient.request(req);
   }
+
+  sendmail(email:string,subject:string,message:string,file:File):Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+
+    formData.append('email',email);
+    formData.append('subject',subject);
+    formData.append('message',message);
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', 'http://localhost:8181/sendemail', formData, {
+      reportProgress: true
+    });
+
+    return this.httpClient.request(req);
+  }
 }

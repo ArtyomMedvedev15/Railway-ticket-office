@@ -374,8 +374,10 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
                                               @RequestParam(name = "message")String message,
                                               @RequestParam(name = "file")MultipartFile file) throws IOException, MessagingException {
         if(mailSender.SendMessageWithAttchement(email,subject,message,file)) {
+            logger.info("Send email with email - " + email + new Date());
             return new ResponseEntity<>(Boolean.TRUE,HttpStatus.OK);
         }else{
+            logger.error("Not send email.");
             return new ResponseEntity<>(Boolean.FALSE,HttpStatus.BAD_REQUEST);
         }
     }
