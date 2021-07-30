@@ -1,12 +1,19 @@
 package com.domain;
 
+import com.domain.util.DateTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.sql.Date;
 import java.util.Objects;
 
+@XmlRootElement(name = "client")
+@XmlAccessorType(XmlAccessType.FIELD)
 @ApiModel(description = "Details info about the clients")
 public class ClientRailway {
     @ApiModelProperty(notes = "The unique id of the client")
@@ -17,6 +24,8 @@ public class ClientRailway {
     private String name_client;
     @ApiModelProperty(notes = "The client's soname")
     private String soname_client;
+
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     @ApiModelProperty(notes = "Date when the ticket was purchased",example = "2020-09-15")
     @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     private Date date_purchase;

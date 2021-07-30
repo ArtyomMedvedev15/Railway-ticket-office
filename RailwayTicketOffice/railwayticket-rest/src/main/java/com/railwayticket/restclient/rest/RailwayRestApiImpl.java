@@ -1,12 +1,14 @@
 package com.railwayticket.restclient.rest;
 
-import com.domain.Stations;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.mysql.cj.xdevapi.Client;
+import com.domain.*;
 import com.railwayticket.restclient.domains.ClientRailway;
 import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
 import com.railwayticket.restclient.util.*;
+import com.railwayticket.restclient.util.dto.ClientsDto;
+import com.railwayticket.restclient.util.dto.TrainsDto;
+import com.railwayticket.restclient.util.xml.ClientsXmlExporter;
+import com.railwayticket.restclient.util.xml.TrainsXmlExporter;
 import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.TrainServiceApi;
@@ -20,13 +22,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import springfox.documentation.service.ResponseMessage;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -317,7 +317,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
 
         ClientsExcelExporter excelExporter = new ClientsExcelExporter(ConvertDomain.convertDomainClientRailwayList(AllClient));
         excelExporter.ExportDataToExcel(response);
-        logger.info("Export client to file");
+        logger.info("Export client to excel file");
     }
 
     @GetMapping("/api/train/listtrains/export/excel")
@@ -335,7 +335,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
 
         TrainsExcelExporter excelExporter = new TrainsExcelExporter(ConvertDomain.convertDomainTrainsList(AllTrains));
         excelExporter.ExportDataToExcel(response);
-        logger.info("Export client to file");
+        logger.info("Export client to excel file");
     }
 
      @PostMapping("/api/train/excel/import")
@@ -381,4 +381,48 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
             return new ResponseEntity<>(Boolean.FALSE,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/api/clients/export/client/xml")
+    public void exportClientsToXml(HttpServletResponse response) throws JAXBException, IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        String filename = "clientList"+dateFormat.format(new Date())+".xml";
+        String headerValue = "attachement; filename="+filename;
+
+        response.setHeader(headerKey,headerValue);
+
+        List<com.domain.ClientRailway>AllClients = clientServiceApi.FindAll();
+        ClientsDto clientsDto = new ClientsDto();
+        clientsDto.setClients(AllClients);
+
+        ClientsXmlExporter clientsXmlExporter = new ClientsXmlExporter(clientsDto);
+        clientsXmlExporter.ClientsXmlExporterFile(response);
+        logger.info("Export client to xml file");
+    }
+
+    @GetMapping("/api/train/export/trains/xml")
+    public void exportTrainsToXml(HttpServletResponse response) throws JAXBException, IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        String filename = "trainList"+dateFormat.format(new Date())+".xml";
+        String headerValue = "attachement; filename="+filename;
+
+        response.setHeader(headerKey,headerValue);
+
+        List<com.domain.Trains>AllTrains = trainServiceApi.FindAll();
+
+        System.out.println(AllTrains);
+
+        TrainsDto trainsDto = new TrainsDto();
+        trainsDto.setTrains(AllTrains);
+
+        TrainsXmlExporter trainsXmlExporter = new TrainsXmlExporter(trainsDto);
+        trainsXmlExporter.TrainsXmlExporterFile(response);
+        logger.info("Export train to xml file");
+    }
+
 }
