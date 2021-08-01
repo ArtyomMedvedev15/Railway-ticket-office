@@ -5,11 +5,15 @@ import com.railwayticket.restclient.domains.ClientRailway;
 import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
 import com.railwayticket.restclient.util.*;
-import com.railwayticket.restclient.util.dto.ClientsDto;
-import com.railwayticket.restclient.util.dto.TrainsDto;
 import com.railwayticket.restclient.util.xml.ClientsXmlExporter;
 import com.railwayticket.restclient.util.xml.TrainsXmlExporter;
-import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.restclient.util.dto.ClientsDto;
+import com.railwayticket.restclient.util.dto.TrainsDto;
+import com.railwayticket.restclient.util.excel.ClientsExcelExporter;
+import com.railwayticket.restclient.util.excel.ClientsExcelImporter;
+import com.railwayticket.restclient.util.excel.TrainsExcelExporter;
+import com.railwayticket.restclient.util.excel.TrainsExcelImporter;
+  import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
@@ -388,7 +392,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         String headerKey = "Content-Disposition";
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
-        String filename = "clientList"+dateFormat.format(new Date())+".xml";
+        String filename = "clientList"+dateFormat.format(new Date())+".tar.gz";
         String headerValue = "attachement; filename="+filename;
 
         response.setHeader(headerKey,headerValue);
@@ -399,7 +403,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
 
         ClientsXmlExporter clientsXmlExporter = new ClientsXmlExporter(clientsDto);
         clientsXmlExporter.ClientsXmlExporterFile(response);
-        logger.info("Export client to xml file");
+        logger.info("Export client xml to archive");
     }
 
     @GetMapping("/api/train/export/trains/xml")
@@ -408,7 +412,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         String headerKey = "Content-Disposition";
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
-        String filename = "trainList"+dateFormat.format(new Date())+".xml";
+        String filename = "trainList"+dateFormat.format(new Date())+".tar.gz";
         String headerValue = "attachement; filename="+filename;
 
         response.setHeader(headerKey,headerValue);
@@ -422,7 +426,7 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
 
         TrainsXmlExporter trainsXmlExporter = new TrainsXmlExporter(trainsDto);
         trainsXmlExporter.TrainsXmlExporterFile(response);
-        logger.info("Export train to xml file");
+        logger.info("Export train xml to archive");
     }
 
 }
