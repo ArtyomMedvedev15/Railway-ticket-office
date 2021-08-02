@@ -48,6 +48,9 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
         try{
             Trains trainFromDB = trainDaoApi.getOneById(trains.getId_train());
             if(trainFromDB==null) {
+                    logger.info("Commit transaction with status: " + status + "Time: " + new Date().toString());
+                    transactionTemplate.getTransactionManager().commit(status);
+
                     logger.info("Save train successfully. Name: " + trains.getName_train() +
                             " station departure: " + trains.getDepartureStation().getNameStation() + " station arrival: "
                             + trains.getArrivalStation().getNameStation() + " Time: " + new Date().toString());
@@ -56,13 +59,11 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
                 logger.error("Train for save equal null" + " Time: " + new Date().toString());
                 throw new TrainServiceException("Error train for save equal null");
             }
+
         }catch (TrainServiceException ex){
             transactionTemplate.getTransactionManager().rollback(status);
             logger.error("Save train unsuccessfully. Name: " + " Time: " + new Date().toString());
             return false;
-        }finally {
-            logger.info("Commit transaction with status: " + status + "Time: " + new Date().toString());
-            transactionTemplate.getTransactionManager().commit(status);
         }
      }
 
@@ -184,6 +185,11 @@ public class TrainServiceApiApiImplementation implements TrainServiceApi {
 
     @Override
     public void ImportExcel(MultipartFile file) {
+
+    }
+
+    @Override
+    public void ImportXml(MultipartFile file) {
 
     }
 }

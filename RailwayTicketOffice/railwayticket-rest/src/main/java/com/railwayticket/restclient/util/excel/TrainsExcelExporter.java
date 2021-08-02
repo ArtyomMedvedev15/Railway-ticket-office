@@ -1,7 +1,9 @@
-package com.railwayticket.restclient.util;
+package com.railwayticket.restclient.util.excel;
 
-import com.railwayticket.restclient.domains.ClientRailway;
+import com.railwayticket.restclient.domains.Trains;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ClientsExcelExporter {
+public class TrainsExcelExporter {
 
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
-    private List<ClientRailway> clientRailwayList;
+    private List<com.railwayticket.restclient.domains.Trains>trainsList;
 
-    public ClientsExcelExporter(List<ClientRailway> clientRailwayList) {
-        this.clientRailwayList = clientRailwayList;
+    public TrainsExcelExporter(List<com.railwayticket.restclient.domains.Trains> trainsList) {
+        this.trainsList = trainsList;
         workbook = new XSSFWorkbook();
-        sheet = workbook.createSheet("Clients");
+        sheet = workbook.createSheet("Trains");
     }
 
-    private void WriteHeaderRow() {
+    private void WriteHeaderRow(){
         Row row = sheet.createRow(0);
         CellStyle cellStyle = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
@@ -44,34 +46,49 @@ public class ClientsExcelExporter {
         cellStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
 
         Cell cell = row.createCell(0);
-        cell.setCellValue("Client ID");
+        cell.setCellValue("Train ID");
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(1);
-        cell.setCellValue("Train ID");
+        cell.setCellValue("Train Name");
         cell.setCellStyle(cellStyle);
 
 
         cell = row.createCell(2);
-        cell.setCellValue("Name Client");
+        cell.setCellValue("Train Type");
         cell.setCellStyle(cellStyle);
 
 
         cell = row.createCell(3);
-        cell.setCellValue("Soname Client");
+        cell.setCellValue("Departure station");
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(4);
-        cell.setCellValue("Phone Client");
+        cell.setCellValue("Arrival station");
         cell.setCellStyle(cellStyle);
 
         cell = row.createCell(5);
-        cell.setCellValue("Date purchapse");
+        cell.setCellValue("Date time departure");
         cell.setCellStyle(cellStyle);
 
+        cell = row.createCell(6);
+        cell.setCellValue("Date time arrival");
+        cell.setCellStyle(cellStyle);
+
+        cell = row.createCell(7);
+        cell.setCellValue("Total Ticket");
+        cell.setCellStyle(cellStyle);
+
+        cell = row.createCell(8);
+        cell.setCellValue("Available Ticket");
+        cell.setCellStyle(cellStyle);
+
+        cell = row.createCell(9);
+        cell.setCellValue("Price Ticket");
+        cell.setCellStyle(cellStyle);
     }
 
-    private void WriteDataRows() {
+    private void WriteDataRows(){
         int row_count = 1;
 
         CellStyle cellStyle = workbook.createCellStyle();
@@ -90,38 +107,58 @@ public class ClientsExcelExporter {
 
         cellStyle.setBorderRight(BorderStyle.THIN);
         cellStyle.setRightBorderColor(IndexedColors.BLACK.getIndex());
-        for (ClientRailway clientRailway : clientRailwayList) {
+        for (Trains train: trainsList){
             Row row = sheet.createRow(row_count++);
 
             Cell cell = row.createCell(0);
-            cell.setCellValue(clientRailway.getIdClient());
+            cell.setCellValue(train.getIdTrain());
             sheet.autoSizeColumn(0);
             cell.setCellStyle(cellStyle);
 
             cell = row.createCell(1);
-            cell.setCellValue(clientRailway.getIdTrain());
+            cell.setCellValue(train.getNameTrain());
             sheet.autoSizeColumn(1);
             cell.setCellStyle(cellStyle);
 
             cell = row.createCell(2);
-            cell.setCellValue(clientRailway.getNameClient());
+            cell.setCellValue(train.getTypeTrain().getValue());
             sheet.autoSizeColumn(2);
             cell.setCellStyle(cellStyle);
 
             cell = row.createCell(3);
-            cell.setCellValue(clientRailway.getSonameClient());
+            cell.setCellValue(train.getDepartureStation().getValue());
             sheet.autoSizeColumn(3);
             cell.setCellStyle(cellStyle);
 
             cell = row.createCell(4);
-            cell.setCellValue(clientRailway.getPhoneClient());
+            cell.setCellValue(train.getArrivalStation().getValue());
             sheet.autoSizeColumn(4);
 
             cell.setCellStyle(cellStyle);
 
             cell = row.createCell(5);
-            cell.setCellValue(clientRailway.getDatePurchase());
+            cell.setCellValue(train.getDateTimeDeparture());
             sheet.autoSizeColumn(5);
+            cell.setCellStyle(cellStyle);
+
+            cell = row.createCell(6);
+            cell.setCellValue(train.getDateTimeArrival());
+            sheet.autoSizeColumn(6);
+            cell.setCellStyle(cellStyle);
+
+            cell = row.createCell(7);
+            cell.setCellValue(train.getTotalTicket());
+            sheet.autoSizeColumn(7);
+            cell.setCellStyle(cellStyle);
+
+            cell = row.createCell(8);
+            cell.setCellValue(train.getAvailableTicket());
+            sheet.autoSizeColumn(8);
+            cell.setCellStyle(cellStyle);
+
+            cell = row.createCell(9);
+            cell.setCellValue(train.getPriceTicket());
+            sheet.autoSizeColumn(9);
             cell.setCellStyle(cellStyle);
 
         }
@@ -136,5 +173,4 @@ public class ClientsExcelExporter {
         workbook.close();
         outputStream.close();
     }
-
 }

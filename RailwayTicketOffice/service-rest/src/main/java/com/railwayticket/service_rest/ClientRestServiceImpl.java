@@ -126,6 +126,20 @@ public class ClientRestServiceImpl implements ClientServiceApi {
         logger.info("Import excel to database");
     }
 
+    @Override
+    public void ImportXml(MultipartFile file) {
+        MultiValueMap<String, Object> bodyMap = new LinkedMultiValueMap<>();
+        bodyMap.add("file", new FileSystemResource(convert(file)));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<MultiValueMap<String, Object>>(bodyMap, headers);
+
+        ResponseEntity<Void> response = restTemplate.postForEntity( base_url+"xml/import", request , Void.class );
+
+        logger.info("Import xml to database");
+    }
+
     public static File convert(MultipartFile file)
     {
         File convFile = new File(Objects.requireNonNull(file.getOriginalFilename()));

@@ -158,9 +158,16 @@ public class TrainController {
     }
 
     @PostMapping("/import/excel")
-    public String importtoExcel(@RequestParam(name = "file")MultipartFile file){
+    public String ImportFromExcel(@RequestParam(name = "file")MultipartFile file){
         trainServiceApiRest.ImportExcel(file);
         logger.info("Import data to database from excel");
+        return "redirect:/listTrain";
+    }
+
+    @PostMapping("/import/xml")
+    public String ImportFromXml(@RequestParam(name = "file")MultipartFile file){
+        trainServiceApiRest.ImportXml(file);
+        logger.info("Import data to database from xml");
         return "redirect:/listTrain";
     }
 

@@ -1,39 +1,53 @@
 package com.domain;
 
+import com.domain.util.DateTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.sql.Date;
- import java.util.Objects;
+import java.util.Objects;
 
 
+@XmlRootElement(name = "train")
+@XmlAccessorType(XmlAccessType.FIELD)
 @ApiModel(description = "Details info about the trains")
 public class Trains {
-    @ApiModelProperty(notes = "The unique id of the train")
+
+     @ApiModelProperty(notes = "The unique id of the train")
     private Long id_train;
-    @ApiModelProperty(notes = "The train's name")
+
+     @ApiModelProperty(notes = "The train's name")
     private String name_train;
-    @ApiModelProperty(notes = "The train's type")
+
+     @ApiModelProperty(notes = "The train's type")
     private TypeTrain typeTrain;
-    @ApiModelProperty(notes = "The station where the train starts from")
+
+     @ApiModelProperty(notes = "The station where the train starts from")
     private Stations departureStation;
-    @ApiModelProperty(notes = "The station where the train arrives")
+
+     @ApiModelProperty(notes = "The station where the train arrives")
     private Stations arrivalStation;
 
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     @ApiModelProperty(notes = "Date of departure of the train from the station",example = "2020-09-15")
     private Date date_time_departure;
 
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     @ApiModelProperty(notes = "Date of arrival of the train at the st",example = "2020-09-15")
     private Date date_time_arrival;
 
-    @ApiModelProperty(notes = "Number of available tickets")
+     @ApiModelProperty(notes = "Number of available tickets")
     private Integer available_ticket;
-    @ApiModelProperty(notes = "Total number of tickets")
+
+     @ApiModelProperty(notes = "Total number of tickets")
     private Integer total_ticket;
-    @ApiModelProperty(notes = "The price for a ticket")
+
+     @ApiModelProperty(notes = "The price for a ticket")
     private Float price_ticket;
 
     public Trains() {

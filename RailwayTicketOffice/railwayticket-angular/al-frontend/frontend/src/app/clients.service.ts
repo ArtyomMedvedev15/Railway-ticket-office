@@ -41,12 +41,29 @@ export class ClientsService {
     window.location.href = this.base_url+"listclients/export/excel";
   }
 
+
+  exportToXml():void{
+    window.location.href = this.base_url+"export/client/xml";
+  }
+
   importFromExcel(file: File): Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
 
     formData.append('file', file);
 
     const req = new HttpRequest('POST', this.base_url + 'excel/import', formData, {
+      reportProgress: true
+    });
+
+    return this.httpClient.request(req);
+  }
+
+  importFromXml(file: File): Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', this.base_url + 'xml/import', formData, {
       reportProgress: true
     });
 

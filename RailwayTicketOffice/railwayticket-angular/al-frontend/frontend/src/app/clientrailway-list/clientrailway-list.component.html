@@ -1,4 +1,18 @@
-<h2 class="text-left" style="font-family: 'Noto Sans JP', sans-serif;">Client railway list</h2>
+<h2 class="text-left" style="font-family: 'Noto Sans JP', sans-serif;">Client railway list
+<button style="top: 5px" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="ExportToExcel()">
+    <mat-icon>arrow_downward</mat-icon>
+    <span>Export excel</span>
+  </button>
+  <button mat-menu-item (click)="ExportToXml()">
+    <mat-icon>arrow_downward</mat-icon>
+    <span>Export xml</span>
+  </button>
+</mat-menu>
+</h2>
 <form (ngSubmit)="findclientbyname(name_client)">
   <div class="row">
     <div class="form-group col">
@@ -20,29 +34,36 @@
 
 <div class="row">
   <div class="col">
-    <label class="btn btn-default p-0">
-      <input type="file" (change)="selectFile($event)"/>
-    </label>
-  </div>
+      <input [title]="'Choose excel file'" placeholder="Choose excel file" type="file" accept=".xls,.xlsx" (change)="selectFileExcel($event)"/>
+   </div>
 
   <div class="form-group col">
     <div class="example-button-container btns-table">
-      <button type="submit" class="btns-table" [disabled]="!selectedFiles" (click)="upload()" mat-fab color="primary">
+      <button type="submit" class="btns-table" [disabled]="!selectedFilesExcel" (click)="uploadExcel()" mat-fab color="primary">
         <mat-icon>arrow_upward</mat-icon>
       </button>
     </div>
   </div>
 </div>
 
+<div class="row">
+  <div class="col">
+    <input type="file" (change)="selectFileXml($event)" accept=".tar" [title]="'Choose tar archive'"/>
+  </div>
+
+  <div class="form-group col">
+    <div class="example-button-container btns-table">
+      <button type="submit" class="btns-table" [disabled]="!selectedFilesXml" (click)="uploadXml()" mat-fab color="primary">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
 <div *ngIf="message" class="alert alert-success" role="alert">{{ message }}</div>
 <div *ngIf="errorMsg" class="alert alert-danger" role="alert">{{ errorMsg }}</div>
 
 
-<div class="example-button-container" >
-  <button style="margin-right: 10px" (click)="ExportToExcel()" mat-fab color="primary" type="button" class="add_btn"  aria-label="Example icon button with a delete icon">
-    <mat-icon>arrow_downward</mat-icon>
-  </button>
-</div>
+
 <div class="mat-elevation-z8 table-responsive" style="margin-top: 20px">
   <table mat-table [dataSource]="dataSource" matSort>
     <!-- Id client Column -->

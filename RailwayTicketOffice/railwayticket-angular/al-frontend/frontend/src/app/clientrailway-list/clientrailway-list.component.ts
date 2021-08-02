@@ -22,7 +22,9 @@ export class ClientrailwayListComponent implements OnInit {
   dataSource: MatTableDataSource<Clientrailway>;
   clientsrailway_list : Clientrailway[];
   name_client : string;
-  selectedFiles?: FileList;
+  selectedFilesExcel?: FileList;
+  selectedFilesXml?: FileList;
+
   currentFile?: File;
   message = '';
   errorMsg = '';
@@ -101,15 +103,23 @@ export class ClientrailwayListComponent implements OnInit {
     this.clientService.exportToExcel();
   }
 
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+  ExportToXml(){
+    this.clientService.exportToXml();
   }
 
-  upload(): void {
+  selectFileExcel(event: any): void {
+    this.selectedFilesExcel = event.target.files;
+  }
+
+  selectFileXml(event: any): void {
+    this.selectedFilesXml = event.target.files;
+  }
+
+  uploadExcel(): void {
     this.errorMsg = '';
 
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+    if (this.selectedFilesExcel) {
+      const file: File | null = this.selectedFilesExcel.item(0);
 
       if (file) {
         this.currentFile = file;
@@ -122,21 +132,55 @@ export class ClientrailwayListComponent implements OnInit {
             } else if (event instanceof HttpResponse) {
               this.message = event.body.responseMessage;
             }
+            this.getAllClients();
+
           },
           (err: any) => {
             console.log(err);
 
             if (err.error && err.error.responseMessage) {
-              this.errorMsg = err.error.responseMessage;
-            } else {
-              this.errorMsg = 'Error occurred while uploading a file!';
-            }
+             } else {
+             }
 
             this.currentFile = undefined;
             this.getAllClients();
           });
       }
-      this.selectedFiles = undefined;
+      this.selectedFilesExcel = undefined;
+    }
+  }
+
+  uploadXml(): void {
+    this.errorMsg = '';
+
+    if (this.selectedFilesXml) {
+      const file: File | null = this.selectedFilesXml.item(0);
+
+      if (file) {
+        this.currentFile = file;
+
+        this.clientService.importFromXml(this.currentFile).subscribe(
+          (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              console.log(Math.round(100 * event.loaded / event.total));
+
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.responseMessage;
+            }
+            this.getAllClients();
+          },
+          (err: any) => {
+            console.log(err);
+
+            if (err.error && err.error.responseMessage) {
+             } else {
+             }
+
+            this.currentFile = undefined;
+            this.getAllClients();
+          });
+      }
+      this.selectedFilesXml = undefined;
     }
   }
 

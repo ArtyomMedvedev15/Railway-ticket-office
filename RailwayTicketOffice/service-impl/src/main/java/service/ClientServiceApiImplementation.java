@@ -63,6 +63,11 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
 
     }
 
+    @Override
+    public void ImportXml(MultipartFile file) {
+
+    }
+
 
     @Override
     public boolean save(ClientRailway clientRailway) throws ClientServiceException {
@@ -72,6 +77,7 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
         try{
             ClientRailway fromDB = clientDao.getOneById(clientRailway.getId_client());
             if(fromDB==null) {
+                transactionTemplate.getTransactionManager().commit(status);
                 logger.info("Save client successfully. Client Name: " + clientRailway.getName_client()+ " id: "+clientRailway.getId_client() + "Time: " + new Date().toString());
                 return clientDao.save(clientRailway);
             }else{
@@ -84,7 +90,6 @@ public class ClientServiceApiImplementation implements ClientServiceApi {
             return false;
         }finally {
             logger.info("Commit transaction with status: " + status + "Time: " + new Date().toString());
-            transactionTemplate.getTransactionManager().commit(status);
         }
     }
 
