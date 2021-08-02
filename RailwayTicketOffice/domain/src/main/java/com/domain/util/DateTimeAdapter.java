@@ -10,7 +10,7 @@ public class DateTimeAdapter extends XmlAdapter<String, Date> {
 
     @Override
     public Date unmarshal(String xml) throws Exception {
-        return (Date) dateFormat.parse(xml);
+        return new Date(dateFormat.parse(xml).getTime());
     }
 
     @Override

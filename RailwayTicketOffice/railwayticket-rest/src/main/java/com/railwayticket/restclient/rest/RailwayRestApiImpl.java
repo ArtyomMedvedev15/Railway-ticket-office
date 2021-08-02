@@ -13,7 +13,8 @@ import com.railwayticket.restclient.util.excel.ClientsExcelExporter;
 import com.railwayticket.restclient.util.excel.ClientsExcelImporter;
 import com.railwayticket.restclient.util.excel.TrainsExcelExporter;
 import com.railwayticket.restclient.util.excel.TrainsExcelImporter;
-  import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.restclient.util.xml.TrainsXmlImporter;
+import com.railwayticket.services_api.ClientServiceApi;
 import com.railwayticket.services_api.MailSenderApi;
 import com.railwayticket.services_api.TrainServiceApi;
 import com.railwayticket.services_api.exception.ClientServiceException;
@@ -429,4 +430,17 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         logger.info("Export train xml to archive");
     }
 
+    @PostMapping("/api/train/import/xml")
+    public void importTrainsFromXmlToSqlTrains(@RequestParam("file")MultipartFile file) throws IOException, JAXBException {
+         TrainsXmlImporter xmlImporter = new TrainsXmlImporter();
+        List<Trains>importsTrains = xmlImporter.ImportTrainsFromXml(file);
+
+        importsTrains.forEach(o1-> {
+            try {
+                trainServiceApi.save(ConvertDomain.convertDomainTrains(o1));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
