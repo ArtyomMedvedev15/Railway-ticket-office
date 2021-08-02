@@ -10,6 +10,7 @@ import {TrainCreateComponent} from "../train-create/train-create.component";
 import {MatDialog} from '@angular/material/dialog';
 import {UpdateTrainComponent} from "../update-train/update-train.component";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class TrainListComponent implements OnInit {
   dataSource: MatTableDataSource<Train>;
   train_list: Train[];
   trainUpdate:Train;
-  selectedFiles?: FileList;
+  selectedFilesExcel?: FileList;
+  selectedFilesXml?: FileList;
+
   currentFile?: File;
   message = '';
   errorMsg = '';
@@ -104,15 +107,19 @@ export class TrainListComponent implements OnInit {
     this.trainService.ExportTrainsToExcel();
   }
 
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+  exportToXml():void{
+    this.trainService.ExportTrainsToXml();
   }
 
-  upload(): void {
+  selectFileExcel(event: any): void {
+    this.selectedFilesExcel = event.target.files;
+  }
+
+  uploadExcel(): void {
     this.errorMsg = '';
 
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+    if (this.selectedFilesExcel) {
+      const file: File | null = this.selectedFilesExcel.item(0);
 
       if (file) {
         this.currentFile = file;
@@ -125,21 +132,58 @@ export class TrainListComponent implements OnInit {
             } else if (event instanceof HttpResponse) {
               this.message = event.body.responseMessage;
             }
+            this.getAllTrain();
           },
           (err: any) => {
             console.log(err);
 
             if (err.error && err.error.responseMessage) {
-              this.errorMsg = err.error.responseMessage;
-            } else {
-              this.errorMsg = 'Error occurred while uploading a file!';
-            }
+             } else {
+             }
 
             this.currentFile = undefined;
             this.getAllTrain();
           });
       }
-      this.selectedFiles = undefined;
+      this.selectedFilesExcel = undefined;
+    }
+  }
+
+  selectFileXml(event: any): void {
+    this.selectedFilesXml = event.target.files;
+  }
+
+  uploadXml(): void {
+    this.errorMsg = '';
+
+    if (this.selectedFilesXml) {
+      const file: File | null = this.selectedFilesXml.item(0);
+
+      if (file) {
+        this.currentFile = file;
+
+        this.trainService.ImportTrainFromXml(this.currentFile).subscribe(
+          (event: any) => {
+            if (event.type === HttpEventType.UploadProgress) {
+              console.log(Math.round(100 * event.loaded / event.total));
+
+            } else if (event instanceof HttpResponse) {
+              this.message = event.body.responseMessage;
+            }
+            this.getAllTrain();
+          },
+          (err: any) => {
+            console.log(err);
+
+            if (err.error && err.error.responseMessage) {
+             } else {
+             }
+
+            this.currentFile = undefined;
+            this.getAllTrain();
+          });
+      }
+      this.selectedFilesXml = undefined;
     }
   }
 

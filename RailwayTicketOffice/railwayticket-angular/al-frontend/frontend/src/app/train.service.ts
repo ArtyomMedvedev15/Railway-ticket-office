@@ -47,7 +47,11 @@ export class TrainService {
     window.location.href = this.base_url+"listtrains/export/excel";
    }
 
-   ImportTrainFromExcel(file: File): Observable<HttpEvent<any>>{
+  ExportTrainsToXml():void{
+    window.location.href = this.base_url+"export/trains/xml";
+  }
+
+  ImportTrainFromExcel(file: File): Observable<HttpEvent<any>>{
      const formData: FormData = new FormData();
 
      formData.append('file', file);
@@ -57,5 +61,17 @@ export class TrainService {
      });
 
      return this.httpClient.request(req);
-   }
+  }
+
+  ImportTrainFromXml(file: File): Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', this.base_url + 'import/xml', formData, {
+      reportProgress: true
+    });
+
+    return this.httpClient.request(req);
+  }
 }

@@ -29,6 +29,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {NgxMatFileInputModule} from "@angular-material-components/file-input";
 import { ContactUSComponent } from './contact-us/contact-us.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ContactUSComponent } from './contact-us/contact-us.component';
         MatInputModule,
         MatCardModule,
         MatDividerModule,
-        NgxMatFileInputModule
+        NgxMatFileInputModule,
+        MatMenuModule
     ],
   providers: [],
   bootstrap: [AppComponent]
