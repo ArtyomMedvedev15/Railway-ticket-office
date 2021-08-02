@@ -1,14 +1,16 @@
 package com.railwayticket.restclient.util.xml;
 
+import com.railwayticket.restclient.domains.ClientRailway;
 import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.util.ConvertDomain;
+import com.railwayticket.restclient.util.dto.ClientsDto;
 import com.railwayticket.restclient.util.dto.TrainsDto;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
-import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream;
 import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
- import javax.xml.bind.JAXBContext;
+
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.*;
@@ -16,29 +18,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.ZipInputStream;
 
-import static org.springframework.util.FileCopyUtils.BUFFER_SIZE;
-
-public class TrainsXmlImporter {
+public class ClientsXmlImporter {
     private File xmlFile;
 
-    public List<com.railwayticket.restclient.domains.Trains>ImportTrainsFromXml(MultipartFile file) throws JAXBException, IOException {
+    public List<com.railwayticket.restclient.domains.ClientRailway> ImportClientsFromXml(MultipartFile file) throws JAXBException, IOException {
         decompressTarGzipFile(convert(file).toPath());
 
-        List<Trains>resultTrainsXml = new ArrayList<>();
+        List<com.railwayticket.restclient.domains.ClientRailway>resultClientsXml = new ArrayList<>();
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(TrainsDto.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(ClientsDto.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-        TrainsDto trainsListfromxml = (TrainsDto)jaxbUnmarshaller.unmarshal(xmlFile);
+        ClientsDto clientsDtoList = (ClientsDto)jaxbUnmarshaller.unmarshal(xmlFile);
 
-        for (com.domain.Trains trains : trainsListfromxml.getTrains()){
-             Trains trainresult = ConvertDomain.convertDomainTrains(trains);
-            resultTrainsXml.add(trainresult);
+        for (com.domain.ClientRailway client : clientsDtoList.getClients()){
+            com.railwayticket.restclient.domains.ClientRailway clientRailway = ConvertDomain.convertDomainClientRailway(client);
+            resultClientsXml.add(clientRailway);
         }
 
-        return resultTrainsXml;
+        return resultClientsXml;
     }
 
     public void decompressTarGzipFile(Path source)

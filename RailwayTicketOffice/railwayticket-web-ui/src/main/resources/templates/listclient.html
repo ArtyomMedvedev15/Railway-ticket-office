@@ -55,16 +55,32 @@
                 </div>
             </div>
             <div class="export_import_btn">
-                <div class="col" style="margin-bottom: 30px">
-                    <a style="color: white" class="btn btn-outline-dark" href="http://localhost:8181//api/clients/listclients/export/excel" >Export to excel</a>
+                <div class="col" style="margin-bottom: 30px;">
+                    <a style="color: white" class="btn btn-outline-dark" href="http://localhost:8181/api/clients/listclients/export/excel" >Export to excel</a>
                 </div>
                 <form enctype="multipart/form-data" method="post" action="/client/import/excel" style="margin-left: 15px">
                     <div class="row">
                         <div class="col">
-                            <input class="form-control" placeholder="Import excel file" type="file" name="file"/>
+                            <input class="form-control" placeholder="Import excel file" type="file" name="file" required="required"/>
                         </div>
                         <div class="col">
-                            <button style="color: white" class="btn btn-outline-dark" type="submit">Import</button>
+                            <button style="color: white" class="btn btn-outline-dark" type="submit">Import excel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="export_import_btn" style="margin-top: 40px;">
+                <div class="col" style="margin-bottom: 30px">
+                    <a style="color: white" class="btn btn-outline-dark" href="http://localhost:8181/api/clients/export/client/xml" >Export to xml</a>
+                </div>
+                <form enctype="multipart/form-data" method="post" action="/client/import/xml" style="margin-left: 15px">
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control" placeholder="Import xml file" type="file" name="file" required="required"/>
+                        </div>
+                        <div class="col">
+                            <button style="color: white" class="btn btn-outline-dark" type="submit">Import xml</button>
                         </div>
                     </div>
                 </form>

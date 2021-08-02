@@ -137,7 +137,7 @@ public class ClientController {
     }
 
     @PostMapping("/client/import/excel")
-    public String importtoExcel(@RequestParam(name = "file") MultipartFile file){
+    public String ImportFromExcel(@RequestParam(name = "file") MultipartFile file){
         clientServiceApiRest.ImportExcel(file);
         logger.info("Import data to database from excel");
         return "redirect:/listClient";
@@ -160,5 +160,13 @@ public class ClientController {
         }
         return "redirect:/contactform";
     }
+
+    @PostMapping("/client/import/xml")
+    public String ImportFromXml(@RequestParam(name = "file") MultipartFile file){
+        clientServiceApiRest.ImportXml(file);
+        logger.info("Import data to database from xml");
+        return "redirect:/listClient";
+    }
+
 
  }

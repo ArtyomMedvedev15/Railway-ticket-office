@@ -9,7 +9,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({ClientRailway.class})
 public class ClientsDto {
-    @XmlElement(name = "train")
+    @XmlElement(name = "client")
     private List<ClientRailway> clients = null;
 
     public List<ClientRailway> getClients() {

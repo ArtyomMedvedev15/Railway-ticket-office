@@ -6,6 +6,7 @@ import com.railwayticket.restclient.domains.Trains;
 import com.railwayticket.restclient.restapi.ApiApiDelegate;
 import com.railwayticket.restclient.util.*;
 import com.railwayticket.restclient.util.xml.ClientsXmlExporter;
+import com.railwayticket.restclient.util.xml.ClientsXmlImporter;
 import com.railwayticket.restclient.util.xml.TrainsXmlExporter;
 import com.railwayticket.restclient.util.dto.ClientsDto;
 import com.railwayticket.restclient.util.dto.TrainsDto;
@@ -438,6 +439,20 @@ public class RailwayRestApiImpl implements ApiApiDelegate {
         importsTrains.forEach(o1-> {
             try {
                 trainServiceApi.save(ConvertDomain.convertDomainTrains(o1));
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @PostMapping("/api/clients/xml/import")
+    public void importClientsFromXmlToSqlTrains(@RequestParam("file")MultipartFile file) throws IOException, JAXBException {
+        ClientsXmlImporter xmlImporter = new ClientsXmlImporter();
+        List<com.railwayticket.restclient.domains.ClientRailway>importsTrains = xmlImporter.ImportClientsFromXml(file);
+
+        importsTrains.forEach(o1-> {
+            try {
+                clientServiceApi.save(ConvertDomain.convertDomainClientRailway(o1));
             } catch (ServiceException e) {
                 e.printStackTrace();
             }
