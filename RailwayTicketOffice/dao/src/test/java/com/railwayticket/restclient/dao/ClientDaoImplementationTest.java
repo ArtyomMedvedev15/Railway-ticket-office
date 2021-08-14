@@ -23,7 +23,7 @@ import java.util.List;
 @TestPropertySource("/application-test.properties")
 @ContextConfiguration(classes = BeanConfig.class)
 @WebAppConfiguration
-@Sql(value = {"classpath:/script_before_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"classpath:/script_before_clients_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class ClientDaoImplementationTest extends TestCase {
 
@@ -36,7 +36,7 @@ public class ClientDaoImplementationTest extends TestCase {
         ClientRailway clientRailway = new ClientRailway();
         clientRailway.setName_client("Test");
         clientRailway.setSoname_client("Test");
-        clientRailway.setId_train(123L);
+        clientRailway.setId_train(127L);
         clientRailway.setDate_purchase(new Date(new java.util.Date().getTime()));
         clientRailway.setPhone_client("123123123");
 

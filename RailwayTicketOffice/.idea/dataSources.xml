@@ -20,5 +20,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/railwayticketoffice</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="railwayticketofficetest@localhost" uuid="cfafa756-1922-42ba-8708-c00f774a1381">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/railwayticketofficetest</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

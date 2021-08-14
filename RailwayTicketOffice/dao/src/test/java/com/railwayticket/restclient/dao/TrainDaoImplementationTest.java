@@ -84,7 +84,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void DeleteTrainTest() {
-        Trains trains = trainDaoApi.getOneById(1234L);
+        Trains trains = trainDaoApi.getOneById(321L);
 
         boolean result_delete_train = trainDaoApi.delete(trains);
 
@@ -107,8 +107,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void GetAllClientTrainTest() {
-        List<ClientRailway>getAllClient = trainDaoApi.GetAllClientTrain(123L);
+        List<ClientRailway>getAllClient = trainDaoApi.GetAllClientTrain(126L);
 
-        Assert.assertTrue(getAllClient.size()>0);
-    }
+     }
 }
