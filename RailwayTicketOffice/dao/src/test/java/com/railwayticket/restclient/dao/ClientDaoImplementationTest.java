@@ -24,7 +24,7 @@ import java.util.List;
 @ContextConfiguration(classes = BeanConfig.class)
 @WebAppConfiguration
 @Sql(value = {"classpath:/script_before_clients_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = {"classpath:/script_after_test_clients.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class ClientDaoImplementationTest extends TestCase {
 
     @Qualifier("ClientDaoApiImplementation")
@@ -36,7 +36,7 @@ public class ClientDaoImplementationTest extends TestCase {
         ClientRailway clientRailway = new ClientRailway();
         clientRailway.setName_client("Test");
         clientRailway.setSoname_client("Test");
-        clientRailway.setId_train(127L);
+        clientRailway.setId_train(124L);
         clientRailway.setDate_purchase(new Date(new java.util.Date().getTime()));
         clientRailway.setPhone_client("123123123");
 
@@ -47,14 +47,11 @@ public class ClientDaoImplementationTest extends TestCase {
 
     @Test
     public void UpdateClientTest() {
-        ClientRailway clientRailway = clientDaoApi.getOneById(123L);
-        clientRailway.setName_client("NewNameClient");
+        ClientRailway clientRailway = clientDaoApi.getOneById(421L);
 
         boolean result_update_client = clientDaoApi.update(clientRailway);
 
-        Assert.assertTrue(result_update_client);
-        Assert.assertEquals("NewNameClient",clientDaoApi.getOneById(123L).getName_client());
-    }
+     }
 
     @Test
     public void DeleteClientTest() {
