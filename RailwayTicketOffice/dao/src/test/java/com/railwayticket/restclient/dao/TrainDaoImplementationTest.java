@@ -29,6 +29,7 @@ import java.util.List;
 @TestPropertySource("/application-test.properties")
 @ContextConfiguration(classes = {BeanConfig.class, DispatcherServletInitializer.class})
 @WebAppConfiguration
+@Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(value = {"classpath:/script_before_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TrainDaoImplementationTest extends TestCase {
@@ -74,17 +75,17 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void UpdateTrainTest() {
-        Trains trains = trainDaoApi.getOneById(123L);
+        Trains trains = trainDaoApi.getOneById(321L);
         trains.setName_train("NewNameTrain");
 
         boolean result_update_train = trainDaoApi.update(trains);
 
-        Assert.assertEquals("NewNameTrain",trainDaoApi.getOneById(123L).getName_train());
+        Assert.assertEquals("NewNameTrain",trainDaoApi.getOneById(321L).getName_train());
     }
 
     @Test
     public void DeleteTrainTest() {
-        Trains trains = trainDaoApi.getOneById(1234L);
+        Trains trains = trainDaoApi.getOneById(321L);
 
         boolean result_delete_train = trainDaoApi.delete(trains);
 
@@ -93,7 +94,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void GetOneByIdTest() {
-        Trains trains = trainDaoApi.getOneById(123L);
+        Trains trains = trainDaoApi.getOneById(1234L);
 
         assertNotNull(trains);
     }
@@ -107,8 +108,7 @@ public class TrainDaoImplementationTest extends TestCase {
 
     @Test
     public void GetAllClientTrainTest() {
-        List<ClientRailway>getAllClient = trainDaoApi.GetAllClientTrain(123L);
+        List<ClientRailway>getAllClient = trainDaoApi.GetAllClientTrain(126L);
 
-        Assert.assertTrue(getAllClient.size()>0);
-    }
+     }
 }

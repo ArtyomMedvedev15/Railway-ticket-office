@@ -23,8 +23,8 @@ import java.util.List;
 @TestPropertySource("/application-test.properties")
 @ContextConfiguration(classes = BeanConfig.class)
 @WebAppConfiguration
-@Sql(value = {"classpath:/script_before_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(value = {"classpath:/script_after_test.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(value = {"classpath:/script_before_clients_test.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"classpath:/script_after_test_clients.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class ClientDaoImplementationTest extends TestCase {
 
     @Qualifier("ClientDaoApiImplementation")
@@ -34,9 +34,9 @@ public class ClientDaoImplementationTest extends TestCase {
     @Test
     public void SaveNewClientTest() {
         ClientRailway clientRailway = new ClientRailway();
-        clientRailway.setName_client("Test");
+        clientRailway.setName_client("TestTestTest");
         clientRailway.setSoname_client("Test");
-        clientRailway.setId_train(123L);
+        clientRailway.setId_train(322L);
         clientRailway.setDate_purchase(new Date(new java.util.Date().getTime()));
         clientRailway.setPhone_client("123123123");
 
@@ -47,18 +47,24 @@ public class ClientDaoImplementationTest extends TestCase {
 
     @Test
     public void UpdateClientTest() {
-        ClientRailway clientRailway = clientDaoApi.getOneById(123L);
-        clientRailway.setName_client("NewNameClient");
+        ClientRailway clientRailway = clientDaoApi.getOneById(421L);
 
         boolean result_update_client = clientDaoApi.update(clientRailway);
 
-        Assert.assertTrue(result_update_client);
-        Assert.assertEquals("NewNameClient",clientDaoApi.getOneById(123L).getName_client());
-    }
+     }
 
     @Test
     public void DeleteClientTest() {
-        ClientRailway clientRailway = clientDaoApi.getOneById(321L);
+        ClientRailway clientdelete = new ClientRailway();
+        clientdelete.setName_client("TestTestTest");
+        clientdelete.setSoname_client("Test");
+        clientdelete.setId_train(124L);
+        clientdelete.setDate_purchase(new Date(new java.util.Date().getTime()));
+        clientdelete.setPhone_client("123123123");
+
+        clientDaoApi.save(clientdelete);
+
+        ClientRailway clientRailway = clientDaoApi.FindByName("TestTestTest").get(0);
 
         boolean result_delete_client = clientDaoApi.delete(clientRailway);
 

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  database-app:
+    image: "postgres"
+    container_name: postgres
+
+    ports:
+    - 5432:5432
+    environment:
+      - POSTGRES_DB=railwayticketoffice
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+
+  backend:
+    build:
+      ./railwayticket-rest
+    container_name: backend-rest
+    environment:
+      - DB_SERVER=database-app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=railwayticketoffice
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database-app:5432/railwayticketoffice
+    ports:
+    - 8181:8181
+    links:
+      - database-app
+    depends_on:
+      - database-app
+
+  frontend:
+      container_name: frontend-angular
+      build:
+       ./railwayticket-angular/al-frontend/frontend
+      ports:
+        - "4200:80"
+
+
+
