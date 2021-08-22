@@ -3,7 +3,7 @@ package com.auth;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-08-15T23:45:03.105+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-08-22T20:57:45.727+03:00")
 public class OAuth implements Authentication {
     private String accessToken;
 
