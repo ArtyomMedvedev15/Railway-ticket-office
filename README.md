@@ -155,7 +155,7 @@ Go to the terminal and run the following command:
 Before running the module with angular, we need to run our module with rest as they interact with each other. 
 For run angular, you need to open the console and, through the cantilever directory change commands, go to the directory with the angular module.
 
-Then enter the command into the conosli:
+Then enter the command into the console:
 
 > **ng serve**
 
@@ -176,4 +176,15 @@ In test rest endpoint use java faker for generated fake data. You can change the
 
 If you do not set a value for this variable, then by default, the localization will be in English.
 
+## Docker
+
+Docker is connected in the project. In order to run a project using docker, you need to build a jar. To do this, go to the console in the project root and enter the command:
+
+> **mvn package**
+
+After that, we can start the project with docker, for this we enter the command into the console:
+
+> **docker compose up**
+
+After this command, docker start building according to the configuration. The configuration can be viewed in the docker-compose.yml file. I also recommend looking at the documentation for a more in-depth review https://docs.docker.com
 
