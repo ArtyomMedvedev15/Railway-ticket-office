@@ -1,6 +1,8 @@
 package com.railwayticket.controller;
 
 import com.railwayticket.config.BeanConfig;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -22,7 +24,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        plugin = "pretty",
+        monochrome = true,
+        tags = "@home",
+        glue = "com.cucumber.junit",
+        features = "classpath:com/cucumber/features"
+)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = {BeanConfig.class})
