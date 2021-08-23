@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Details info about the clients
  */
 @ApiModel(description = "Details info about the clients")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-08-22T20:57:45.727+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-08-23T20:27:38.509+03:00")
 public class ClientRailway {
   @JsonProperty("date_purchase")
   private String datePurchase = null;
