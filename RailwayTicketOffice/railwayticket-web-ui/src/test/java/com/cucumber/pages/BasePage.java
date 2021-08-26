@@ -17,11 +17,8 @@ public abstract class BasePage {
         return DriverManager.getDriver().findElement(by);
     }
 
-    public List<WebElement>findElements(By by){
-        return DriverManager.getDriver().findElements(by);
+    public List<WebElement>findElements(String id){
+        return DriverManager.getDriver().findElements(By.id(id));
     }
 
-    public boolean isElementsDisplay(By by){
-        return !findElements(by).isEmpty();
-    }
 }
