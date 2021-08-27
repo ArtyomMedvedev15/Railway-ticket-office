@@ -8,6 +8,7 @@ public class CucumberHook {
     @Before
     public void setupDriver(){
         DriverManager.SetUpDriver();
+
     }
 
     @After

@@ -23,7 +23,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-08-23T20:27:38.509+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2021-08-27T19:53:52.892+03:00")
 @Component("com.rest.ClientRestControllerApi")
 public class ClientRestControllerApi {
     private ApiClient apiClient;

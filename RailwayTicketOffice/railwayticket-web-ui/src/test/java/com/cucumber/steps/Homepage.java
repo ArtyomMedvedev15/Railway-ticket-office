@@ -34,6 +34,6 @@ public class Homepage {
     @When("try to send request with empty field, valid message appears")
     public void tryToSendRequestWithEmptyFieldValidMessageAppears() {
         Assertions.assertThat(homePage.isValidMessageDisplayed()).
-                overridingErrorMessage("Validation message for input date doesn't appear").isTrue();
+                overridingErrorMessage("Validation message for input date doesn't appears").isTrue();
     }
 }
