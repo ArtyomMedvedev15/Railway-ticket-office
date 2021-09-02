@@ -31,7 +31,7 @@ import javax.sql.DataSource;
 import java.util.Locale;
 
 @Configuration
-@MapperScan("com.railwayticket.dao.mybatis")
+@MapperScan("com.railwayticket.dao_api")
 public class BeanConfig {
 
     private final ApplicationContext applicationContext;

@@ -1,6 +1,7 @@
 package com.railwayticket.dao.mybatis;
 
 import com.domain.ClientRailway;
+import com.railwayticket.dao_api.ClientMyBatisDaoImplementation;
 import com.railwayticket.restclient.config.BeanConfig;
 import junit.framework.TestCase;
 import org.junit.Assert;

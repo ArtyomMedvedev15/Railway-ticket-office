@@ -4,6 +4,7 @@ import com.domain.ClientRailway;
 import com.domain.Stations;
 import com.domain.Trains;
 import com.domain.TypeTrain;
+import com.railwayticket.dao_api.TrainsMyBatisDaoImplementation;
 import com.railwayticket.restclient.config.BeanConfig;
 import com.railwayticket.restclient.config.DispatcherServletInitializer;
 import junit.framework.TestCase;
@@ -84,7 +85,10 @@ import java.util.List;
     public void FindAllByDateDepartureArrivalStations_ThenReturn3() throws ParseException {
         java.util.Date dateDeparture=new SimpleDateFormat("dd/MM/yyyy").parse("12/09/2020");
         java.util.Date datearrival=new SimpleDateFormat("dd/MM/yyyy").parse("13/09/2020");
-        List<Trains>allTrainFindByDateStation = trainsMyBatisDaoImplementation.FindAllByDateDepartureArrivalStations(new Date(dateDeparture.getTime()),new Date(datearrival.getTime()),Stations.BREST,Stations.MINSK);
+        List<Trains>allTrainFindByDateStation = trainsMyBatisDaoImplementation.FindAllByDateDepartureArrivalStations(
+                new Date(dateDeparture.getTime()),
+                new Date(datearrival.getTime()),
+                Stations.BREST,Stations.MINSK);
 
         Assert.assertEquals(3,allTrainFindByDateStation.size());
     }

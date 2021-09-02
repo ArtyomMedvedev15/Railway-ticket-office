@@ -73,7 +73,7 @@ import java.util.List;
 
     @Select("SELECT * FROM trains WHERE date_time_departure>=#{date_departure} and date_time_departure<=#{date_arrival} " +
             "and date_time_arrival>=#{date_departure} and date_time_arrival<=#{date_arrival} " +
-            "and departure_station_id=${departure.getId_station()} and arrival_station_id=${arrival.getId_station()}")
+            "and departure_station_id=${departure_station.getId_station()} and arrival_station_id=${arrival_station.getId_station()}")
     @Results(value = {
             @Result(column = "id_train",property = "id_train"),
             @Result(column = "name_train",property = "name_train"),
@@ -87,7 +87,7 @@ import java.util.List;
             @Result(column = "price_ticket",property = "price_ticket")
     })
     @Override
-    List<Trains> FindAllByDateDepartureArrivalStations(Date date_departure, Date date_arrival, Stations departure, Stations arrival);
+    List<Trains> FindAllByDateDepartureArrivalStations(Date date_departure, Date date_arrival, Stations departure_station, Stations arrival_station);
 
     @Select("SELECT * FROM client_railway WHERE id_train = #{idTrain}")
     @Override
