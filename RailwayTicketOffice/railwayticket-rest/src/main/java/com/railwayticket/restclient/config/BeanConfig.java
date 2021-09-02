@@ -1,42 +1,49 @@
 package com.railwayticket.restclient.config;
 
 
- import com.fasterxml.jackson.databind.ObjectMapper;
- import com.fasterxml.jackson.databind.SerializationFeature;
- import com.railwayticket.dao.ClientDaoImplementation;
- import com.railwayticket.dao.TrainDaoImplementation;
- import com.railwayticket.dao_api.ClientDaoApi;
- import com.railwayticket.dao_api.TrainDaoApi;
- import com.railwayticket.services_api.ClientServiceApi;
- import com.railwayticket.services_api.MailSenderApi;
- import com.railwayticket.services_api.TrainServiceApi;
- import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.railwayticket.dao.ClientDaoImplementation;
+import com.railwayticket.dao.TrainDaoImplementation;
+import com.railwayticket.dao_api.ClientDaoApi;
+import com.railwayticket.dao_api.TrainDaoApi;
+import com.railwayticket.services_api.ClientServiceApi;
+import com.railwayticket.services_api.MailSenderApi;
+import com.railwayticket.services_api.TrainServiceApi;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
- import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
- import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
- import org.springframework.mail.MailSender;
- import org.springframework.web.client.RestTemplate;
- import org.springframework.web.servlet.config.annotation.*;
- import service.ClientServiceApiImplementation;
- import service.MailServiceApiImplementation;
- import service.TrainServiceApiApiImplementation;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import service.ClientServiceApiImplementation;
+import service.MailServiceApiImplementation;
+import service.TrainServiceApiApiImplementation;
 
- import javax.sql.DataSource;
+import javax.sql.DataSource;
 import java.util.Objects;
 
 @Configuration
-@ComponentScan("com.railwayticket.restclient")
 @EnableWebMvc
+@MapperScan("com.railwayticket.dao_api")
 public class BeanConfig extends WebMvcConfigurerAdapter {
 
     private final ApplicationContext applicationContext;
@@ -92,13 +99,39 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public TrainDaoApi TrainDaoApiImplementation(){
-        return new TrainDaoImplementation(dataSource());
+        if(Objects.requireNonNull(this.environment.getProperty("daoConfig")).equals("mybatis")){
+            return (TrainDaoApi) applicationContext.getBean("trainsMyBatisDaoImplementation");
+        } else if (Objects.requireNonNull(this.environment.getProperty("daoConfig")).equals("springjdbc")) {
+            return new TrainDaoImplementation(dataSource());
+        }else{
+            return new TrainDaoImplementation(dataSource());
+        }
     }
 
     @Bean
-    public ClientDaoApi ClientDaoApiImplementation(){
-        return new ClientDaoImplementation(dataSource());
+     public ClientDaoApi ClientDaoApiImplementation(){
+        if(Objects.requireNonNull(this.environment.getProperty("daoConfig")).equals("mybatis")){
+            System.out.println("VAR:" + this.environment.getProperty("daoConfig"));
+            return (ClientDaoApi) applicationContext.getBean("clientMyBatisDaoImplementation");
+        } else if (Objects.requireNonNull(this.environment.getProperty("daoConfig")).equals("springjdbc")) {
+            System.out.println("VAR:" + this.environment.getProperty("daoConfig"));
+            return new ClientDaoImplementation(dataSource());
+        }else{
+            System.out.println("VAR:" + this.environment.getProperty("daoConfig"));
+            return new ClientDaoImplementation(dataSource());
+        }
     }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() throws Exception
+    {
+        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource());
+        return sessionFactory.getObject();
+    }
+
+
+
 
     @Bean
     public TrainServiceApi TrainServiceImplementation(){

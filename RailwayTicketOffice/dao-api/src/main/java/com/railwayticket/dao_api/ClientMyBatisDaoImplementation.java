@@ -1,11 +1,8 @@
-package com.railwayticket.dao.mybatis;
+package com.railwayticket.dao_api;
 
 import com.domain.ClientRailway;
-import com.railwayticket.dao.TrainDaoImplementation;
-import com.railwayticket.dao_api.ClientDaoApi;
 import org.apache.ibatis.annotations.*;
-import org.apache.log4j.Logger;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
