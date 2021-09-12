@@ -111,14 +111,11 @@ public class BeanConfig extends WebMvcConfigurerAdapter {
     @Bean
      public ClientDaoApi ClientDaoApiImplementation(){
         if(Objects.requireNonNull(this.environment.getProperty("daoConfig")).equals("mybatis")){
-            System.out.println("VAR:" + this.environment.getProperty("daoConfig"));
-            return (ClientDaoApi) applicationContext.getBean("clientMyBatisDaoImplementation");
+             return (ClientDaoApi) applicationContext.getBean("clientMyBatisDaoImplementation");
         } else if (Objects.requireNonNull(this.environment.getProperty("daoConfig")).equals("springjdbc")) {
-            System.out.println("VAR:" + this.environment.getProperty("daoConfig"));
-            return new ClientDaoImplementation(dataSource());
+             return new ClientDaoImplementation(dataSource());
         }else{
-            System.out.println("VAR:" + this.environment.getProperty("daoConfig"));
-            return new ClientDaoImplementation(dataSource());
+             return new ClientDaoImplementation(dataSource());
         }
     }
 
