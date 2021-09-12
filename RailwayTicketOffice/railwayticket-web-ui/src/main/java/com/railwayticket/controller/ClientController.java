@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -117,8 +118,12 @@ public class ClientController {
         List<com.rest.domains.ClientRailway> ClientList;
 
         if(!name_client.equals("")) {
-            ClientList = clientRestApi.findAllClientByNameUsingGET(name_client);
-            logger.info("Find client by name. " + "Name: " + name_client + " Time: " + new Date().toString());
+            try {
+                ClientList = clientRestApi.findAllClientByNameUsingGET(name_client);
+                logger.info("Find client by name. " + "Name: " + name_client + " Time: " + new Date().toString());
+            }catch (HttpClientErrorException ex){
+                ClientList = Collections.emptyList();
+            }
         }else{
             ClientList = clientRestApi.allClientUsingGET();
             logger.info("Find all client. " + "Name: Empty"  + " Time: " + new Date().toString());
