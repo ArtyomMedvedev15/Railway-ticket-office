@@ -4,7 +4,9 @@ import com.domain.util.DateTimeAdapter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.Proxy;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,23 +14,38 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.sql.Date;
 import java.util.Objects;
 
+@Entity(name = "client_railway")
+@Table(name = "client_railway")
+@Proxy(lazy=false)
 @XmlRootElement(name = "client")
 @XmlAccessorType(XmlAccessType.FIELD)
 @ApiModel(description = "Details info about the clients")
 public class ClientRailway {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     @ApiModelProperty(notes = "The unique id of the client")
     private Long id_client;
+    @Column(name = "id_train")
     @ApiModelProperty(notes = "The ID train which the customer bought the ticket for")
     private Long id_train;
+
+    @Column(name = "name_client")
     @ApiModelProperty(notes = "The client's name")
     private String name_client;
+
+    @Column(name = "soname_client")
     @ApiModelProperty(notes = "The client's soname")
     private String soname_client;
 
+
+    @Column(name = "date_purchase")
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
     @ApiModelProperty(notes = "Date when the ticket was purchased",example = "2020-09-15")
     @JsonFormat(pattern="yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     private Date date_purchase;
+
+    @Column(name = "phone_client")
     @ApiModelProperty(notes = "The client's phone number")
     private String phone_client;
 
